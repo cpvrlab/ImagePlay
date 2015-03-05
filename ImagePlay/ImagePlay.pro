@@ -166,7 +166,7 @@ macx: {
     INCLUDEPATH += $$PWD/lib/FreeImage_src/Dist
     DEPENDPATH += $$PWD/lib/FreeImage_src/Dist
 
-    ICON = ImagePlay.icns
+    ICON = res/ImagePlay.icns
     CONFIG +=c++11
 }
 

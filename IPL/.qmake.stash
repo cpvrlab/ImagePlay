@@ -15,3 +15,4 @@ QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_RANLIB = \
 QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_SHLIB = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 QMAKE_MAC_SDK.macosx.platform_name = macosx
+QMAKE_MAC_SDK.macosx.version = 10.10

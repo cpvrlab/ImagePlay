@@ -223,14 +223,14 @@ macx: {
     #CONFIG += staticlib
 
     # A) trying dynamic library
-    LIBS += -L$$PWD/lib/FreeImage_src/Dist/ -lfreeimage-3.16.0
+    LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
 
     # B) static library
     #LIBS += -L$$PWD/lib/FreeImage_src/ -lfreeimage
     #PRE_TARGETDEPS += $$PWD/lib/FreeImage_src/libfreeimage.a
 
-    INCLUDEPATH += $$PWD/lib/FreeImage_src/Dist
-    DEPENDPATH += $$PWD/lib/FreeImage_src/Dist
+    INCLUDEPATH += $$PWD/../_lib/freeimage
+    DEPENDPATH += $$PWD/../_lib/freeimage
 
     DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS
     #DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM
@@ -238,12 +238,12 @@ macx: {
     #DESTDIR  = ../ImagePlay/ImagePlay.app/Contents/MacOS
     #DESTDIR  = ../ImagePlay/release/
 
-    LIBS += -L$$PWD/lib/OpenCV/build/x64/clang/lib/ -lopencv_core
-    LIBS += -L$$PWD/lib/OpenCV/build/x64/clang/lib/ -lopencv_imgproc
-    LIBS += -L$$PWD/lib/OpenCV/build/x64/clang/lib/ -lopencv_highgui
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui
 
-    INCLUDEPATH += $$PWD/lib/OpenCV/build/include
-    DEPENDPATH += $$PWD/lib/OpenCV/build/include
+#    INCLUDEPATH += $$PWD/../_lib/opencv/build/include
+#    DEPENDPATH += $$PWD/../lib/opencv/build/include
 
     CONFIG +=c++11
 }

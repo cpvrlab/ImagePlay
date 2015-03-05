@@ -11,7 +11,7 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-SUBDIRS = ImagePlay\
-          IPL
+SUBDIRS = IPL\
+          ImagePlay
 
 ImagePlay.depends = IPL
