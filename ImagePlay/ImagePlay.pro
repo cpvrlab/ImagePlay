@@ -152,10 +152,9 @@ win32: {
     resources.files += ../_res/process_icons
     INSTALLS += resources
 }
-macx: {
-    QMAKE_CXXFLAGS += -stdlib=libstdc++ -std=c++11
-    CONFIG +=c++11
 
+macx: {
+    CONFIG +=c++11
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
 
     mylib.path = Contents/Frameworks
@@ -184,6 +183,12 @@ macx: {
     QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
 
 }
+
+linux: {
+    CONFIG +=c++11
+    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/lib/ -lIPL
+}
+
 
 INCLUDEPATH += $$PWD/include/
 INCLUDEPATH += $$PWD/../IPL/include/
