@@ -218,7 +218,6 @@ win32: {
 }
 
 macx: {
-    QMAKE_CXXFLAGS += -stdlib=libstdc++ -std=c++11
     CONFIG +=c++11
 
     LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
