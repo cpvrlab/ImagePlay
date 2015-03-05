@@ -457,9 +457,9 @@ DIST          = /usr/local/Cellar/qt5/5.4.1/mkspecs/features/spec_pre.prf \
 		src/processes/IPLCamera.cpp \
 		src/processes/IPLLabelBlobs.cpp
 QMAKE_TARGET  = IPL
-DESTDIR       = ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/#avoid trailing-slash linebreak
+DESTDIR       = ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/#avoid trailing-slash linebreak
 TARGET        = libIPL.1.0.0.dylib
-TARGETA       = ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/libIPL.a
+TARGETA       = ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/libIPL.a
 TARGET0       = libIPL.dylib
 TARGETD       = libIPL.1.0.0.dylib
 TARGET1       = libIPL.1.dylib
@@ -500,21 +500,21 @@ first: all
 
 ####### Build rules
 
-../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
-	@test -d ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ || mkdir -p ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/
+../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
+	@test -d ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/ || mkdir -p ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/
 	-$(DEL_FILE) $(TARGET) $(TARGET0) $(TARGET1) $(TARGET2)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS) $(OBJCOMP)
 	-ln -s $(TARGET) $(TARGET0)
 	-ln -s $(TARGET) $(TARGET1)
 	-ln -s $(TARGET) $(TARGET2)
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET)
-	-$(MOVE) $(TARGET)  ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ 
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET0)
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET1)
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET2)
-	-$(MOVE) $(TARGET0) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ 
-	-$(MOVE) $(TARGET1) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ 
-	-$(MOVE) $(TARGET2) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ 
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET)
+	-$(MOVE) $(TARGET)  ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/ 
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET0)
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET1)
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET2)
+	-$(MOVE) $(TARGET0) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/ 
+	-$(MOVE) $(TARGET1) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/ 
+	-$(MOVE) $(TARGET2) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/ 
 
 
 
@@ -776,7 +776,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 
-all: Makefile ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET)
+all: Makefile ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET)
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -792,8 +792,8 @@ clean:compiler_clean
 
 
 distclean: clean 
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET) 
-	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET0) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET1) ../_bin/Release/macx/ImagePlay.app/Contents/MacOS/$(TARGET2) $(TARGETA)
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET) 
+	-$(DEL_FILE) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET0) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET1) ../_bin/Release/macx/ImagePlay.app/Contents/Frameworks/$(TARGET2) $(TARGETA)
 	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 

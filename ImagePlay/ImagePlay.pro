@@ -139,6 +139,7 @@ RESOURCES += res/ressources.qrc
 
 RC_FILE = res/icon.rc
 
+
 # ImagePlay Library
 win32: {
     CONFIG(release, debug|release): LIBS += -L$$PWD/../_bin/$$CONFIGURATION/$$PLATFORM -lIPL
@@ -153,21 +154,35 @@ win32: {
 }
 macx: {
     QMAKE_CXXFLAGS += -stdlib=libstdc++ -std=c++11
-    #LIBS += -L$$PWD/ImagePlay.app/Contents/MacOS/ -lIPL
+    CONFIG +=c++11
 
-    # A) trying with dynamic library:
-    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ -lIPL
-    #LIBS += -F$$PWD/../_bin/Release/macx/ImagePlay.app/Contents/MacOS/ -framework IPL
+    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
 
-    # B) trying with static library
-    #LIBS += -L$$PWD/../_bin/Release/macx/ -lIPL
-    #PRE_TARGETDEPS += $$PWD/../_bin/Release/macx/libIPL.a
+    mylib.path = Contents/Frameworks
+    mylib.files = \
+      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.10.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_highgui.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.10.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_core.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.10.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.dylib \
+      ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64
+        
+    QMAKE_BUNDLE_DATA += mylib
 
-    INCLUDEPATH += $$PWD/lib/FreeImage_src/Dist
-    DEPENDPATH += $$PWD/lib/FreeImage_src/Dist
+    #copy stuff after compiling
+    resources.path = Contents/MacOS
+    resources.files += ../_res/process_icons
+    QMAKE_BUNDLE_DATA += resources
 
     ICON = res/ImagePlay.icns
-    CONFIG +=c++11
+
+    #run macdeployqt
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
+
 }
 
 INCLUDEPATH += $$PWD/include/
