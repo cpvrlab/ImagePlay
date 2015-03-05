@@ -186,7 +186,6 @@ macx: {
 
 linux: {
     CONFIG +=c++11
-
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/lib/ -lIPL
 }
 
