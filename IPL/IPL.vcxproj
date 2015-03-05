@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F3F6F48C-4304-3914-9037-98C0882634D2}</ProjectGuid>
+    <RootNamespace>IPL</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\_bin\Release\x64\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\intermediate\IPL\Release\x64\</IntermediateDirectory>
+    <PrimaryOutput>IPL</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\_bin\Debug\x64\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\intermediate\IPL\Debug\x64\</IntermediateDirectory>
+    <PrimaryOutput>IPL</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">..\_bin\Release\x64\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">..\intermediate\IPL\Release\x64\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">IPL</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">false</LinkIncremental>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">..\_bin\Debug\x64\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">..\intermediate\IPL\Debug\x64\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">IPL</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>&quot;D:\Projects\imageplay\IPL\lib\&quot;;&quot;..\_lib\freeimage&quot;;&quot;include&quot;;&quot;include\processes&quot;;&quot;include\opencv&quot;;C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -Zc:strictStrings -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\intermediate\IPL\Release\x64\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>..\intermediate\IPL\Release\x64\</ObjectFileName>
+      <OpenMPSupport>true</OpenMPSupport>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;IPL_LIBRARY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>D:\Projects\imageplay\IPL\..\_lib\freeimage\\FreeImage.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Projects\imageplay\IPL\..\_lib\freeimage\;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>-openmp %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkDLL>true</LinkDLL>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\IPL.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;IPL_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>&quot;D:\Projects\imageplay\IPL\lib\&quot;;&quot;..\_lib\freeimage&quot;;&quot;include&quot;;&quot;include\processes&quot;;&quot;include\opencv&quot;;C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\intermediate\IPL\Debug\x64\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>..\intermediate\IPL\Debug\x64\</ObjectFileName>
+      <OpenMPSupport>true</OpenMPSupport>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;IPL_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>D:\Projects\imageplay\IPL\..\_lib\freeimage\\FreeImage.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Projects\imageplay\IPL\..\_lib\freeimage\;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>-openmp %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkDLL>true</LinkDLL>
+      <OutputFile>$(OutDir)\IPL.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;IPL_LIBRARY;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\processes\IPLAddNoise.cpp" />
+    <ClCompile Include="src\processes\IPLAgglomerate.cpp" />
+    <ClCompile Include="src\processes\IPLArithmeticOperations.cpp" />
+    <ClCompile Include="src\processes\IPLArithmeticOperationsConstant.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeEntropy.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeImage.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeKMeans.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeOtsu.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeSavola.cpp" />
+    <ClCompile Include="src\processes\IPLBinarizeUnimodal.cpp" />
+    <ClCompile Include="src\processes\IPLBlendImages.cpp" />
+    <ClCompile Include="src\processes\IPLCamera.cpp" />
+    <ClCompile Include="src\processes\IPLCanny.cpp" />
+    <ClCompile Include="src\processes\IPLCanvasSize.cpp" />
+    <ClCompile Include="src\processes\IPLCompassMask.cpp" />
+    <ClCompile Include="src\IPLComplexImage.cpp" />
+    <ClCompile Include="src\processes\IPLConvertToColor.cpp" />
+    <ClCompile Include="src\processes\IPLConvertToGray.cpp" />
+    <ClCompile Include="src\processes\IPLConvolutionFilter.cpp" />
+    <ClCompile Include="src\IPLData.cpp" />
+    <ClCompile Include="src\processes\IPLEnhanceMode.cpp" />
+    <ClCompile Include="src\processes\IPLEqualizeHistogram.cpp" />
+    <ClCompile Include="src\processes\IPLEquidensityLines.cpp" />
+    <ClCompile Include="src\processes\IPLExtractLines.cpp" />
+    <ClCompile Include="src\processes\IPLExtrema.cpp" />
+    <ClCompile Include="src\processes\IPLFalseColor.cpp" />
+    <ClCompile Include="src\IPLFileIO.cpp" />
+    <ClCompile Include="src\processes\IPLFillConcavities.cpp" />
+    <ClCompile Include="src\processes\IPLFlipImage.cpp" />
+    <ClCompile Include="src\processes\IPLGabor.cpp" />
+    <ClCompile Include="src\processes\IPLGammaCorrection.cpp" />
+    <ClCompile Include="src\processes\IPLGaussianLowPass.cpp" />
+    <ClCompile Include="src\processes\IPLGradientOperator.cpp" />
+    <ClCompile Include="src\processes\IPLHysteresisThreshold.cpp" />
+    <ClCompile Include="src\IPLImage.cpp" />
+    <ClCompile Include="src\IPLImagePlane.cpp" />
+    <ClCompile Include="src\processes\IPLInverseContrastRatioMapping.cpp" />
+    <ClCompile Include="src\processes\IPLLabelBlobs.cpp" />
+    <ClCompile Include="src\processes\IPLLaplaceOfGaussian.cpp" />
+    <ClCompile Include="src\processes\IPLLoadImage.cpp" />
+    <ClCompile Include="src\processes\IPLLoadImageSequence.cpp" />
+    <ClCompile Include="src\processes\IPLLocalThreshold.cpp" />
+    <ClCompile Include="src\processes\IPLMarkImage.cpp" />
+    <ClCompile Include="src\IPLMatrix.cpp" />
+    <ClCompile Include="src\processes\IPLMax.cpp" />
+    <ClCompile Include="src\processes\IPLMaxMinMedian.cpp" />
+    <ClCompile Include="src\processes\IPLMedian.cpp" />
+    <ClCompile Include="src\processes\IPLMergePlanes.cpp" />
+    <ClCompile Include="src\processes\IPLMin.cpp" />
+    <ClCompile Include="src\processes\IPLMorphologicalEdge.cpp" />
+    <ClCompile Include="src\processes\IPLMorphologyBinary.cpp" />
+    <ClCompile Include="src\processes\IPLMorphologyGrayscale.cpp" />
+    <ClCompile Include="src\processes\IPLMorphologyHitMiss.cpp" />
+    <ClCompile Include="src\processes\IPLNegate.cpp" />
+    <ClCompile Include="src\processes\IPLNormalizeIllumination.cpp" />
+    <ClCompile Include="src\processes\IPLOnePixelEdge.cpp" />
+    <ClCompile Include="src\IPLOrientedImage.cpp" />
+    <ClCompile Include="src\IPLPoint.cpp" />
+    <ClCompile Include="src\IPLProcess.cpp" />
+    <ClCompile Include="src\IPLProcessProperty.cpp" />
+    <ClCompile Include="src\processes\IPLRandomPoint.cpp" />
+    <ClCompile Include="src\processes\IPLRankTransform.cpp" />
+    <ClCompile Include="src\processes\IPLResize.cpp" />
+    <ClCompile Include="src\processes\IPLRotate.cpp" />
+    <ClCompile Include="src\processes\IPLSaveImage.cpp" />
+    <ClCompile Include="src\processes\IPLSplitPlanes.cpp" />
+    <ClCompile Include="src\processes\IPLStretchContrast.cpp" />
+    <ClCompile Include="src\processes\IPLSynthesize.cpp" />
+    <ClCompile Include="src\processes\IPLTriangleSegmentation.cpp" />
+    <ClCompile Include="src\processes\IPLUnsharpMasking.cpp" />
+    <ClCompile Include="include\dirent\dirent.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\processes\IPLAddNoise.h" />
+    <ClInclude Include="include\processes\IPLAgglomerate.h" />
+    <ClInclude Include="include\processes\IPLArithmeticOperations.h" />
+    <ClInclude Include="include\processes\IPLArithmeticOperationsConstant.h" />
+    <ClInclude Include="include\processes\IPLBinarizeEntropy.h" />
+    <ClInclude Include="include\processes\IPLBinarizeImage.h" />
+    <ClInclude Include="include\processes\IPLBinarizeKMeans.h" />
+    <ClInclude Include="include\processes\IPLBinarizeOtsu.h" />
+    <ClInclude Include="include\processes\IPLBinarizeSavola.h" />
+    <ClInclude Include="include\processes\IPLBinarizeUnimodal.h" />
+    <ClInclude Include="include\processes\IPLBlendImages.h" />
+    <ClInclude Include="include\processes\IPLCamera.h" />
+    <ClInclude Include="include\processes\IPLCanny.h" />
+    <ClInclude Include="include\processes\IPLCanvasSize.h" />
+    <ClInclude Include="include\IPLColor.h" />
+    <ClInclude Include="include\processes\IPLCompassMask.h" />
+    <ClInclude Include="include\IPLComplexImage.h" />
+    <ClInclude Include="include\processes\IPLConvertToColor.h" />
+    <ClInclude Include="include\processes\IPLConvertToGray.h" />
+    <ClInclude Include="include\processes\IPLConvolutionFilter.h" />
+    <ClInclude Include="include\IPLData.h" />
+    <ClInclude Include="include\processes\IPLEnhanceMode.h" />
+    <ClInclude Include="include\processes\IPLEqualizeHistogram.h" />
+    <ClInclude Include="include\processes\IPLEquidensityLines.h" />
+    <ClInclude Include="include\IPLErrorHandler.h" />
+    <ClInclude Include="include\processes\IPLExtractLines.h" />
+    <ClInclude Include="include\processes\IPLExtrema.h" />
+    <ClInclude Include="include\processes\IPLFalseColor.h" />
+    <ClInclude Include="include\IPLFileIO.h" />
+    <ClInclude Include="include\processes\IPLFillConcavities.h" />
+    <ClInclude Include="include\processes\IPLFlipImage.h" />
+    <ClInclude Include="include\processes\IPLGabor.h" />
+    <ClInclude Include="include\processes\IPLGammaCorrection.h" />
+    <ClInclude Include="include\processes\IPLGaussianLowPass.h" />
+    <ClInclude Include="include\processes\IPLGradientOperator.h" />
+    <ClInclude Include="include\IPLHistogram.h" />
+    <ClInclude Include="include\processes\IPLHysteresisThreshold.h" />
+    <ClInclude Include="include\IPLImage.h" />
+    <ClInclude Include="include\IPLImagePlane.h" />
+    <ClInclude Include="include\processes\IPLInverseContrastRatioMapping.h" />
+    <ClInclude Include="include\processes\IPLLabelBlobs.h" />
+    <ClInclude Include="include\processes\IPLLaplaceOfGaussian.h" />
+    <ClInclude Include="include\processes\IPLLoadImage.h" />
+    <ClInclude Include="include\processes\IPLLoadImageSequence.h" />
+    <ClInclude Include="include\processes\IPLLocalThreshold.h" />
+    <ClInclude Include="include\processes\IPLMarkImage.h" />
+    <ClInclude Include="include\IPLMatrix.h" />
+    <ClInclude Include="include\processes\IPLMax.h" />
+    <ClInclude Include="include\processes\IPLMaxMinMedian.h" />
+    <ClInclude Include="include\processes\IPLMedian.h" />
+    <ClInclude Include="include\processes\IPLMergePlanes.h" />
+    <ClInclude Include="include\processes\IPLMin.h" />
+    <ClInclude Include="include\processes\IPLMorphologicalEdge.h" />
+    <ClInclude Include="include\processes\IPLMorphologyBinary.h" />
+    <ClInclude Include="include\processes\IPLMorphologyGrayscale.h" />
+    <ClInclude Include="include\processes\IPLMorphologyHitMiss.h" />
+    <ClInclude Include="include\processes\IPLNegate.h" />
+    <ClInclude Include="include\processes\IPLNormalizeIllumination.h" />
+    <ClInclude Include="include\processes\IPLOnePixelEdge.h" />
+    <ClInclude Include="include\IPLOrientedImage.h" />
+    <ClInclude Include="include\IPLPoint.h" />
+    <ClInclude Include="include\IPLProcess.h" />
+    <ClInclude Include="include\IPLProcessProperty.h" />
+    <ClInclude Include="include\IPLProgressEventHandler.h" />
+    <ClInclude Include="include\IPLPropertyChangedEventHandler.h" />
+    <ClInclude Include="include\processes\IPLRandomPoint.h" />
+    <ClInclude Include="include\processes\IPLRankTransform.h" />
+    <ClInclude Include="include\processes\IPLResize.h" />
+    <ClInclude Include="include\processes\IPLRotate.h" />
+    <ClInclude Include="include\processes\IPLSaveImage.h" />
+    <ClInclude Include="include\processes\IPLSplitPlanes.h" />
+    <ClInclude Include="include\processes\IPLStretchContrast.h" />
+    <ClInclude Include="include\processes\IPLSynthesize.h" />
+    <ClInclude Include="include\processes\IPLTriangleSegmentation.h" />
+    <ClInclude Include="include\processes\IPLUnsharpMasking.h" />
+    <ClInclude Include="include\IPL_global.h" />
+    <ClInclude Include="include\IPL_plugininterface.h" />
+    <ClInclude Include="include\IPL_processes.h" />
+    <ClInclude Include="include\dirent\dirent.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

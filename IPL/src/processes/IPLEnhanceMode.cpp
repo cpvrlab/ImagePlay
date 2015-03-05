@@ -1,0 +1,115 @@
+#include "IPLEnhanceMode.h"
+
+void IPLEnhanceMode::init()
+{
+    // init
+    _result     = NULL;
+
+    // basic settings
+    setClassName("IPLEnhanceMode");
+    setTitle("Enhance Mode");
+    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+
+    // inputs and outputs
+    addInput("Image", IPLData::IMAGE_COLOR);
+    addOutput("Image", IPLImage::IMAGE_COLOR);
+
+    // properties
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 3,3,15);
+}
+
+void IPLEnhanceMode::destroy()
+{
+    delete _result;
+}
+
+bool IPLEnhanceMode::processInputData(IPLImage* image , int, bool useOpenCV)
+{
+    // delete previous result
+    delete _result;
+    _result = NULL;
+
+    int width = image->width();
+    int height = image->height();
+    _result = new IPLImage( image->type(), width, height );
+
+    // get properties
+    float window = getProcessPropertyInt("window");
+
+    int progress = 0;
+    int maxProgress = image->height() * image->getNumberOfPlanes();
+    int nrOfPlanes = image->getNumberOfPlanes();
+
+    int w2 = window/2;
+    int area = window * window;
+
+    #pragma omp parallel for
+    for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
+    {
+        IPLImagePlane* plane = image->plane( planeNr );
+        IPLImagePlane* newplane = _result->plane( planeNr );
+
+
+        int H[256], W[256];
+        for( int z=0; z<256; z++ )
+            H[z] = 0;
+
+        for(int y=w2; y<height-w2; y++)
+        {
+            // progress
+            notifyProgressEventHandler(100*progress++/maxProgress);
+            for(int x=w2; x<width-w2; x++)
+            {
+                // operator
+                for( int ky=-w2; ky <= w2; ky++)
+                {
+                    for( int kx=-w2; kx <= w2; kx++)
+                    {
+                        int index = (int) (plane->p(x+kx, y+ky) * FACTOR_TO_UCHAR);
+                        H[index]++;
+                    }
+                }
+
+                // bucketsort
+                int z = 0;
+                for( int u=0; u<256; u++ )
+                {
+                    if(H[u] > 0)
+                    {
+                        while( H[u] > 0)
+                        {
+                            W[z++] = u;
+                            H[u]--;
+                        }
+                    }
+                }
+
+                int qmin = INT_MAX;
+                int u;
+                for( int s=0; s<area; s++ )
+                {
+                    u = std::max( 0, s-w2-1);
+                    int v = std::min( area-1, s+w2+1);
+                    int q = 0;
+                    for( int z=u; z<v; z++ )
+                        if( s != z )
+                            q += abs( (W[s] - W[z]) / (s - z) );
+                    q /= (v - u);
+                    if ( q < qmin )
+                    {
+                        u = s;
+                        qmin = q;
+
+                    }
+                }
+                newplane->p(x,y) = (float) W[u] * FACTOR_TO_FLOAT;
+            }
+        }
+    }
+    return true;
+}
+
+IPLData* IPLEnhanceMode::getResultData( int )
+{
+    return _result;
+}

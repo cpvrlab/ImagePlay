@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AboutWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConnectionDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPFilterLineEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPHistogramWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPImageViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPMorphologyCheckbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessEdge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessEdgeTmp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessGridScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessListTabWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessMessageWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessPropertiesWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPProcessThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPZoomWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImageViewerWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SettingsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TutorialDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="include\AboutWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\ConnectionDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\IPApplication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\IPFilterLineEdit.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPHistogramThread.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPHistogramWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPImageViewer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\PropertyWidgets\IPKernelPreset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\IPMorphologyCheckbox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\IPProcessEdge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IPProcessEdgeTmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IPProcessFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\IPProcessGrid.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPProcessGridScene.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPProcessList.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPProcessListTabWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPProcessMessageWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPProcessPropertiesWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\IPProcessScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IPProcessStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\IPProcessThread.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyBinaryMorphologyInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyBinaryMorphologyTristateInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyCheckbox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyCheckboxInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyColorHSL.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyColorHSV.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyColorRGB.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyCombobox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyFileOpen.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyFileSave.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyFolder.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyGrayscaleMorphologyInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyKernelInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyPoint.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyRadioInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertySliderDouble.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertySliderInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertySpinnerInt.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyString.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PropertyWidgets\IPPropertyWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\IPZoomWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\ImageViewerWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\MainWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\PluginGenerator.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\SettingsWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\TutorialDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\stafx.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_AboutWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_AboutWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_ConnectionDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_ConnectionDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPFilterLineEdit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPFilterLineEdit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPHistogramThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPHistogramWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPImageViewer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPImageViewer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPMorphologyCheckbox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPMorphologyCheckbox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGrid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessGrid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGridScene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessGridScene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessList.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessList.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessListTabWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessListTabWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessMessageWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessMessageWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessPropertiesWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessPropertiesWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPProcessThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPProcessThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyBinaryMorphologyInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyTristateInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyBinaryMorphologyTristateInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckbox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyCheckbox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckboxInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyCheckboxInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSL.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorHSL.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSV.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorHSV.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorRGB.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorRGB.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCombobox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyCombobox.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileOpen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyFileOpen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileSave.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyFileSave.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFolder.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyFolder.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyGrayscaleMorphologyInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyGrayscaleMorphologyInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyKernelInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyKernelInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyPoint.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyPoint.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyRadioInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyRadioInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderDouble.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertySliderDouble.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertySliderInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySpinnerInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertySpinnerInt.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyString.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyString.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPPropertyWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_IPZoomWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_IPZoomWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_ImageViewerWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_ImageViewerWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_MainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_MainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_PluginGenerator.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_PluginGenerator.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_SettingsWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_SettingsWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\moc_TutorialDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\moc_TutorialDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Debug\x64\qrc_ressources.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\intermediate\ImagePlay\Release\x64\qrc_ressources.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\stafx.h.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_AboutWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_AboutWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_ImageViewerWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_ImageViewerWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_MainWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_MainWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_PluginGenerator.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_PluginGenerator.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_SettingsWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_SettingsWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Debug\x64\ui_TutorialDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intermediate\ImagePlay\Release\x64\ui_TutorialDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="ui\AboutWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui\ImageViewerWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui\MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui\PluginGenerator.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui\SettingsWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui\TutorialDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\icons\24hours-phone.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Delete-32-over.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Delete-32.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\about_logo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\abs.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\add.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\announcement.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\back-next.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\back1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\back2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\bank.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\blueprint.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\bus.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\calculator.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\car.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\chat.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\chat2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\check.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\check1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\check2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\close.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\close2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\close3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\cloud.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\clouds1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\colorpicker.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\colorpicker_cursor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\contact.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\contactbook.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\crosshair.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\crosshair_cursor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cursor-cross.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\direction.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\download.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\dribbble.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\email.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\empty-battery.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\eps.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\equal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\favorite.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\favourite2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\file-folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\find.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\forward.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\forward1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\forward2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\full-battery.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\half-battery.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\handel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\home.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\hospital.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\imageviewer.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\inside.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\light.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\loader.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\locked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\love.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\magnet.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\mail.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\man1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\man2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\mobile.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\mobile2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\mobile3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\movie.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\msg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\msg2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\multiply.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\nest.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\new.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\next.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\next1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\next2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\note.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\ok-shield.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\ok.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\ok2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\opencv_small.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\outside.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\padlock_closed_inv.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\padlock_open_inv.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\pause.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\pen.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\people.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\perfect1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\phone.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\phonebook.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\phonebook1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\phonebook2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\pin.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\play.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\play@2x.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\plugins.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\point.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\pointer.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\pointer2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\previous.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\put-inside.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\refresh.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\refresh1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\refresh2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\refresh3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\refresh4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="res\ressources.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="res\icons\reward.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\rewind.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\rewind1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\rss.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\setting.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\settings.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\settings2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\settings3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\share2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\shield.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\signal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\signals.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\snow.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\sound.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\stamp.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\stop.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\stop1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\substract.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\switch.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\thumbnails_off.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\thumbnails_on.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\turbine.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tutorial.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\type-msg.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\unknown.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\unlocked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\up-down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\up.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\upload.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\warning.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\zoom-in.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\zoom-out.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icons\zoom.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\icon.rc" />
+  </ItemGroup>
+</Project>
