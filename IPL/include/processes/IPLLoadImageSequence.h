@@ -7,7 +7,7 @@
 
 #include <string>
 #include <stdio.h>
-#ifdef __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
     #include <sys/uio.h>
     #include <dirent.h>
 #else

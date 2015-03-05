@@ -14,8 +14,8 @@ class IPLSHARED_EXPORT IPLData
 public:
     enum                IPLDataType     { IMAGE_BW, IMAGE_GRAYSCALE, IMAGE_COLOR, IMAGE_ORIENTED, IMAGE_COMPLEX, POINT, MATRIX, SHAPES, UNDEFINED };
 
-                        IPLData         ()                      { _type = UNDEFINED; }
-                         IPLData        (IPLDataType type)      { _type = type; }
+    IPLData         ()                      { _type = UNDEFINED; }
+    IPLData        (IPLDataType type)      { _type = type; }
     virtual             ~IPLData()                              {}
     IPLDataType         type            (void)                  { return _type; }
 

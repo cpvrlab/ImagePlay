@@ -233,6 +233,22 @@ macx: {
 
 }
 
+linux: {
+    CONFIG +=c++11
+
+   # LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
+
+    INCLUDEPATH += $$PWD/../_lib/freeimage
+    DEPENDPATH += $$PWD/../_lib/freeimage
+
+    DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/lib/
+
+   # LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core
+   # LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc
+   # LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui
+
+}
+
 # IPL
 INCLUDEPATH += $$PWD/include/
 INCLUDEPATH += $$PWD/include/processes/

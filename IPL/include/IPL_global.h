@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <math.h>
 
-#if  __APPLE__
+#if defined(__linux__) || defined(__APPLE__)
     #define EXTERNC         extern "C"
     #define IPLSHARED_EXPORT     __attribute__((visibility("default")))
     #define IPLSHARED_IMPORT     __attribute__((visibility("default")))
