@@ -16,5 +16,5 @@ before_install:
  - sudo apt-get install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
 
 script:
- - qmake -recursive
+ - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8
  - make
