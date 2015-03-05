@@ -1,0 +1,6 @@
+[submodule "_res"]
+	path = _res
+	url = git@github.com:cpvrlab/ImagePlay_res.git
+[submodule "_lib"]
+	path = _lib
+	url = git@github.com:cpvrlab/ImagePlay_lib.git
