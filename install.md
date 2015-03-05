@@ -9,8 +9,8 @@ First make sure you have a recent version of XCode.
 
 Install [Homebrew](http://brew.sh)
 
-  brew install qt5
-  brew link --force qt5
+   brew install qt5
+   brew link --force qt5
 
 ### Linux
 
@@ -18,7 +18,7 @@ Install [Homebrew](http://brew.sh)
 ## Build
 
 ### OSX
-  git clone --recursive https://github.com/cpvrlab/ImagePlay.git
-  cd ImagePlay
-  qmake -recursive
-  make 
+   git clone --recursive https://github.com/cpvrlab/ImagePlay.git
+   cd ImagePlay
+   qmake -recursive
+   make 
