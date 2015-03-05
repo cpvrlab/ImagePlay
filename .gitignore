@@ -1,0 +1,41 @@
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+#.dll
+#.dylib
+*.pdb
+*.suo
+*.sdf
+*.opensdf
+
+# Qt-es
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+#Makefile
+*-build-*
+
+*.obj
+*.manifest
+*.res
+*.tlog
+*.log
+*.exe
+*.exp
+
+# Mac
+*.DS_Store
+*.o
+*.o-i386
+*.o-x86_64
+
+# temporary and html doc files
+intermediate/
+_doc/
+_bin/
