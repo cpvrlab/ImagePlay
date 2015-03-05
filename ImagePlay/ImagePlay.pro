@@ -198,5 +198,5 @@ DEPENDPATH += $$PWD/../IPL/include/
 #DEPENDPATH += "C:/Program Files (x86)/Visual Leak Detector/include/"
 
 
-INCLUDEPATH += $$PWD/../_bin/Release/macx
-DEPENDPATH += $$PWD/../_bin/Release/macx
+#INCLUDEPATH += $$PWD/../_bin/Release/macx
+#DEPENDPATH += $$PWD/../_bin/Release/macx
