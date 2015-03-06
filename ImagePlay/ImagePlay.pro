@@ -188,6 +188,7 @@ linux: {
     CONFIG +=c++11
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/lib/ -lIPL
 
+    QMAKE_LFLAGS += -Wl,--rpath=\$ORIGIN
     resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM/
     resources.files += media/process_icons
     QMAKE_BUNDLE_DATA += resources
