@@ -31,6 +31,7 @@ The following packages are necessary to compile (Debian/Ubuntu).
    qmake -tp vc -r
    
    # use ImagePlay.sln to compile in Visual Studio
+   # or ImagePlay.pro to use QtCreator
 ```
 
 ### OSX
