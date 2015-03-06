@@ -38,7 +38,8 @@ git clone --recursive https://github.com/cpvrlab/ImagePlay.git
 cd ImagePlay
 qmake -tp vc -r
 ```
-Use **ImagePlay.sln** to compile in Visual Studio or **ImagePlay.pro** to use QtCreator
+Open **ImagePlay.sln** to compile using Visual Studio or
+**ImagePlay.pro** to compile using QtCreator
 
 ### OSX
 ```sh
