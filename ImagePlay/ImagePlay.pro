@@ -146,11 +146,20 @@ win32: {
     else:CONFIG(debug, debug|release): LIBS += -L$$PWD/../_bin/$$CONFIGURATION/$$PLATFORM -lIPL
 
     #copy stuff after compiling
-    resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM
-    resources.files += ../_res/*
-    resources.files += ../_res/platforms
-    resources.files += ../_res/process_icons
-    INSTALLS += resources
+    #resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM
+    #resources.files += media/process_icons
+    #INSTALLS += resources
+
+    #run windeployqt
+    #copy dlls
+    #copy media
+    QMAKE_POST_LINK +=  windeployqt.exe --no-angle --no-svg --no-system-d3d-compiler --no-quick-import --no-translations ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.exe & \
+                        $${QMAKE_COPY} ..\\_lib\\windows\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\ & \
+                        mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
+                        $${QMAKE_COPY} media\\process_icons\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
+                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
+                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
+
 }
 
 macx: {
