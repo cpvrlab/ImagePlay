@@ -180,7 +180,7 @@ macx: {
     ICON = res/ImagePlay.icns
 
     #run macdeployqt
-    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
 
 }
 
