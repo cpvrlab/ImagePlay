@@ -218,7 +218,7 @@ win32: {
 }
 
 macx: {
-    CONFIG +=c++11
+    CONFIG += c++11
 
     LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
 
@@ -234,18 +234,14 @@ macx: {
 }
 
 linux: {
-    CONFIG +=c++11
+    CONFIG += c++11 staticlib
 
     LIBS += -lfreeimage
-
-    INCLUDEPATH += $$PWD/../_lib/freeimage
-    DEPENDPATH += $$PWD/../_lib/freeimage
-
-    DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/lib/
-
     LIBS += -lopencv_core
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
+
+    DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/
 
 }
 
