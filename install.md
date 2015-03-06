@@ -15,7 +15,12 @@ Install [Homebrew](http://brew.sh)
 ```
 
 ### Linux
+The following packages are necessary to compile (Debian/Ubuntu).
 
+```sh
+   sudo apt-get install qt5-default qt5-qmake
+   sudo apt-get install libfreeimage-dev libopencv-core-dev libopencv-core-dev libopencv-imgproc-dev libopencv-highgui-dev
+```
 
 ## Build
 
