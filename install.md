@@ -24,6 +24,15 @@ The following packages are necessary to compile (Debian/Ubuntu).
 
 ## Build
 
+### Windows
+```sh
+   git clone --recursive https://github.com/cpvrlab/ImagePlay.git
+   cd ImagePlay
+   qmake -tp vc -r
+   
+   # use ImagePlay.sln to compile in Visual Studio
+```
+
 ### OSX
 ```sh
    git clone --recursive https://github.com/cpvrlab/ImagePlay.git
