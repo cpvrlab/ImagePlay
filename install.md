@@ -38,12 +38,12 @@ git clone --recursive https://github.com/cpvrlab/ImagePlay.git
 cd ImagePlay
 qmake -tp vc -r
 ```
-Visual Studio:
+**Visual Studio:**
  * Open **ImagePlay.sln**
  * Set *ImagePlay* as startup project.
  * Run
 
-Qt Creator:
+**Qt Creator:**
  * Open **ImagePlay.pro**
  * Disable *Shadow build* in the project settings.
  * Run
