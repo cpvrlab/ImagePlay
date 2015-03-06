@@ -174,7 +174,7 @@ macx: {
 
     #copy stuff after compiling
     resources.path = Contents/MacOS
-    resources.files += ../_res/process_icons
+    resources.files += media/process_icons
     QMAKE_BUNDLE_DATA += resources
 
     ICON = res/ImagePlay.icns
@@ -187,6 +187,11 @@ macx: {
 linux: {
     CONFIG +=c++11
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/lib/ -lIPL
+
+    resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM/
+    resources.files += media/process_icons
+    QMAKE_BUNDLE_DATA += resources
+
 }
 
 
