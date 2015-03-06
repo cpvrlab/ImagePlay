@@ -3,6 +3,14 @@
 ## Prerequisites
 
 ### Windows
+* Install [Git](http://git-scm.com/download/win/)
+* Install Visual Studio 2013 or later:
+   * [Visual Studio Community Edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs/)
+    or
+   * [Visual Studio Express 2013 for Windows Desktop](https://www.visualstudio.com/downloads/)
+* Install [Qt (Version 5.4 or greater)](http://www.qt.io/download-open-source/)
+   * Make sure you select the correct version (`msvc2013 64-bit` or similar)
+* Add Qt to your PATH (`C:\Qt\5.4\msvc2013_64\bin` or similar)
 
 ### OSX
 First make sure you have a recent version of XCode.
