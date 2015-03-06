@@ -30,7 +30,7 @@ The following packages are necessary to compile (Debian/Ubuntu).
    cd ImagePlay
    qmake -tp vc -r
 ```
-Use ImagePlay.sln to compile in Visual Studio or ImagePlay.pro to use QtCreator
+Use **ImagePlay.sln** to compile in Visual Studio or **ImagePlay.pro** to use QtCreator
 
 ### OSX
 ```sh
