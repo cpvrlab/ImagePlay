@@ -25,7 +25,7 @@ Install [Homebrew](http://brew.sh)
    cd ImagePlay
    qmake -tp vc -r
    
-   // use ImagePlay.sln to compile in Visual Studio
+   # use ImagePlay.sln to compile in Visual Studio
 ```
 
 ### OSX
