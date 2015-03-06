@@ -20,7 +20,7 @@ TARGET = ImagePlay
 TEMPLATE = app
 #TEMPLATE = vcapp
 
-VERSION = 6.0.0.1
+VERSION = 6.0.0-beta
 QMAKE_TARGET_COMPANY = "BFH"
 QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
@@ -189,13 +189,19 @@ macx: {
     ICON = res/ImagePlay.icns
 
     #run macdeployqt
-    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
 
 }
 
 linux: {
-    CONFIG +=c++11
-    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/lib/ -lIPL
+    CONFIG += c++11
+
+    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ -lIPL
+
+    LIBS += -lfreeimage
+    LIBS += -lopencv_core
+    LIBS += -lopencv_imgproc
+    LIBS += -lopencv_highgui
 
     resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM/
     resources.files += media/process_icons

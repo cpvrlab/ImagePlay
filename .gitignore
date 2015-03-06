@@ -19,6 +19,7 @@
 moc_*.cpp
 qrc_*.cpp
 Makefile
+.qmake.stash
 *-build-*
 
 *.obj

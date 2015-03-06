@@ -55,3 +55,11 @@ cd ImagePlay
 qmake -recursive
 make 
 ```
+
+### Linux
+```sh
+git clone --recursive https://github.com/cpvrlab/ImagePlay.git
+cd ImagePlay
+qmake -recursive
+make 
+```
