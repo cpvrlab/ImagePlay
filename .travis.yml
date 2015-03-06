@@ -14,6 +14,7 @@ before_install:
  # additional headerfiles
  - sudo apt-get install libXxf86vm-dev libXi-dev libudev-dev libXcursor-dev
  - sudo apt-get install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
+ - sudo apt-get install libfreeimage-dev libopencv-core-dev libopencv-core-dev libopencv-imgproc-dev libopencv-highgui-dev
 
 script:
  - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8
