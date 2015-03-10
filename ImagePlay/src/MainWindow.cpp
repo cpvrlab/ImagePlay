@@ -125,14 +125,18 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, c
     // write log file. one file per day
     if(logFileEnabled())
     {
+#ifdef Q_OS_MAC
         QDir logDir(qApp->applicationDirPath() + "/log/");
+#else
+        QDir logDir(QDir::homePath() + "/ImagePlay_log/");
+#endif
         if(!logDir.exists())
         {
             logDir.mkdir(".");
         }
 
 #ifdef Q_OS_MAC
-        QString fileName = QDir::homePath() + "/ImagePlay/log/";
+        QString fileName = QDir::homePath() + "/ImagePlay_log/";
 #else
         QString fileName = qApp->applicationDirPath() + "/log/";
 #endif
