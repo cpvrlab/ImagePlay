@@ -1,0 +1,126 @@
+/* 
+* Version: 1.6
+* Blue Color 		: #3498db;
+* Blue Hover Color  : #2980b9;
+* Additional color  : deeffc;
+* rgba(52, 152, 219, 1);
+*/
+
+/*Pace
+------------------------------------*/
+.pace .pace-progress {
+  background: #3498db;
+}
+
+.pace .pace-progress-inner {
+  box-shadow: 0 0 10px #3498db, 0 0 5px #3498db;
+}
+
+.pace .pace-activity {
+  border-top-color: #3498db;
+  border-left-color: #3498db;
+}
+
+/*Headers Default
+------------------------------------*/
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #3498db !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #3498db;
+    z-index: 1;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
+    color: #3498db;
+}
+
+.title-v1 h1:after, .title-v1 h2:after {
+    background:  #3498db;
+}
+
+/*Logo
+------------------------------------*/
+.navbar-default .navbar-brand span {
+    color: #3498db !important;
+}
+
+/*Title v1
+------------------------------------*/
+.title-v1 h1:after, .title-v1 h2:after {
+    background:  #3498db;
+}
+
+/*Title v1
+------------------------------------*/
+i.icon-bg-u {
+    background:  #3498db;
+}
+
+/*Text Color
+------------------------------------*/
+.color-green {
+    color: #3498db;
+}
+
+/*Team v1
+------------------------------------*/
+.team-v1 li:hover > p:before {
+    background:  #3498db;
+}
+
+/*Service Box v1
+------------------------------------*/
+.service-box-v1 p:after {
+    background:  #3498db;
+}
+
+.service-box-v1 li {
+    border-top: 1px dotted #3498db;
+}
+
+.service-box-v1 li:hover {
+    color: #3498db;
+}
+
+/*News v1
+------------------------------------*/
+.news-v1 h3 a:hover {
+    color: #3498db;
+}
+
+.news-v1 .news-v1-info li a:hover {
+    color: #3498db;
+}
+
+/*News v1
+------------------------------------*/
+.wrapper-portfolio #filters-container .cbp-filter-item-active {
+    background:  #3498db;
+    border-color: #3498db;
+}
+
+.wrapper-portfolio #filters-container .cbp-filter-item:hover {
+    background:  #3498db;
+    border-color: #3498db;
+}
+
+/*Testimonials v3
+------------------------------------*/
+.testimonials-v3 .testimonials-v3-title p {
+    color: #3498db;
+}
+
+.testimonials-v3 .owl-buttons .owl-prev:hover,
+.testimonials-v3 .owl-buttons .owl-next:hover {
+    background:  #3498db;
+}
+
+/*Copyright Section
+------------------------------------*/
+.copyright-section i.back-to-top:hover {
+    color: #3498db;
+}

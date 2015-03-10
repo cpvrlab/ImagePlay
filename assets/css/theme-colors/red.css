@@ -1,0 +1,119 @@
+/* 
+* Version: 1.6
+* Red Color     : #e74c3c;
+*/
+
+/*Pace
+------------------------------------*/
+.pace .pace-progress {
+  background: #e74c3c;
+}
+
+.pace .pace-progress-inner {
+  box-shadow: 0 0 10px #e74c3c, 0 0 5px #e74c3c;
+}
+
+.pace .pace-activity {
+  border-top-color: #e74c3c;
+  border-left-color: #e74c3c;
+}
+
+/*Headers Default
+------------------------------------*/
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #e74c3c !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #e74c3c;
+    z-index: 1;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
+    color: #e74c3c;
+}
+
+/*Logo
+------------------------------------*/
+.navbar-default .navbar-brand span {
+    color: #e74c3c !important;
+}
+
+/*Title v1
+------------------------------------*/
+.title-v1 h1:after, .title-v1 h2:after {
+    background:  #e74c3c;
+}
+
+/*Title v1
+------------------------------------*/
+i.icon-bg-u {
+    background:  #e74c3c;
+}
+
+/*Text Color
+------------------------------------*/
+.color-green {
+    color: #e74c3c;
+}
+
+/*Team v1
+------------------------------------*/
+.team-v1 li:hover > p:before {
+    background:  #e74c3c;
+}
+
+/*Service Box v1
+------------------------------------*/
+.service-box-v1 p:after {
+    background:  #e74c3c;
+}
+
+.service-box-v1 li {
+    border-top: 1px dotted #e74c3c;
+}
+
+.service-box-v1 li:hover {
+    color: #e74c3c;
+}
+
+/*News v1
+------------------------------------*/
+.news-v1 h3 a:hover {
+    color: #e74c3c;
+}
+
+.news-v1 .news-v1-info li a:hover {
+    color: #e74c3c;
+}
+
+/*News v1
+------------------------------------*/
+.wrapper-portfolio #filters-container .cbp-filter-item-active {
+    background:  #e74c3c;
+    border-color: #e74c3c;
+}
+
+.wrapper-portfolio #filters-container .cbp-filter-item:hover {
+    background:  #e74c3c;
+    border-color: #e74c3c;
+}
+
+/*Testimonials v3
+------------------------------------*/
+.testimonials-v3 .testimonials-v3-title p {
+    color: #e74c3c;
+}
+
+.testimonials-v3 .owl-buttons .owl-prev:hover,
+.testimonials-v3 .owl-buttons .owl-next:hover {
+    background:  #e74c3c;
+}
+
+/*Copyright Section
+------------------------------------*/
+.copyright-section i.back-to-top:hover {
+    color: #e74c3c;
+}

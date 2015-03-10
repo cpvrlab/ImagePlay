@@ -1,0 +1,363 @@
+/*Sky-Forms
+------------------------------------*/
+/*Contact Style*/
+.sky-form.contact-style {
+  border: none;
+}
+
+/*Comment Style*/
+.sky-form.comment-style,
+.sky-form.comment-style fieldset {
+  padding: 0;
+  border: none;
+  background: inherit;
+}
+
+.sky-form.comment-style input,
+.sky-form.comment-style textarea {
+  border: none;
+}
+
+.sky-form.comment-style input:focus,
+.sky-form.comment-style textarea:focus {
+  box-shadow: none;
+}
+
+/*Sky Space*/
+.sky-form .sky-space-20 {
+  margin-bottom: 20px;
+}
+
+.sky-form .sky-space-30 {
+  margin-bottom: 30px;
+}
+
+/**/
+/* defaults */
+/**/
+.sky-form {
+  box-shadow: none;
+  border: 1px solid #eee;
+}
+
+.sky-form header {
+  color: inherit;
+  display: block;
+  font-size: 20px;
+  background: #fff;
+  font-weight: 400;
+  padding: 8px 30px;
+}
+
+.sky-form fieldset.no-padding {
+  padding: 0;
+}
+
+.sky-form fieldset {
+  background: #fff;
+}
+
+.sky-form footer {
+  background: #fff;
+  padding: 15px 30px;
+}
+
+.sky-form a {
+  color: inherit;
+}
+
+.sky-form a.btn-u {
+  color: #fff;
+}
+
+.sky-form .input input {
+  height: 34px;
+  padding: 6px 12px;
+}
+
+.sky-form .input input,
+.sky-form .select select,
+.sky-form .textarea textarea {
+  border-width: 1px;
+  font-size: 14px;
+  color: #404040;
+}
+
+.sky-form .select select {
+  height: 33px;
+  padding: 6px 10px;
+}
+
+.sky-form .select-multiple select {
+  height: auto;
+}
+
+/**/
+/* file inputs */
+/**/
+.sky-form .input-file .button {
+  height: 32px;
+  top: 1px;
+  right: 1px;
+}
+
+/**/
+/* captcha inputs */
+/**/
+.sky-form .input-captcha img {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border-left: 1px solid #e5e5e5;
+}
+
+
+/**/
+/* normal state */
+/**/
+.sky-form .input input,
+.sky-form .select select,
+.sky-form .textarea textarea,
+.sky-form .radio i,
+.sky-form .checkbox i,
+.sky-form .toggle i,
+.sky-form .icon-append,
+.sky-form .icon-prepend {
+  border-color: #bbb;
+}
+.sky-form .toggle i:before {
+  background-color: #999;  
+}
+
+.sky-form .button {
+  background: #72c02c;
+}
+
+/**/
+/* toggles */
+/**/
+.sky-form .toggle {
+	font-weight: normal;
+}
+
+.sky-form .toggle i {
+  width: 54px;
+  height: 21px;
+  border-width: 1px;
+}
+.sky-form .toggle i:after {
+  top: 3px;
+}
+.sky-form .toggle i:before {
+  top: 5px;
+  right: 6px;
+}
+
+/*(remove Bootstrap 'radio, checkbox' margin-top)
+--------------------------------------------------*/
+.radio, .checkbox {
+  margin-top: 0;
+}
+
+/**/
+/* radios and checkboxes */
+/**/
+.sky-form .radio i,
+.sky-form .checkbox i {
+  width: 17px;
+  height: 17px;
+  border-width: 1px;
+}
+
+.sky-form .checkbox input + i:after {
+  top: 2px;
+  left: 0;
+  font: normal 10px FontAwesome;
+}
+
+/**/
+/* checked state */
+/**/
+.sky-form .radio input + i:after {
+  top: 5px;
+  left: 5px;
+  background-color: #999;  
+}
+.sky-form .checkbox input + i:after {
+  color: #999;
+}
+.sky-form .radio input:checked + i,
+.sky-form .checkbox input:checked + i,
+.sky-form .toggle input:checked + i {
+  border-color: #999;  
+}
+.sky-form .rating input:checked ~ label {
+  color: #72c02c; 
+}
+
+/**/
+/* selects */
+/**/
+.sky-form .select i {
+  top: 14px;
+  width: 9px;
+  right: 13px;
+  height: 6px;
+}
+.sky-form .select i:after,
+.sky-form .select i:before {
+  top: 4px;
+}
+.sky-form .select i:before {
+  top: -2px;
+  border-bottom: 4px solid #404040;
+}
+
+.label-rounded .ui-slider-handle {
+  border-radius: 50% !important;
+}
+
+/**/
+/* icons */
+/**/
+.sky-form .icon-append,
+.sky-form .icon-prepend {
+  top: 1px;
+  height: 32px;
+  font-size: 14px;
+  line-height: 33px;
+  background: inherit;
+}
+.sky-form .icon-append {
+  right: 1px;
+  padding: 0 3px;
+  min-width: 34px;
+}
+
+.sky-form .icon-prepend {
+  left: 6px;
+  padding-right: 5px;
+}
+
+/**/
+/* focus state */
+/**/
+.sky-form .input input:focus,
+.sky-form .select select:focus,
+.sky-form .textarea textarea:focus {
+ 	border-color: #bbb;
+  box-shadow: 0 0 2px #c9c9c9;	
+}
+
+.sky-form .radio input:focus + i,
+.sky-form .checkbox input:focus + i,
+.sky-form .toggle input:focus + i {
+  border-color: #999;
+  box-shadow: none;
+}
+
+/**/
+/* hover state */
+/**/
+.sky-form .input:hover input,
+.sky-form .select:hover select,
+.sky-form .textarea:hover textarea {
+	border-color: #999;
+}
+
+.sky-form .radio:hover i,
+.sky-form .checkbox:hover i,
+.sky-form .toggle:hover i,
+.sky-form .ui-slider-handle:hover {
+  border-color: #999;
+}
+.sky-form .rating input + label:hover,
+.sky-form .rating input + label:hover ~ label {
+  color: #72c02c;
+}
+
+.sky-form .icon-append,
+.sky-form .icon-prepend {
+  color: #b3b3b3;
+}
+
+/**/
+/* disabled state */
+/**/
+.sky-form .input.state-disabled:hover input,
+.sky-form .select.state-disabled:hover select,
+.sky-form .textarea.state-disabled:hover textarea,
+.sky-form .radio.state-disabled:hover i,
+.sky-form .checkbox.state-disabled:hover i,
+.sky-form .toggle.state-disabled:hover i {
+  border-color: #bbb;
+}
+
+/**/
+/* datepicker */
+/**/
+.ui-datepicker-header {
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.ui-datepicker-inline {
+  border-width: 1px;
+}
+
+.ui-datepicker-inline .ui-datepicker-header {
+  line-height: 27px;
+}
+
+.ui-datepicker-prev, 
+.ui-datepicker-next {
+  font-size: 18px;
+  line-height: 47px;
+}
+
+.ui-datepicker-calendar a {
+  border: 1px solid transparent;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+  background: inherit;
+  border: 1px solid #bbb;
+}
+.ui-datepicker-calendar a:hover {
+  background: inherit;  
+  border: 1px solid #bbb;
+}
+
+/**/
+/* bootstrap compatibility */
+/**/
+.sky-form button *,
+.sky-form button *:after,
+.sky-form button *:before {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.btn-u.button-uploading:after {
+  top: 6px;
+}
+.btn-u.btn-u-lg.button-uploading:after {
+  top: 10px;
+}
+.btn-u.btn-u-sm.button-uploading:after {
+  top: 3px;
+}
+.btn-u.btn-u-xs.button-uploading:after {
+  top: 2px;
+}
+
+.label {
+  padding: 0.2em 0 0.3em;
+}
+
+/*Fix for datepicker's responsive issue on resolution 1024x768*/
+/*.ui-datepicker-calendar a,*/
+.ui-datepicker-calendar span {
+  width: 26px;
+  /*color: #bfbfbf;*/
+}

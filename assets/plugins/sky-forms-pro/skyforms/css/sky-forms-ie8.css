@@ -1,0 +1,62 @@
+/**/
+/* defaults */
+/**/
+.sky-form header {
+	background: rgb(248,248,248);
+}
+.sky-form fieldset {
+	background: rgb(255,255,255);
+}
+.sky-form footer {
+	background: rgb(248,248,248);
+}
+
+
+/**/
+/* file inputs */
+/**/
+.sky-form .input-file .button input {
+	filter: alpha(opacity=0);
+}
+
+
+/**/
+/* radios and checkboxes */
+/**/
+.sky-form .radio input + i:after,
+.sky-form .checkbox input + i:after {
+	display: none;
+}
+.sky-form .radio .checked + i:after,
+.sky-form .checkbox .checked + i:after {
+	display: block;
+}
+
+
+/**/
+/* toggles */
+/**/
+.sky-form .toggle input.checked + i:after {
+	content: 'ON';
+	text-align: right;
+}
+.sky-form .toggle input.checked + i:before {
+	right: 36px;
+}
+
+
+/**/
+/* ratings */
+/**/
+.sky-form .rating input.checked + label,
+.sky-form .rating input.checked + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label,
+.sky-form .rating input.checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label {
+	color: #2da5da;
+}

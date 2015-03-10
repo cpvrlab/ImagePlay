@@ -1,0 +1,60 @@
+.shadow-wrapper {
+  z-index: 1;  
+  position: relative;
+}
+
+/*Common Style*/
+.box-shadow {
+	background: #fff;
+	position: relative;
+}
+
+.box-shadow:after,
+.box-shadow:before {
+	top: 80%;
+	left: 5px;
+	width: 50%;
+	z-index: -1;
+	content: "";
+	bottom: 15px;
+	max-width: 300px;
+	background: #999;
+	position: absolute;	
+}
+
+ /*Effect 1*/
+.shadow-effect-1 {
+	box-shadow: 0 10px 6px -6px #bbb;
+	-moz-box-shadow: 0 10px 6px -6px #bbb;
+	-webkit-box-shadow: 0 10px 6px -6px #bbb;
+}
+
+ /*Effect 2,3,4*/
+.shadow-effect-2 {
+	position: relative;
+}
+
+.shadow-effect-2:after,
+.shadow-effect-2:before,
+.shadow-effect-3:before,
+.shadow-effect-4:after {
+	transform: rotate(-3deg);
+	-o-transform: rotate(-3deg);
+	-ms-transform: rotate(-3deg);
+	-moz-transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+	box-shadow: 0 15px 10px #999;
+	-moz-box-shadow: 0 15px 10px #999;
+	-webkit-box-shadow: 0 15px 10px #999;
+}
+
+.shadow-effect-2:after,
+.shadow-effect-4:after {
+	left: auto;
+	right: 5px;
+  transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -webkit-transform: rotate(3deg);
+}

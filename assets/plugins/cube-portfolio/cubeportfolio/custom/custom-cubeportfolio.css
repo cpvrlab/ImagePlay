@@ -1,0 +1,140 @@
+/*Cubeportfolio
+------------------------------------*/
+.cube-portfolio:before,
+.cube-portfolio:after {
+	content: " ";
+	display: table;
+}
+
+.cube-portfolio:after {
+	clear: both;
+}
+
+/*Loading Box*/
+.cube-portfolio .cbp-popup-singlePageInline .cbp-popup-loadingBox {
+  border-radius: 50% !important;
+}
+
+/*Overlays
+------------------------------------*/
+/*Default*/
+.cube-portfolio .cbp-caption-zoom .cbp-caption-activeWrap {
+  	background: rgba(39,58,78,.6) !important;
+}
+
+/*Overlay Option v2*/
+.cube-portfolio .cbp-caption-activeWrap.overlay-btm-v2 {
+  	background: rgba(39,58,78,.6) !important;
+}
+
+/*White Transparent*/
+.cube-portfolio .cbp-caption-activeWrap.white-transparent-hover {
+	background: rgba(255,255,255,.6) !important;
+}
+
+/*Dark Transparent*/
+.cube-portfolio .cbp-caption-activeWrap.dark-transparent-hover {
+	background: rgba(0,0,0,.6) !important;
+}
+
+/*Grenn Transparent*/
+.cube-portfolio .cbp-caption-activeWrap.green-transparent-hover {
+	background: rgba(114,192,44,.9) !important;
+}
+
+.cube-portfolio .cbp-caption-activeWrap.green-transparent-hover .link-captions i:hover {
+	background: #333;
+}
+
+/*Filters*/
+.cube-portfolio .cbp-l-filters-text .cbp-filter-item {
+	color: #555;
+}
+
+.cube-portfolio .cbp-l-filters-text .cbp-filter-item.cbp-filter-item-active,
+.cube-portfolio .cbp-l-filters-text .cbp-filter-item:hover {
+	color: #72c02c;
+}
+
+.cube-portfolio .cbp-l-filters-text .cbp-filter-counter {
+	background: #72c02c;
+}
+
+.cube-portfolio .cbp-l-filters-text .cbp-filter-counter:before {
+	border-top-color: #72c02c;
+}
+
+/*Pagination*/
+.cube-portfolio .cbp-nav-pagination-item {
+	border-radius: 50% !important;
+}
+
+/*Buttons*/
+.cube-portfolio .cbp-l-caption-buttonLeft,
+.cube-portfolio .cbp-l-caption-buttonRight {
+	background: #72c02c;
+}
+
+.cube-portfolio .cbp-l-caption-buttonLeft:hover,
+.cube-portfolio .cbp-l-caption-buttonRight:hover {
+	background: #5fb611;
+}
+
+/*Titles*/
+.cube-portfolio .cbp-l-grid-agency-title {
+	color: #fff !important;
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.cube-portfolio .cbp-l-grid-agency-desc {
+	color: #fff;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+/*Dark Titles*/
+.cube-portfolio .cbp-title-dark .cbp-l-grid-agency-title {
+	color: #444 !important;
+}
+
+.cube-portfolio .cbp-title-dark .cbp-l-grid-agency-desc {
+	color: #555;
+}
+
+/*Link Captions*/
+.cube-portfolio .link-captions {
+	padding-left: 0;
+	margin: 0 0 20px;
+	list-style: none;
+	text-align: center;
+}
+
+.cube-portfolio .link-captions li {
+	padding: 0 2px;
+	display: inline-block;
+}
+
+.cube-portfolio .link-captions li i {
+	color: #444;
+	width: 30px;
+	height: 30px;
+	padding: 8px;
+	font-style: 14px;
+	background: #fff;
+	text-align: center;
+	display: inline-block;
+}
+
+.cube-portfolio .link-captions li i:hover {
+	color: #fff;
+	background: #72c02c;
+	-webkit-transition: all .2s ease-in-out;
+  	-moz-transition: all .2s ease-in-out;
+  	-o-transition: all .2s ease-in-out;
+  	transition: all .2s ease-in-out;    
+
+}

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube Portfolio Documentation v2.0.1 | 21 January, 2015</title>
+    <meta name="description" content="demo1">
+    <meta name="keywords" content="demo1">
+
+    <!-- load open sans font from google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+
+    <!-- load reset -->
+    <link rel="stylesheet" href="css/reset.css">
+
+    <!-- load main.css -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- load prettify css -->
+    <link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="left">
+            <a href="#">Cube Portfolio</a>
+            <nav>
+                <dl id="navigation">
+                    <dt><a href="#about">About</a></dt>
+                    <dt><a href="#how-to-install">How to install</a></dt>
+                    <dt><a href="#options">Options</a></dt>
+                    <dt><a href="#filters">Filters</a></dt>
+                    <dt><a href="#lightbox">Lightbox</a></dt>
+                    <dt><a href="#singlePage">Single Page</a></dt>
+                    <dt><a href="#singlePageInline">Single Page Inline</a></dt>
+                    <dt><a href="#captions">Captions</a></dt>
+                    <dt><a href="#templates">Templates</a></dt>
+                    <dt><a href="#api">API</a></dt>
+                    <dt><a href="#loadMoreItems">Load More Items</a></dt>
+                    <dt><a href="#support">Support</a></dt>
+                    <dt><a href="#change-log">Change Log</a></dt>
+                </dl>
+            </nav>
+        </div>
+
+        <div class="right">
+            <h1><a name="about">About</a></h1>
+                <p>Cube Portfolio is a powerful jQuery plugin that provides beautiful animated filtering, custom captions and it's perfect for <strong>portfolios, galleries, team members, blog posts</strong> or any other ordered content.</p>
+                <p>It plays nice with your existing HTML and CSS, making it a great choice for dynamic and responsive layouts.</p>
+
+            <h1><a name="how-to-install">How to install</a></h1>
+                <h4>1. Upload <span class="tinycode">cubeportfolio</span> folder to your server. This folder contains all of the asssets of the plugin.</h4>
+                    <ul class="lists">
+                        <li>js</li>
+                        <li>css</li>
+                        <li>images</li>
+                    </ul>
+                <h4>
+                    2. Include the following files in your <span class="tinycode">&lt;head&gt;</span> section of the page. Please ensure that all of them have the correct path:
+                </h4>
+
+<pre class="prettyprint lang-html linenums">
+&lt;!-- load cubeportfolio css file --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;cubeportfolio/css/cubeportfolio.min.css&quot;&gt;
+
+&lt;!-- load latest jquery from google resources--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-latest.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- load cubeportfolio jQuery plugin --&gt;
+&lt;script type="text/javascript" src=&quot;cubeportfolio/js/jquery.cubeportfolio.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+                <p>
+                    Be aware that Cube Portfolio plugin requires jQuery 1.7+.
+                    If you already have jQuery on your page, don’t include it second time.
+                </p>
+                <br>
+                <h4>
+                    3. Insert the HTML structure below to the <span class="tinycode">&lt;body&gt;</span> section to build the markup (don't forget to update images path!).<br>
+                </h4>
+                <p>For more complex structures please check the <span class="tinycode">templates</span> folder.</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;#&quot; title=&quot;custom title 1&quot;&gt;
+            &lt;img src=&quot;path/to/img1&quot; alt=&quot;custom alt 1&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;#&quot; title=&quot;custom title 2&quot;&gt;
+            &lt;img src=&quot;path/to/img2&quot; alt=&quot;custom alt 2&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;#&quot; title=&quot;custom title 3&quot;&gt;
+            &lt;img src=&quot;path/to/img3&quot; alt=&quot;custom alt 3&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+                <h4>
+                    4. Initialize the Cube Portfolio plugin. Usually just before the closing body tag: For options go to <a href="#options">Options</a> section.
+                </h4>
+
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery(document).ready( function() {
+     jQuery('#grid-container').cubeportfolio({
+        // options
+     });
+});
+&lt;/script&gt;
+</pre>
+            <h1><a name="options">Options</a></h1>
+                <p>
+                    There are numerous options that can be added to configure Cube Portfolio behaviour.
+                    To set an option you must add it to the initialisation block of code.
+                </p>
+
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery('#grid-container').cubeportfolio({
+    // place here the options. Don't forget to separate them by comma
+});
+&lt;/script&gt;
+</pre>
+                <h2>Full list of options</h2>
+
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th width="15%">Name</th>
+                        <th width="20%">Values</th>
+                        <th width="15%">Default</th>
+                        <th width="40%">Description</th>
+                    </tr>
+
+                    <tr>
+                        <td>layoutMode</td>
+                        <td>'grid' or 'slider'</td>
+                        <td>'grid'</td>
+                        <td>Layout Mode for this plugin</td>
+                    </tr>
+
+                    <tr>
+                        <td>drag</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Mouse and touch drag support. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>auto</td>
+                        <td>true or false</td>
+                        <td>false</td>
+                        <td>Autoplay the slider. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>autoTimeout</td>
+                        <td>only integers (ex: 1000, 2000, 5000)</td>
+                        <td>5000</td>
+                        <td>Autoplay interval timeout. Time is set in milisecconds. 1000 milliseconds equals 1 second. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>autoPauseOnHover</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Stops autoplay when user hover the slider. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>showNavigation</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Show `next` and `prev` buttons for slider. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>showPagination</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Show pagination for slider. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>rewindNav</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Enable slide to first item (last item). Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>scrollByPage</td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Scroll by page and not by item. This option affect next/prev buttons and drag support. Option available only for `layoutMode: 'slider'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>defaultFilter</td>
+                        <td>strings that represent the filter name(e.g. '*', '.logo', '.web-design', '.design')</td>
+                        <td>'*'</td>
+                        <td>Default filter for plugin. Option available only for `layoutMode: 'grid'`</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>filterDeeplinking</td>
+                        <td>true or false</td>
+                        <td>false</td>
+                        <td>Enable / disable the deeplinking feature when you click on filters. Option available only for `layoutMode: 'grid'`</td>
+                    </tr>
+
+                    <tr>
+                        <td>animationType</td>
+                        <td>
+                         'fadeOut'<br>
+                         'quicksand'<br>
+                         'boxShadow'<br>
+                         'bounceLeft'<br>
+                         'bounceTop'<br>
+                         'bounceBottom'<br>
+                         'moveLeft'<br>
+                         'slideLeft'<br>
+                         'fadeOutTop'<br>
+                         'sequentially'<br>
+                         'skew'<br>
+                         'slideDelay'<br>
+                         '3d' Flip<br>
+                         'rotateSides'<br>
+                         'flipOutDelay'<br>
+                         'flipOut'<br>
+                         'unfold'<br>
+                         'foldLeft'<br>
+                         'scaleDown'<br>
+                         'scaleSides'<br>
+                         'frontRow'<br>
+                         'flipBottom'<br>
+                         'rotateRoom'
+                        </td>
+                        <td>'fadeOut'</td>
+                        <td>
+                            Defines which animation to use for items that will be shown or hidden after a filter has been activated.
+                            The plugin use the best browser features available (CSS3 transitions and transform, GPU acceleration)
+                            Option available only for `layoutMode: 'grid'`
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>gridAdjustment</td>
+                        <td>
+                            'default'<br>
+                            'alignCenter'<br>
+                            'responsive'
+                        </td>
+                        <td>'responsive'</td>
+                        <td>
+                            Adjust the layout grid.
+                             <br>- default (no adjustment applied)
+                             <br>- alignCenter (align the grid on center of the page)
+                             <br>- responsive (use a fluid grid to resize the grid)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>mediaQueries</td>
+                        <td>
+                            - array of objects of format: [{width: a, cols: d}, {width: b, cols: e}] <br>
+                            - you can define as many objects as you want <br>
+                            - if this option is `false` Cube Portfolio will adjust the items width automatically (default option for backward compatibility)
+                        </td>
+                        <td>false</td>
+                        <td>
+                             Define `media queries` for columns layout.
+                             <br>Format: [{width: a, cols: d}, {width: b, cols: e}, {width: c, cols: f}], where a, b, c are the grid width and d, e, f are the columns displayed. e.g. [{width: 1100, cols: 4}, {width: 800, cols: 3}, {width: 480, cols: 2}] means
+                             <br>if (gridWidth >= 1100) => show 4 columns,
+                             <br>if (gridWidth >= 800 && gridWidth < 1100) => show 3 columns,
+                             <br>if (gridWidth >= 480 && gridWidth < 800) => show 2 columns,
+                             <br>if (gridWidth < 480) => show 2 columns
+                             <br>Keep in mind that a > b > c
+                             <br>This option is available only when `gridAdjustment: 'responsive'`
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>gapHorizontal</td>
+                        <td>only integers (e.g. 1, 5, 10)</td>
+                        <td>10</td>
+                        <td>Horizontal gap between items</td>
+                    </tr>
+                    <tr>
+                        <td>gapVertical</td>
+                        <td>only integers (e.g. 1, 5, 10)</td>
+                        <td>10</td>
+                        <td>Vertical gap between items</td>
+                    </tr>
+                    <tr>
+                        <td>caption</td>
+                        <td>
+                            'pushTop'
+                            <br>'pushDown'
+                            <br>'revealBottom'
+                            <br>'revealTop'
+                            <br>'moveRight'
+                            <br>'moveLeft'
+                            <br>'overlayBottomPush'
+                            <br>'overlayBottom'
+                            <br>'overlayBottomReveal'
+                            <br>'overlayBottomAlong'
+                            <br>'overlayRightAlong'
+                            <br>'minimal'
+                            <br>'fadeIn'
+                            <br>'zoom'
+                            <br>'opacity'
+                        </td>
+                        <td>'pushTop'</td>
+                        <td>Caption - the overlay that is shown when you put the mouse over an item. <br>NOTE: If you don't want to have captions set this option to an empty string (e.g. caption: '')</td>
+                    </tr>
+                    <tr>
+                        <td>displayType</td>
+                        <td>
+                            'default'
+                            <br>'fadeIn'
+                            <br>'lazyLoading'
+                            <br>'fadeInToTop'
+                            <br>'sequentially'
+                            <br>'bottomToTop'
+                        </td>
+                        <td>'lazyLoading'</td>
+                        <td>
+                            The plugin will display his content based on the following values.
+                            <br>- default (the content will be displayed as soon as possible)
+                            <br>- fadeIn (the content will be displayed with a fadeIn effect)
+                            <br>- lazyLoading (the plugin will fully preload the images before displaying the items with a fadeIn effect)
+                            <br>- fadeInToTop - fadeInToTop (the plugin will fully preload the images before displaying the items with a fadeIn effect from bottom to top)
+                            <br>- sequentially (the plugin will fully preload the images before displaying the items with a sequentially effect)
+                            <br>- bottomToTop (the plugin will fully preload the images before displaying the items with an animation from bottom to top)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>displayTypeSpeed</td>
+                        <td>only integers, values in ms (e.g. 200, 300, 500)</td>
+                        <td>400</td>
+                        <td>Defines the speed of displaying the items (when <i>displayType == default</i> this option will have no effect)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            lightboxDelegate
+                        </td>
+                        <td>strings that represent the elements in the document (DOM selector)</td>
+                        <td>'.cbp-lightbox'</td>
+                        <td>Define any clickable elements you wish to use to trigger lightbox popup on click. </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            lightboxGallery
+                        </td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Enable / disable gallery mode for lightbox popup</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            lightboxTitleSrc
+                        </td>
+                        <td>html atributte</td>
+                        <td>'data-title'</td>
+                        <td>Attribute of the delegate item that contains caption for lightbox</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="color: #D66767">lightboxShowCounter</span>
+                        </td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>This options is deprecated. Please use lightboxCounter option instead.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            lightboxCounter
+                        </td>
+                        <td>html markup code</td>
+                        <td>
+                            '&lt;div class=&quot;cbp-popup-lightbox-counter&quot;&gt;{{current}} of {{total}}&lt;/div&gt;'
+                        </td>
+                        <td>
+                            Markup of the lightbox counter. To hide the counter for lightbox put this option to an empty string (e.g. '')
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageDelegate
+                        </td>
+                        <td>strings that represent the elements in the document (DOM selector)</td>
+                        <td>'.cbp-singlePage'</td>
+                        <td>Define any clickable elements you wish to use to trigger singlePage popup on click. </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageDeeplinking
+                        </td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Enable / disable the deeplinking feature for singlePage popup</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageStickyNavigation
+                        </td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Enable / disable the sticky navigation for singlePage popup</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="color: #D66767">singlePageShowCounter</span>
+                        </td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>This options is deprecated. Please use singlePageCounter option instead.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageCounter
+                        </td>
+                        <td>html markup code</td>
+                        <td>
+                            '&lt;div class=&quot;cbp-popup-singlePage-counter&quot;&gt;{{current}} of {{total}}&lt;/div&gt;'
+                        </td>
+                        <td>
+                            Markup of the singlePage counter. To hide the counter for singlePage put this option to an empty string (e.g. '')
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageAnimation
+                        </td>
+                        <td>
+                             'left'
+                             <br>'fade'
+                             <br>'right'
+                        </td>
+                        <td>
+                            'left'
+                        </td>
+                        <td>
+                            Defines which animation to use when singlePage appear
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageCallback
+                        </td>
+                        <td>function</td>
+                        <td>empty function</td>
+                        <td>Use this callback to update singlePage content. The callback will trigger after the singlePage popup will open. (@param url = the href attribute of the item clicked, @param element = the item clicked)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageInlineDelegate
+                        </td>
+                        <td>strings that represent the elements in the document (DOM selector)</td>
+                        <td>'.cbp-singlePageInline'</td>
+                        <td>Define any clickable elements you wish to use to trigger singlePageInline popup on click. </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageInlinePosition
+                        </td>
+                        <td>
+                             'above'
+                             <br>'below'
+                             <br>'top'
+                             <br>'bottom'
+                        </td>
+                        <td>'top'</td>
+                        <td>Define the position of singlePage Inline block</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageInlineInFocus
+                        </td>
+                        <td>true or false</td>
+                        <td>true</td>
+                        <td>Push the open panel in focus and at close go back to the former stage</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            singlePageInlineCallback
+                        </td>
+                        <td>function</td>
+                        <td>empty function</td>
+                        <td> Use this callback to update singlePage content. The callback will trigger after the singlePage popup will open. (@param url = the href attribute of the item clicked, @param element = the item clicked)</td>
+                    </tr>
+
+                </table>
+
+            <h1><a name="filters">Filters</a></h1>
+                <p>
+                    Based on your filters Cube Portfolio use jQuery to decide witch items to hide, show or reposition. Then applies CSS3 transition and transform to smoothly animate these items to their new locations.
+                    The plugin use the best browser features available (CSS3 transition and transform, GPU acceleration).
+                </p>
+                <p>
+                    Filtering happens when public API method <span class="tinycode">filter</span> is triggered.
+                    This method (<span class="tinycode">filter</span>) can be trigger from anywhere, so you can use any kind of HTML structure for filters: buttons, links, dropdowns, etc.
+                </p>
+
+                <p>The following example use some simple buttons to filter the plugin. For drowdown structure plese check <span class="tinycode">exemples/lightbox-gallery/</span> folder.</p>
+                <h4>1. Create the HTML markup:</h4>
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;filters-container&quot;&gt;
+&lt;!-- '*' means shows all item elements --&gt;
+&lt;div data-filter=&quot;*&quot; class=&quot;cbp-filter-item cbp-filter-item-active&quot;&gt;All&lt;/div&gt;
+&lt;div data-filter=&quot;.animation&quot; class=&quot;cbp-filter-item&quot;&gt;Animation&lt;/div&gt;
+&lt;div data-filter=&quot;.artwork&quot; class=&quot;cbp-filter-item&quot;&gt;Artwork&lt;/div&gt;
+&lt;div data-filter=&quot;.illustration&quot; class=&quot;cbp-filter-item&quot;&gt;Illustration&lt;/div&gt;
+&lt;div data-filter=&quot;.photography&quot; class=&quot;cbp-filter-item&quot;&gt;Photography&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                <p>Every filter categories should be entered as the "data-filter" attribute.</p>
+
+                <h4>2. Add filter categories to desired target item into its class attribute:</h4>
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item animation illustration&quot;&gt;
+        &lt;a title=&quot;custom title 1&quot; href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/img1&quot; alt=&quot;custom alt 1&quot; width=&quot;100%&quot;/&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item artwork&quot;&gt;
+        &lt;a title=&quot;custom title 2&quot; href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/img2&quot; alt=&quot;custom alt 2&quot; width=&quot;100%&quot;/&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item animation artwork photography&quot;&gt;
+        &lt;a title=&quot;custom title 3&quot; href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/img3&quot; alt=&quot;custom alt 3&quot; width=&quot;100%&quot;/&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+                <h4>3. Initialize the javascript. Here is the part for initialising the plugin and then call the filter method.</h4>
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery(document).ready(function() {
+    var gridContainer = jQuery('#grid-container'),
+        filtersContainer = $('#filters-container');
+
+    // init cubeportfolio
+    gridContainer.cubeportfolio({
+        // cubeportfolio options
+    });
+
+    /*********************************
+        add listener for filters
+     *********************************/
+    if (filtersContainer.hasClass('cbp-l-filters-dropdown')) {
+        wrap = filtersContainer.find('.cbp-l-filters-dropdownWrap');
+
+        wrap.on({
+            'mouseover.cbp': function() {
+                wrap.addClass('cbp-l-filters-dropdownWrap-open');
+            },
+            'mouseleave.cbp': function() {
+                wrap.removeClass('cbp-l-filters-dropdownWrap-open');
+            }
+        });
+
+        filtersCallback = function(me) {
+            wrap.find('.cbp-filter-item').removeClass('cbp-filter-item-active');
+            wrap.find('.cbp-l-filters-dropdownHeader').text(me.text());
+            me.addClass('cbp-filter-item-active');
+            wrap.trigger('mouseleave.cbp');
+        };
+    } else {
+        filtersCallback = function(me) {
+            me.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
+        };
+    }
+
+    filtersContainer.on('click.cbp', '.cbp-filter-item', function() {
+        var me = $(this);
+
+        if (me.hasClass('cbp-filter-item-active')) {
+            return;
+        }
+
+        // get cubeportfolio data and check if is still animating (reposition) the items.
+        if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
+            filtersCallback.call(null, me);
+        }
+
+        // filter the items
+        gridContainer.cubeportfolio('filter', me.data('filter'), function() {});
+    });
+});
+&lt;/script&gt;
+</pre>
+            <h4>4. Next steps are optional. Follow them only if you want to show counter for filters.</h4>
+
+                <h4>4.1 Update the above HTML markup with this one:</h4>
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;filters-container&quot;&gt;
+    &lt;div data-filter=&quot;*&quot; class=&quot;cbp-filter-item cbp-filter-item-active&quot;&gt;
+        All &lt;div class=&quot;cbp-filter-counter&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-filter=&quot;.animation&quot; class=&quot;cbp-filter-item&quot;&gt;
+        Animation &lt;div class=&quot;cbp-filter-counter&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-filter=&quot;.artwork&quot; class=&quot;cbp-filter-item&quot;&gt;
+        Artwork &lt;div class=&quot;cbp-filter-counter&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-filter=&quot;.illustration&quot; class=&quot;cbp-filter-item&quot;&gt;
+        Illustration &lt;div class=&quot;cbp-filter-counter&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-filter=&quot;.photography&quot; class=&quot;cbp-filter-item&quot;&gt;
+        Photography &lt;div class=&quot;cbp-filter-counter&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                <h4>4.2 Update the above js initialization with this one:</h4>
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery(document).ready(function() {
+    var gridContainer = jQuery('#grid-container'),
+        filtersContainer = $('#filters-container');
+
+    // init cubeportfolio
+    gridContainer.cubeportfolio({
+        // cubeportfolio options
+    });
+
+    /*********************************
+        add listener for filters
+     *********************************/
+    if (filtersContainer.hasClass('cbp-l-filters-dropdown')) {
+        wrap = filtersContainer.find('.cbp-l-filters-dropdownWrap');
+
+        wrap.on({
+            'mouseover.cbp': function() {
+                wrap.addClass('cbp-l-filters-dropdownWrap-open');
+            },
+            'mouseleave.cbp': function() {
+                wrap.removeClass('cbp-l-filters-dropdownWrap-open');
+            }
+        });
+
+        filtersCallback = function(me) {
+            wrap.find('.cbp-filter-item').removeClass('cbp-filter-item-active');
+            wrap.find('.cbp-l-filters-dropdownHeader').text(me.text());
+            me.addClass('cbp-filter-item-active');
+            wrap.trigger('mouseleave.cbp');
+        };
+    } else {
+        filtersCallback = function(me) {
+            me.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
+        };
+    }
+
+    filtersContainer.on('click.cbp', '.cbp-filter-item', function() {
+        var me = $(this);
+
+        if (me.hasClass('cbp-filter-item-active')) {
+            return;
+        }
+
+        // get cubeportfolio data and check if is still animating (reposition) the items.
+        if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
+            filtersCallback.call(null, me);
+        }
+
+        // filter the items
+        gridContainer.cubeportfolio('filter', me.data('filter'), function() {});
+    });
+
+
+    /*********************************
+        activate counter for filters
+     *********************************/
+    gridContainer.cubeportfolio('showCounter', filtersContainer.find('.cbp-filter-item'), function() {
+        // read from url and change filter active
+        var match = /#cbpf=(.*?)([#|?&]|$)/gi.exec(location.href),
+            item;
+        if (match !== null) {
+            item = filtersContainer.find('.cbp-filter-item').filter('[data-filter="' + match[1] + '"]');
+            if (item.length) {
+                filtersCallback.call(null, item);
+            }
+        }
+    });
+});
+&lt;/script&gt;
+</pre>
+
+                <p>You can enable a default filter right from the URL. When you visit the page that has Cube Portfolio implemented on it and want to enable the filter <span class="tinycode">Print</span> you can append to url the string <span class="tinycode">#cbpf=.print</span> and the `Print` filter will be active.</p>
+
+            <h1><a name="lightbox">Lightbox</a></h1>
+                <p>When an anchor tag (link) is pressed you can choose either to display a cubeportoflio lightbox, open a singlePage popup, or to open a new webpage based on the url of anchor tag. The lightbox can display images or videos loaded from YouTube, Vimeo, Ted.com or self hosted videos(use delimiter '|' in href attribute to add the path to other formats for self hosted videos).</p>
+
+                <p>Cube Portfolio use a custom lightbox system that is dependend to plugin. You can use another lightbox system but you will not have all of the features included in the Cube Portfolio lightbox. (Please see <a href="#options">options</a> section)</p>
+
+                <p>To enable lightbox you must add <span class="tinycode">cbp-lightbox</span> class (or another class that you set in <span class="tinycode">lightboxDelegate</span> <a href="#options">options</a>) on the anchor elements that will open the lightbox on click.</p>
+
+                <p>Based on the href attribute of the anchor tag the lightbox will open an image or a video.</p>
+
+                <p>For youtube and vimeo videos you can also append custom params to the video link (e.g. &rel=0&autoplay=0&loop=1
+                <br>Please check <a href="https://developers.google.com/youtube/player_parameters" target="_blank">youtube</a> and <a href="http://developer.vimeo.com/player/embedding" target="_blank">vimeo</a> embedding pages for more info)</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;!-- data-title attribute will be use to populate lightbox caption --&gt;
+        &lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 1&quot; href=&quot;http://www.youtube.com/watch?v=bpOSxM0rNPM&rel=0&autoplay=0&quot;&gt;
+            &lt;img src=&quot;path/to/img1&quot; alt=&quot;custom alt 1&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 2&quot; href=&quot;http://vimeo.com/74216460?autoplay=0&loop=1&quot;&gt;
+            &lt;img src=&quot;path/to/img2&quot; alt=&quot;custom alt 2&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 3&quot; href=&quot;http://www.ted.com/talks/david_epstein_are_athletes_really_getting_faster_better_stronger&quot;&gt;
+            &lt;img src=&quot;path/to/img2&quot; alt=&quot;custom alt 3&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 4&quot; href=&quot;path/to/videos/big_buck_bunny.mp4|path/to/videos/big_buck_bunny.ogg|path/to/videos/big_buck_bunny.webm&quot;&gt;
+            &lt;img src=&quot;path/to/img2&quot; alt=&quot;custom alt 4&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 5&quot; href=&quot;path/to/big/img&quot;&gt;
+            &lt;img src=&quot;path/to/img3&quot; alt=&quot;custom alt 5&quot; width=&quot;100%&quot;/&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+            <h3>Use Cube Portfolio lightbox outside of the plugin</h3>
+            <p>To use the lightbox feature add class <span class="tinycode">cbp-lightbox</span> on your link elements.</p>
+<pre class="prettyprint lang-html linenums">
+&lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 3&quot; href=&quot;path/to/img3&quot;&gt;
+    external link
+&lt;/a&gt;
+</pre>
+
+            <p>To create a gallery add also the <span class="tinycode">data-cbp-lightbox</span> attribute on those links. The value for <span class="tinycode">data-cbp-lightbox</span> attribute can be whatever you want but must be the same for one gallery.</p>
+<pre class="prettyprint lang-html linenums">
+&lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 1&quot; href=&quot;path/to/img1&quot; data-cbp-lightbox=&quot;myCustomLightbox&quot;&gt;
+    external link 1
+&lt;/a&gt;
+&lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 2&quot; href=&quot;path/to/img2&quot; data-cbp-lightbox=&quot;myCustomLightbox&quot;&gt;
+    external link 2
+&lt;/a&gt;
+&lt;a class=&quot;cbp-lightbox&quot; data-title=&quot;custom title 3&quot; href=&quot;path/to/img3&quot; data-cbp-lightbox=&quot;myCustomLightbox&quot;&gt;
+    external link 3
+&lt;/a&gt;
+</pre>
+
+            <h1><a name="singlePage">Single Page</a></h1>
+                <p>You can open a custom HTML content by using singlePage feature. Single Page use a similar approach to lightbox system and you can use any kind of HTML markup as a content.</p>
+
+                <p>
+                    You have the option to deep link a singlePage based on the href attribute of anchor tag that opened the singlePage. This means that URL automatically change when you switch to another singlePage and you can easily link to the desired singlePage when Cube Portfolio start.
+                    To do that, you have to enable <span class="tinycode">singlePageDeeplinking</span> in <a href="#options">options</a>.
+                </p>
+
+                <p>To enable singlePage you must add <span class="tinycode">cbp-singlePage</span> class (or another class that you set in <span class="tinycode">singlePageDelegate</span> <a href="#options">options</a>) on the anchor elements that will open the singlePage on click.</p>
+
+                <p>The content that will be add to singlePage with the callback: <span class="tinycode">singlePageCallback</span></p>
+
+                <p>To update content you must use <span class="tinycode">updateSinglePage</span> method and pass your HTML content as a parameter.</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink1&quot; class=&quot;cbp-singlePage&quot;&gt;
+            open singlePage 1
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink2&quot; class=&quot;cbp-singlePage&quot;&gt;
+            open singlePage 2
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink3&quot; class=&quot;cbp-singlePage&quot;&gt;
+            open singlePage 3
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery('#grid-container').cubeportfolio({
+    /**
+     *  This callback function will be trigger after the singlePage popup will be opened. (@param item = the current item clicked)
+     */
+    singlePageCallback: function (item) {
+        // add content to singlePage
+        this.updateSinglePage('&lt;div&gt;My content to append to singlePage container&lt;/div&gt;');
+
+    }
+});
+&lt;/script&gt;
+</pre>
+
+            <h3>Use Cube Portfolio singlePage outside of the plugin</h3>
+            <p>To use singlePage feature add class <span class="tinycode">cbp-singlePage</span> on your link elements.</p>
+<pre class="prettyprint lang-html linenums">
+&lt;a class=&quot;cbp-singlePage&quot; href=&quot;myCustomLink&quot;&gt;
+    external singlePage link
+&lt;/a&gt;
+</pre>
+
+            <p>To create a gallery add also the <span class="tinycode">data-cbp-singlePage</span> attribute on those links. The value for <span class="tinycode">data-cbp-singlePage</span> attribute can be whatever you want but must be the same for one gallery.</p>
+<pre class="prettyprint lang-html linenums">
+&lt;a class=&quot;cbp-singlePage&quot; href=&quot;myCustomLink1&quot; data-cbp-singlePage=&quot;myCustomSinglePage&quot;&gt;
+    external singlePage link 1
+&lt;/a&gt;
+&lt;a class=&quot;cbp-singlePage&quot; href=&quot;myCustomLink2&quot; data-cbp-singlePage=&quot;myCustomSinglePage&quot;&gt;
+    external singlePage link 2
+&lt;/a&gt;
+&lt;a class=&quot;cbp-singlePage&quot; href=&quot;myCustomLink3&quot; data-cbp-singlePage=&quot;myCustomSinglePage&quot;&gt;
+    external singlePage link 3
+&lt;/a&gt;
+</pre>
+
+                <p>
+                    <span class="tinycode">Note</span>If you run the plugin locally you must know that Chrome, Opera and Internet Explorer deny local AJAX (xmlhttprequest) requests locally .
+                    You must use a web server to test singlePage feature. If you are using a web server and still have this issues please send me a link to your live website.
+                </p>
+
+            <h1><a name="singlePageInline">Single Page Inline</a></h1>
+                <p>You can open a custom HTML content by using singlePageInline feature. Single Page Inline use a similar approach to singlePage but his content is added directly to content of the plugin.</p>
+
+                <p>To enable singlePageInline you must add <span class="tinycode">cbp-singlePageInline</span> class (or another class that you set in <span class="tinycode">singlePageInlineDelegate</span> <a href="#options">options</a>) on the anchor elements that will open the singlePageInline on click.</p>
+
+                <p>The content that will be add to singlePageInline with the callback: <span class="tinycode">singlePageInlineCallback</span></p>
+
+                <p>To update content you must use <span class="tinycode">updateSinglePageInline</span> method and pass your HTML content as a parameter.</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink1&quot; class=&quot;cbp-singlePageInline&quot;&gt;
+            open singlePageInline 1
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink2&quot; class=&quot;cbp-singlePageInline&quot;&gt;
+            open singlePageInline 2
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;a href=&quot;myCustomLink3&quot; class=&quot;cbp-singlePageInline&quot;&gt;
+            open singlePageInline 3
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery('#grid-container').cubeportfolio({
+    /**
+     *  This callback function will be trigger after the singlePageInline popup will be opened. (@param item = the current item clicked)
+     */
+    singlePageInlineCallback: function (item) {
+        // add content to singlePageInline
+        this.updateSinglePageInline('&lt;div&gt;My content to append to singlePageInline container&lt;/div&gt;');
+
+    }
+});
+&lt;/script&gt;
+</pre>
+
+                <p>
+                    <span class="tinycode">Note</span>If you run the plugin locally you must know that Chrome, Opera and Internet Explorer deny local AJAX (xmlhttprequest) requests locally .
+                    You must use a web server to test singlePageInline feature. If you are using a web server and still have this issues please send me a link to your live website.
+                </p>
+
+            <h1><a name="captions">Captions</a></h1>
+                <p>
+                    Cube Portfolio has predefined captions, but it is very simple to add your own HMTL formatted containers inside the entries with your own CSS.
+                    You can create captions from almost any static HTML elements.
+                </p>
+                <p>There are 11 predefined examples for captions in Cube Portfolio:</p>
+                <ul class="lists">
+                    <li>pushTop</li>
+                    <li>revealBottom</li>
+                    <li>moveRight</li>
+                    <li>overlayBottomPush</li>
+                    <li>overlayBottom</li>
+                    <li>overlayBottomReveal</li>
+                    <li>overlayBottomAlong</li>
+                    <li>overlayRightAlong</li>
+                    <li>minimal</li>
+                    <li>fadeIn</li>
+                    <li>zoom</li>
+                </ul>
+
+                <p>To activate a particulary caption set that caption in <span class="tinycode">caption</span> options</p>
+<pre class="prettyprint lang-js linenums">
+&lt;script type=&quot;text/javascript&quot;&gt;
+jQuery('#grid-container').cubeportfolio({
+    caption: 'pushTop'
+});
+&lt;/script&gt;
+</pre>
+                <p>
+                    In your HTML markup you must add <span class="tinycode">cbp-caption</span> class to container that wrap your caption.
+                    Also, the default state of caption must be wrap in a <span class="tinycode">cbp-caption-defaultWrap</span> container and
+                    the active state of caption must be wrap in another <span class="tinycode">cbp-caption-activeWrap</span> container.
+                </p>
+<pre class="prettyprint lang-html linenums">
+&lt;div id=&quot;grid-container&quot;&gt;
+    &lt;div class=&quot;cbp-item&quot;&gt;
+        &lt;div class=&quot;cbp-caption&quot;&gt;
+            &lt;div class=&quot;cbp-caption-defaultWrap&quot;&gt;
+                &lt;img src=&quot;path/to/img&quot; alt=&quot;&quot; width=&quot;100%&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;cbp-caption-activeWrap&quot;&gt;
+                &lt;h1&gt;Caption that is active on hover&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+            <h1><a name="templates">Templates</a></h1>
+                <p>Cube Portfolio comes with 15 starter templates: Juicy Project, Lightbox Gallery, Meet the Team, Full Width, Masonry, Blog Posts, Masonry Projects,
+                    Slider Projects, Awesome Work, Clients, Tabs, Agency, Testimonials, Slider Testimonials and Slider Team. You will find them in <span class="tinycode">templates</span> folder.</p>
+
+                <p>
+                    Every component (filters, grid container and load more) have different skins that are completelly independent from the others), so the skins can be combined. To enable a skin add the correspondent class to desire component container.
+                    To change the numbers of columns please refer to the <a href="#options">Options</a> area for <span class="tinycode">mediaQueries</span> feature.
+                </p>
+
+            <h1><a name="api">API</a></h1>
+                <p>
+                    Cube Portfolio has 5 methods to use for external control: <span class="tinycode">init</span>, <span class="tinycode">destroy</span>, <span class="tinycode">filter</span>, <span class="tinycode">showCounter</span> and <span class="tinycode">appendItems</span>
+                    For every callbackFunction <span class="tinycode">this</span> keyword refers to Cube Portfolio instance.
+                </p>
+
+                <h4>1. Initialize the plugin</h4>
+<pre class="prettyprint lang-js linenums">
+// default init
+jQuery("#grid-container").cubeportfolio(options);
+                    // or
+jQuery("#grid-container").cubeportfolio('init', options);
+
+// with callback function
+jQuery("#grid-container").cubeportfolio(options, callbackFunction);
+                    // or
+jQuery("#grid-container").cubeportfolio('init', options, callbackFunction);
+</pre>
+
+            <br>
+            <h4>2. Destroy the plugin (removes all events, data and markup from page)</h4>
+<pre class="prettyprint lang-js linenums">
+jQuery("#grid-container").cubeportfolio('destroy');
+
+// with callback function
+jQuery("#grid-container").cubeportfolio('destroy', callbackFunction);
+</pre>
+
+            <br>
+            <h4>3. Filter the items</h4>
+<pre class="prettyprint lang-js linenums">
+// filterDataSelector can be (only if you set .cbp-filter-item on filter selectors): jQuery('.cbp-filter-item').data('filter')
+jQuery("#grid-container").cubeportfolio('filter', filterDataSelector);
+
+// with callback function
+jQuery("#grid-container").cubeportfolio('filter', filterDataSelector, callbackFunction);
+</pre>
+
+            <br>
+            <h4>4. Activate counter on filters</h4>
+<pre class="prettyprint lang-js linenums">
+// filterSelector can be (only if you set .cbp-filter-item on filter selectors): jQuery('.cbp-filter-item')
+jQuery("#grid-container").cubeportfolio('showCounter', filterSelector);
+
+// with callback function
+jQuery("#grid-container").cubeportfolio('showCounter', filterSelector, callbackFunction);
+</pre>
+
+            <br>
+            <h4>5. Append new items to plugin</h4>
+            <p> Append new items will append the content to the gird, filter the new content, then will rearange all item elements to a properly layout.</p>
+<pre class="prettyprint lang-js linenums">
+// htmlContent - your HTML content
+jQuery("#grid-container").cubeportfolio('appendItems', htmlContent);
+
+// with callback function
+jQuery("#grid-container").cubeportfolio('appendItems', htmlContent, callbackFunction);
+</pre>
+
+            <p>A typical <span class="tinycode">htmlContent</span> can look like this:</p>
+<pre class="prettyprint lang-js linenums">
+var htmlContent = '&lt;div class=&quot;logo cbp-item&quot;&gt;my awesome content to append to plugin&lt;/div&gt; &lt;div class=&quot;logo cbp-item&quot;&gt;my second awesome content to append to plugin&lt;/div&gt;';
+</pre>
+            <p><strong>Note:</strong> Don't forget to add class <span class="tinycode">.cbp-item</span> to your <span class="tinycode">div</span> element</p>
+
+            <br>
+            <h3>Event Emmiter</h3>
+            <p>
+                Cube Portfolio emmit some events when certain events happens. You can subscribe to them by using jQuery event syntax:
+<pre class="prettyprint lang-js linenums">
+jQuery("#grid-container").on('updateSinglePageComplete.cbp', function() {
+    // your functionality
+});
+</pre>
+                and unsubscrbe to them by ussing <span class="tinycode">.off</span> method
+<pre class="prettyprint lang-js linenums">
+jQuery("#grid-container").off('updateSinglePageComplete.cbp');
+</pre>
+            </p>
+            <p>The events supported are:
+                <ul class="lists">
+                    <li><span class="tinycode">updateSinglePageComplete.cbp</span> (singlePage finish appending his content)</li>
+                    <li><span class="tinycode">updateSinglePageInlineComplete.cbp</span> (singlePageInline finish appending his content)</li>
+                    <li><span class="tinycode">initComplete.cbp</span> (the plugin is initialized)</li>
+                    <li><span class="tinycode">pluginResize.cbp</span> (the plugin height change)</li>
+                    <li><span class="tinycode">filterComplete.cbp</span> (a filter trigger is finished)</li>
+                </ul>
+            </p>
+
+
+            <h1><a name="loadMoreItems">Load More Items</a></h1>
+                <p>
+                    You can use load more feature using public API method <span class="tinycode">appendItems</span>.
+                </p>
+<pre class="prettyprint lang-js linenums">
+// ... after cubeportfolio initialization
+// basic load more items using public method `appendItems`
+jQuery("#grid-container").cubeportfolio('appendItems', '&lt;div class=&quot;logo cbp-item&quot;&gt;my awesome content to append to plugin&lt;/div&gt; &lt;div class=&quot;logo cbp-item&quot;&gt;my second awesome content to append to plugin&lt;/div&gt;');
+</pre>
+                <p>For a more advanced examples please go to templates/juicy-projects/index.html path and check the HTML and js markup.</p>
+
+            <h1><a name="support">Support</a></h1>
+
+                <p>
+                    If you have any questions that are beyond the scope of this documentation file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/bmihai">here</a>.</p>
+                </p>
+
+            <h1><a name="change-log">Change Log</a></h1>
+                <h4>v2.0.1 – 21 January, 2015</h4>
+                <ul class="lists">
+                    <li>- [BUG FIXED] - margin-top of singlePage content for small devices</li>
+                    <li>- [BUG FIXED] - slider-project template performance improvements</li>
+                    <li>- [BUG FIXED] - API destroy slider layout issue</li>
+                </ul>
+                <h4>v2.0.0 – 17 January, 2015</h4>
+                <ul class="lists">
+                    <li>- [FEATURE] - slider layout option with drag support</li>
+                    <li>- [FEATURE] - better responsive layout system. now you can set the columns number based on the browser resolution</li>
+                    <li>- [FEATURE] - performance improvements</li>
+                    <li>- [FEATURE] - code refractoring</li>
+                    <li>- [FEATURE] - items auto height</li>
+                    <li>- [FEATURE] - added 9 new templates</li>
+                    <li>- [BUG FIXED] - mobile scroll for singlePage</li>
+                    <li>- [BREAKING CHANGE] - new html structure (old syntax still works)</li>
+                    <li>- [BREAKING CHANGE] - remove support for ie8 & ie9 animations</li>
+                </ul>
+                <h4>v1.6.0 – 7 November, 2014</h4>
+                <ul class="lists">
+                    <li>- [FEATURE] - set the appear animation for singlePage popup (e.g. `left`, `right`, `fade`)</li>
+                    <li>- [FEATURE] - youtube & video posibility to add params (e.g. &rel=0&autoplay=0 etc)</li>
+                    <li>- [FEATURE] - code improvements</li>
+                    <li>- [BUG FIXED] - minor css bugs</li>
+                </ul>
+                <h4>v1.5.1 – 29 September, 2014</h4>
+                <ul class="lists">
+                    <li>- [BUG FIXED] - multiple grids on the same page</li>
+                    <li>- [BUG FIXED] - mark-up for singlePage counter</li>
+                </ul>
+                <h4>v1.5.0 – 8 September, 2014</h4>
+                <ul class="lists">
+                    <li>- [FEATURE] - improved responsive layout on mobile, tablet and desktop</li>
+                    <li>- [FEATURE] - added deeplinking for filters</li>
+                    <li>- [FEATURE] - open singlePageInline at the bottom of the grid</li>
+                    <li>- [FEATURE] - use lightbox and singlePage outside of the grid</li>
+                    <li>- [FEATURE] - set the mark-up for ligthbox and siglePage counter</li>
+                    <li>- [FEATURE] - improved the look and feel of templates</li>
+                    <li>- [BUG FIXED] - singlePageInline overflow the items in some cases</li>
+                    <li>- [BUG FIXED] - dropdown filters is now closing at click</li>
+                    <li>- [BUG FIXED] - responsive bugs on some mobile devices</li>
+                    <li>- [BREAKING CHANGE] - changed JS and HTML for dropdown filters</li>
+                </ul>
+                <h4>v1.4.1 – 23 June, 2014</h4>
+                <ul class="lists">
+                    <li>- [BUG FIXED] - ios: double click to activate a filter</li>
+                    <li>- [BUG FIXED] - page shift to the left by 15-20px</li>
+                </ul>
+
+                <h4>v1.4.0 – 10 May, 2014</h4>
+                <ul class="lists">
+                    <li>- [FEATURE] - added ted.com videos support</li>
+                    <li>- [FEATURE] - added support for self hosted videos</li>
+                    <li>- [BUG FIXED]  - corect dimensions for default filter</li>
+                    <li>- [BUG FIXED]  - page flickers during singlePage open transition</li>
+                </ul>
+
+                <h4>v1.3.0 – 24 March, 2014</h4>
+                <ul class="lists">
+                    <li>- added default filter</li>
+                    <li>- added related projects, basic slider and closing transition for singlePage feature</li>
+                    <li>- focus the open panel for singlePageInline feature</li>
+                    <li>- bugs fixed</li>
+                </ul>
+
+                <h4>v1.2.0 – 23 January, 2014</h4>
+                <ul class="lists">
+                    <li>- added 12 new animations for filters: 'Slide Delay', '3d Flip', 'Rotate Sides', 'Flip Out Delay', 'Flip Out', 'Unfold', 'Fold Left', 'Scale Down', 'Scale Sides', 'Front Row', 'Flip Bottom', 'Rotate Room'</li>
+                    <li>- added a new feature to open projects (singlePageInline). See exeample on 'Lightbox Gallery' template</li>
+                    <li>- bugs fixed</li>
+                </ul>
+
+                <h4>v1.1.0 – 18 December, 2013</h4>
+                <ul class="lists">
+                    <li>- added a new animation for filters: 'Skew'</li>
+                    <li>- added 3 new caption effects: 'revealLeft', 'revealTop', 'pushDown'</li>
+                    <li>- added 2 new display type: 'fadeInToTop' and 'bottomToTop'</li>
+                    <li>- documentation updated</li>
+                </ul>
+
+                <h4>v1.0.0 – 10 December, 2013</h4>
+                <ul class="lists">
+                    <li>initial release</li>
+                </ul>
+
+                <br>
+                <br>
+                <strong>Created by <a href="http://scriptpie.com" target="_blank">Mihai Buricea</a></strong>
+        </div>
+    </div>
+
+    <!-- load jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <!-- load prettify -->
+    <script src="js/prettify.js"></script>
+
+    <!-- load main.js -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>

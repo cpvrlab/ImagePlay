@@ -1,0 +1,196 @@
+/* apply a natural box layout model to all elements  - http://www.paulirish.com/2012/box-sizing-border-box-ftw/*/
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+    width: 100%;
+    font: normal 13px/20px "Open Sans", sans-serif;
+    color: #555;
+}
+
+body {
+    background: none repeat scroll 0 0 #FEFEFE;
+}
+
+.wrap {
+    width: 955;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+a {
+    transition: color 0.5s ease 0s;
+    text-decoration: none;
+}
+
+i {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.left {
+    height: 439px;
+    margin-left: 10px;
+    position: fixed;
+    width: 150px;
+}
+
+.left > a {
+    color: #6F6D6D;
+    display: block;
+    font: bold 25px/25px "Open Sans", sans-serif;
+    margin: 20px 0 0;
+}
+
+.left > a:hover {
+    color: #B3B3B3;
+}
+
+.left nav {
+    margin: 50px 0 0;
+}
+
+.left nav dl dt a {
+    color: #848484;
+    display: block;
+    font: 14px/21px "Open Sans", sans-serif;
+    padding: 6px 0;
+}
+
+.left nav dl dt a:hover {
+    color: #5283D0;
+}
+
+.left nav dl dt.active a {
+    background: url("../images/arrow.png") no-repeat scroll right center transparent;
+    color: #2576B8;
+    font-weight: bold;
+}
+
+.right {
+    margin-left: 190px;
+    max-width: 860px;
+    overflow: hidden;
+    padding: 0 25px 25px;
+}
+
+.right h1 a {
+    background: none repeat scroll 0 0 #E7E7E7;
+    border-bottom: 2px solid #AAD6F9;
+    color: #333;
+    display: block;
+    font: bold 20px/20px "Open Sans", sans-serif;
+    margin: 30px 0 20px;
+    padding: 15px 0 15px 15px;
+}
+
+.right h2 {
+    color: #4C4A56;
+    font: bold 17px/17px "Open Sans", sans-serif;
+    padding: 17px 0;
+}
+
+.right h3 {
+    color: #4C4A56;
+    font: bold 15px/15px "Open Sans", sans-serif;
+    padding: 15px 0;
+}
+
+.right h4 {
+    color: #555;
+    font: bold 13px/21px "Open Sans", sans-serif;
+    padding: 5px 0;
+}
+
+.right p {
+    margin: 5px 0;
+}
+
+.right strong {
+    color: #4C4A56;
+}
+
+.right ul {
+    padding: 5px 0;
+}
+
+.right a {
+    color: #2576B8;
+}
+
+.right a:hover {
+    color: #333333;
+}
+
+p.attention {
+    color: #E87373;
+}
+
+.right li {
+    /*color: #4C4A56;*/
+}
+
+.right .tinycode {
+    background: none repeat scroll 0% 0% #e4e4e4;
+    color: #42433C;
+    font: italic 12px/18px "Open Sans", sans-serif;
+    margin: 0 2px;
+    padding: 2px 6px;
+}
+
+.right table {
+    border-color: #DADADA;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+}
+
+.right table th {
+    background: none repeat scroll 0% 0% #ECECEC;
+    border-bottom: 1px solid #C8C8C8;
+    border-left: 1px solid #C8C8C8;
+    border-top: 1px solid #C8C8C8;
+    color: #666666;
+    font: bold 12px/32px sans-serif;
+    height: 32px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.right table td {
+    border-bottom: 1px solid #C8C8C8;
+    border-left: 1px solid #C8C8C8;
+    color: #787878;
+    font: 12px/18px Open Sans, sans-serif;
+    padding: 8px 12px;
+}
+
+.right table td a {
+    color: #2576B8;
+    font: 11px/14px sans-serif;
+}
+
+.right table td a:hover {
+    color: #333333;
+}
+
+.right table tr:nth-child(2n+1) {
+    background: none repeat scroll 0% 0% #F0F0F0;
+}
+
+.lists {
+    list-style: disc inside none;
+    margin-left: 30px;
+}

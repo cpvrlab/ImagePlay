@@ -1,0 +1,207 @@
+/*Contacts Section
+------------------------------------*/
+.contacts-section {
+  color: #fff;
+  position: relative;
+  background: #333 url(../../img/bg/3.jpg) center fixed;
+  background-size: cover;
+}
+
+.contacts-section:after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  content: " ";
+  position: absolute;
+  background: rgba(0,0,0,0.7);
+}
+
+.contacts-section:before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  content: " ";
+  position: absolute;
+  background: url(../../img/patterns/gridtile.png) repeat;
+}
+
+/*Contacts Title*/
+.contacts-section .title-v1 p,
+.contacts-section .title-v1 h2 {
+  color: #fff;
+}
+
+/*Contacts Content*/
+.contacts-in {
+  z-index: 1;
+  color: #fff;
+  position: relative;
+}
+
+.contacts-in h3 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.contacts-in ul {
+  margin-top: 20px;
+}
+
+.contacts-in li {
+  color: #fff;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.contacts-in li a {
+  color: #fff;
+}
+
+.contacts-in li i {
+  width: 35px;
+  padding: 8px;
+  font-size: 18px;
+  margin-right: 5px;
+  text-align: center;
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+}
+
+.contacts-in form label {
+  color: #fff;
+  font-size: 14px; 
+  font-weight: 200;
+}
+
+.contacts-in form .form-control {
+  color: #fff;
+  box-shadow: none;
+  border-color: #eee;
+  background: rgba(0,0,0,0.2);
+}
+
+.contacts-in form .form-control:focus {
+  border-color: #bbb;
+  background: rgba(0,0,0,0.6);
+}
+
+.contacts-in form .btn-u.btn-brd.btn-u-dark {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(0,0,0,0.2);
+}
+
+.contacts-in form .btn-u.btn-brd.btn-u-dark:hover {
+  border-color: #bbb;
+  background: rgba(0,0,0,0.6) !important;
+}
+
+/*Copyright Section*/
+.copyright-section {
+  z-index: 1;
+  background: #fff;
+  position: relative;
+  text-align: center;
+  padding: 25px 0 20px;
+}
+
+.copyright-section p {
+  font-size: 14px;
+}
+
+.copyright-section p a {
+  color: #555;
+  text-decoration: underline;
+}
+
+.copyright-section p a:hover {
+  text-decoration: none;
+}
+
+.copyright-section ul.social-icons li {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.copyright-section i.back-to-top {
+  left: 50%;
+  top: -35px;
+  color: #555;
+  font-size: 20px;
+  background: #fff;
+  padding: 8px 10px;
+  margin-left: -15px;
+  position: absolute;
+}
+
+.copyright-section i.back-to-top:hover {
+  color: #72c02c;
+}
+
+/*Sky Form
+------------------------------------*/
+/*Error State*/
+.sky-form .state-error input,
+.sky-form .state-error textarea {
+  border-color: #e0aaaa;
+}
+
+.sky-form .state-error + em {
+  display: block;
+  margin-top: 6px;
+  padding: 0 1px;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 15px;
+  color: #ee9393;
+}
+.sky-form .rating.state-error + em {
+  margin-top: -4px;
+  margin-bottom: 4px;
+}
+
+/*Success State*/
+.sky-form .state-success input {
+  border-color: #f0fff0;
+}
+
+/*Disabled State*/
+.sky-form .input.state-disabled input {
+  border-color: #f0fff0;
+}
+
+/*Submited State*/
+.sky-form .message {
+  display: none;
+  color: #6fb679;
+}
+
+.sky-form .message i {
+  display: block;
+  margin: 0 auto 20px;
+  width: 81px;
+  height: 81px;
+  border: 1px solid #6fb679;
+  border-radius: 50%;
+  font-size: 30px;
+  line-height: 81px;
+}
+
+.sky-form.submited fieldset,
+.sky-form.submited footer {
+  display: none;
+}
+
+.sky-form.submited .message {
+  display: block;
+  padding: 25px 30px;
+  font: 300 18px/27px 'Open Sans', Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.sky-form.submited .message p {
+  color: #fff;
+}

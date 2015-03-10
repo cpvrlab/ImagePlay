@@ -1,0 +1,318 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Documentation for Sky Forms Pro</title>
+		
+		<meta name="viewport" content="width=1024">
+		
+		<link rel="stylesheet" href="css/main.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body id="overview">
+		<article>
+			<!-- overview -->
+			<section>
+				<h1>Sky Forms Pro Documentation</h1>
+				<p>Sky Forms Pro is a set of beautiful form elements with large amount of javascript features: validation, masking, modals, ajax submit, datepickers. It allows you to create forms of any complexity and for any needs: login, registration, contacts, review, order, comment, checkout, etc.</p>
+				<p>If you have any questions that are beyond the scope of this documentation, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/voky?ref=voky">here</a>.</p>
+			</section>
+			<!--/ overview -->
+			
+			<!-- integration -->
+			<section id="integration">
+				<h2>Integration</h2>
+				<ol>
+					<li>Download the zipped pack from codecanyon and extract to a folder on your computer.</li>
+					<li>Include css and js files to your project.
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-forms.css&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-forms-ie8.css&quot;&gt;
+&lt;![endif]--&gt;
+
+&lt;script src=&quot;js/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jquery-ui-1.10.3.custom.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jquery.form.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jquery.validate.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jquery.maskedinput.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jquery.modal.js&quot;&gt;&lt;/script&gt;
+&lt;!--[if lt IE 10]&gt;
+	&lt;script src=&quot;js/jquery.placeholder.min.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;		
+&lt;!--[if lt IE 9]&gt;
+	&lt;script src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;js/sky-forms-ie8.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;</pre>
+					</li>
+					<li>Copy HTML and JS code from one of demo files.</li>
+					<li>Replace demo content with yours.</li>
+				</ol>
+			</section>
+			<!--/ integration -->
+			
+			<!-- html structure -->
+			<section id="html">
+				<h2>HTML structure</h2>
+				<p>The main HTML structure of the form consists of fieldset, legend, footer and sections. Each section contains label, form element and optional note. Here is the basic structure of registration form.</p>
+<pre>&lt;form action=&quot;&quot; class=&quot;sky-form&quot;&gt;
+	&lt;header&gt;Registration form&lt;/header&gt;
+		
+	&lt;fieldset&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;input&quot;&gt;
+				&lt;i class=&quot;icon-append icon-user&quot;&gt;&lt;/i&gt;
+				&lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;Username&quot;&gt;
+			&lt;/label&gt;
+		&lt;/section&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;input&quot;&gt;
+				&lt;i class=&quot;icon-append icon-envelope-alt&quot;&gt;&lt;/i&gt;
+				&lt;input type=&quot;text&quot; name=&quot;email&quot; placeholder=&quot;Email address&quot;&gt;
+			&lt;/label&gt;
+		&lt;/section&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;input&quot;&gt;
+				&lt;i class=&quot;icon-append icon-lock&quot;&gt;&lt;/i&gt;
+				&lt;input type=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Password&quot;&gt;
+			&lt;/label&gt;
+		&lt;/section&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;input&quot;&gt;
+				&lt;i class=&quot;icon-append icon-lock&quot;&gt;&lt;/i&gt;
+				&lt;input type=&quot;password&quot; name=&quot;passwordConfirm&quot; placeholder=&quot;Confirm password&quot;&gt;
+			&lt;/label&gt;
+		&lt;/section&gt;
+	&lt;fieldset&gt;	
+		
+	&lt;/fieldset&gt;		
+		&lt;div class=&quot;row&quot;&gt;
+			&lt;section class=&quot;col col-6&quot;&gt;
+				&lt;label class=&quot;input&quot;&gt;
+					&lt;input type=&quot;text&quot; name=&quot;firstmane&quot; placeholder=&quot;First name&quot;&gt;
+				&lt;/label&gt;
+			&lt;/section&gt;
+			&lt;section class=&quot;col col-6&quot;&gt;
+				&lt;label class=&quot;input&quot;&gt;
+					&lt;input type=&quot;text&quot; name=&quot;lastname&quot; placeholder=&quot;Last name&quot;&gt;
+				&lt;/label&gt;
+			&lt;/section&gt;
+		&lt;/div&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;select&quot;&gt;
+				&lt;select name=&quot;gender&quot;&gt;
+					&lt;option value=&quot;0&quot; selected disabled&gt;Gender&lt;/option&gt;
+					&lt;option value=&quot;1&quot;&gt;Male&lt;/option&gt;
+					&lt;option value=&quot;2&quot;&gt;Female&lt;/option&gt;
+					&lt;option value=&quot;3&quot;&gt;Other&lt;/option&gt;
+				&lt;/select&gt;
+				&lt;i&gt;&lt;/i&gt;
+			&lt;/label&gt;
+		&lt;/section&gt;
+		
+		&lt;section&gt;
+			&lt;label class=&quot;checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;subscription&quot; id=&quot;subscription&quot;&gt;&lt;i&gt;&lt;/i&gt;I want to receive news and  special offers&lt;/label&gt;
+			&lt;label class=&quot;checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;terms&quot; id=&quot;terms&quot;&gt;&lt;i&gt;&lt;/i&gt;I agree with the Terms and Conditions&lt;/label&gt;
+		&lt;/section&gt;
+	&lt;/fieldset&gt;
+	
+	&lt;footer&gt;
+		&lt;button type=&quot;submit&quot; class=&quot;button&quot;&gt;Submit&lt;/button&gt;
+	&lt;/footer&gt;
+&lt;/form&gt;</pre>
+			</section>
+			<!--/ html structure -->
+			
+			<!-- css structure -->
+			<section id="css">
+				<h2>CSS structure</h2>
+				<p>Sky Forms Pro includes 8 css files.</p>
+				<ul>
+					<li><strong>demo.css</strong> - demo page styles</li>
+					<li><strong>sky-forms.css</strong> - required main styles</li>
+					<li><strong>sky-forms-ie8.css</strong> - styles for IE8</li>
+					<li><strong>sky-forms-red.css</strong> - red color scheme</li>
+					<li><strong>sky-forms-orange.css</strong> - orange color scheme</li>
+					<li><strong>sky-forms-green.css</strong> - green color scheme</li>
+					<li><strong>sky-forms-purple.css</strong> - purple color scheme</li>
+					<li><strong>sky-forms-pink.css</strong> - pink color scheme</li>
+				</ul>
+				<p>The file "sky-forms.css" contains all of the specific styling and separated into sections:</p>
+				<ul>
+					<li>font</li>
+					<li>defaults</li>
+					<li>file inputs</li>
+					<li>selects</li>
+					<li>textareas</li>
+					<li>radios and checkboxes</li>
+					<li>toggles</li>
+					<li>ratings</li>
+					<li>buttons</li>
+					<li>icons</li>
+					<li>grid</li>
+					<li>tooltips</li>
+					<li>normal state</li>
+					<li>hover state</li>
+					<li>focus state</li>
+					<li>checked state</li>
+					<li>error state</li>
+					<li>success state</li>
+					<li>disabled state</li>
+					<li>submited state</li>
+					<li>datepicker</li>
+					<li>modal</li>
+				</ul>
+				<p>If you would like to edit a specific section, simply find the appropriate label in the CSS file.</p>
+			</section>
+			<!--/ css structure -->
+			
+			<!-- schemes -->
+			<section id="schemes">
+				<h2>Color schemes</h2>
+				<p>There are 6 color schemes at your disposal. Cyan is the default scheme and to choose other you need to include appropriate css file. For example, if you want to use orange scheme include <strong>sky-forms-orange.css</strong> file:</p>
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-forms.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-forms-orange.css&quot;&gt;</pre>
+			</section>
+			<!--/ schemes -->		
+			
+			<!-- icons -->
+			<section id="icons">
+				<h2>Icons</h2>
+				<p>There are 302 font icons included. To use one of them you need to add &lt;i&gt; tag with 2 classes. First class defines icon position: <strong>icon-append</strong> or <strong>icon-prepend</strong>. Second class defines appearance of the icon. For example, if we need appended user icon:</p>
+<pre>&lt;section&gt;
+	&lt;label class=&quot;input&quot;&gt;
+		&lt;i class=&quot;icon-append icon-user&quot;&gt;&lt;/i&gt;
+		&lt;input type=&quot;text&quot;&gt;
+	&lt;/label&gt;
+&lt;/section&gt;</pre>
+				<p>All available classes for icons you can find <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">here</a>.</p>
+			</section>
+			<!--/ icons -->
+			
+			<!-- placeholders -->
+			<section id="placeholders">
+				<h2>Placeholders</h2>
+				<p>You can use placeholders for inputs and textareas. Just specify placeholder attribute like in demo below.</p>
+<pre>&lt;section&gt;
+	&lt;label class=&quot;input&quot;&gt;
+		&lt;input type=&quot;text&quot; placeholder=&quot;Placeholder text&quot;&gt;
+	&lt;/label&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+	&lt;label class=&quot;textarea&quot;&gt;
+		&lt;textarea rows=&quot;3&quot; placeholder=&quot;Placeholder text&quot;&gt;&lt;/textarea&gt;
+	&lt;/label&gt;
+&lt;/section&gt;</pre>
+				<p>Also there is a possibility to add placeholder for select element. To do that we need to disable first element.</p>
+<pre>&lt;section&gt;
+	&lt;label class=&quot;select&quot;&gt;
+		&lt;select&gt;
+			&lt;option value=&quot;0&quot; selected disabled&gt;Gender&lt;/option&gt;
+			&lt;option value=&quot;1&quot;&gt;Male&lt;/option&gt;
+			&lt;option value=&quot;2&quot;&gt;Female&lt;/option&gt;
+			&lt;option value=&quot;3&quot;&gt;Other&lt;/option&gt;
+		&lt;/select&gt;
+		&lt;i&gt;&lt;/i&gt;
+	&lt;/label&gt;
+&lt;/section&gt;</pre>
+			</section>
+			<!--/ placeholders -->
+			
+			<!-- states -->
+			<section id="states">
+				<h2>Elements states</h2>
+				<p>Each element of Sky Forms Pro has 3 additional states: error, success and disabled. To use one of them just add state-error, state-success or state-disabled class to element container.</p>
+<pre>&lt;section&gt;
+	&lt;label class=&quot;input state-error&quot;&gt;
+		&lt;input type=&quot;text&quot;&gt;
+	&lt;/label&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+	&lt;label class=&quot;textarea state-success&quot;&gt;
+		&lt;textarea rows=&quot;3&quot; placeholder=&quot;Placeholder text&quot;&gt;&lt;/textarea&gt;
+	&lt;/label&gt;
+&lt;/section&gt;</pre>
+				<p>When using disabled state don't forget to add <strong>disabled</strong> attribute to form element.</p>
+<pre>&lt;section&gt;
+	&lt;label class=&quot;input state-error&quot;&gt;
+		&lt;input type=&quot;text&quot; disabled&gt;
+	&lt;/label&gt;
+&lt;/section&gt;</pre>
+			</section>
+			<!--/ states -->
+			
+			<!-- validation -->
+			<section id="validation">
+				<h2>Client-side Validation</h2>
+				<p>There are lots of validation options and customizations. You can find all of them in special demo file <strong>ext-validation.html</strong>. Also I provided several practical examples of validation usage, so I recommend to use one of that files as a base for your custom form and simply add/remove form fields and validation rules. For more help read the <a href="http://jqueryvalidation.org/documentation">official plugin documentation</a>.</p>
+			</section>
+			<!--/ validation -->
+			
+			<!-- masking -->
+			<section id="masking">
+				<h2>Fields Masking</h2>
+				<p>Masking makes forms more user friendly and easy to fill. In this project I used jQuery Masked Input Plugin and it is very simple to use. You can find several practical examples in special demo file <strong>ext-masking.html</strong>. Use this file as a base for your custom form and simply add/remove masking rules. For more help read the <a href="http://digitalbush.com/projects/masked-input-plugin/">official plugin documentation</a>.</p>
+			</section>
+			<!--/ masking -->
+			
+			<!-- modal -->
+			<section id="modal">
+				<h2>Modal Forms</h2>
+				<p>You can easly transform all regular forms to modal forms. Just add <strong>sky-form-modal</strong> class to the form container and use any link with class <strong>modal-opener</strong> to display form. For more details see the <strong>ext-modal.html</strong> demo file.</p>
+			</section>
+			<!--/ modal -->
+			
+			<!-- credits -->
+			<section id="credits">
+				<h2>Credits</h2>
+				<ol>
+					<li><a href="http://jquery.com" target="_blank">jQuery library</a> by The jQuery Foundation</li>
+					<li><a href="http://jqueryui.com" target="_blank">jQuery UI library</a> by The jQuery Foundation</li>
+					<li><a href="https://github.com/malsup/form" target="_blank">jQuery Form Plugin</a> by The jQuery Foundation</li>
+					<li><a href="http://matoilic.github.com/jquery.placeholder" target="_blank">jQuery Placeholder Plugin</a> by Mato Ilic</li>
+					<li><a href="https://github.com/jzaefferer/jquery-validation/" target="_blank">jQuery Validation Plugin</a> by Jörn Zaefferer</li>
+					<li><a href="http://digitalbush.com/projects/masked-input-plugin/" target="_blank">jQuery Masked Input Plugin</a> by Josh Bush</li>
+					<li><a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a> by Dave Gandy</li>
+				</ol>
+			</section>
+			<!--/ credits -->
+		</article>
+		
+		<aside>
+			<!-- logo -->
+			<img src="img/thumbnail.png" alt="" />
+			<!--/ logo -->
+			
+			<!-- main nav -->
+			<nav id="main-nav">
+				<ul>
+					<li><a href="#overview">Overview</a></li>
+					<li><a href="#integration">Integration</a></li>
+					<li><a href="#html">HTML structure</a></li>
+					<li><a href="#css">CSS structure</a></li>
+					<li><a href="#schemes">Color schemes</a></li>
+					<li><a href="#icons">Icons</a></li>
+					<li><a href="#placeholders">Placeholders</a></li>
+					<li><a href="#states">Elements states</a></li>
+					<li><a href="#validation">Validation</a></li>
+					<li><a href="#masking">Masking</a></li>
+					<li><a href="#modal">Modal</a></li>
+					<li><a href="#credits">Credits</a></li>
+				</ul>
+			</nav>
+			<!--/ main nav -->
+			
+			<!-- copyrights -->
+			<p>Created by <a href="http://codecanyon.net/user/voky?ref=voky">Voky</a></p>
+			<!--/ copyrights -->
+		</aside>
+	</body>
+</html>
