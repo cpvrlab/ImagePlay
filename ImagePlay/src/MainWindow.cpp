@@ -126,9 +126,11 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, c
     if(logFileEnabled())
     {
 #ifdef Q_OS_MAC
-        QDir logDir(qApp->applicationDirPath() + "/log/");
-#else
         QDir logDir(QDir::homePath() + "/ImagePlay_log/");
+        // doesn't work, disable for now...
+        return;
+#else
+        QDir logDir(qApp->applicationDirPath() + "/log/");
 #endif
         if(!logDir.exists())
         {
