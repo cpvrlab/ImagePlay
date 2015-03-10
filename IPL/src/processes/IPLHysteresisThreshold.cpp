@@ -9,6 +9,7 @@ void IPLHysteresisThreshold::init()
     setClassName("IPLHysteresisThreshold");
     setTitle("Hysteresis Threshold");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Apply hysteresis threshold.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

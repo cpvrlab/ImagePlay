@@ -9,6 +9,7 @@ void IPLAgglomerate::init()
     setClassName("IPLAgglomerate");
     setTitle("Agglomerate");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Local agglomeration operator.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

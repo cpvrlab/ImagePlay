@@ -13,6 +13,7 @@ void IPLConvolutionFilter::init()
     setTitle("2D Convolution");
     setKeywords("filter");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Convolution of a kernel with image.");
 
     // default values
     // 0 0 0

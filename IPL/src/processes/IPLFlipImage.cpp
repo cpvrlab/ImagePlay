@@ -9,6 +9,7 @@ void IPLFlipImage::init()
     setClassName("IPLFlipImage");
     setTitle("Flip Image");
     setCategory(IPLProcess::CATEGORY_GEOMETRY);
+    setDescription("Flip an image horizontally or vertically.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

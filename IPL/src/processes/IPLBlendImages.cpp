@@ -45,6 +45,7 @@ void IPLBlendImages::init()
     setClassName("IPLBlendImages");
     setTitle("Blend Images");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Blend two input images using various blend modes known from popular image editing software.");
 
     // inputs and outputs
     addInput("Image A", IPLData::IMAGE_COLOR);

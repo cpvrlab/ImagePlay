@@ -9,6 +9,7 @@ void IPLEqualizeHistogram::init()
     setClassName("IPLEqualizeHistogram");
     setTitle("Equalize Histogram");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Histogram equalization of the input image.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

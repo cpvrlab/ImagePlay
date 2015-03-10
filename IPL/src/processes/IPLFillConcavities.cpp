@@ -10,6 +10,7 @@ void IPLFillConcavities::init()
     setTitle("Fill Concavities");
     setKeywords("threshold");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Local fill concavities operator.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

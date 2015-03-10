@@ -9,11 +9,12 @@ void IPLMergePlanes::init()
     _inputC = NULL;
     _inputType  = 0;
 
-
     // basic settings
     setClassName("IPLMergePlanes");
     setTitle("Merge Planes");
     setCategory(IPLProcess::CATEGORY_CONVERSIONS);
+    setDescription("Converts color planes into a color image. The input planes may be images in"
+                   "the RGB, HSI, HLS, or HSV color system");
 
     // properties
     addProcessPropertyInt("input_type", "Color Model:RGB|HSV|HSL", "", IPL_INT_RADIOBUTTONS, _inputType);

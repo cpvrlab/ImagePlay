@@ -9,6 +9,7 @@ void IPLBinarizeImage::init()
     setClassName("IPLBinarizeImage");
     setTitle("Binarize");
     setKeywords("threshold");
+    setDescription("Converts an image with the color format binary, gray-scale, or color to a binary image. The threshold can be set between 0.0 and 1.0");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
 
     // inputs and outputs

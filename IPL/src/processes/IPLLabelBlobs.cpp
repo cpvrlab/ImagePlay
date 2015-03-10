@@ -10,6 +10,7 @@ void IPLLabelBlobs::init()
     setTitle("Label Blobs");
     setCategory(IPLProcess::CATEGORY_OBJECTS);
     setKeywords("objects");
+    setDescription("Label blobs (connected components) of binary input image.");
 
     // inputs and outputs
     addInput("Binary Image", IPLData::IMAGE_BW);

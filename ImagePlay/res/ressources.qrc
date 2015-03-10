@@ -17,7 +17,7 @@
         <file>home.png</file>
         <file>plugins.png</file>
         <file>thumbnails_on.png</file>
-		<file>thumbnails_off.png</file>
+        <file>thumbnails_off.png</file>
         <file>icons/24hours-phone.png</file>
         <file>icons/abs.png</file>
         <file>icons/add.png</file>
@@ -138,5 +138,9 @@
         <file>icons/imageviewer.png</file>
         <file>icons/close3.png</file>
         <file>icons/play@2x.png</file>
+        <file>error.png</file>
+        <file>info.png</file>
+        <file>question.png</file>
+        <file>warning.png</file>
     </qresource>
 </RCC>

@@ -9,6 +9,7 @@ void IPLBinarizeOtsu::init()
     setClassName("IPLBinarizeOtsu");
     setTitle("Binarize Otsu");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Binarize image using threshold computed with Otsu’s method.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

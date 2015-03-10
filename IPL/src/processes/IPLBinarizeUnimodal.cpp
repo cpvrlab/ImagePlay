@@ -9,6 +9,7 @@ void IPLBinarizeUnimodal::init()
     setClassName("IPLBinarizeUnimodal");
     setTitle("Binarize Unimodal");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Binarize image using threshold computed with Rosin’s unimodal method.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

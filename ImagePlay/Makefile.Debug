@@ -11,12 +11,12 @@ MAKEFILE      = Makefile.Debug
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DAPP_VERSION="\"6.0.0.1\"" -DAPP_COMPANY="\"BFH\"" -DAPP_PRODUCT="\"ImagePlay\"" -DAPP_DESCRIPTION="\"\"" -DAPP_COPYRIGHT="\"\"" -DAPP_NAME=\"ImagePlay\" -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -nologo -Zm200 -Zc:wchar_t -FS -Zi -MDd -W3 /Fd..\_bin\Debug\x64\ImagePlay6.pdb $(DEFINES)
-CXXFLAGS      = -nologo -Zm200 -Zc:wchar_t -FS -openmp -Zi -MDd -GR -W3 -w34100 -w34189 -EHsc /Fd..\_bin\Debug\x64\ImagePlay6.pdb $(DEFINES)
-INCPATH       = -I"include" -I"..\IPL\include" -I"..\IPL\include\processes" -I"..\IPL\include\opencv" -I"D:\Projects\imageplay\ImagePlay\..\_bin\Release\macx" -I"C:\Qt\5.4\msvc2013_64\include" -I"C:\Qt\5.4\msvc2013_64\include\QtWidgets" -I"C:\Qt\5.4\msvc2013_64\include\QtGui" -I"C:\Qt\5.4\msvc2013_64\include\QtANGLE" -I"C:\Qt\5.4\msvc2013_64\include\QtCore" -I"..\intermediate\ImagePlay\Debug\x64" -I"..\intermediate\ImagePlay\Debug\x64" -I"C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013"
+DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DAPP_VERSION="\"\"" -DAPP_COMPANY="\"BFH\"" -DAPP_PRODUCT="\"ImagePlay\"" -DAPP_DESCRIPTION="\"\"" -DAPP_COPYRIGHT="\"\"" -DAPP_NAME=\"ImagePlay\" -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+CFLAGS        = -nologo -Zm200 -Zc:wchar_t -FS -Zi -MDd -W3 /Fd..\_bin\Debug\x64\ImagePlay.pdb $(DEFINES)
+CXXFLAGS      = -nologo -Zm200 -Zc:wchar_t -FS -openmp -Zi -MDd -GR -W3 -w34100 -w34189 -EHsc /Fd..\_bin\Debug\x64\ImagePlay.pdb $(DEFINES)
+INCPATH       = -I"include" -I"..\IPL\include" -I"..\IPL\include\processes" -I"..\IPL\include\opencv" -I"C:\Qt\5.4\msvc2013_64\include" -I"C:\Qt\5.4\msvc2013_64\include\QtWidgets" -I"C:\Qt\5.4\msvc2013_64\include\QtGui" -I"C:\Qt\5.4\msvc2013_64\include\QtANGLE" -I"C:\Qt\5.4\msvc2013_64\include\QtCore" -I"..\intermediate\ImagePlay\Debug\x64" -I"..\intermediate\ImagePlay\Debug\x64" -I"C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013"
 LINKER        = link
-LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" /VERSION:6.001
+LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
 LIBS          = /LIBPATH:C:\Qt\5.4\msvc2013_64\lib C:\Qt\5.4\msvc2013_64\lib\qtmaind.lib shell32.lib /LIBPATH:D:\Projects\imageplay\ImagePlay\..\_bin\Debug\x64 D:\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\IPL.lib C:\Qt\5.4\msvc2013_64\lib\Qt5Widgetsd.lib C:\Qt\5.4\msvc2013_64\lib\Qt5Guid.lib C:\Qt\5.4\msvc2013_64\lib\Qt5Cored.lib ..\intermediate\ImagePlay\Debug\x64\icon.res 
 QMAKE         = C:\Qt\5.4\msvc2013_64\bin\qmake.exe
 IDC           = idc
@@ -349,6 +349,7 @@ $(DESTDIR_TARGET): ..\intermediate\ImagePlay\Debug\x64\ui_ImageViewerWindow.h ..
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
 $(OBJECTS) $(LIBS)
 <<
+	windeployqt.exe --no-angle --no-svg --no-system-d3d-compiler --no-quick-import --no-translations ../_bin/Debug/x64/ImagePlay.exe & copy /y ..\_lib\windows\ ..\_bin\Debug\x64\ & mkdir ..\_bin\Debug\x64\process_icons\ & copy /y media\process_icons\ ..\_bin\Debug\x64\process_icons\ & del ..\_bin\Debug\x64\IPL.exp &
 
 ..\intermediate\ImagePlay\Debug\x64\icon.res: res\icon.rc
 	rc -D_DEBUG $(DEFINES) -fo ..\intermediate\ImagePlay\Debug\x64\icon.res res\icon.rc
@@ -364,11 +365,11 @@ dist:
 clean: compiler_clean 
 	-$(DEL_FILE) ..\intermediate\ImagePlay\Debug\x64\main.obj ..\intermediate\ImagePlay\Debug\x64\IPApplication.obj ..\intermediate\ImagePlay\Debug\x64\IPHistogramWidget.obj ..\intermediate\ImagePlay\Debug\x64\ImageViewerWindow.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessListTabWidget.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessMessageWidget.obj ..\intermediate\ImagePlay\Debug\x64\IPFilterLineEdit.obj ..\intermediate\ImagePlay\Debug\x64\IPMorphologyCheckbox.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessStep.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessEdge.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessEdgeTmp.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessGrid.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessGridScene.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessList.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessFactory.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessScript.obj ..\intermediate\ImagePlay\Debug\x64\IPImageViewer.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessPropertiesWidget.obj ..\intermediate\ImagePlay\Debug\x64\ConnectionDialog.obj ..\intermediate\ImagePlay\Debug\x64\SettingsWindow.obj ..\intermediate\ImagePlay\Debug\x64\AboutWindow.obj ..\intermediate\ImagePlay\Debug\x64\MainWindow.obj ..\intermediate\ImagePlay\Debug\x64\TutorialDialog.obj ..\intermediate\ImagePlay\Debug\x64\IPZoomWidget.obj ..\intermediate\ImagePlay\Debug\x64\IPProcessThread.obj ..\intermediate\ImagePlay\Debug\x64\PluginGenerator.obj ..\intermediate\ImagePlay\Debug\x64\qrc_ressources.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessPropertiesWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessMessageWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckbox.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSL.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSV.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorRGB.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySpinnerInt.obj
 	-$(DEL_FILE) ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderDouble.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyKernelInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyRadioInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckboxInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyGrayscaleMorphologyInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyTristateInt.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyString.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyPoint.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileSave.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileOpen.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFolder.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCombobox.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessListTabWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPMorphologyCheckbox.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessThread.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramThread.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPZoomWidget.obj ..\intermediate\ImagePlay\Debug\x64\moc_ImageViewerWindow.obj ..\intermediate\ImagePlay\Debug\x64\moc_ConnectionDialog.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPFilterLineEdit.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGrid.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGridScene.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessList.obj ..\intermediate\ImagePlay\Debug\x64\moc_IPImageViewer.obj ..\intermediate\ImagePlay\Debug\x64\moc_SettingsWindow.obj ..\intermediate\ImagePlay\Debug\x64\moc_AboutWindow.obj ..\intermediate\ImagePlay\Debug\x64\moc_TutorialDialog.obj ..\intermediate\ImagePlay\Debug\x64\moc_MainWindow.obj ..\intermediate\ImagePlay\Debug\x64\moc_PluginGenerator.obj debug\ImagePlay_pch.obj
-	-$(DEL_FILE) debug\ImagePlay_pch.pch ..\_bin\Debug\x64\ImagePlay6.exp ..\_bin\Debug\x64\ImagePlay6.ilk ..\_bin\Debug\x64\ImagePlay6.idb
+	-$(DEL_FILE) debug\ImagePlay_pch.pch ..\_bin\Debug\x64\ImagePlay.exp ..\_bin\Debug\x64\ImagePlay.ilk ..\_bin\Debug\x64\ImagePlay.idb
 	-$(DEL_FILE) ..\intermediate\ImagePlay\Debug\x64\icon.res
 
 distclean: clean 
-	-$(DEL_FILE) ..\_bin\Debug\x64\ImagePlay6.pdb
+	-$(DEL_FILE) ..\_bin\Debug\x64\ImagePlay.pdb
 	-$(DEL_FILE) $(DESTDIR_TARGET)
 	-$(DEL_FILE) Makefile.Debug
 
@@ -387,12 +388,16 @@ compiler_rcc_clean:
 		res\crosshair.png \
 		res\blueprint.png \
 		res\cursor-cross.png \
+		res\warning.png \
+		res\info.png \
 		res\tutorial.png \
 		res\colorpicker.png \
 		res\plugins.png \
 		res\opencv_small.png \
 		res\Delete-32-over.png \
+		res\error.png \
 		res\about_logo.png \
+		res\question.png \
 		res\colorpicker_cursor.png \
 		res\padlock_open_inv.png \
 		res\crosshair_cursor.png \
@@ -907,7 +912,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qstandardpaths.h \
 		..\IPL\include\IPL_plugininterface.h \
 		include\IPProcessPropertiesWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessPropertiesWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessPropertiesWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessPropertiesWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessPropertiesWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessMessageWidget.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -1253,7 +1258,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qstandardpaths.h \
 		..\IPL\include\IPL_plugininterface.h \
 		include\IPProcessMessageWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessMessageWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessMessageWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessMessageWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessMessageWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckbox.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -1459,7 +1464,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyCheckbox.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCheckbox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckbox.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCheckbox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckbox.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSL.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -1666,7 +1671,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyColorHSL.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorHSL.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSL.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorHSL.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSL.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSV.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -1880,7 +1885,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyColorHSV.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorHSV.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSV.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorHSV.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorHSV.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorRGB.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -2101,7 +2106,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyColorRGB.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorRGB.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorRGB.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyColorRGB.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyColorRGB.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -2305,7 +2310,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertySliderInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySliderInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySliderInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySpinnerInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -2512,7 +2517,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertySpinnerInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySpinnerInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySpinnerInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySpinnerInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySpinnerInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyWidget.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -2701,7 +2706,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderDouble.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -2908,7 +2913,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertySliderDouble.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySliderDouble.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderDouble.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertySliderDouble.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertySliderDouble.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyKernelInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -3125,7 +3130,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPKernelPreset.h \
 		include\PropertyWidgets\IPPropertyKernelInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyKernelInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyKernelInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyKernelInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyKernelInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyRadioInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -3330,7 +3335,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyRadioInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyRadioInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyRadioInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyRadioInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyRadioInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckboxInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -3533,7 +3538,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyCheckboxInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCheckboxInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckboxInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCheckboxInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCheckboxInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -3757,7 +3762,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		include\PropertyWidgets\IPKernelPreset.h \
 		include\PropertyWidgets\IPPropertyBinaryMorphologyInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyBinaryMorphologyInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyBinaryMorphologyInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyGrayscaleMorphologyInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -3975,7 +3980,7 @@ compiler_moc_header_clean:
 		include\PropertyWidgets\IPPropertyKernelInt.h \
 		include\PropertyWidgets\IPKernelPreset.h \
 		include\PropertyWidgets\IPPropertyGrayscaleMorphologyInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyGrayscaleMorphologyInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyGrayscaleMorphologyInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyGrayscaleMorphologyInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyGrayscaleMorphologyInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyTristateInt.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -4199,7 +4204,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		include\PropertyWidgets\IPKernelPreset.h \
 		include\PropertyWidgets\IPPropertyBinaryMorphologyTristateInt.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyBinaryMorphologyTristateInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyTristateInt.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyBinaryMorphologyTristateInt.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyBinaryMorphologyTristateInt.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyString.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -4410,7 +4415,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyString.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyString.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyString.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyString.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyString.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyPoint.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -4625,7 +4630,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyPoint.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyPoint.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyPoint.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyPoint.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyPoint.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileSave.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -4836,7 +4841,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyFileSave.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFileSave.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileSave.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFileSave.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileSave.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileOpen.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -5047,7 +5052,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyFileOpen.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFileOpen.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileOpen.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFileOpen.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFileOpen.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFolder.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -5258,7 +5263,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyFolder.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFolder.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFolder.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyFolder.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyFolder.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCombobox.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -5474,7 +5479,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\PropertyWidgets\IPPropertyCombobox.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCombobox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCombobox.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PropertyWidgets\IPPropertyCombobox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPPropertyCombobox.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessListTabWidget.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTabWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
@@ -5997,7 +6002,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QDesktopServices \
 		..\IPL\include\IPL_plugininterface.h \
 		include\IPProcessListTabWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessListTabWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessListTabWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessListTabWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessListTabWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPMorphologyCheckbox.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
@@ -6111,7 +6116,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QDebug \
 		include\IPMorphologyCheckbox.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPMorphologyCheckbox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPMorphologyCheckbox.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPMorphologyCheckbox.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPMorphologyCheckbox.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessThread.cpp: C:\Qt\5.4\msvc2013_64\include\QtCore\QThread \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qthread.h \
@@ -6267,7 +6272,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qset.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qcontiguouscache.h \
 		include\IPProcessThread.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessThread.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessThread.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessThread.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessThread.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramThread.cpp: C:\Qt\5.4\msvc2013_64\include\QtCore\QThread \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qthread.h \
@@ -6342,7 +6347,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLImagePlane.h \
 		..\IPL\include\IPL_global.h \
 		include\IPHistogramThread.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPHistogramThread.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramThread.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPHistogramThread.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramThread.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramWidget.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -6559,7 +6564,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qthread.h \
 		..\IPL\include\IPLHistogram.h \
 		include\IPHistogramWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPHistogramWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPHistogramWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPHistogramWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPZoomWidget.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qwidget.h \
@@ -6754,7 +6759,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\IPZoomWidget.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPZoomWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPZoomWidget.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPZoomWidget.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPZoomWidget.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_ImageViewerWindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmainwindow.h \
@@ -7100,7 +7105,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLHistogram.h \
 		include\PropertyWidgets\IPPropertyWidget.h \
 		include\ImageViewerWindow.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\ImageViewerWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_ImageViewerWindow.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\ImageViewerWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_ImageViewerWindow.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_ConnectionDialog.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialog \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialog.h \
@@ -7446,7 +7451,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPL_plugininterface.h \
 		include\ConnectionDialog.h \
 		include\ConnectionDialog.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\ConnectionDialog.h -o ..\intermediate\ImagePlay\Debug\x64\moc_ConnectionDialog.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\ConnectionDialog.h -o ..\intermediate\ImagePlay\Debug\x64\moc_ConnectionDialog.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPFilterLineEdit.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLineEdit \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlineedit.h \
@@ -7566,7 +7571,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
 		include\IPFilterLineEdit.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPFilterLineEdit.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPFilterLineEdit.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPFilterLineEdit.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPFilterLineEdit.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGrid.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsView \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsview.h \
@@ -7912,7 +7917,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qbasictimer.h \
 		include\IPProcessGrid.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessGrid.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGrid.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessGrid.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGrid.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGridScene.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsScene \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsscene.h \
@@ -8258,7 +8263,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qbasictimer.h \
 		include\IPProcessGridScene.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessGridScene.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGridScene.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessGridScene.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessGridScene.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessList.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
@@ -8609,7 +8614,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLProgressEventHandler.h \
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		include\IPProcessList.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessList.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessList.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPProcessList.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPProcessList.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_IPImageViewer.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QFrame \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
@@ -8955,7 +8960,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLHistogram.h \
 		include\PropertyWidgets\IPPropertyWidget.h \
 		include\IPImageViewer.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPImageViewer.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPImageViewer.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\IPImageViewer.h -o ..\intermediate\ImagePlay\Debug\x64\moc_IPImageViewer.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_SettingsWindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialog \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialog.h \
@@ -9065,7 +9070,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qdir.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qfileinfo.h \
 		include\SettingsWindow.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\SettingsWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_SettingsWindow.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\SettingsWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_SettingsWindow.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_AboutWindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialog \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialog.h \
@@ -9171,7 +9176,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qvector2d.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qtouchdevice.h \
 		include\AboutWindow.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\AboutWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_AboutWindow.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\AboutWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_AboutWindow.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_TutorialDialog.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialog \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialog.h \
@@ -9282,7 +9287,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qeasingcurve.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractanimation.h \
 		include\TutorialDialog.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\TutorialDialog.h -o ..\intermediate\ImagePlay\Debug\x64\moc_TutorialDialog.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\TutorialDialog.h -o ..\intermediate\ImagePlay\Debug\x64\moc_TutorialDialog.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_MainWindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmainwindow.h \
@@ -9628,7 +9633,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qbasictimer.h \
 		include\MainWindow.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\MainWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_MainWindow.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\MainWindow.h -o ..\intermediate\ImagePlay\Debug\x64\moc_MainWindow.cpp
 
 ..\intermediate\ImagePlay\Debug\x64\moc_PluginGenerator.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialog \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialog.h \
@@ -9745,7 +9750,7 @@ compiler_moc_header_clean:
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qstandardpaths.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QDebug \
 		include\PluginGenerator.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -ID:/Projects/imageplay/_bin/Release/macx -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PluginGenerator.h -o ..\intermediate\ImagePlay\Debug\x64\moc_PluginGenerator.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -ID:/Projects/imageplay/ImagePlay -ID:/Projects/imageplay/ImagePlay/include -ID:/Projects/imageplay/IPL/include -ID:/Projects/imageplay/IPL/include/processes -ID:/Projects/imageplay/IPL/include/opencv -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtCore include\PluginGenerator.h -o ..\intermediate\ImagePlay\Debug\x64\moc_PluginGenerator.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -19080,50 +19085,9 @@ debug\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidgets
 
 ####### Install
 
-install_resources: first FORCE
-	@if not exist D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64 mkdir D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64 & if not exist D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64 exit 1
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\FreeImage.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\icudt53.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\icuin53.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\icuuc53.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\msvcp120.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\msvcr120.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\opencv_core2410.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\opencv_highgui2410.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\opencv_imgproc2410.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_DIR) D:\Projects\imageplay\_res\platforms D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\platforms
-	-$(INSTALL_DIR) D:\Projects\imageplay\_res\process_icons D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\process_icons
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\Qt5Core.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\Qt5Gui.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\Qt5Widgets.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_FILE) D:\Projects\imageplay\_res\vcomp120.dll D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64
-	-$(INSTALL_DIR) D:\Projects\imageplay\_res\platforms D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\platforms
-	-$(INSTALL_DIR) D:\Projects\imageplay\_res\process_icons D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\process_icons
+install:   FORCE
 
-uninstall_resources: FORCE
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\process_icons
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\platforms
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\vcomp120.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\Qt5Widgets.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\Qt5Gui.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\Qt5Core.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\process_icons
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\platforms
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\opencv_imgproc2410.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\opencv_highgui2410.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\opencv_core2410.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\msvcr120.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\msvcp120.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\icuuc53.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\icuin53.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\icudt53.dll
-	-$(DEL_FILE) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\FreeImage.dll
-	-$(DEL_DIR) D:$(INSTALL_ROOT)\Projects\imageplay\ImagePlay\..\_bin\Debug\x64 
-
-
-install:  install_resources  FORCE
-
-uninstall: uninstall_resources   FORCE
+uninstall:   FORCE
 
 FORCE:
 

@@ -11,6 +11,8 @@ void IPLGaussianLowPass::init()
     setTitle("Gaussian Low Pass");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
     setOpenCVSupport(IPLProcess::OPENCV_OPTIONAL);
+    setKeywords("blur");
+    setDescription("Local Gaussian low-pass operator.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

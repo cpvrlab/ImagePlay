@@ -49,6 +49,7 @@ void IPLCompassMask::init()
     setTitle("Compass Mask");
     setKeywords("direction");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Local compass mask low-pass operator. Prewitt, Kirsch, Sobel, and ThreeLevel masks in all directions.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

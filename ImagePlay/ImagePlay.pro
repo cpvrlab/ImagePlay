@@ -20,7 +20,7 @@ TARGET = ImagePlay
 TEMPLATE = app
 #TEMPLATE = vcapp
 
-VERSION = 6.0.0-beta
+#VERSION = "6.0.0 beta"
 QMAKE_TARGET_COMPANY = "BFH"
 QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
@@ -158,7 +158,7 @@ win32: {
                         mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
                         $${QMAKE_COPY} media\\process_icons\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
-                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
+#                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
 
 }
 

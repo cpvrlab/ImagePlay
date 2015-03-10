@@ -12,6 +12,9 @@ void IPLCanny::init()
     setTitle("Canny Edge Detector");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
     setOpenCVSupport(IPLOpenCVSupport::OPENCV_ONLY);
+    setDescription("The Canny edge detector delivers the magnitude and the gradient of the edge"
+                   "image. Thresholding has to be done by an appropriate operator. The σ value"
+                   "is used for both, smoothing and derivation operation.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

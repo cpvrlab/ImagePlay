@@ -9,11 +9,18 @@ void IPLConvertToGray::init()
     setClassName("IPLConvertToGray");
     setTitle("Convert to Gray");
     setKeywords("grayscale");
+    setDescription("Converts an image with the color format binary, gray-scale, or color to a gray-scale image."
+                   "Default weights based on human eye perception:\nR: 0.2125\nG: 0.7154\nB: 0.0721");
     setCategory(IPLProcess::CATEGORY_CONVERSIONS);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
     addOutput("Gray Image", IPLData::IMAGE_GRAYSCALE);
+
+    // properties
+    addProcessPropertyDouble("weight_r", "Weight R", "", IPL_DOUBLE_SLIDER, 0.2125, 0.0, 1.0);
+    addProcessPropertyDouble("weight_g", "Weight G", "", IPL_DOUBLE_SLIDER, 0.7154, 0.0, 1.0);
+    addProcessPropertyDouble("weight_b", "Weight B", "", IPL_DOUBLE_SLIDER, 0.0721, 0.0, 1.0);
 }
 
 void IPLConvertToGray::destroy()
@@ -35,6 +42,11 @@ bool IPLConvertToGray::processInputData(IPLImage* image , int, bool useOpenCV)
     IPLImagePlane* red;
     IPLImagePlane* green;
     IPLImagePlane* blue;
+
+    // properties
+    double weight_r = getProcessPropertyDouble("weight_r");
+    double weight_g = getProcessPropertyDouble("weight_g");
+    double weight_b = getProcessPropertyDouble("weight_b");
 
     int progress = 0;
     int maxProgress = image->height();
@@ -94,7 +106,10 @@ bool IPLConvertToGray::processInputData(IPLImage* image , int, bool useOpenCV)
                 //unsigned char pixel = HIBYTE(red->p(x,y) * 77 + green->p(x,y) * 151 + blue->p(x,y) * 28); //!< Fast
                 //unsigned char pixel = (unsigned char) (0.2125 * red->p(x,y)) + (0.7154 * green->p(x,y)) + (0.0721 * blue->p(x,y)); //!< Slower
                 //unsigned char pixel = (unsigned char) ((r+r+r+b+g+g+g+g)>>3); //!< Even Faster
-                ipl_basetype pixel = (0.2125f * red->p(x,y)) + (0.7154f * green->p(x,y)) + (0.0721f * blue->p(x,y)); //!< Slower
+                //ipl_basetype pixel = (0.2125f * red->p(x,y)) + (0.7154f * green->p(x,y)) + (0.0721f * blue->p(x,y)); //!< Slower
+                ipl_basetype pixel = (weight_r * red->p(x,y)) + (weight_g * green->p(x,y)) + (weight_b * blue->p(x,y)); //!< Slower
+                pixel = (pixel > 1.0) ? 1.0 : pixel;
+                pixel = (pixel < 0.0) ? 0.0 : pixel;
                 newplane->p(x,y) = pixel;
             }
         }

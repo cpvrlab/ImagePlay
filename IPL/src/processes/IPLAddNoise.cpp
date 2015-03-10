@@ -10,6 +10,7 @@ void IPLAddNoise::init()
     setTitle("Add Noise");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
     setKeywords("gaussian, impulsive");
+    setDescription("Add impulse, Gaussian noise (additive or multiplicative) to an image.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

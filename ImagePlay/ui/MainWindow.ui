@@ -266,7 +266,7 @@
    <property name="minimumSize">
     <size>
      <width>300</width>
-     <height>217</height>
+     <height>220</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -310,7 +310,7 @@
           <x>0</x>
           <y>0</y>
           <width>289</width>
-          <height>69</height>
+          <height>77</height>
          </rect>
         </property>
        </widget>
@@ -318,22 +318,14 @@
      </item>
      <item>
       <widget class="QLabel" name="lblProcessDescription">
+       <property name="styleSheet">
+        <string notr="true">color: #333344; background-color: #e0e0ee; border: 1px solid #333344; padding:4px; margin: 2px 0px 2px 0px;</string>
+       </property>
        <property name="text">
         <string>TextLabel</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnHelpPage">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {text-align:left;color: #0000ff; text-decoration: underline;border:none;cursor:pointer;}
-QPushButton:hover { color: #3366aa; }</string>
-       </property>
-       <property name="text">
-        <string>More Information...</string>
        </property>
       </widget>
      </item>
@@ -413,6 +405,9 @@ QPushButton:hover { color: #3366aa; }</string>
    </property>
   </action>
   <action name="actionHelp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Help</string>
    </property>
@@ -424,7 +419,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionPlay">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/play.png</normaloff>:/icons/play.png</iconset>
    </property>
    <property name="text">
@@ -439,7 +434,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionZoomIn">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
    </property>
    <property name="text">
@@ -448,7 +443,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionZoomOut">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
    </property>
    <property name="text">
@@ -457,7 +452,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionZoomReset">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/zoom.png</normaloff>:/icons/zoom.png</iconset>
    </property>
    <property name="text">
@@ -474,7 +469,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionPause">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/pause.png</normaloff>:/icons/pause.png</iconset>
    </property>
    <property name="text">
@@ -483,7 +478,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionImageViewer">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/imageviewer.png</normaloff>:/icons/imageviewer.png</iconset>
    </property>
    <property name="text">
@@ -495,7 +490,7 @@ QPushButton:hover { color: #3366aa; }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/close3.png</normaloff>
      <normalon>:/icons/check1.png</normalon>:/icons/close3.png</iconset>
    </property>
@@ -521,9 +516,9 @@ QPushButton:hover { color: #3366aa; }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/thumbnails_off.png</normaloff>
-     <normalon>:/thumbnails_on.png</normalon>:/thumbnails_on.png</iconset>
+     <normalon>:/thumbnails_on.png</normalon>:/thumbnails_off.png</iconset>
    </property>
    <property name="text">
     <string>Show Thumbnails</string>
@@ -539,7 +534,7 @@ QPushButton:hover { color: #3366aa; }</string>
   </action>
   <action name="actionReloadPlugins">
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/refresh1.png</normaloff>:/icons/refresh1.png</iconset>
    </property>
    <property name="text">
@@ -551,7 +546,7 @@ QPushButton:hover { color: #3366aa; }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../res/ressources.qrc">
      <normaloff>:/opencv_small.png</normaloff>:/opencv_small.png</iconset>
    </property>
    <property name="text">
@@ -567,6 +562,9 @@ QPushButton:hover { color: #3366aa; }</string>
    </property>
   </action>
   <action name="actionGeneratePlugin">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Generate Plugin Code</string>
    </property>
@@ -603,7 +601,9 @@ QPushButton:hover { color: #3366aa; }</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../res/ressources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionExit</sender>

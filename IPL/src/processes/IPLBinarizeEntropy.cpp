@@ -9,6 +9,7 @@ void IPLBinarizeEntropy::init()
     setClassName("IPLBinarizeEntropy");
     setTitle("Binarize Entropy");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Binarize image using threshold computed with maximum entropy method.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

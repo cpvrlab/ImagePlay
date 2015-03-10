@@ -9,6 +9,7 @@ void IPLEnhanceMode::init()
     setClassName("IPLEnhanceMode");
     setTitle("Enhance Mode");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Enhance the local mode.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

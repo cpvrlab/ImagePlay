@@ -19,6 +19,7 @@ void IPLArithmeticOperationsConstant::init()
     setClassName("IPLArithmeticOperationsConstant");
     setTitle("Arithmetic Operations Constant");
     setCategory(IPLProcess::CATEGORY_ARITHMETIC);
+    setDescription("Performs arithmetic operations based an input image and a constant.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

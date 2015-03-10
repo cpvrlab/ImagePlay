@@ -9,6 +9,9 @@ void IPLMarkImage::init()
     setClassName("IPLMarkImage");
     setTitle("Mark Image");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Mark a level range in the image histogram with a selected color. The background"
+                   "may be cleared or it may retain the original image. The resulting"
+                   "image is a color image and has to be converted if used as a mask.");
 
     // inputs and outputs
     addInput("Grayscale Image", IPLData::IMAGE_GRAYSCALE);

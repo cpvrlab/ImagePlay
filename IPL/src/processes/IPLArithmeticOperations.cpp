@@ -27,6 +27,7 @@ void IPLArithmeticOperations::init()
     setTitle("Arithmetic Operations");
     setKeywords("add, substract, multiply, divide, minimum, maximum, and, or, xor, exclusive or, not, atan, arcus tangens");
     setCategory(IPLProcess::CATEGORY_ARITHMETIC);
+    setDescription("Performs arithmetic operations based on two input images.");
 
     // inputs and outputs
     addInput("Image A", IPLData::IMAGE_COLOR);
