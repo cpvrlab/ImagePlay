@@ -131,7 +131,11 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, c
             logDir.mkdir(".");
         }
 
+#ifdef Q_OS_MAC
+        QString fileName = QDir::homePath() + "/ImagePlay/log/";
+#else
         QString fileName = qApp->applicationDirPath() + "/log/";
+#endif
         fileName += QDate::currentDate().toString("yyyy-MM-dd");
         fileName += ".log";
 

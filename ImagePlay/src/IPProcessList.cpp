@@ -57,11 +57,11 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
 {
     // load icon from png file and add background color based on the process category
 
-    QFileInfo iconFile(QString("process_icons/") + processID + QString(".png"));
+    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
 
     if(!iconFile.exists())
     {
-        iconFile = QFileInfo(QString("process_icons/Plugin.png"));
+        iconFile = QFileInfo(QCoreApplication::applicationDirPath() + QString("/process_icons/Plugin.png"));
     }
 
     QPixmap transparentIcon(iconFile.absoluteFilePath());

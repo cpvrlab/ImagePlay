@@ -47,7 +47,7 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
 
 
     // try to find icon
-    QFileInfo iconFile(QString("process_icons/") + processID + QString(".png"));
+    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
     qDebug() << iconFile.absoluteFilePath();
     if(iconFile.isFile())
     {

@@ -110,7 +110,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
                 // use icon of first process for the category tab
                 if(categoryIcon.width() == 0)
                 {
-                    QFileInfo iconFile(QString("process_icons/") + processID + QString(".png"));
+                    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
 
                     if(iconFile.exists())
                     {
