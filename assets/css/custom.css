@@ -1,1 +1,15 @@
 /* Add here all your css styles (customizations) */
+
+.process_icon				{background-repeat: no-repeat !important; background-position: center !important;}
+.process_inputoutput 		{background-image: url(../img/process_icons/IPLLoadImage.png) !important;}
+.process_conversions 		{background-image: url(../img/process_icons/IPLConvertToGray.png) !important;background-size: 20px !important;}
+.process_geometry 			{background-image: url(../img/process_icons/IPLResize.png) !important;}
+.process_arithmetic 			{background-image: url(../img/process_icons/IPLArithmeticOperations.png) !important;}
+.process_pointoperations 	{background-image: url(../img/process_icons/IPLBinarizeImage.png) !important;}
+.process_localoperations 	{background-image: url(../img/process_icons/IPLAgglomerate.png) !important;}
+.process_morphology 			{background-image: url(../img/process_icons/IPLMorphologyBinary.png) !important;}
+.process_histogram 			{background-image: url(../img/process_icons/.png) !important;}
+.process_edges 				{background-image: url(../img/process_icons/.png) !important;}
+.process_gradients 			{background-image: url(../img/process_icons/IPLGradientOperator.png) !important;}
+.process_fourier 			{background-image: url(../img/process_icons/.png) !important;}
+.process_objects 			{background-image: url(../img/process_icons/.png) !important;}

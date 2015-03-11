@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+    <link rel='stylesheet' type='text/css' href='fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -80,9 +80,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <li class="page-scroll">
                             <a href="#download">Download</a>
                         </li>
-                        <li class="page-scroll">
-                            <a href="#about">About</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +87,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         </div>
         <!-- /.container -->
     </nav>
-    <!--=== End Header ===-->    
+    <!--=== End Header ===-->
 
     <!--  About Section -->
     <section id="home" class="about-section section-first">
@@ -98,9 +95,9 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="container margin-bottom-40">
                 <div class="title-v1">
                     <h1>Welcome to ImagePlay</h1>
-                    <p>ImagePlay is a <strong>rapid prototyping tool</strong> for building and testing image processing algorithms. <br />
+                    <p class="page-scroll">ImagePlay is a <strong>rapid prototyping tool</strong> for building and testing image processing algorithms. <br />
 					It comes with a variety of over <strong>70</strong> so called processes which can be combined into complex process chains.<br />
-					ImagePlay is completely open source and can be built for <a href="#">Windows</a>, <a href="#">Mac</a> and <a href="#">Linux</a>.</p>
+					ImagePlay is completely open source and can be built for <a href="#download">Windows</a>, <a href="#download">Mac</a> and <a href="#download">Linux</a>.</p>
                 </div>
                 <div class="img-center">
                     <img class="img-responsive" src="assets/img/02.png" alt="">
@@ -118,7 +115,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="row">
                 <div class="col-md-6 content-boxes-v3 margin-bottom-40">
                     <div class="clearfix margin-bottom-30">
-                        <i class="icon-custom icon-md rounded-x icon-bg-u fa fa-lightbulb-o"></i>
+                        <i class="icon-custom icon-md rounded-x icon-bg-u process_icon process_inputoutput"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Education</h2>
                             <p>Let your students learn about the basics of image processing. Show the effects of various parameters by manipulating them in real time.</p>
@@ -157,7 +154,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="container">
                 <div class="row content-boxes-v3">
                     <div class="col-md-4 md-margin-bottom-30">
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_inputoutput"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Input/Output</h2>
 							<p>
@@ -167,7 +164,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 								IPLCamera<br />
 							</p>
                         </div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_conversions"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Conversions</h2>
 							<p>
@@ -176,7 +173,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 								IPLMergePlanes<br />
 							</p>
                         </div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_geometry"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Geometry</h2>
 							<p>
@@ -186,7 +183,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 								IPLRotate<br />
 							</p>
                         </div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_arithmetic"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Arithmetic Operations</h2>
 							<p>
@@ -194,7 +191,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 								IPLArithmeticOperationsConstant<br />
 							</p>
                         </div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_pointoperations"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Point Operations</h2>
 							<p>
@@ -215,7 +212,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         </div>
                     </div>
                     <div class="col-md-4 md-margin-bottom-30">
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_localoperations"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Local Operations</h2>
 							<p>
@@ -247,7 +244,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 								IPLUnsharpMasking<br />
 							</p>
 						</div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_morphology"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Morphology</h2>
 							<p>
@@ -258,35 +255,35 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 						</div>
                     </div>
                     <div class="col-md-4">
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_histogram"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Histogram</h2>
 							<p>
 								<br />
 							</p>
 						</div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_edges"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Edges</h2>
 							<p>
 								<br />
 							</p>
 						</div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_gradients"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Gradients</h2>
 							<p>
 								IPLGradientOperator<br />
 							</p>
 						</div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_fourier"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Fourier</h2>
 							<p>
 								<br />
 							</p>
 						</div>
-                        <i class="icon-custom rounded-x icon-bg-dark fa fa-lightbulb-o"></i>
+                        <i class="icon-custom rounded-x icon-bg-dark process_icon process_objects"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Objects</h2>
 							<p>
@@ -304,8 +301,14 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         <div class="container content-lg">
             <div class="title-v1">
                 <h2>Download &amp; Build</h2>
-                <p>Binaries are coming soon...</p>             
+				<div  class="margin-bottom-40">
+					<p>Download ImagePlay 6.0.0-beta:</p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.zip" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:250px;" type="button">Windows</a></p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.dmg" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:250px;" type="button">Mac OS X</a></p>
+				</div>
+                <p>Or build your own version using the latest source code:           
 				<a href="https://github.com/cpvrlab/ImagePlay/blob/master/install.md">Build Instructions</a>
+				</p>  
             </div>
         </div>
     </section>
