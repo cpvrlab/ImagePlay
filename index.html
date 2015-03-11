@@ -100,7 +100,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 					ImagePlay is completely open source and can be built for <a href="#download">Windows</a>, <a href="#download">Mac</a> and <a href="#download">Linux</a>.</p>
                 </div>
                 <div class="img-center">
-                    <img class="img-responsive" src="assets/img/02.png" alt="">
+                    <img class="img-responsive" src="assets/img/screenshot.png" alt="">
                 </div>
             </div>
         </div>
@@ -138,7 +138,37 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                 </div>
 
                 <div class="col-md-6">
-                    <img class="img-responsive" src="assets/img/01.png" alt="">
+                    <div id="myCarousel" class="carousel slide carousel-v1">
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="assets/img/01.png" alt="">
+								<div class="carousel-caption">
+									<p>Binarize and use custom morphological kernel to enhance.</p>
+								</div>
+							</div>
+							<div class="item">
+								<img src="assets/img/02.png" alt="">
+								<div class="carousel-caption">
+									<p>Enhance exposure, split hues, find and objects.</p>
+								</div>
+							</div>
+							<div class="item">
+								<img src="assets/img/03.png" alt="">
+								<div class="carousel-caption">
+									<p>Find and extract edges.</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="carousel-arrow">
+							<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a class="right carousel-control" href="#myCarousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+					</div>
                 </div>
             </div>
         </div>        
@@ -303,8 +333,8 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                 <h2>Download &amp; Build</h2>
 				<div  class="margin-bottom-40">
 					<p>Download ImagePlay 6.0.0-beta:</p>
-					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.zip" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:250px;" type="button">Windows</a></p>
-					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.dmg" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:250px;" type="button">Mac OS X</a></p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.zip" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Windows</a></p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta/ImagePlay.6.0.0-beta.dmg" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Mac OS X</a></p>
 				</div>
                 <p>Or build your own version using the latest source code:           
 				<a href="https://github.com/cpvrlab/ImagePlay/blob/master/install.md">Build Instructions</a>
@@ -350,12 +380,8 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <script type="text/javascript">
         jQuery(document).ready(function() {
             App.init();
-            App.initCounter();
             App.initParallaxBg();
-            LoginForm.initLoginForm();
-            ContactForm.initContactForm();
-            OwlCarousel.initOwlCarousel();
-            RevolutionSlider.initRSfullScreen();
+			OwlCarousel.initOwlCarousel();
         });
     </script>
     <!--[if lt IE 9]>
