@@ -68,7 +68,7 @@ IPLImage::IPLImage(cv::Mat &cvMat)
         {
             for(int x = 0; x<_width; x++)
             {
-                _planes[0]->p(x,y) = cvMat.at<float>(y,x) * FACTOR_TO_FLOAT;
+                _planes[0]->p(x,y) = cvMat.at<uchar>(y,x) * FACTOR_TO_FLOAT;
             }
         }
     }

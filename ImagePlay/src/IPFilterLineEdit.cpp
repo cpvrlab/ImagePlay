@@ -6,7 +6,7 @@ IPFilterLineEdit::IPFilterLineEdit(QWidget *parent) :
     _resetButton = new QPushButton("", this);
     _resetButton->setMinimumSize(QSize(16,16));
     _resetButton->setMaximumSize(QSize(16,16));
-    _resetButton->setIcon(QIcon(":/icons/Delete-32.png"));
+    _resetButton->setIcon(QIcon(":/Delete-32.png"));
     _resetButton->setStyleSheet("border:none;");
     setCursor(Qt::ArrowCursor);
 
@@ -23,12 +23,12 @@ IPFilterLineEdit::IPFilterLineEdit(QWidget *parent) :
 
 void IPFilterLineEdit::resetPressed()
 {
-    _resetButton->setIcon(QIcon(":/icons/Delete-32-over.png"));
+    _resetButton->setIcon(QIcon(":/Delete-32-over.png"));
 }
 
 void IPFilterLineEdit::resetReleased()
 {
-    _resetButton->setIcon(QIcon(":/icons/Delete-32.png"));
+    _resetButton->setIcon(QIcon(":/Delete-32.png"));
 }
 
 void IPFilterLineEdit::resetClicked()
