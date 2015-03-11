@@ -37,8 +37,8 @@
 
 #include "IPL_plugininterface.h"
 
-#define IMAGEPLAY_VERSION "6.0.0-beta"
-#define IMAGEPLAY_BUILDNUMBER "20150310"
+#define IMAGEPLAY_VERSION "6.0.0-beta.1"
+#define IMAGEPLAY_BUILDNUMBER "20150311"
 
 namespace Ui {
 class MainWindow;
