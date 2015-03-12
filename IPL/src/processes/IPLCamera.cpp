@@ -4,7 +4,6 @@ void IPLCamera::init()
 {
     // init
     _result         = NULL;
-    _camera         = NULL;
 
     // basic settings
     setClassName("IPLCamera");
@@ -13,6 +12,7 @@ void IPLCamera::init()
     setCategory(IPLProcess::CATEGORY_IO);
     setOpenCVSupport(IPLOpenCVSupport::OPENCV_ONLY);
     setIsSource(true);
+    setIsSequence(true);
 
     // inputs and outputs
     addOutput("Image", IPLData::IMAGE_COLOR);
@@ -30,10 +30,7 @@ void IPLCamera::destroy()
     delete _result;
 
     // the camera should be deinitialized automatically in VideoCapture destructor
-    if(_camera)
-        _camera->release();
-
-    delete _camera;
+    IPLCameraIO::release();
 }
 
 bool IPLCamera::processInputData(IPLImage*, int, bool useOpenCV)
@@ -42,42 +39,29 @@ bool IPLCamera::processInputData(IPLImage*, int, bool useOpenCV)
     delete _result;
     _result = NULL;
 
-    // connect camera once
-    if(!_camera)
-    {
-        _camera = new cv::VideoCapture(0);
-    }
-
-    if(!_camera->isOpened())
-    {
-        addError("Default camera could not be opened");
-        return false;
-    }
-
     // get properties
-    int width = getProcessPropertyInt("width");
+    /*int width = getProcessPropertyInt("width");
     int height = getProcessPropertyInt("height");
     int brightness = getProcessPropertyInt("brightness");
     int contrast = getProcessPropertyInt("contrast");
-    double exposure = getProcessPropertyFloat("exposure");
+    double exposure = getProcessPropertyFloat("exposure");*/
 
     // set camera properties
-    _camera->set(CV_CAP_PROP_FRAME_WIDTH, width);
+    /*_camera->set(CV_CAP_PROP_FRAME_WIDTH, width);
     _camera->set(CV_CAP_PROP_FRAME_HEIGHT, height);
     _camera->set(CV_CAP_PROP_BRIGHTNESS, brightness);
     _camera->set(CV_CAP_PROP_CONTRAST, contrast);
-    _camera->set(CV_CAP_PROP_EXPOSURE, exposure);
+    _camera->set(CV_CAP_PROP_EXPOSURE, exposure);*/
 
-    notifyProgressEventHandler(50);
+    //notifyProgressEventHandler(99);
 
-    // get next frame
-    cv::Mat frame;
-    *_camera >> frame;
+    //delete _camera;
+    //_camera = NULL;
 
-    _result = new IPLImage(frame);
+    _result = IPLCameraIO::grabFrame();
 
     // collect information
-    std::stringstream s;
+    /*std::stringstream s;
     s << "<b>Width: </b>" << _camera->get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
     s << "<b>Height: </b>" << _camera->get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
     s << "<b>Brightness: </b>" << _camera->get(CV_CAP_PROP_BRIGHTNESS) << "\n";
@@ -88,7 +72,7 @@ bool IPLCamera::processInputData(IPLImage*, int, bool useOpenCV)
     s << "<b>Exposure: </b>" << _camera->get(CV_CAP_PROP_EXPOSURE) << "\n";
     s << "<b>GUID: </b>" << _camera->get(CV_CAP_PROP_GUID) << "";
 
-    addInformation(s.str());
+    addInformation(s.str());*/
 
     return true;
 }

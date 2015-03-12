@@ -139,6 +139,7 @@ public:
 
     void                    setOutputName                       (int index, std::string name);
     void                    setIsSource                         (bool isSource)                 { _isSource = isSource;  }
+    void                    setIsSequence                       (bool isSequence)               { _isSequence = isSequence;  }
     void                    setOpenCVSupport                    (IPLOpenCVSupport supportType)  { _openCVSupport = supportType;  }
     void                    setClassName                        (std::string className)         { _className = className; }
     void                    setTitle                            (std::string title)             { _title = title; }
@@ -147,6 +148,7 @@ public:
     void                    setHelpPage                         (std::string helpPage)          { _helpPage = helpPage; }
     void                    setCategory                         (IPLProcessCategory category)   { _category = category; }
     bool                    isSource                            ()                              { return _isSource; }
+    bool                    isSequence                          ()                              { return _isSequence; }
     IPLOpenCVSupport        openCVSupport                       ()                              { return _openCVSupport; }
     std::string             title                               ()                              { return _title; }
     std::string             description                         ()                              { return _description; }
@@ -186,6 +188,7 @@ private:
     void                    checkPropertyKey                    (const char* name);
 
     bool                            _isSource;
+    bool                            _isSequence;
     bool                            _resultReady;
     bool                            _needsUpdate;
     IPLProgressEventHandler*        _handler;

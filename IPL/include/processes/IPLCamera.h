@@ -3,6 +3,7 @@
 
 #include "IPL_global.h"
 #include "IPLProcess.h"
+#include "IPLCameraIO.h"
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -24,7 +25,6 @@ public:
     virtual IPLImage*       getResultData           (int outNr);
 protected:
     IPLImage*               _result;
-    cv::VideoCapture*       _camera;
 };
 
 #endif // IPLCAMERA_H

@@ -3,6 +3,7 @@
 IPLProcess::IPLProcess(void)
 {
     _isSource           = false;
+    _isSequence         = false;
     _resultReady        = false;
     _needsUpdate        = true;
     _openCVSupport      = IPLProcess::OPENCV_NONE;
@@ -20,6 +21,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _handler            = other._handler;
     _propertyHandler    = other._propertyHandler;
     _isSource           = other._isSource;
+    _isSequence         = other._isSequence;
     _resultReady        = other._resultReady;
     _title              = other._title;
     _properties         = other._properties;

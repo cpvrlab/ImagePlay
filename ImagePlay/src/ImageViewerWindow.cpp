@@ -191,8 +191,9 @@ void ImageViewerWindow::showProcessDuration(int durationMs)
 {
     if(durationMs > 0)
     {
-        QString durationMsg = QString("Total duration: ") + QString::number(durationMs) + QString("ms");
-        ui->statusbar->showMessage(durationMsg);
+        float fps = 1000.0f / durationMs;
+        QString durationMsg("Total duration: %1ms / %2fps");
+        ui->statusbar->showMessage(durationMsg.arg(durationMs).arg(fps, 0, 'f', 1));
     }
 }
 //-----------------------------------------------------------------------------

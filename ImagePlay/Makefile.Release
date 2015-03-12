@@ -355,12 +355,12 @@ $(OBJECTS) $(LIBS)
 	rc $(DEFINES) -fo ..\intermediate\ImagePlay\Release\x64\icon.res res\icon.rc
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-msvc2013 CONFIG+=debug -o Makefile.Release ImagePlay.pro
+	@$(QMAKE) -spec win32-msvc2013 -o Makefile.Release ImagePlay.pro
 
 qmake_all: FORCE
 
 dist:
-	$(ZIP) ImagePlay.zip $(SOURCES) $(DIST) ..\ImagePlay.pro C:\Qt\5.4\msvc2013_64\mkspecs\features\spec_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\common\shell-win32.conf C:\Qt\5.4\msvc2013_64\mkspecs\qconfig.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_declarative.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_declarative_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_enginio.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_enginio_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkit.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkit_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\features\qt_functions.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\qt_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013\qmake.conf C:\Qt\5.4\msvc2013_64\mkspecs\features\spec_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\default_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\resolve_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\default_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\build_pass.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\rtti.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\precompile_header.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\warn_on.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\qt.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\resources.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\moc.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\opengl.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\uic.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\windows.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\testcase_targets.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exceptions.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\yacc.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\lex.prf ImagePlay.pro res\ressources.qrc C:/Qt/5.4/msvc2013_64/lib/qtmain.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Core.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Widgets.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Gui.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) ImagePlay.zip $(SOURCES) $(DIST) ImagePlay.pro C:\Qt\5.4\msvc2013_64\mkspecs\features\spec_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\common\shell-win32.conf C:\Qt\5.4\msvc2013_64\mkspecs\qconfig.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_declarative.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_declarative_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_enginio.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_enginio_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkit.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkit_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.4\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.4\msvc2013_64\mkspecs\features\qt_functions.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\qt_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\win32-msvc2013\qmake.conf C:\Qt\5.4\msvc2013_64\mkspecs\features\spec_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\default_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\resolve_config.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\default_post.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\build_pass.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\rtti.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\precompile_header.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\warn_on.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\qt.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\resources.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\moc.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\opengl.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\uic.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\win32\windows.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\testcase_targets.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\exceptions.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\yacc.prf C:\Qt\5.4\msvc2013_64\mkspecs\features\lex.prf ImagePlay.pro res\ressources.qrc C:/Qt/5.4/msvc2013_64/lib/qtmain.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Core.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Widgets.prl C:/Qt/5.4/msvc2013_64/lib/Qt5Gui.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
 	-$(DEL_FILE) ..\intermediate\ImagePlay\Release\x64\main.obj ..\intermediate\ImagePlay\Release\x64\IPApplication.obj ..\intermediate\ImagePlay\Release\x64\IPHistogramWidget.obj ..\intermediate\ImagePlay\Release\x64\ImageViewerWindow.obj ..\intermediate\ImagePlay\Release\x64\IPProcessListTabWidget.obj ..\intermediate\ImagePlay\Release\x64\IPProcessMessageWidget.obj ..\intermediate\ImagePlay\Release\x64\IPFilterLineEdit.obj ..\intermediate\ImagePlay\Release\x64\IPMorphologyCheckbox.obj ..\intermediate\ImagePlay\Release\x64\IPProcessStep.obj ..\intermediate\ImagePlay\Release\x64\IPProcessEdge.obj ..\intermediate\ImagePlay\Release\x64\IPProcessEdgeTmp.obj ..\intermediate\ImagePlay\Release\x64\IPProcessGrid.obj ..\intermediate\ImagePlay\Release\x64\IPProcessGridScene.obj ..\intermediate\ImagePlay\Release\x64\IPProcessList.obj ..\intermediate\ImagePlay\Release\x64\IPProcessFactory.obj ..\intermediate\ImagePlay\Release\x64\IPProcessScript.obj ..\intermediate\ImagePlay\Release\x64\IPImageViewer.obj ..\intermediate\ImagePlay\Release\x64\IPProcessPropertiesWidget.obj ..\intermediate\ImagePlay\Release\x64\ConnectionDialog.obj ..\intermediate\ImagePlay\Release\x64\SettingsWindow.obj ..\intermediate\ImagePlay\Release\x64\AboutWindow.obj ..\intermediate\ImagePlay\Release\x64\MainWindow.obj ..\intermediate\ImagePlay\Release\x64\TutorialDialog.obj ..\intermediate\ImagePlay\Release\x64\IPZoomWidget.obj ..\intermediate\ImagePlay\Release\x64\IPProcessThread.obj ..\intermediate\ImagePlay\Release\x64\PluginGenerator.obj ..\intermediate\ImagePlay\Release\x64\qrc_ressources.obj ..\intermediate\ImagePlay\Release\x64\moc_IPProcessPropertiesWidget.obj ..\intermediate\ImagePlay\Release\x64\moc_IPProcessMessageWidget.obj ..\intermediate\ImagePlay\Release\x64\moc_IPPropertyCheckbox.obj ..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorHSL.obj ..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorHSV.obj ..\intermediate\ImagePlay\Release\x64\moc_IPPropertyColorRGB.obj ..\intermediate\ImagePlay\Release\x64\moc_IPPropertySliderInt.obj
@@ -683,6 +683,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -1038,6 +1039,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -1401,6 +1403,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -1608,6 +1611,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -1822,6 +1826,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -2043,6 +2048,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -2247,6 +2253,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -2454,6 +2461,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -2643,6 +2651,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -2850,6 +2859,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -3066,6 +3076,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -3272,6 +3283,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -3475,6 +3487,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -3692,6 +3705,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -3915,6 +3929,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -4134,6 +4149,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -4352,6 +4368,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -4567,6 +4584,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -4778,6 +4796,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -4989,6 +5008,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -5200,6 +5220,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -5416,6 +5437,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -5905,6 +5927,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -6191,6 +6214,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -6497,6 +6521,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -6696,6 +6721,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -6901,6 +6927,7 @@ compiler_moc_header_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -7326,6 +7353,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -7796,6 +7824,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -8135,6 +8164,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -8763,6 +8793,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -9496,6 +9527,7 @@ compiler_moc_header_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -9908,6 +9940,7 @@ compiler_uic_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -10104,6 +10137,7 @@ compiler_uic_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -10403,6 +10437,7 @@ compiler_uic_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -10673,6 +10708,7 @@ compiler_uic_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -11325,6 +11361,7 @@ compiler_uic_clean:
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -11662,6 +11699,7 @@ compiler_uic_clean:
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -12314,6 +12352,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -12680,6 +12719,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -12889,6 +12929,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -13092,21 +13133,6 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLHistogram.h \
 		include\PropertyWidgets\IPPropertyWidget.h \
 		..\intermediate\ImagePlay\Release\x64\ui_ImageViewerWindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QComboBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcombobox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDockWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdockwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSpacerItem \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTabWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QToolBar \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtoolbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		include\IPZoomWidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QRect \
 		release\ImagePlay_pch.obj
 
 ..\intermediate\ImagePlay\Release\x64\IPProcessListTabWidget.obj: src\IPProcessListTabWidget.cpp include\IPProcessListTabWidget.h \
@@ -13534,6 +13560,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -13757,6 +13784,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -14419,6 +14447,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -14764,6 +14793,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -15225,6 +15255,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -15563,6 +15594,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -16156,6 +16188,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -16473,6 +16506,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -16821,6 +16855,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -17271,6 +17306,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -17505,88 +17541,44 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qdir.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qfileinfo.h \
 		..\intermediate\ImagePlay\Release\x64\ui_SettingsWindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialogButtonBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialogbuttonbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGridLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGroupBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgroupbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLineEdit \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlineedit.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextformat.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSpacerItem \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		include\MainWindow.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenuBar \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenubar.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenu.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QMouseEvent \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsScene \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsscene.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsView \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsview.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpainter.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QDir \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QFormLayout \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qformlayout.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLayout \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QSettings \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qsettings.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QMutableListIterator \
@@ -17610,7 +17602,14 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpicture.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QIcon \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStyle \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStyleOptionGraphicsItem \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QTimeLine \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimeline.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qeasingcurve.h \
@@ -17618,8 +17617,14 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsitemanimation.h \
 		include\IPProcessEdge.h \
 		include\ConnectionDialog.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGridLayout \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QRadioButton \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qradiobutton.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QTimer \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qbasictimer.h \
@@ -17627,9 +17632,15 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QMimeData \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qmimedata.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidgetItem \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
 		include\IPProcessEdgeTmp.h \
 		include\IPImageViewer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QFrame \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHBoxLayout \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QPixmap \
 		..\IPL\include\IPLProcess.h \
 		..\IPL\include\IPL_global.h \
@@ -17658,6 +17669,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -17721,10 +17733,18 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLAddNoise.h \
 		..\IPL\include\processes\IPLLabelBlobs.h \
 		include\IPHistogramWidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QBitmap \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qbitmap.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QElapsedTimer \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qelapsedtimer.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
 		include\IPHistogramThread.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QThread \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qthread.h \
@@ -17864,75 +17884,46 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qvector2d.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qtouchdevice.h \
 		..\intermediate\ImagePlay\Release\x64\ui_AboutWindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTextEdit \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtextedit.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextdocument.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextformat.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
 		include\MainWindow.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenuBar \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenubar.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenu.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QMouseEvent \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsScene \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsscene.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGraphicsView \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgraphicsview.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpainter.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QDir \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qdir.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qfileinfo.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QFormLayout \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qformlayout.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLayout \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QSettings \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qsettings.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QMutableListIterator \
@@ -17956,7 +17947,14 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qpicture.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\QIcon \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStyle \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStyleOptionGraphicsItem \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QTimeLine \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimeline.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qeasingcurve.h \
@@ -17965,6 +17963,8 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		include\IPProcessEdge.h \
 		include\ConnectionDialog.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGridLayout \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QRadioButton \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qradiobutton.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
@@ -17979,6 +17979,9 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidgetItem \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
 		include\IPProcessEdgeTmp.h \
 		include\IPImageViewer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QFrame \
@@ -18011,6 +18014,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -18079,6 +18083,13 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qbitmap.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QElapsedTimer \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qelapsedtimer.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
 		include\IPHistogramThread.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QThread \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qthread.h \
@@ -18348,6 +18359,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\processes\IPLLoadImage.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -18459,233 +18471,6 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qstandardpaths.h \
 		..\IPL\include\IPL_plugininterface.h \
 		..\intermediate\ImagePlay\Release\x64\ui_MainWindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDialogButtonBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdialogbuttonbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDockWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdockwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenu \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSlider \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTextEdit \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtextedit.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextdocument.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextformat.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QToolBar \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtoolbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		include\IPFilterLineEdit.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLineEdit \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlineedit.h \
-		include\IPProcessListTabWidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTabWidget \
-		include\IPProcessList.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QDrag \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qdrag.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QtGui \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QtGuiDepends \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QtCore \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QtCoreDepends \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qanimationgroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qparallelanimationgroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qpauseanimation.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsequentialanimationgroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtextcodec.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qendian.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qlibraryinfo.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qdatetime.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qbuffer.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qdiriterator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfileselector.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QObject \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfilesystemwatcher.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qlockfile.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qloggingcategory.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qprocess.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qresource.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsavefile.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qstorageinfo.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtemporarydir.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QScopedPointer \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtemporaryfile.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractproxymodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qidentityproxymodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsortfilterproxymodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qstringlistmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qjsonarray.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qjsondocument.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstracteventdispatcher.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractnativeeventfilter.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qmath.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qmetaobject.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qobjectcleanuphandler.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsharedmemory.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsignalmapper.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsocketnotifier.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsystemsemaphore.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtranslator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qwineventnotifier.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qmimedatabase.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qmimetype.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfactoryinterface.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\quuid.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractstate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstracttransition.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventtransition.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfinalstate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qhistorystate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsignaltransition.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qstate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qstatemachine.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qexception.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfuture.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfutureinterface.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qrunnable.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qresultstore.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfuturesynchronizer.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfuturewatcher.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qreadwritelock.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qsemaphore.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qthreadpool.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qthreadstorage.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qwaitcondition.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qarraydataops.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qarraydatapointer.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qbitarray.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qbytearraymatcher.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcache.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcollator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcommandlineoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcommandlineparser.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcryptographichash.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qlinkedlist.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qmessageauthenticationcode.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qscopedvaluerollback.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qstack.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtextboundaryfinder.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtimezone.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qxmlstream.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qtcoreversion.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qaccessible.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qaccessiblebridge.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qaccessibleobject.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qaccessibleplugin.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qiconengine.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qiconengineplugin.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qimageiohandler.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qimagereader.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qimagewriter.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qmovie.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpictureformatplugin.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpixmapcache.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qstandarditemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qclipboard.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qgenericplugin.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qgenericpluginfactory.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qoffscreensurface.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qsurface.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qsurfaceformat.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglcontext.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QSurfaceFormat \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopengl.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qt_windows.h \
-		C:\Qt\5.4\msvc2013_64\include\QtANGLE\GLES3\gl3.h \
-		C:\Qt\5.4\msvc2013_64\include\QtANGLE\GLES3\gl3platform.h \
-		C:\Qt\5.4\msvc2013_64\include\QtANGLE\KHR\khrplatform.h \
-		C:\Qt\5.4\msvc2013_64\include\QtANGLE\GLES2\gl2.h \
-		C:\Qt\5.4\msvc2013_64\include\QtANGLE\GLES2\gl2platform.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopengles2ext.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglext.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglversionfunctions.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglwindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QPaintDeviceWindow \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpaintdevicewindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QWindow \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qwindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QEvent \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QMargins \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QRect \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QPaintDevice \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QOpenGLContext \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QImage \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qrasterwindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qscreen.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QList \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QSize \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QSizeF \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QTransform \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qsessionmanager.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qstylehints.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qgenericmatrix.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qmatrix4x4.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvector3d.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvector4d.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qquaternion.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglbuffer.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopengldebug.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglframebufferobject.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglfunctions.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglpaintdevice.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglpixeltransferoptions.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QSharedDataPointer \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglshaderprogram.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopengltexture.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopengltimerquery.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qopenglvertexarrayobject.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qbackingstore.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpagedpaintdevice.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpagelayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpagesize.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpdfwriter.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qabstracttextdocumentlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qglyphrun.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qrawfont.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qfontdatabase.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qstatictext.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qsyntaxhighlighter.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextobject.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextdocumentfragment.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextdocumentwriter.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextlist.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtexttable.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtguiversion.h \
-		include\IPProcessMessageWidget.h \
-		include\IPProcessPropertiesWidget.h \
-		include\PropertyWidgets\IPPropertySliderInt.h \
-		include\PropertyWidgets\IPPropertySpinnerInt.h \
-		include\PropertyWidgets\IPPropertySliderDouble.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QDoubleSpinBox \
-		include\PropertyWidgets\IPPropertyFileOpen.h \
-		include\PropertyWidgets\IPPropertyFileSave.h \
-		include\PropertyWidgets\IPPropertyColorRGB.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QColorDialog \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcolordialog.h \
-		include\PropertyWidgets\IPPropertyColorHSL.h \
-		include\PropertyWidgets\IPPropertyColorHSV.h \
-		include\PropertyWidgets\IPPropertyCheckbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
-		include\PropertyWidgets\IPPropertyKernelInt.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QComboBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcombobox.h \
-		include\PropertyWidgets\IPKernelPreset.h \
-		include\PropertyWidgets\IPPropertyRadioInt.h \
-		include\PropertyWidgets\IPPropertyCheckboxInt.h \
-		include\PropertyWidgets\IPPropertyBinaryMorphologyInt.h \
-		include\IPMorphologyCheckbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\QPaintEvent \
-		include\PropertyWidgets\IPPropertyBinaryMorphologyTristateInt.h \
-		include\PropertyWidgets\IPPropertyGrayscaleMorphologyInt.h \
-		include\PropertyWidgets\IPPropertyString.h \
-		include\PropertyWidgets\IPPropertyFolder.h \
-		include\PropertyWidgets\IPPropertyCombobox.h \
-		include\PropertyWidgets\IPPropertyPoint.h \
 		release\ImagePlay_pch.obj
 
 ..\intermediate\ImagePlay\Release\x64\TutorialDialog.obj: src\TutorialDialog.cpp include\TutorialDialog.h \
@@ -18798,50 +18583,6 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qeasingcurve.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractanimation.h \
 		..\intermediate\ImagePlay\Release\x64\ui_TutorialDialog.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		release\ImagePlay_pch.obj
 
 ..\intermediate\ImagePlay\Release\x64\IPZoomWidget.obj: src\IPZoomWidget.cpp include\IPZoomWidget.h \
@@ -18975,6 +18716,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -19113,6 +18855,7 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		..\IPL\include\IPLPropertyChangedEventHandler.h \
 		..\IPL\include\IPLFileIO.h \
 		..\IPL\include\processes\IPLCamera.h \
+		..\IPL\include\IPLCameraIO.h \
 		..\IPL\include\opencv\opencv2\highgui\highgui.hpp \
 		..\IPL\include\opencv\opencv2\highgui\highgui_c.h \
 		..\IPL\include\processes\IPLLoadImageSequence.h \
@@ -19311,60 +19054,6 @@ release\ImagePlay_pch.obj: include\stafx.h C:\Qt\5.4\msvc2013_64\include\QtWidge
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qstandardpaths.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QDebug \
 		..\intermediate\ImagePlay\Release\x64\ui_PluginGenerator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QComboBox \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qcombobox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QGridLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qgridlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlayoutitem.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qboxlayout.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLineEdit \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlineedit.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextformat.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QSpacerItem \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QVBoxLayout \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\QUrl \
 		release\ImagePlay_pch.obj
 

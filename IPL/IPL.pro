@@ -47,6 +47,7 @@ SOURCES += \
     src/IPLProcess.cpp \
     src/IPLProcessProperty.cpp \
     src/IPLFileIO.cpp \
+    src/IPLCameraIO.cpp \
     src/IPLComplexImage.cpp \
     src/IPLOrientedImage.cpp \
     src/IPLMatrix.cpp \
@@ -124,6 +125,7 @@ HEADERS += \
     include/IPLImagePlane.h \
     include/IPLHistogram.h \
     include/IPLFileIO.h \
+    include/IPLCameraIO.h \
     include/IPLColor.h \
     include/IPLImage.h \
     include/IPLComplexImage.h \

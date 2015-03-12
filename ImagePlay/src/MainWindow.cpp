@@ -977,10 +977,7 @@ void MainWindow::showEvent(QShowEvent*)
 void MainWindow::closeEvent(QCloseEvent* e)
 {
     QMessageBox question(QMessageBox::Question, "Quit", "Do you want to quit ImagePlay?", QMessageBox::Yes | QMessageBox::No, this);
-
-#ifdef Q_OS_WIN
     question.setIconPixmap(QPixmap(":/question.png").scaledToWidth(48, Qt::SmoothTransformation));
-#endif
 
     int reply = question.exec();
     if (reply == QMessageBox::Yes)
@@ -1036,10 +1033,7 @@ void MainWindow::on_actionNew_triggered()
     if(_unsavedChanges)
     {
         QMessageBox question(QMessageBox::Question, "Clear Scene", "You have unsaved changes, do you want to clear the process scene?", QMessageBox::Yes | QMessageBox::No, this);
-
-#ifdef Q_OS_WIN
-    question.setIconPixmap(QPixmap(":/question.png").scaledToWidth(48, Qt::SmoothTransformation));
-#endif
+        question.setIconPixmap(QPixmap(":/question.png").scaledToWidth(48, Qt::SmoothTransformation));
         int reply = question.exec();
         if (reply == QMessageBox::No)
             return;

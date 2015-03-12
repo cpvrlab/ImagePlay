@@ -325,8 +325,24 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         }
     }
 
+    // find sequence processes
+    bool graphNeedsUpdate = false;
+    for(auto it = _scene->steps()->begin(); it < _scene->steps()->end(); ++it)
+    {
+        IPProcessStep* step = (IPProcessStep*) *it;
+        IPLProcess* process = step->process();
+
+        if(process->isSequence())
+        {
+            process->setNeedsUpdate(true);
+            propertyChanged(process);
+            setParamsHaveChanged();
+        }
+    }
+
     // only for testing the camera
-    // _mainWindow->execute(true);
+    if(graphNeedsUpdate)
+        _mainWindow->execute(false);
 }
 
 void IPProcessGrid::updateProgress(int progress)

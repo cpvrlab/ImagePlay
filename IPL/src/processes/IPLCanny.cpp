@@ -164,9 +164,7 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
         cv::Mat input;
         cv::Mat output;
         cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
-        //input.convertTo(input, CV_8U);
-
-        cv::Canny(input, output, sigma, sigma, window);
+        cv::Canny(input, output, sigma*128, sigma*255, window);
 
         delete _result;
         _result = new IPLImage(output);
