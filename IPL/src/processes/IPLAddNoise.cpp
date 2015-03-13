@@ -51,6 +51,7 @@ bool IPLAddNoise::processInputData(IPLImage* image , int, bool useOpenCV)
     int nrOfPlanes = image->getNumberOfPlanes();
 
     std::default_random_engine generator;
+    generator.seed(time(0));
     std::normal_distribution<double> distribution(1.0, stdDev);
 
     #pragma omp parallel for

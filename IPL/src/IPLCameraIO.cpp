@@ -1,7 +1,7 @@
 #include "IPLCameraIO.h"
 
-cv::VideoCapture* IPLCameraIO::_camera = NULL;
-IPLImage* IPLCameraIO::_lastFrame = NULL;
+cv::VideoCapture*   IPLCameraIO::_camera    = NULL;
+IPLImage*           IPLCameraIO::_lastFrame = NULL;
 
 IPLImage* IPLCameraIO::grabFrame()
 {
@@ -23,6 +23,11 @@ IPLImage* IPLCameraIO::grabFrame()
     _lastFrame = new IPLImage(frame);
 
     return _lastFrame;
+}
+
+cv::VideoCapture *IPLCameraIO::camera()
+{
+    return _camera;
 }
 
 void IPLCameraIO::release()

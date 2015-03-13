@@ -74,6 +74,17 @@ void IPImageViewer::updateImage()
         // convert from IPLImage
         _rawData = _processStep->process()->getResultData( _resultIndex );
 
+        // if the result is invalid, abort
+        if(!_rawData)
+        {
+            setVisible(false);
+            return;
+        }
+        else
+        {
+            setVisible(true);
+        }
+
         if(_rawData->type() == IPLData::IMAGE_COLOR
                 || _rawData->type() == IPLData::IMAGE_GRAYSCALE
                 || _rawData->type() == IPLData::IMAGE_BW

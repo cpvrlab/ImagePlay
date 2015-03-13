@@ -60,19 +60,26 @@ bool IPLCamera::processInputData(IPLImage*, int, bool useOpenCV)
 
     _result = IPLCameraIO::grabFrame();
 
-    // collect information
-    /*std::stringstream s;
-    s << "<b>Width: </b>" << _camera->get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
-    s << "<b>Height: </b>" << _camera->get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
-    s << "<b>Brightness: </b>" << _camera->get(CV_CAP_PROP_BRIGHTNESS) << "\n";
-    s << "<b>Contrast: </b>" << _camera->get(CV_CAP_PROP_CONTRAST) << "\n";
-    s << "<b>Saturation: </b>" << _camera->get(CV_CAP_PROP_SATURATION) << "\n";
-    s << "<b>Hue: </b>" << _camera->get(CV_CAP_PROP_HUE) << "\n";
-    s << "<b>Gain: </b>" << _camera->get(CV_CAP_PROP_GAIN) << "\n";
-    s << "<b>Exposure: </b>" << _camera->get(CV_CAP_PROP_EXPOSURE) << "\n";
-    s << "<b>GUID: </b>" << _camera->get(CV_CAP_PROP_GUID) << "";
+    // if we didn't get a frame
+    if(!_result)
+    {
+        addError("Camera not available.");
+        return false;
+    }
 
-    addInformation(s.str());*/
+    // collect information
+    std::stringstream s;
+    s << "<b>Width: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
+    s << "<b>Height: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
+    s << "<b>Brightness: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_BRIGHTNESS) << "\n";
+    s << "<b>Contrast: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_CONTRAST) << "\n";
+    s << "<b>Saturation: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_SATURATION) << "\n";
+    s << "<b>Hue: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_HUE) << "\n";
+    s << "<b>Gain: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_GAIN) << "\n";
+    s << "<b>Exposure: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_EXPOSURE) << "\n";
+    s << "<b>GUID: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_GUID) << "";
+
+    addInformation(s.str());
 
     return true;
 }

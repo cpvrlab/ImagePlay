@@ -102,7 +102,6 @@ SOURCES += \
     src/processes/IPLLocalThreshold.cpp \
     src/processes/IPLHysteresisThreshold.cpp \
     src/processes/IPLFalseColor.cpp \
-    src/processes/IPLEquidensityLines.cpp \
     src/processes/IPLEqualizeHistogram.cpp \
     src/processes/IPLBinarizeUnimodal.cpp \
     src/processes/IPLBinarizeOtsu.cpp \
@@ -111,6 +110,7 @@ SOURCES += \
     src/processes/IPLAddNoise.cpp \
     src/processes/IPLCamera.cpp \
     src/processes/IPLLabelBlobs.cpp \
+    src/processes/IPLFFT.cpp \
 
 HEADERS += \
     include/IPL_plugininterface.h \
@@ -183,7 +183,6 @@ HEADERS += \
     include/processes/IPLLocalThreshold.h \
     include/processes/IPLHysteresisThreshold.h \
     include/processes/IPLFalseColor.h \
-    include/processes/IPLEquidensityLines.h \
     include/processes/IPLEqualizeHistogram.h \
     include/processes/IPLBinarizeUnimodal.h \
     include/processes/IPLBinarizeOtsu.h \
@@ -192,6 +191,7 @@ HEADERS += \
     include/processes/IPLAddNoise.h \
     include/processes/IPLCamera.h \
     include/processes/IPLLabelBlobs.h \
+    include/processes/IPLFFT.h \
 
 #win32: LIBS += -L$$PWD/lib/FreeImage/ -lFreeImage
 

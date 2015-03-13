@@ -133,6 +133,7 @@ protected:
     void resizeEvent(QResizeEvent *);
     void moveEvent(QMoveEvent *);
     void wheelEvent(QWheelEvent *);
+    void closeEvent(QCloseEvent *);
 };
 
 #endif // IMAGEVIEWERWINDOW_H

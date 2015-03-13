@@ -172,8 +172,6 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
         return true;
     }
 
-    return false;
-
     // Create a Gaussian 1D filter
     int N = ceil( sigma * sqrt( 2.0*log( 1.0/0.015 ) ) + 1.0 );
     window = 2*N+1;

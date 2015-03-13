@@ -28,7 +28,7 @@ public:
     void                registerProcess             (QString name, IPLProcess* getInstance);
     void                unregisterProcess           (QString name);
     IPLProcess*         getInstance                 (QString name);
-    QStringList    getProcessNamesByCategory   (IPLProcess::IPLProcessCategory category);
+    QStringList         getProcessNamesByCategory   (IPLProcess::IPLProcessCategory category);
 
 private:
     QMap<QString, IPLProcess*>   _map;              //!< Contains all currently registered IPLProcesses by name

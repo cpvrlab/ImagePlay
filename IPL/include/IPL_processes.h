@@ -56,13 +56,14 @@
 #include "IPLLocalThreshold.h"
 #include "IPLHysteresisThreshold.h"
 #include "IPLFalseColor.h"
-#include "IPLEquidensityLines.h"
 #include "IPLEqualizeHistogram.h"
 #include "IPLBinarizeUnimodal.h"
 #include "IPLBinarizeOtsu.h"
 #include "IPLBinarizeKMeans.h"
 #include "IPLBinarizeEntropy.h"
 #include "IPLAddNoise.h"
+
+#include "IPLFFT.h"
 
 #include "IPLLabelBlobs.h"
 

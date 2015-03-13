@@ -564,6 +564,13 @@ void ImageViewerWindow::wheelEvent(QWheelEvent* event)
 
     event->ignore();
 }
+
+void ImageViewerWindow::closeEvent(QCloseEvent* e)
+{
+    // tell the MainWindow that the image viewer is no longer visible
+    _mainWindow->on_actionImageViewer_hidden();
+    QMainWindow::closeEvent(e);
+}
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::on_btnZoomIn_clicked
@@ -645,7 +652,8 @@ Updates the position of the zoomWindow and the pixel information window
 */
 void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 {
-    if(((IPImageViewer*) ui->tabWidget->currentWidget())->processStep()->process()->isResultReady() == false)
+    // check if we have a valid image
+    if(!((IPImageViewer*) ui->tabWidget->currentWidget())->image())
         return;
 
     if(x < 0 || y < 0)

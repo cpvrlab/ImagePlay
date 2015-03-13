@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     loadPlugins();
 
     _imageViewer = new ImageViewerWindow(this);
-    _imageViewer->setWindowFlags(Qt::Window);
+    //_imageViewer->setWindowFlags(Qt::Window);
     //_imageViewer->show();
 
     _settingsWindow = new SettingsWindow(this);
@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _progressLabel->setMovie(movie);
     movie->start();
     movie->stop();
-    //_progressLabel->setVisible(false);
+    _progressLabel->setVisible(false);
 
     ui->toolBar->addWidget(_progressLabel);
 
@@ -82,8 +82,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->messageLabel->hide();
 
     // sequence control widget
-    ui->toolBar->addWidget(ui->sequenceControlWidget);
+    //ui->toolBar->addWidget(ui->sequenceControlWidget);
     ui->sequenceControlWidget->setEnabled(false);
+    ui->sequenceControlWidget->hide();
 
     connect(ui->graphicsView, &IPProcessGrid::sequenceChanged, this, &MainWindow::on_sequenceChanged);
 
@@ -368,13 +369,14 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLLocalThreshold",      new IPLLocalThreshold);
     _factory->registerProcess("IPLHysteresisThreshold", new IPLHysteresisThreshold);
     _factory->registerProcess("IPLFalseColor",          new IPLFalseColor);
-    _factory->registerProcess("IPLEquidensityLines",    new IPLEquidensityLines);
     _factory->registerProcess("IPLEqualizeHistogram",   new IPLEqualizeHistogram);
     _factory->registerProcess("IPLBinarizeUnimodal",    new IPLBinarizeUnimodal);
     _factory->registerProcess("IPLBinarizeOtsu",        new IPLBinarizeOtsu);
     _factory->registerProcess("IPLBinarizeKMeans",      new IPLBinarizeKMeans);
     _factory->registerProcess("IPLBinarizeEntropy",     new IPLBinarizeEntropy);
     _factory->registerProcess("IPLAddNoise",            new IPLAddNoise);
+
+    _factory->registerProcess("IPLFFT",                 new IPLFFT);
 
     _factory->registerProcess("IPLLabelBlobs",          new IPLLabelBlobs);
 
@@ -925,17 +927,6 @@ void MainWindow::on_actionPause_triggered()
     _progressLabel->setVisible(false);
 }
 
-void MainWindow::on_actionImageViewer_triggered()
-{
-    if(_imageViewer->isVisible())
-    {
-        _imageViewer->hide();
-    }
-    else
-    {
-        _imageViewer->show();
-    }
-}
 
 void MainWindow::on_actionSynchronizeViews_triggered(bool checked)
 {
@@ -985,6 +976,9 @@ void MainWindow::closeEvent(QCloseEvent* e)
         writeSettings();
 
         delete _imageViewer;
+
+        // try closing any videocapture items
+        IPLCameraIO::release();
 
         QApplication::quit();
     }
@@ -1106,4 +1100,14 @@ void MainWindow::on_actionGeneratePlugin_triggered()
 {
     PluginGenerator* pluginGenerator = new PluginGenerator(this);
     pluginGenerator->show();
+}
+
+void MainWindow::on_actionImageViewer_triggered(bool checked)
+{
+    _imageViewer->setVisible(checked);
+}
+
+void MainWindow::on_actionImageViewer_hidden()
+{
+    ui->actionImageViewer->setChecked(false);
 }

@@ -28,6 +28,85 @@ void IPLGaussianLowPass::destroy()
     delete _result;
 }
 
+void IPLGaussianLowPass::gauss(IPLImage* image, IPLImage* result, IPLData* kernel, int height, int window, double sigma, int width, int N)
+{
+    float* filter = new float [window];
+    float sum = 0;
+    for( int k = -N; k <= N; ++k )
+    {
+        float val = exp( -((double)k*(double)k) / (sigma*sigma) );
+        sum += val;
+        filter[k+N] = val;
+    }
+
+    kernel = new IPLMatrix(1, window, filter);
+
+    float sumFactor = 1.0f/sum;
+    for( int k = 0; k < window; ++k )
+        filter[k] *= sumFactor;
+
+    int progress = 0;
+    int maxProgress = image->height() * image->getNumberOfPlanes() * 2;
+    int nrOfPlanes = image->getNumberOfPlanes();
+
+    #pragma omp parallel for
+    for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
+    {
+        IPLImagePlane* plane = image->plane( planeNr );
+        IPLImagePlane* newplane = result->plane( planeNr );
+
+        /// @todo should be double image
+        IPLImage* tmpI = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
+
+        // horizontal run
+        float sum = 0;
+        float img = 0;
+        int i = 0;
+
+        for(int y=0; y<height; y++)
+        {
+            // progress
+           //notifyProgressEventHandler(100*progress++/maxProgress);
+
+            for(int x=0; x<width; x++)
+            {
+                sum = 0;
+                i = 0;
+                for( int kx=-N; kx<=N; kx++ )
+                {
+                    img = plane->bp(x+kx, y);
+                    sum += (img * filter[i++]);
+                }
+                tmpI->plane(0)->p(x,y) = sum;
+            }
+        }
+
+        // vertical run
+        sum = 0;
+        img = 0;
+        i = 0;
+        for(int y=0; y<height; y++)
+        {
+            // progress
+            //notifyProgressEventHandler(100*progress++/maxProgress);
+
+            for(int x=0; x<width; x++)
+            {
+                sum = 0;
+                i = 0;
+                for( int ky=-N; ky<=N; ky++ )
+                {
+                    img = tmpI->plane(0)->bp(x, y+ky);
+                    sum += (img * filter[i++]);
+                }
+                newplane->p(x,y) = sum;
+            }
+        }
+        delete tmpI;
+    }
+    delete [] filter;
+}
+
 bool IPLGaussianLowPass::processInputData(IPLImage* image , int, bool useOpenCV)
 {
     // delete previous result
@@ -68,84 +147,11 @@ bool IPLGaussianLowPass::processInputData(IPLImage* image , int, bool useOpenCV)
 
         return true;
     }
-
-    float* filter = new float [window];
-    float sum = 0;
-    for( int k = -N; k <= N; ++k )
+    else
     {
-        float val = exp( -((double)k*(double)k) / (sigma*sigma) );
-        sum += val;
-        filter[k+N] = val;
+        IPLGaussianLowPass::gauss(image, _result, _kernel, height, window, sigma, width, N);
+        return true;
     }
-
-    _kernel = new IPLMatrix(1, window, filter);
-
-    float sumFactor = 1.0f/sum;
-    for( int k = 0; k < window; ++k )
-        filter[k] *= sumFactor;
-
-    int progress = 0;
-    int maxProgress = image->height() * image->getNumberOfPlanes() * 2;
-    int nrOfPlanes = image->getNumberOfPlanes();
-
-    #pragma omp parallel for
-    for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
-    {
-        IPLImagePlane* plane = image->plane( planeNr );
-        IPLImagePlane* newplane = _result->plane( planeNr );
-
-        /// @todo should be double image
-        IPLImage* tmpI = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
-
-        // horizontal run
-        float sum = 0;
-        float img = 0;
-        int i = 0;
-
-        for(int y=0; y<height; y++)
-        {
-            // progress
-           notifyProgressEventHandler(100*progress++/maxProgress);
-
-            for(int x=0; x<width; x++)
-            {
-                sum = 0;
-                i = 0;
-                for( int kx=-N; kx<=N; kx++ )
-                {
-                    img = plane->bp(x+kx, y);
-                    sum += (img * filter[i++]);
-                }
-                tmpI->plane(0)->p(x,y) = sum;
-            }
-        }
-
-        // vertical run
-        sum = 0;
-        img = 0;
-        i = 0;
-        for(int y=0; y<height; y++)
-        {
-            // progress
-            notifyProgressEventHandler(100*progress++/maxProgress);
-
-            for(int x=0; x<width; x++)
-            {
-                sum = 0;
-                i = 0;
-                for( int ky=-N; ky<=N; ky++ )
-                {
-                    img = tmpI->plane(0)->bp(x, y+ky);
-                    sum += (img * filter[i++]);
-                }
-                newplane->p(x,y) = sum;
-            }
-        }
-        delete tmpI;
-    }
-    delete [] filter;
-
-    return true;
 }
 
 IPLData* IPLGaussianLowPass::getResultData(int index)

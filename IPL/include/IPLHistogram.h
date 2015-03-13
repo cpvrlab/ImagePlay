@@ -34,6 +34,9 @@ public:
 
         long total = 0;
 
+        if(_plane->height()*_plane->width() == 0)
+            return;
+
         // create bins
         for(int i=0; i<_bins; i++)
         {

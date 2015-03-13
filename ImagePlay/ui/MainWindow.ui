@@ -477,6 +477,9 @@
    </property>
   </action>
   <action name="actionImageViewer">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/ressources.qrc">
      <normaloff>:/icons/imageviewer.png</normaloff>:/icons/imageviewer.png</iconset>

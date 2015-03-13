@@ -64,10 +64,10 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool useOpenCV)
         return false;
     }
 
-    // play from 0 to max, stay there
+    // play from 0 to max
     if(_sequenceIndex >= _sequenceCount)
     {
-        _sequenceIndex = _sequenceCount-1;
+        _sequenceIndex = 0;
     }
 
     // load current file
@@ -77,6 +77,15 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool useOpenCV)
 
     std::string information;
     bool success = IPLFileIO::loadFile(fileName, this->_result, information);
+
+    _sequenceIndex++;
+
+    std::stringstream s;
+    s << "File: ";
+    s << (_sequenceIndex+1);
+    s << " / ";
+    s << _sequenceCount;
+    addInformation(s.str());
 
     return success;
 }

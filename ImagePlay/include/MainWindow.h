@@ -107,6 +107,7 @@ public slots:
     void                    handleProgress                  (int);
     void                    setParamsHaveChanged            ();
     void                    hideMessage                     ();
+    void                    on_actionImageViewer_hidden     ();
 
 private slots:
     void                    on_actionZoomIn_triggered       ();
@@ -118,7 +119,6 @@ private slots:
     void                    on_buttonBox_rejected           ();
     void                    on_actionPlay_triggered         ();
     void                    on_actionPause_triggered        ();
-    void                    on_actionImageViewer_triggered  ();
     void                    on_actionSynchronizeViews_triggered(bool checked);
     void                    on_actionTutorial_triggered     ();
     void                    on_actionOpen_triggered         ();
@@ -142,6 +142,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_actionGeneratePlugin_triggered();
+
+    void on_actionImageViewer_triggered(bool checked);
 
 private:
     Ui::MainWindow*         ui;

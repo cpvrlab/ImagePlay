@@ -21,11 +21,12 @@ public:
     ~IPLGaussianLowPass()  { destroy(); }
 
     void                    init                    ();
-    virtual void        destroy();
+    virtual void            destroy();
 
     bool                    processInputData        (IPLImage*, int, bool useOpenCV);
     IPLData*                getResultData           (int);
 
+    static void             gauss                   (IPLImage* image, IPLImage* result, IPLData* kernel, int height, int window, double sigma, int width, int N);
 protected:
     IPLImage*               _result;
     IPLData*                _kernel;
