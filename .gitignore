@@ -35,6 +35,13 @@ Makefile
 *.o
 *.o-i386
 *.o-x86_64
+Makefile.Debug
+Makefile.Release
+
+# Windows
+*.sln
+*.vcxproj
+*.vcxproj.filters
 
 # temporary and html doc files
 intermediate/
