@@ -5,3 +5,5 @@ ImagePlay is a rapid prototyping application allowing you to experiment with sta
 [Website](http://cpvrlab.github.io/ImagePlay/)
 
 [Build instructions](install.md)
+
+[Changelog](changelog.md)
