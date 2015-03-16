@@ -45,7 +45,7 @@ void IPLSaveImage::destroy()
     delete _result;
 }
 
-bool IPLSaveImage::processInputData(IPLImage* image, int, bool useOpenCV)
+bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
 {
     //IPLImage* colorImage = new IPLImage(IPLData::COLOR, image->width(), image->height());
 
@@ -137,7 +137,7 @@ IPLImage* IPLSaveImage::getResultData(int)
 
 bool IPLSaveImage::stringEndsWith(const std::string& haystack, const std::string& needle)
 {
-    int found = static_cast<int>(haystack.rfind(needle));
+    uint found = static_cast<int>(haystack.rfind(needle));
 
     if(found == haystack.length() - needle.length())
         return true;

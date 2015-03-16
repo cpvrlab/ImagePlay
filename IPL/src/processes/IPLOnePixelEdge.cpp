@@ -23,7 +23,7 @@ void IPLOnePixelEdge::destroy()
     delete _result;
 }
 
-bool IPLOnePixelEdge::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLOnePixelEdge::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

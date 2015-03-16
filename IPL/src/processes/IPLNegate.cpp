@@ -21,7 +21,7 @@ void IPLNegate::destroy()
     delete _result;
 }
 
-bool IPLNegate::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLNegate::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

@@ -45,7 +45,7 @@ void IPLArithmeticOperations::destroy()
     delete _result;
 }
 
-bool IPLArithmeticOperations::processInputData(IPLImage* image, int imageIndex, bool useOpenCV)
+bool IPLArithmeticOperations::processInputData(IPLImage* image, int imageIndex, bool)
 {
     // save the first image
     if(imageIndex == 0)

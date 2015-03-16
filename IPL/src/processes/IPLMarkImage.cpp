@@ -29,7 +29,7 @@ void IPLMarkImage::destroy()
     delete _result;
 }
 
-bool IPLMarkImage::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLMarkImage::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

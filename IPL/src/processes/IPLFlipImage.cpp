@@ -24,7 +24,7 @@ void IPLFlipImage::destroy()
     delete _result;
 }
 
-bool IPLFlipImage::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLFlipImage::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

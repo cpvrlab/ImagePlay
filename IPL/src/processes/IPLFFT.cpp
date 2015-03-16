@@ -24,7 +24,7 @@ void IPLFFT::destroy()
     delete _result;
 }
 
-bool IPLFFT::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLFFT::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -36,7 +36,7 @@ bool IPLFFT::processInputData(IPLImage* image , int, bool useOpenCV)
     _result = new IPLComplexImage(width, height);
 
     // get properties
-    float threshold = getProcessPropertyDouble("threshold");
+    //float threshold = getProcessPropertyDouble("threshold");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

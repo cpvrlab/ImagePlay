@@ -26,7 +26,7 @@ void IPLRandomPoint::destroy()
     delete _point;
 }
 
-bool IPLRandomPoint::processInputData(IPLImage* image, int, bool useOpenCV)
+bool IPLRandomPoint::processInputData(IPLImage* image, int, bool)
 {
     // delete previous result
     delete _image;

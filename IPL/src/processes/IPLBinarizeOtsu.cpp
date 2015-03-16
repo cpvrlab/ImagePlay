@@ -23,7 +23,7 @@ void IPLBinarizeOtsu::destroy()
     delete _result;
 }
 
-bool IPLBinarizeOtsu::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLBinarizeOtsu::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

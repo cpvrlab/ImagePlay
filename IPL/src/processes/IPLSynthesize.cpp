@@ -38,7 +38,7 @@ void IPLSynthesize::destroy()
     delete _result;
 }
 
-bool IPLSynthesize::processInputData(IPLImage*, int, bool useOpenCV)
+bool IPLSynthesize::processInputData(IPLImage*, int, bool)
 {
     if(isResultReady())
     {

@@ -62,7 +62,7 @@ void IPZoomWidget::setPositionLocked(bool locked)
     _positionLocked = locked;
 }
 
-void IPZoomWidget::paintEvent(QPaintEvent* e)
+void IPZoomWidget::paintEvent(QPaintEvent*)
 {
     if(!_image)
         return;

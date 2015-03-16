@@ -24,7 +24,7 @@ void IPLGradientOperator::destroy()
     delete _result;
 }
 
-bool IPLGradientOperator::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLGradientOperator::processInputData(IPLImage* image , int, bool)
 {
     int width = image->width();
     int height = image->height();
@@ -34,7 +34,7 @@ bool IPLGradientOperator::processInputData(IPLImage* image , int, bool useOpenCV
     _result = new IPLOrientedImage(width, height);
 
     // get properties
-    int algorithm = getProcessPropertyInt("algorithm");
+    //int algorithm = getProcessPropertyInt("algorithm");
 
     // fast gradient
     int progress = 0;

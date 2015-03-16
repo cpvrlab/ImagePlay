@@ -23,7 +23,7 @@ void IPLMedian::destroy()
     delete _result;
 }
 
-bool IPLMedian::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLMedian::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -55,8 +55,6 @@ bool IPLMedian::processInputData(IPLImage* image , int, bool useOpenCV)
         {
             // progress
             notifyProgressEventHandler(100*progress++/maxProgress);
-
-            ipl_basetype m0, m[4], ma, mi;
 
             for(int y=0; y<height; y++)
             {

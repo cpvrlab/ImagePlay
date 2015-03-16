@@ -24,7 +24,7 @@ void IPLEnhanceMode::destroy()
     delete _result;
 }
 
-bool IPLEnhanceMode::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLEnhanceMode::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

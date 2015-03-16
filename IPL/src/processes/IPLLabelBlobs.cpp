@@ -22,7 +22,7 @@ void IPLLabelBlobs::destroy()
     delete _result;
 }
 
-bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

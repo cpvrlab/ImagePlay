@@ -35,7 +35,7 @@ void IPLMergePlanes::destroy()
     delete _inputC;
 }
 
-bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool useOpenCV)
+bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool)
 {
     // save the inputs
     if(imageIndex == 0)
@@ -112,7 +112,7 @@ bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool use
     return true;
 }
 
-IPLImage* IPLMergePlanes::getResultData( int outputIndex )
+IPLImage* IPLMergePlanes::getResultData(int)
 {
     return _result;
 }

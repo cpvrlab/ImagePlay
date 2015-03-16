@@ -23,7 +23,7 @@ void IPLMaxMinMedian::destroy()
     delete _result;
 }
 
-bool IPLMaxMinMedian::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLMaxMinMedian::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

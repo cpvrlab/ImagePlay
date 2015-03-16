@@ -24,7 +24,7 @@ void IPLAgglomerate::destroy()
     delete _result;
 }
 
-bool IPLAgglomerate::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLAgglomerate::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

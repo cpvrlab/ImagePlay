@@ -30,7 +30,7 @@ void IPLResize::destroy()
     delete _result;
 }
 
-bool IPLResize::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLResize::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -87,7 +87,7 @@ bool IPLResize::processInputData(IPLImage* image , int, bool useOpenCV)
     return true;
 }
 
-IPLData* IPLResize::getResultData(int index)
+IPLData* IPLResize::getResultData(int)
 {
     return _result;
 }

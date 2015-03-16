@@ -33,7 +33,7 @@ void IPLCamera::destroy()
     IPLCameraIO::release();
 }
 
-bool IPLCamera::processInputData(IPLImage*, int, bool useOpenCV)
+bool IPLCamera::processInputData(IPLImage*, int, bool)
 {
     // delete previous result
     delete _result;

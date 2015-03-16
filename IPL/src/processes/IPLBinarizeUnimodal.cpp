@@ -24,7 +24,7 @@ void IPLBinarizeUnimodal::destroy()
     delete _result;
 }
 
-bool IPLBinarizeUnimodal::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLBinarizeUnimodal::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

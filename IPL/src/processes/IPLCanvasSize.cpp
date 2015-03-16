@@ -27,7 +27,7 @@ void IPLCanvasSize::destroy()
     delete _result;
 }
 
-bool IPLCanvasSize::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLCanvasSize::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -148,7 +148,7 @@ bool IPLCanvasSize::processInputData(IPLImage* image , int, bool useOpenCV)
     return true;
 }
 
-IPLData* IPLCanvasSize::getResultData(int index)
+IPLData* IPLCanvasSize::getResultData(int)
 {
     return _result;
 }

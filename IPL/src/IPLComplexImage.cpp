@@ -36,7 +36,7 @@ ipl_basetype& IPLComplexImage::imag(int x, int y)
 
 
 void IPLComplexImage::flip( void )
-{
+{/*
     Complex** tempPlane = plane;
     int h =height;
     height = width;
@@ -51,7 +51,7 @@ void IPLComplexImage::flip( void )
     }
     for(int y=0; y<width; y++)
         delete [] tempPlane[y];
-    delete [] tempPlane;
+    delete [] tempPlane;*/
 }
 
 Complex* IPLComplexImage::getRow( int y )

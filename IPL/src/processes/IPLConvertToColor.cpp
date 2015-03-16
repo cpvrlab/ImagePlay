@@ -20,7 +20,7 @@ void IPLConvertToColor::destroy()
     delete _result;
 }
 
-bool IPLConvertToColor::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLConvertToColor::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

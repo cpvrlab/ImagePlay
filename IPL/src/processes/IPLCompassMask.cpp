@@ -65,7 +65,7 @@ void IPLCompassMask::destroy()
     delete _result;
 }
 
-bool IPLCompassMask::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLCompassMask::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

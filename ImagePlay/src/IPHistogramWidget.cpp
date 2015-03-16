@@ -92,7 +92,7 @@ void IPHistogramWidget::paintEvent(QPaintEvent* e)
         std::vector<int> valuesR = _logarithmic ? _histogramR->logarithmic() : _histogramR->linear();
         std::vector<int> valuesG = _logarithmic ? _histogramG->logarithmic() : _histogramG->linear();
         std::vector<int> valuesB = _logarithmic ? _histogramB->logarithmic() : _histogramB->linear();
-        for(int i=0; i < valuesR.size(); i++)
+        for(uint i=0; i < valuesR.size(); i++)
         {
             // R
             painter.setPen(penR);

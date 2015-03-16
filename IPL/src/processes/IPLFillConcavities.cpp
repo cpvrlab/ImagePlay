@@ -26,7 +26,7 @@ void IPLFillConcavities::destroy()
     delete _result;
 }
 
-bool IPLFillConcavities::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLFillConcavities::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

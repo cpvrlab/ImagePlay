@@ -32,7 +32,7 @@ public:
     int height(void)                { return _height; }
 
     unsigned char* rgb32 (void);
-    IPLImagePlane* plane( int planeNr );
+    IPLImagePlane* plane(int planeNr);
     void fillColor( ipl_basetype color );
 
     std::string                 toString(int x, int y);

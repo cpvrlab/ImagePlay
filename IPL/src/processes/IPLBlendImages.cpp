@@ -67,7 +67,7 @@ void IPLBlendImages::destroy()
     delete _inputB;
 }
 
-bool IPLBlendImages::processInputData(IPLImage* image , int imageIndex, bool useOpenCV)
+bool IPLBlendImages::processInputData(IPLImage* image , int imageIndex, bool)
 {
     // save the first image
     if(imageIndex == 0)

@@ -28,7 +28,7 @@ void IPLLoadImage::destroy()
     delete _result;
 }
 
-bool IPLLoadImage::processInputData(IPLImage*, int, bool useOpenCV)
+bool IPLLoadImage::processInputData(IPLImage*, int, bool)
 {
     // delete previous result
     delete _result;

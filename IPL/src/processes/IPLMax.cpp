@@ -23,7 +23,7 @@ void IPLMax::destroy()
     delete _result;
 }
 
-bool IPLMax::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLMax::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

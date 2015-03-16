@@ -32,7 +32,7 @@ void IPLGabor::destroy()
     delete _result2;
 }
 
-bool IPLGabor::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLGabor::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result0;
@@ -54,9 +54,8 @@ bool IPLGabor::processInputData(IPLImage* image , int, bool useOpenCV)
     double direction = getProcessPropertyDouble("direction");
     double deviation = getProcessPropertyDouble("deviation");
 
-    int progress = 0;
-    int maxProgress = image->height() * image->getNumberOfPlanes();
-    int nrOfPlanes = image->getNumberOfPlanes();
+    //int progress = 0;
+    //int maxProgress = image->height() * image->getNumberOfPlanes();
 
     int w2 = window/2;
     int area = window*window;

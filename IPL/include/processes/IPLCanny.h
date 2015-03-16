@@ -39,7 +39,7 @@ private:
     void trace(int x, int y, double lowThreshold, IPLOrientedImage *dI, IPLImagePlane *image);
     void thinning(IPLOrientedImage *dI, IPLImagePlane *image, IPLImagePlane *newplane);
 
-    IPLSHARED_EXPORT class Pixel {
+    class Pixel {
         public: Pixel( int _x, int _y ){ x=_x; y=_y; }
         int x;
         int y;

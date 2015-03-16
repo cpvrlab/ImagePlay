@@ -24,7 +24,7 @@ void IPLInverseContrastRatioMapping::destroy()
     delete _result;
 }
 
-bool IPLInverseContrastRatioMapping::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLInverseContrastRatioMapping::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

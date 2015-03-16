@@ -36,7 +36,7 @@ void IPLArithmeticOperationsConstant::destroy()
     delete _result;
 }
 
-bool IPLArithmeticOperationsConstant::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLArithmeticOperationsConstant::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

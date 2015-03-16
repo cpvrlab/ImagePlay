@@ -23,7 +23,7 @@ void IPLMin::destroy()
     delete _result;
 }
 
-bool IPLMin::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLMin::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

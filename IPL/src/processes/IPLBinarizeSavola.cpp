@@ -26,7 +26,7 @@ void IPLBinarizeSavola::destroy()
     delete _result;
 }
 
-bool IPLBinarizeSavola::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLBinarizeSavola::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

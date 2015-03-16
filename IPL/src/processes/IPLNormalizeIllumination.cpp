@@ -29,7 +29,7 @@ void IPLNormalizeIllumination::destroy()
     delete _illumination;
 }
 
-bool IPLNormalizeIllumination::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLNormalizeIllumination::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -127,7 +127,6 @@ void IPLNormalizeIllumination::RGBtoHLS( double R, double G, double B, double& H
 
 double IPLNormalizeIllumination::_RGB( double q1, double q2, double H )
 {
-    double ret;
     if ( H > 6.0 ) H -= 6.0;
     if ( H < 0.0 ) H += 6.0;
     if( H < 1.0 )

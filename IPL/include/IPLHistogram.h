@@ -88,7 +88,7 @@ public:
         // logarithmic scale
         std::vector<double> histogramLogTmp;
 
-        for(int i=0; i < _histogram.size(); i++)
+        for(uint i=0; i < _histogram.size(); i++)
         {
             // prevent undefined results of log(0)
             double value = std::max(0.0, log((double)_histogram[i]));
@@ -97,7 +97,7 @@ public:
         }
 
         // normalize to range
-        for(int i=0; i < _histogram.size(); i++)
+        for(uint i=0; i < _histogram.size(); i++)
         {
             // normalize to range
             _histogramLinear.push_back(_range*_histogram[i]/_maxCount);

@@ -27,7 +27,7 @@ void IPLRotate::destroy()
     delete _result;
 }
 
-bool IPLRotate::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLRotate::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -66,7 +66,7 @@ bool IPLRotate::processInputData(IPLImage* image , int, bool useOpenCV)
     return true;
 }
 
-IPLData* IPLRotate::getResultData(int index)
+IPLData* IPLRotate::getResultData(int)
 {
     return _result;
 }

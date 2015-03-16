@@ -24,7 +24,7 @@ void IPLEqualizeHistogram::destroy()
     delete _result;
 }
 
-bool IPLEqualizeHistogram::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLEqualizeHistogram::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

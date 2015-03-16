@@ -20,7 +20,7 @@ void IPLStretchContrast::destroy()
     delete _result;
 }
 
-bool IPLStretchContrast::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLStretchContrast::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

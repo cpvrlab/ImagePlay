@@ -45,8 +45,8 @@ void IPLGaussianLowPass::gauss(IPLImage* image, IPLImage* result, IPLData* kerne
     for( int k = 0; k < window; ++k )
         filter[k] *= sumFactor;
 
-    int progress = 0;
-    int maxProgress = image->height() * image->getNumberOfPlanes() * 2;
+    //int progress = 0;
+    //int maxProgress = image->height() * image->getNumberOfPlanes() * 2;
     int nrOfPlanes = image->getNumberOfPlanes();
 
     #pragma omp parallel for

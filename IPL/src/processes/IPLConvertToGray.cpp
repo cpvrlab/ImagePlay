@@ -28,7 +28,7 @@ void IPLConvertToGray::destroy()
     delete _result;
 }
 
-bool IPLConvertToGray::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLConvertToGray::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

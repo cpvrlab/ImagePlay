@@ -23,7 +23,7 @@ void IPLRankTransform::destroy()
     delete _result;
 }
 
-bool IPLRankTransform::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLRankTransform::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

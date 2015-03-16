@@ -33,7 +33,7 @@ void IPLMorphologyHitMiss::destroy()
     delete _result;
 }
 
-bool IPLMorphologyHitMiss::processInputData(IPLImage* image, int, bool useOpenCV)
+bool IPLMorphologyHitMiss::processInputData(IPLImage* image, int, bool)
 {
     // delete previous result
     delete _result;

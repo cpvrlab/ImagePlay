@@ -24,7 +24,7 @@ void IPLLocalThreshold::destroy()
     delete _result;
 }
 
-bool IPLLocalThreshold::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLLocalThreshold::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

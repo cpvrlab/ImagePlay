@@ -27,16 +27,16 @@ void IPLSplitPlanes::init()
 
 void IPLSplitPlanes::destroy()
 {
-    for(int i=0; i<_result.size(); i++)
+    for(uint i=0; i<_result.size(); i++)
     {
         delete _result[i];
     }
 }
 
-bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool useOpenCV)
+bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool)
 {
     // delete previous result
-    for(int i=0; i<_result.size(); i++)
+    for(uint i=0; i<_result.size(); i++)
     {
         delete _result[i];
     }

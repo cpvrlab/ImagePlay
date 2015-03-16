@@ -24,7 +24,7 @@ void IPLUnsharpMasking::destroy()
     delete _result;
 }
 
-bool IPLUnsharpMasking::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLUnsharpMasking::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

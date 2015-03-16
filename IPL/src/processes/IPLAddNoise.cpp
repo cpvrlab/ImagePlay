@@ -29,7 +29,7 @@ void IPLAddNoise::destroy()
     delete _result;
 }
 
-bool IPLAddNoise::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLAddNoise::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
