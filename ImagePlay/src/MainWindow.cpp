@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     loadPlugins();
 
     _imageViewer = new ImageViewerWindow(this);
-    //_imageViewer->setWindowFlags(Qt::Window);
+    _imageViewer->setWindowFlags(Qt::Tool);
     //_imageViewer->show();
 
     _settingsWindow = new SettingsWindow(this);
@@ -900,6 +900,7 @@ void MainWindow::on_actionPlay_triggered()
     //execute();
     _timer->start(33); // 33ms = 30 fps
     _imageViewer->show();
+    ui->actionImageViewer->setChecked(true);
 
     // apply settings
     /*_settings->beginGroup("ImageViewerWindow");
