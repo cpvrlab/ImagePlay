@@ -1,6 +1,6 @@
 # Change Log
 
-## 6.0.0-beta.1 - 2015-03-13
+## 6.0.0-beta.1 - 2015-03-18
 ### Added
 - Added example images in /images/
 
