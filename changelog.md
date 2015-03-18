@@ -10,3 +10,4 @@
 ### Fixed
 - IPLCamera now works better with up to 30fps and should now terminate all threads on exit.
 - IPLCanny now works with opencv enabled.
+- General stability improvements
