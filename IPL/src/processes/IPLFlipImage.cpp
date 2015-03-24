@@ -32,10 +32,7 @@ bool IPLFlipImage::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    if( image->type() == IPLData::IMAGE_GRAYSCALE )
-        _result = new IPLImage( IPLImage::IMAGE_BW, width, height );
-    else
-        _result = new IPLImage( image->type(), width, height );
+    _result = new IPLImage(image->type(), width, height);
 
     // get properties
     int direction = getProcessPropertyInt("direction");

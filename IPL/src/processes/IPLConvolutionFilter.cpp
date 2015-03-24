@@ -4,9 +4,10 @@ void IPLConvolutionFilter::init()
 {
     // init
     _result     = NULL;
-    _offset = 0;
-    _divisor = 0;
-    _borders = 0;
+    _offset     = 0;
+    _divisor    = 0;
+    _borders    = 0;
+    _kernel.clear();
 
     // basic settings
     setClassName("IPLConvolutionFilter");
@@ -77,7 +78,7 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool)
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();
 
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for( int planeNr=0; planeNr < image->getNumberOfPlanes(); planeNr++ )
     {
         IPLImagePlane* plane = image->plane( planeNr );

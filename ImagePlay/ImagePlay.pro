@@ -12,8 +12,6 @@ QT       += core gui
 
 PRECOMPILED_HEADER = include/stafx.h
 
-#QMAKE_CXXFLAGS += -fopenmp -openmp
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ImagePlay
@@ -49,93 +47,11 @@ MOC_DIR = ../intermediate/$$TARGET/$$CONFIGURATION/$$PLATFORM
 RCC_DIR = ../intermediate/$$TARGET/$$CONFIGURATION/$$PLATFORM
 UI_DIR = ../intermediate/$$TARGET/$$CONFIGURATION/$$PLATFORM
 
-
-SOURCES += src/main.cpp\
-    src/IPApplication.cpp \
-    src/IPHistogramWidget.cpp \
-    src/ImageViewerWindow.cpp \
-    src/IPProcessListTabWidget.cpp \
-    src/IPProcessMessageWidget.cpp \
-    src/IPFilterLineEdit.cpp \
-    src/IPMorphologyCheckbox.cpp \
-    src/IPProcessStep.cpp \
-    src/IPProcessEdge.cpp \
-    src/IPProcessEdgeTmp.cpp \
-    src/IPProcessGrid.cpp \
-    src/IPProcessGridScene.cpp \
-    src/IPProcessList.cpp \
-    src/IPProcessFactory.cpp \
-    src/IPProcessScript.cpp \
-    src/IPImageViewer.cpp \
-    src/IPProcessPropertiesWidget.cpp \
-    src/ConnectionDialog.cpp \
-    src/SettingsWindow.cpp \
-    src/AboutWindow.cpp \
-    src/MainWindow.cpp \
-    src/TutorialDialog.cpp \
-    src/IPZoomWidget.cpp \
-    src/IPProcessThread.cpp \
-    src/PluginGenerator.cpp
-
-HEADERS  += \
-    include/IPApplication.h \
-    include/IPProcessPropertiesWidget.h \
-    include/IPProcessMessageWidget.h \
-    include/PropertyWidgets/IPPropertyCheckbox.h \
-    include/PropertyWidgets/IPPropertyColorHSL.h \
-    include/PropertyWidgets/IPPropertyColorHSV.h \
-    include/PropertyWidgets/IPPropertyColorRGB.h \
-    include/PropertyWidgets/IPPropertySliderInt.h \
-    include/PropertyWidgets/IPPropertySpinnerInt.h \
-    include/PropertyWidgets/IPPropertyWidget.h \
-    include/PropertyWidgets/IPPropertySliderDouble.h \
-    include/PropertyWidgets/IPPropertyKernelInt.h \
-    include/PropertyWidgets/IPPropertyRadioInt.h \
-    include/PropertyWidgets/IPPropertyCheckboxInt.h \
-    include/PropertyWidgets/IPPropertyBinaryMorphologyInt.h \
-    include/PropertyWidgets/IPPropertyGrayscaleMorphologyInt.h \
-    include/PropertyWidgets/IPPropertyBinaryMorphologyTristateInt.h \
-    include/PropertyWidgets/IPKernelPreset.h \
-    include/PropertyWidgets/IPPropertyString.h \
-    include/PropertyWidgets/IPPropertyPoint.h \
-    include/PropertyWidgets/IPPropertyFileSave.h \
-    include/PropertyWidgets/IPPropertyFileOpen.h \
-    include/PropertyWidgets/IPPropertyFolder.h \
-    include/PropertyWidgets/IPPropertyCombobox.h \
-    include/IPProcessListTabWidget.h \
-    include/IPMorphologyCheckbox.h \
-    include/IPProcessThread.h \
-    include/IPHistogramThread.h \
-    include/IPHistogramWidget.h \
-    include/IPZoomWidget.h \
-    include/ImageViewerWindow.h \
-    include/ConnectionDialog.h \
-    include/IPFilterLineEdit.h \
-    include/IPProcessStep.h \
-    include/IPProcessEdge.h \
-    include/IPProcessEdgeTmp.h \
-    include/IPProcessGrid.h \
-    include/IPProcessGridScene.h \
-    include/IPProcessList.h \
-    include/IPProcessFactory.h \
-    include/IPProcessScript.h \
-    include/IPImageViewer.h \
-    include/SettingsWindow.h \
-    include/AboutWindow.h \
-    include/TutorialDialog.h \
-    include/MainWindow.h \
-    include/PluginGenerator.h \
-    include/stafx.h \
-
-FORMS    += \
-    ui/ImageViewerWindow.ui \
-    ui/SettingsWindow.ui \
-    ui/AboutWindow.ui \
-    ui/MainWindow.ui \
-    ui/TutorialDialog.ui \
-    ui/PluginGenerator.ui
-
-RESOURCES += res/ressources.qrc
+HEADERS     += $$files(*.h,true)
+SOURCES     += $$files(*.cpp,true)
+FORMS       += $$files(*.ui,true)
+RESOURCES   += $$files(*.qrc,true)
+OTHER_FILES += $$files(*,true)
 
 RC_FILE = res/icon.rc
 
@@ -161,14 +77,9 @@ win32: {
                         $${QMAKE_COPY} media\\images\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
-
-    QMAKE_CXXFLAGS_RELEASE -= -O1
-    QMAKE_CXXFLAGS_RELEASE -= -O2
-    QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
 macx: {
-    CONFIG +=c++11
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
 
     mylib.path = Contents/Frameworks
@@ -198,8 +109,6 @@ macx: {
 }
 
 linux: {
-    CONFIG += c++11
-
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ -lIPL
 
     LIBS += -lfreeimage
@@ -211,6 +120,21 @@ linux: {
                         $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/ && \
                         mkdir ../_bin/$$CONFIGURATION/$$PLATFORM/images/ && \
                         $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/images/ \
+}
+
+msvc {
+    QMAKE_CXXFLAGS_RELEASE -= -O1
+    QMAKE_CXXFLAGS_RELEASE -= -O2
+    QMAKE_CXXFLAGS_RELEASE *= -O3
+}
+
+clang {
+    CONFIG +=c++11
+}
+
+gcc {
+    CONFIG +=c++11
+    LIBS += -lgomp
 }
 
 
