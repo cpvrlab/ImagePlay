@@ -52,6 +52,8 @@ public:
 
         _ignoreCombobox = false;
 
+        _ignoreUpdates = true;
+
         _kernelType = 0;        // 3x3
         if(_kernel.size() == 25)
         {
@@ -108,7 +110,7 @@ public:
             _gridLayout->addWidget(input, i/7, i%7);
             _inputs.push_back(input);
 
-            connect(input, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertyKernelInt::updateValue );
+            connect(input, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertyKernelInt::updateValue);
         }
 
         _presetsComboBox = new QComboBox(this);
@@ -121,6 +123,8 @@ public:
 
         enableDisableKernelEditor();
         setKernelPreset();
+
+        _ignoreUpdates = false;
     }
 
 //    void
@@ -136,6 +140,9 @@ signals:
 public slots:
     void updateValue()
     {
+        if(_ignoreUpdates)
+            return;
+
         // any change should change the preset box to "Custom"
         if(!_ignoreCombobox)
             _presetsComboBox->setCurrentIndex(0);
@@ -246,6 +253,7 @@ private:
     QComboBox*                  _kernelSizeComboBox;
     QWidget*                    _kernelWidget;
     bool                        _ignoreCombobox;
+    bool                        _ignoreUpdates;
     std::vector<IPKernelPreset> _presets;
 };
 
