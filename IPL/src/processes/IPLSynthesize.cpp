@@ -20,7 +20,7 @@ void IPLSynthesize::init()
     setIsSource(true);
 
     // inputs and outputs
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addOutput("Image", IPLData::IMAGE_GRAYSCALE);
 
     // all properties which can later be changed by gui
     addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","", IPL_INT_RADIOBUTTONS, _type);
