@@ -35,7 +35,7 @@ public:
         connect(_checkbox, &QCheckBox::stateChanged, this, &IPPropertyCheckbox::updateValue );
 
         // update everything
-        updateValue();
+        //updateValue();
     }
     void setMinimum(int)    {  }
     void setMaximum(int)    {  }
