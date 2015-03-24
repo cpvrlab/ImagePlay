@@ -43,14 +43,16 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
     }
 
     // sort the properties by user set position
-    auto orderedProperties = new std::vector<IPLProcessProperty*>;
-    for(auto it = processSettings->begin(); it != processSettings->end(); ++it) {
-        orderedProperties->push_back( it->second );
-    }
-    std::sort(orderedProperties->begin(), orderedProperties->end(), &IPProcessPropertiesWidget::sortByPosition);
+    std::vector<IPLProcessProperty*> orderedProperties;
+    orderedProperties.reserve(processSettings->size());
+
+    for (auto &entry: *processSettings)
+        orderedProperties.push_back(entry.second);
+
+    std::sort(orderedProperties.begin(), orderedProperties.end(), &IPProcessPropertiesWidget::sortByPosition);
 
     // create all property widgets
-    for (auto it = orderedProperties->begin(); it != orderedProperties->end(); ++it)
+    for (auto it = orderedProperties.begin(); it != orderedProperties.end(); ++it)
     {
         IPLProcessProperty* property = *it;
 
