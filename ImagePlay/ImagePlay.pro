@@ -116,10 +116,8 @@ linux: {
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
 
-    QMAKE_POST_LINK +=  mkdir ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/ && \
-                        $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/ && \
-                        mkdir ../_bin/$$CONFIGURATION/$$PLATFORM/images/ && \
-                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/images/ \
+    QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
+                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/ \
 }
 
 msvc {
