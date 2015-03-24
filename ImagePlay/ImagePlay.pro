@@ -207,9 +207,10 @@ linux: {
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
 
-    resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM/
-    resources.files += media/process_icons
-    QMAKE_BUNDLE_DATA += resources
+    QMAKE_POST_LINK +=  mkdir ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/ && \
+                        $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/ && \
+                        mkdir ../_bin/$$CONFIGURATION/$$PLATFORM/images/ && \
+                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/images/ \
 }
 
 
