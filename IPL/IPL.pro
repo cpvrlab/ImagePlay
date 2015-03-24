@@ -11,9 +11,6 @@
 
 CONFIG -= qt
 
-QMAKE_CXXFLAGS+= -openmp
-QMAKE_LFLAGS +=  -openmp
-
 TARGET = IPL
 CONFIG(debug, debug|release): DESTDIR  = ../ImagePlay/debug
 else: DESTDIR  = ../ImagePlay/release
@@ -111,6 +108,8 @@ SOURCES += \
     src/processes/IPLCamera.cpp \
     src/processes/IPLLabelBlobs.cpp \
     src/processes/IPLFFT.cpp \
+    src/processes/IPLIFFT.cpp \
+    src/processes/IPLFrequencyFilter.cpp \
 
 HEADERS += \
     include/IPL_plugininterface.h \
@@ -192,6 +191,8 @@ HEADERS += \
     include/processes/IPLCamera.h \
     include/processes/IPLLabelBlobs.h \
     include/processes/IPLFFT.h \
+    include/processes/IPLIFFT.h \
+    include/processes/IPLFrequencyFilter.h \
 
 #win32: LIBS += -L$$PWD/lib/FreeImage/ -lFreeImage
 
@@ -217,6 +218,13 @@ win32: {
     LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc2410
     LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui2410
 
+    # openmp for vs
+    QMAKE_CXXFLAGS += -openmp
+    QMAKE_LFLAGS   += -openmp
+
+    QMAKE_CXXFLAGS_RELEASE -= -O1
+    QMAKE_CXXFLAGS_RELEASE -= -O2
+    QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
 macx: {
@@ -233,6 +241,9 @@ macx: {
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui
 
+    # openmp for clang
+    QMAKE_CXXFLAGS += -openmp
+    QMAKE_LFLAGS   += -openmp
 }
 
 linux: {
@@ -245,6 +256,9 @@ linux: {
 
     DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/
 
+    # openmp for gcc
+    QMAKE_CXXFLAGS += -fopenmp
+    QMAKE_LFLAGS   += -fopenmp
 }
 
 # IPL

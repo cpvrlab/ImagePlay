@@ -98,6 +98,7 @@ public slots:
 private:
     QImage*             _image;
     IPLImage*           _rawImage;
+    IPLComplexImage*    _rawComplexImage;
     IPLData*            _rawData;
     QPixmap             _pixmap;
     IPPixmapItem*       _pixmapItem;

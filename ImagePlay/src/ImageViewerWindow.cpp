@@ -668,11 +668,11 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
     _currentColor = QColor(((IPImageViewer*) ui->tabWidget->currentWidget())->image()->pixel(x, y));
     _currentPosition = QPoint(x,y);
 
-    IPLImage* image;
+    IPLData* data = NULL;
     if(((IPImageViewer*) ui->tabWidget->currentWidget())->rawData())
     {
-        image = ((IPImageViewer*) ui->tabWidget->currentWidget())->rawData()->toImage();
-        if(!image)
+        data = ((IPImageViewer*) ui->tabWidget->currentWidget())->rawData();
+        if(!data)
             return;
     }
 
@@ -684,9 +684,11 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
     message.append("<td>%3</td>");
     message.append("</tr></table>");
 
+
     QString value;
-    if(image->type() == IPLData::IMAGE_COLOR)
+    if(data->type() == IPLData::IMAGE_COLOR)
     {
+        IPLImage* image = data->toImage();
         QString r = QString::number(image->plane(0)->cp(x, y), 'f', 2);
         QString g = QString::number(image->plane(1)->cp(x, y), 'f', 2);
         QString b = QString::number(image->plane(2)->cp(x, y), 'f', 2);
@@ -698,20 +700,37 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 
         value = value.arg(r).arg(g).arg(b);
     }
-    else if(image->type() == IPLData::IMAGE_GRAYSCALE || image->type() == IPLImage::IMAGE_BW)
+    else if(data->type() == IPLData::IMAGE_GRAYSCALE || data->type() == IPLImage::IMAGE_BW)
     {
+        IPLImage* image = data->toImage();
         QString v = QString::number(image->plane(0)->cp(x, y), 'f', 2);
         value.append("<span>%1</span>");
 
         value = value.arg(v);
     }
-    else if(image->type() == IPLData::IMAGE_ORIENTED || image->type() == IPLImage::IMAGE_BW)
+    else if(data->type() == IPLData::IMAGE_ORIENTED)
     {
+        IPLImage* image = data->toImage();
         QString m = QString::number(image->plane(0)->cp(x, y), 'f', 2);
         QString p = QString::number(image->plane(1)->cp(x, y), 'f', 2);
         value.append("<span>Phase: %1, Magnitude: %2</span>");
 
         value = value.arg(p).arg(m);
+    }
+    else if(data->type() == IPLData::IMAGE_COMPLEX)
+    {
+        IPLComplexImage* image = data->toComplexImage();
+        int xx = ((x-image->width()/2) + image->width()) % image->width();
+        int yy = ((y-image->height()/2) + image->height()) % image->height();
+
+        // make 0/0 the center
+        x = x-image->width()/2;
+        y = y-image->height()/2;
+        QString r = QString::number(image->real(xx, yy), 'f', 2);
+        QString i = QString::number(image->imag(xx, yy), 'f', 2);
+        value.append("<span>Real: %1, Imaginary: %2</span>");
+
+        value = value.arg(r).arg(i);
     }
 
     message = message.arg(x).arg(y).arg(value);

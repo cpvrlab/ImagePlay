@@ -12,7 +12,7 @@ QT       += core gui
 
 PRECOMPILED_HEADER = include/stafx.h
 
-QMAKE_CXXFLAGS+= -openmp
+#QMAKE_CXXFLAGS += -fopenmp -openmp
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -157,9 +157,14 @@ win32: {
                         $${QMAKE_COPY} ..\\_lib\\windows\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\ & \
                         mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
                         $${QMAKE_COPY} media\\process_icons\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
+                        mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
+                        $${QMAKE_COPY} media\\images\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
 
+    QMAKE_CXXFLAGS_RELEASE -= -O1
+    QMAKE_CXXFLAGS_RELEASE -= -O2
+    QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
 macx: {
@@ -190,7 +195,6 @@ macx: {
 
     #run macdeployqt
     QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
-
 }
 
 linux: {
@@ -206,7 +210,6 @@ linux: {
     resources.path = ../_bin/$$CONFIGURATION/$$PLATFORM/
     resources.files += media/process_icons
     QMAKE_BUNDLE_DATA += resources
-
 }
 
 

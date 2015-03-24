@@ -32,14 +32,21 @@ bool IPLFFT::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
+    int cWidth = IPLComplexImage::nextPowerOf2(width);
+    int cHeight = IPLComplexImage::nextPowerOf2(height);
+    int size = cHeight = cWidth = (cWidth>cHeight)? cWidth : cHeight;
 
-    _result = new IPLComplexImage(width, height);
+    _result = new IPLComplexImage(cWidth, cHeight);
 
     // get properties
-    //float threshold = getProcessPropertyDouble("threshold");
+    int mode = getProcessPropertyInt("mode");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();
+
+    // image center
+    int dx = ( cWidth - width )/2;
+    int dy = ( cHeight - height )/2;
 
     IPLImagePlane* plane = image->plane(0);
     for(int y=0; y<height; y++)
@@ -48,10 +55,50 @@ bool IPLFFT::processInputData(IPLImage* image , int, bool)
         notifyProgressEventHandler(100*progress++/maxProgress);
         for(int x=0; x<width; x++)
         {
-            _result->real(x,y) = plane->p(x,y);
-            _result->imag(x,y) = 0.0f;
+            _result->c(x+dx, y+dy) = Complex(plane->p(x,y), 0.0);
         }
     }
+
+    // windowing function
+    switch(mode)
+    {
+        case 0: // rectangular
+                break;
+
+        case 1: // Hanning
+                for( int y=0; y<size; y++ )
+                    for( int x=0; x<size; x++ )
+                        _result->c(x,y) *= Hanning(x, size) * Hanning(y, size);
+                break;
+        case 2: // Hamming
+                for( int y=0; y<size; y++ )
+                    for( int x=0; x<size; x++ )
+                        _result->c(x,y) *= Hamming(x, size) * Hamming(y, size);
+                break;
+        case 3: // Blackman
+                for( int y=0; y<size; y++ )
+                    for( int x=0; x<size; x++ )
+                        _result->c(x,y) *= Blackman(x, size) * Blackman(y, size);
+                break;
+        case 4: // Border only
+                int border = size / 32;
+                for( int y=0; y<border; y++ )
+                    for( int x=0; x<size; x++ )
+                    {
+                        double factor = (0.54 - 0.46 * cos( 2.0 * PI * y / border / 2.0 ));
+                        _result->c(x,y) *= factor;
+                        _result->c(x,size-y-1) *= factor;
+                    }
+                for( int x=0; x<border; x++ )
+                    for( int y=0; y<size; y++ )
+                    {
+                        double factor = (0.54 - 0.46 * cos( 2.0 * PI * x / border / 2.0 ));
+                        _result->c(x,y) *= factor;
+                        _result->c(size-x-1,y) *= factor;
+                    }
+                break;
+    }
+
     _result->FFT();
 
     return true;
@@ -61,3 +108,20 @@ IPLData* IPLFFT::getResultData( int )
 {
     return _result;
 }
+
+
+double IPLFFT::Hanning(int n, int size)
+{
+    return ( 0.5*(1.0 - cos( 2.0 * PI * n / (size-1) ) ) );
+}
+
+double IPLFFT::Hamming(int n, int size)
+{
+    return ( 0.54 - 0.46 * cos( 2.0 * PI * n / (size-1) ) );
+}
+
+double IPLFFT::Blackman(int n, int size)
+{
+    return ( 0.42 - 0.5 * cos( 2.0 * PI * n / (size-1) ) + 0.08 * cos( 4.0 * PI * n / (size-1) ) );
+}
+

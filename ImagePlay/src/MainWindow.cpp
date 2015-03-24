@@ -377,6 +377,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLAddNoise",            new IPLAddNoise);
 
     _factory->registerProcess("IPLFFT",                 new IPLFFT);
+    _factory->registerProcess("IPLIFFT",                new IPLIFFT);
+    _factory->registerProcess("IPLFrequencyFilter",     new IPLFrequencyFilter);
 
     _factory->registerProcess("IPLLabelBlobs",          new IPLLabelBlobs);
 

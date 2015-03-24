@@ -39,7 +39,7 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
     IPLImagePlane* newplane = _result->plane(0);
 
     // label increment 0.01;
-    float label = 0.01;
+    float label = 0.01f;
     for(int y=0; y<height; y++)
     {
         // progress
@@ -47,7 +47,7 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
         for(int x=0; x<width; x++)
         {
             if(plane->p(x,y))
-                labelBlob(plane, newplane, x, y, label += 0.01);
+                labelBlob(plane, newplane, x, y, label += 0.01f);
         }
     }
     return true;

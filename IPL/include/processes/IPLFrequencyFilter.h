@@ -1,5 +1,5 @@
-#ifndef IPLFFT_H
-#define IPLFFT_H
+#ifndef IPLFREQUENCYFILTER_H
+#define IPLFREQUENCYFILTER_H
 
 #include "IPL_global.h"
 #include "IPLProcess.h"
@@ -11,13 +11,13 @@
 #include "opencv2/imgproc/imgproc.hpp"
 
 /**
- * @brief The IPLFFT class
+ * @brief The IPLFrequencyFilter class
  */
-class IPLSHARED_EXPORT IPLFFT : public IPLClonableProcess<IPLFFT>
+class IPLSHARED_EXPORT IPLFrequencyFilter : public IPLClonableProcess<IPLFrequencyFilter>
 {
 public:
-                            IPLFFT() : IPLClonableProcess() { init(); }
-                            ~IPLFFT()  { destroy(); }
+                            IPLFrequencyFilter() : IPLClonableProcess() { init(); }
+                            ~IPLFrequencyFilter()  { destroy(); }
 
     void                    init                    ();
     void                    destroy                 ();
@@ -25,11 +25,9 @@ public:
     IPLData*                getResultData           (int);
 
 protected:
+    IPLComplexImage*        _input;
     IPLComplexImage*        _result;
-private:
-    double                  Hanning                 (int n, int size);
-    double                  Hamming                 (int n, int size);
-    double                  Blackman                (int n, int size);
+    IPLImage*               _filter;
 };
 
-#endif // IPLFFT_H
+#endif // IPLFREQUENCYFILTER_H

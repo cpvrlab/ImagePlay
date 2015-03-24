@@ -79,8 +79,8 @@ private:
 
     int                     _height;
     int                     _width;
-    ipl_basetype*          _plane;
-    static ipl_basetype    _zero;
+    ipl_basetype*           _plane;
+    static ipl_basetype     _zero;
     static int              _instanceCount;
 };
 

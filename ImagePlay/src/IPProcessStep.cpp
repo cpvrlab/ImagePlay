@@ -283,10 +283,13 @@ void IPProcessStep::updateThumbnail()
 {
     if(process()->isResultReady())
     {
-        IPLImage* image = static_cast<IPLImage*>(process()->getResultData(0));
-        QImage* tmpImage = new QImage(image->rgb32(), image->width(), image->height(), QImage::Format_RGB32);
-
-        _thumbnail = QPixmap::fromImage(tmpImage->scaled(138,138, Qt::KeepAspectRatioByExpanding, Qt::FastTransformation));
+        IPLData* data = process()->getResultData(0);
+        IPLImage* image = data->toImage();
+        if(image)
+        {
+            QImage* tmpImage = new QImage(image->rgb32(), image->width(), image->height(), QImage::Format_RGB32);
+            _thumbnail = QPixmap::fromImage(tmpImage->scaled(138,138, Qt::KeepAspectRatioByExpanding, Qt::FastTransformation));
+        }
     }
 }
 

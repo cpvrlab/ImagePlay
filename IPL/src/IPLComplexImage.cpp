@@ -1,22 +1,37 @@
 #include "IPLComplexImage.h"
 
 
-IPLComplexImage::IPLComplexImage() : IPLImage()
+IPLComplexImage::IPLComplexImage() : IPLData()
 {
+    _plane = NULL;
+    _rgb32 = NULL;
+    _type = IPLData::IMAGE_COMPLEX;
+}
+
+IPLComplexImage::IPLComplexImage(const IPLComplexImage &other)
+{
+    if(this != &other)
+    {
+        _height = other._height;
+        _width = other._width;
+
+        newPlane();
+
+        for( int y=0; y<_height; y++)
+            for( int x=0; x<_width; x++)
+                _plane[x][y] = other._plane[x][y];
+    }
 }
 
 
 IPLComplexImage::IPLComplexImage( int width, int height )
 {
+    _plane = NULL;
     _width = width;
     _height = height;
     _rgb32 = NULL;
-
-    // 2 planes are needed for real and imaginary part
-    _planes.push_back(new IPLImagePlane( width, height ));
-    _planes.push_back(new IPLImagePlane( width, height ));
-
-    fillColor(0.0);
+    _type = IPLData::IMAGE_COMPLEX;
+    newPlane();
 }
 
 IPLComplexImage::~IPLComplexImage()
@@ -24,39 +39,120 @@ IPLComplexImage::~IPLComplexImage()
 
 }
 
-ipl_basetype& IPLComplexImage::real(int x, int y)
+void IPLComplexImage::newPlane(void)
 {
-    return plane(0)->p(x, y);
+    _plane = new Complex * [_height];
+
+    for(int y=0; y<_height; y++)
+        _plane[y] = new Complex [_width];
 }
 
-ipl_basetype& IPLComplexImage::imag(int x, int y)
+unsigned char* IPLComplexImage::rgb32()
 {
-    return plane(1)->p(x, y);
-}
-
-
-void IPLComplexImage::flip( void )
-{/*
-    Complex** tempPlane = plane;
-    int h =height;
-    height = width;
-    width = h;
-    newPlane();
-    for( int y=0; y<height; y++ )
+    // scale from min to max
+    float min = FLT_MAX;
+    float max = FLT_MIN;
+    for(int y=0; y < _height; y++)
     {
-        for( int x=0; x<width; x++ )
+        for(int x=0; x < _width; x++)
         {
-            p(x,y) = (tempPlane[x])[y];
+            float value = abs(real(x,y));
+            if(value < min)
+                min = value;
+            if(value > max)
+                max = value;
         }
     }
-    for(int y=0; y<width; y++)
-        delete [] tempPlane[y];
-    delete [] tempPlane;*/
+    float diff = max-min;
+    const double delta = 0.00001;
+    const double logdelta = log( delta );
+    max = (max!=0.0)? log(delta+max) : logdelta;
+    min = (min!=0.0)? log(delta+min) : logdelta;
+    double scale = (max-min)? 255.0 / (max-min) : 1.0;
+
+    // generate rgb32
+    delete _rgb32;
+    _rgb32 = new uchar[_height*_width*4];
+    int i=0;
+    for(int y=0; y < _height; y++)
+    {
+        for(int x=0; x < _width; x++)
+        {
+            // move 0/0 to the center for better visualization
+            int xx = ((x-_width/2) + _width) % _width;
+            int yy = ((y-_height/2) + _height) % _height;
+            double c = abs(real(xx,yy) );
+            double lgc = (c!=0.0)? log(delta+c) : logdelta;
+            uchar val = ( (lgc-min)*scale );
+            _rgb32[i++] = val;
+            _rgb32[i++] = val;
+            _rgb32[i++] = val;
+            _rgb32[i++] = 0xFF;
+        }
+    }
+    return _rgb32;
 }
 
-Complex* IPLComplexImage::getRow( int y )
+Complex& IPLComplexImage::c(int x, int y)
 {
-    return _plane[y];
+    return _plane[x][y];
+}
+
+ipl_basetype IPLComplexImage::real(int x, int y)
+{
+    return (ipl_basetype) _plane[x][y].real();
+}
+
+ipl_basetype IPLComplexImage::imag(int x, int y)
+{
+    return (ipl_basetype) _plane[x][y].imag();
+}
+
+ipl_basetype IPLComplexImage::maxReal()
+{
+    float max = FLT_MIN;
+    for(int y=0; y < _height; y++)
+    {
+        for(int x=0; x < _width; x++)
+        {
+            if(abs(real(x,y)) > max)
+                max = real(x,y);
+        }
+    }
+    return max;
+}
+
+ipl_basetype IPLComplexImage::minReal()
+{
+    float min = FLT_MAX;
+    for(int y=0; y < _height; y++)
+    {
+        for(int x=0; x < _width; x++)
+        {
+            if(abs(real(x,y)) < min)
+                min = real(x,y);
+        }
+    }
+    return min;
+}
+
+void IPLComplexImage::flip(void)
+{
+    Complex** tempPlane = _plane;
+    int h = _height;
+    _height = _width;
+    _width = h;
+    newPlane();
+    for( int y=0; y<_height; y++ )
+    {
+        for( int x=0; x<_width; x++ )
+        {
+            c(x,y) = (tempPlane[y])[x];
+        }
+    }
+    for(int y=0; y<_width; y++)
+        delete [] tempPlane[y];
+    delete [] tempPlane;
 }
 
 int IPLComplexImage::nextPowerOf2( int x )
@@ -67,7 +163,7 @@ int IPLComplexImage::nextPowerOf2( int x )
     return result;
 }
 
-void IPLComplexImage::Twiddle( Complex* x, int N)
+void IPLComplexImage::Twiddle(Complex* x, int N)
 {
     double pi2 = PI / (double) N;
     for( int i=0; i<N; i++ )
@@ -77,7 +173,7 @@ void IPLComplexImage::Twiddle( Complex* x, int N)
     }
 }
 
-void IPLComplexImage::iTwiddle( Complex* x, int N)
+void IPLComplexImage::iTwiddle(Complex* x, int N)
 {
     double pi2 = - PI / (double) N;
     for( int i=0; i<N; i++ )
@@ -89,15 +185,15 @@ void IPLComplexImage::iTwiddle( Complex* x, int N)
 
 bool IPLComplexImage::FFT()
 {
-    if( _width != _height ) return false;
+    if(_width != _height) return false;
     int size = IPLComplexImage::nextPowerOf2(_width);
-    if( size != _width ) return false;
+    if(size != _width) return false;
 
     Complex* twiddle = new Complex [size/2];
     Twiddle( twiddle, size/2 );
     for( int y=0; y<size; y++ )
     {
-        lineFFT( getRow(y), twiddle, size);
+        lineFFT(_plane[y], twiddle, size);
     }
 /*    for( int y=1; y<size; y++ )
         for( int x=0; x<size; x++ )
@@ -108,7 +204,7 @@ bool IPLComplexImage::FFT()
     flip();
     for( int y=0; y<size; y++ )
     {
-        lineFFT( getRow(y), twiddle, size);
+        lineFFT(_plane[y], twiddle, size);
     }
     delete [] twiddle;
     return true;
@@ -124,12 +220,12 @@ bool IPLComplexImage::IFFT()
     iTwiddle( twiddle, size/2 );
     for( int y=0; y<size; y++ )
     {
-        lineFFT( getRow(y), twiddle, size);
+        lineFFT(_plane[y], twiddle, size);
     }
     flip();
     for( int y=0; y<size; y++ )
     {
-        lineFFT( getRow(y), twiddle, size);
+        lineFFT(_plane[y], twiddle, size);
     }
     /*delete [] twiddle;
     double height_2 = (double)_height * (double)_height;
@@ -141,7 +237,8 @@ bool IPLComplexImage::IFFT()
 
 void IPLComplexImage::lineFFT(Complex* x, Complex* twiddle, int N)
 {
-Complex temp, w; int m,           /* stage of computation */
+Complex temp, w;
+int m,           /* stage of computation */
     step,        /* step between indexes p and q */
     i,           /* index of Xm(p) in DFT */
     p, q,        /* indexes of butterfly values */

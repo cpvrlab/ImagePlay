@@ -64,6 +64,8 @@
 #include "IPLAddNoise.h"
 
 #include "IPLFFT.h"
+#include "IPLIFFT.h"
+#include "IPLFrequencyFilter.h"
 
 #include "IPLLabelBlobs.h"
 

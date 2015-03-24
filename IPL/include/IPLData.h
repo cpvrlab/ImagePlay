@@ -6,6 +6,7 @@
 #include <string>
 
 class IPLImage;
+class IPLComplexImage;
 class IPLPoint;
 class IPLMatrix;
 
@@ -20,6 +21,7 @@ public:
     IPLDataType         type            (void)                  { return _type; }
 
     IPLImage*           toImage();
+    IPLComplexImage*    toComplexImage();
     IPLPoint*           toPoint();
     IPLMatrix*          toMatrix();
 

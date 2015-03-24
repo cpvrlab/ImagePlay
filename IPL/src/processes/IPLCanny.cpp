@@ -159,7 +159,8 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
     int window      = getProcessPropertyInt("window");
     double sigma    = getProcessPropertyDouble("sigma");
 
-    if(useOpenCV)
+    //! @todo currently only the opencv implementation works
+    if(useOpenCV || true)
     {
         cv::Mat input;
         cv::Mat output;
@@ -171,6 +172,8 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
 
         return true;
     }
+
+    return false;
 
     // Create a Gaussian 1D filter
     int N = ceil( sigma * sqrt( 2.0*log( 1.0/0.015 ) ) + 1.0 );

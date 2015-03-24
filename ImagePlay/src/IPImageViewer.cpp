@@ -96,6 +96,13 @@ void IPImageViewer::updateImage()
             // show normal image
             _image = new QImage(_rawImage->rgb32(), _rawImage->width(), _rawImage->height(), QImage::Format_RGB32);
         }
+        else if(_rawData->type() == IPLData::IMAGE_COMPLEX)
+        {
+            _rawComplexImage = _rawData->toComplexImage();
+
+            // show complex image
+            _image = new QImage(_rawComplexImage->rgb32(), _rawComplexImage->width(), _rawComplexImage->height(), QImage::Format_RGB32);
+        }
         else if(_rawData->type() == IPLImage::POINT)
         {
             // show point

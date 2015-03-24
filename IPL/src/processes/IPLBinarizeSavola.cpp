@@ -57,7 +57,7 @@ bool IPLBinarizeSavola::processInputData(IPLImage* image , int, bool)
 
         int w2 = window/2;
         float area = (float)(w2*2)*(float)(w2*2);
-        float minI = INT_MAX;
+        float minI = FLT_MAX;
         float maxDeviation = 0.0;
 
         for(int y=0; y<height; y++)
