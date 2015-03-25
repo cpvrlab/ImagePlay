@@ -981,12 +981,15 @@ void MainWindow::closeEvent(QCloseEvent* e)
     int reply = question.exec();
     if (reply == QMessageBox::Yes)
     {
+
         writeSettings();
 
         delete _imageViewer;
 
         // try closing any videocapture items
         IPLCameraIO::release();
+
+        ui->graphicsView->stopExecution();
 
         QApplication::quit();
     }

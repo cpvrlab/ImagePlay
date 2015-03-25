@@ -23,6 +23,8 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
 
     _currentStep = NULL;
 
+    _stopExecution = false;
+
     _sequenceCount = 0;
     _sequenceIndex = 0;
     _lastSequenceIndex = 0;
@@ -209,6 +211,9 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     QListIterator<IPProcessStep *> it(_processList);
     while (it.hasNext() && counter < limit)
     {
+        if(_stopExecution)
+            return;
+
         IPProcessStep* step = it.next();
         _currentStep = step;
 
@@ -300,6 +305,9 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 
         counter++;
     }
+
+    if(_stopExecution)
+        return;
 
     // update images
     _mainWindow->imageViewer()->updateImage();

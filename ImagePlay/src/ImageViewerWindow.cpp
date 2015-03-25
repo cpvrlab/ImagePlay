@@ -149,7 +149,7 @@ ImageViewerWindow::updateImage
 */
 void ImageViewerWindow::updateImage()
 {
-    if(ui->tabWidget->isVisible())
+    if(ui && ui->tabWidget->isVisible())
     {
         // update the currently visible image
         IPImageViewer* imageViewer = ((IPImageViewer*) ui->tabWidget->currentWidget());

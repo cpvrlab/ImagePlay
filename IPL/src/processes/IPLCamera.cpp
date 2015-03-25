@@ -28,7 +28,7 @@ void IPLCamera::init()
 void IPLCamera::destroy()
 {
     // the camera should be deinitialized automatically in VideoCapture destructor
-    IPLCameraIO::release();
+    //IPLCameraIO::release();
 
     delete _result;
 }
