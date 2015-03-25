@@ -43,15 +43,13 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
     }
 
     // sort the properties by user set position
-    typedef std::shared_ptr<IPLProcessProperty> Property;
-    std::vector<Property> orderedProperties;
+    std::vector<IPLProcessProperty*> orderedProperties;
     orderedProperties.reserve(processSettings->size());
 
-    for (auto &entry: *processSettings) orderedProperties.push_back(entry.second);
+    for (auto &entry: *processSettings)
+        orderedProperties.push_back(entry.second.get());
 
-    std::sort(orderedProperties.begin(), orderedProperties.end(), [](Property & a, Property &b) {
-        return IPProcessPropertiesWidget::sortByPosition(a.get(),b.get());
-    });
+    std::sort(orderedProperties.begin(), orderedProperties.end(), IPProcessPropertiesWidget::sortByPosition);
 
     // create all property widgets
     for (auto &property: orderedProperties)
@@ -59,33 +57,33 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         // generate GUI based on the property type
         if(property->type() == IPL_INT_SLIDER)
         {
-            IPPropertySliderInt* widget = new IPPropertySliderInt((IPLProcessPropertyInt*) property.get(), this);
+            IPPropertySliderInt* widget = new IPPropertySliderInt((IPLProcessPropertyInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_INT)
         {
-            IPPropertySpinnerInt* widget = new IPPropertySpinnerInt((IPLProcessPropertyInt*) property.get(), this);
+            IPPropertySpinnerInt* widget = new IPPropertySpinnerInt((IPLProcessPropertyInt*) property, this);
             addPropertyWidget(property->name(),property->description(), widget);
         }
         else if(property->type() == IPL_DOUBLE_SLIDER)
         {
-            IPPropertySliderDouble* widget = new IPPropertySliderDouble((IPLProcessPropertyDouble*) property.get(), this);
+            IPPropertySliderDouble* widget = new IPPropertySliderDouble((IPLProcessPropertyDouble*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_DOUBLE_GAMMA)
         {
-            IPPropertySliderDouble* widget = new IPPropertySliderDouble((IPLProcessPropertyDouble*) property.get(), this);
+            IPPropertySliderDouble* widget = new IPPropertySliderDouble((IPLProcessPropertyDouble*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_FILE_OPEN)
         {
             QString defaultDirectory =  _mainWindow->defaultImagePath();
-            IPPropertyFileOpen* widget = new IPPropertyFileOpen((IPLProcessPropertyString*) property.get(), defaultDirectory, this);
+            IPPropertyFileOpen* widget = new IPPropertyFileOpen((IPLProcessPropertyString*) property, defaultDirectory, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_FILE_SAVE)
         {
-            IPPropertyFileSave* widget = new IPPropertyFileSave((IPLProcessPropertyString*) property.get(), this);
+            IPPropertyFileSave* widget = new IPPropertyFileSave((IPLProcessPropertyString*) property, this);
             // name:value1|value2
             QString rawName(property->name());
             QString name = rawName.split(":").at(0);
@@ -94,12 +92,12 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_FOLDER)
         {
-            IPPropertyFolder* widget = new IPPropertyFolder((IPLProcessPropertyString*) property.get(), this);
+            IPPropertyFolder* widget = new IPPropertyFolder((IPLProcessPropertyString*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_COLOR_RGB)
         {
-            IPPropertyColorRGB* widget = new IPPropertyColorRGB((IPLProcessPropertyColor*) property.get(), this);
+            IPPropertyColorRGB* widget = new IPPropertyColorRGB((IPLProcessPropertyColor*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
 
             // connect to image viewer for color picking
@@ -107,42 +105,42 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_COLOR_HSL)
         {
-            IPPropertyColorHSL* widget = new IPPropertyColorHSL((IPLProcessPropertyColor*) property.get(), this);
+            IPPropertyColorHSL* widget = new IPPropertyColorHSL((IPLProcessPropertyColor*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_COLOR_HSV)
         {
-            IPPropertyColorHSV* widget = new IPPropertyColorHSV((IPLProcessPropertyColor*) property.get(), this);
+            IPPropertyColorHSV* widget = new IPPropertyColorHSV((IPLProcessPropertyColor*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_BOOL_CHECKBOX)
         {
-            IPPropertyCheckbox* widget = new IPPropertyCheckbox((IPLProcessPropertyBool*) property.get(), property->name(), this);
+            IPPropertyCheckbox* widget = new IPPropertyCheckbox((IPLProcessPropertyBool*) property, property->name(), this);
             addPropertyWidget("", property->description(), widget);
         }
         else if(property->type() == IPL_INT_KERNEL)
         {
-            IPPropertyKernelInt* widget = new IPPropertyKernelInt((IPLProcessPropertyVectorInt*) property.get(), this);
+            IPPropertyKernelInt* widget = new IPPropertyKernelInt((IPLProcessPropertyVectorInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_INT_BINARY_MORPHOLOGY)
         {
-            IPPropertyBinaryMorphologyInt* widget = new IPPropertyBinaryMorphologyInt((IPLProcessPropertyVectorInt*) property.get(), this);
+            IPPropertyBinaryMorphologyInt* widget = new IPPropertyBinaryMorphologyInt((IPLProcessPropertyVectorInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_INT_BINARY_MORPHOLOGY_TRISTATE)
         {
-            IPPropertyBinaryMorphologyTristateInt* widget = new IPPropertyBinaryMorphologyTristateInt((IPLProcessPropertyVectorInt*) property.get(), this);
+            IPPropertyBinaryMorphologyTristateInt* widget = new IPPropertyBinaryMorphologyTristateInt((IPLProcessPropertyVectorInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_INT_GRAYSCALE_MORPHOLOGY)
         {
-            IPPropertyGrayscaleMorphologyInt* widget = new IPPropertyGrayscaleMorphologyInt((IPLProcessPropertyVectorInt*) property.get(), this);
+            IPPropertyGrayscaleMorphologyInt* widget = new IPPropertyGrayscaleMorphologyInt((IPLProcessPropertyVectorInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_INT_RADIOBUTTONS)
         {
-            IPPropertyRadioInt* widget = new IPPropertyRadioInt((IPLProcessPropertyInt*) property.get(), this);
+            IPPropertyRadioInt* widget = new IPPropertyRadioInt((IPLProcessPropertyInt*) property, this);
 
             // name:value1|value2
             QString rawName(property->name());
@@ -151,7 +149,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_INT_COMBOBOX)
         {
-            IPPropertyCombobox* widget = new IPPropertyCombobox((IPLProcessPropertyInt*) property.get(), this);
+            IPPropertyCombobox* widget = new IPPropertyCombobox((IPLProcessPropertyInt*) property, this);
 
             // name:value1|value2
             QString rawName(property->name());
@@ -160,7 +158,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_INT_CHECKBOXES)
         {
-            IPPropertyCheckboxInt* widget = new IPPropertyCheckboxInt((IPLProcessPropertyUnsignedInt*) property.get(), this);
+            IPPropertyCheckboxInt* widget = new IPPropertyCheckboxInt((IPLProcessPropertyUnsignedInt*) property, this);
 
             // name:value1|value2
             QString rawName(property->name());
@@ -169,7 +167,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_STRING)
         {
-            IPPropertyString* widget = new IPPropertyString((IPLProcessPropertyString*) property.get(), this);
+            IPPropertyString* widget = new IPPropertyString((IPLProcessPropertyString*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
         else if(property->type() == IPL_LABEL)
@@ -186,7 +184,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         }
         else if(property->type() == IPL_POINT)
         {
-            IPPropertyPoint* widget = new IPPropertyPoint((IPLProcessPropertyPoint*) property.get(), this);
+            IPPropertyPoint* widget = new IPPropertyPoint((IPLProcessPropertyPoint*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
 
             // connect to image viewer for color picking

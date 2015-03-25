@@ -19,7 +19,7 @@ class IPLProgressEventHandler;
 class IPLPropertyChangedEventHandler;
 
 //! IPLProcessPropertyMap
-typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
+typedef std::map<std::string, std::unique_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
 
 /**
  * @brief The IPLProcessMessage struct for passing around messages and errors
@@ -104,6 +104,7 @@ public:
 
                             IPLProcess                  (void);
                             IPLProcess                  (const IPLProcess& other);
+                            IPLProcess                  (IPLProcess &&other) = default;
     virtual                 ~IPLProcess                 (void);
     virtual IPLProcess*     clone                       () const = 0;
     virtual void            init                        () = 0;

@@ -25,6 +25,7 @@ public:
     IPLProcessPropertyType type()   { return _type; }
     virtual std::string toJson() = 0;
     virtual void fromJson(std::string) = 0;
+    virtual IPLProcessProperty *clone() = 0;
 
 protected:
     int _position;                  //!< Position in GUI
@@ -49,6 +50,7 @@ public:
     void setValue(int value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     int _min;                         //!< min value, may be used in GUI
@@ -68,6 +70,7 @@ public:
     void setValue(unsigned int value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     unsigned int _min;                         //!< min value, may be used in GUI
@@ -87,6 +90,7 @@ public:
     void setValue(double value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     double _min;                         //!< min value, may be used in GUI
@@ -106,6 +110,7 @@ public:
     void setValue(float value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     float _min;                         //!< min value, may be used in GUI
@@ -127,6 +132,7 @@ public:
     void setValue(bool value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     bool _min;                         //!< min value, may be used in GUI
@@ -146,6 +152,7 @@ public:
     void setValue(std::string value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     std::string _min;                         //!< min value, may be used in GUI
@@ -166,6 +173,7 @@ public:
     void setValue(std::vector<int> value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     std::vector<int> _min;                         //!< min value, may be used in GUI
@@ -183,6 +191,7 @@ public:
     void setValue(IPLColor value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     IPLColor _value;                       //!< default and also current value
@@ -199,13 +208,14 @@ public:
     void setValue(IPLPoint value);
     std::string toJson();
     void fromJson(std::string value);
+    IPLProcessProperty *clone();
 
 private:
     IPLPoint _value;                       //!< default and also current value
 };
 
 //! IPLProcessPropertyMap
-typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
+typedef std::map<std::string, std::unique_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
 
 
 #endif // IPLPROCESSPROPERTY_H
