@@ -130,7 +130,7 @@ clang {
     CONFIG +=c++11
 }
 
-gcc {
+gcc:!clang {
     CONFIG +=c++11
     LIBS += -lgomp
 }
