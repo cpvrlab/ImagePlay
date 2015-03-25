@@ -30,6 +30,11 @@ std::string IPLProcessPropertyInt::toJson()
     return json.str();
 }
 
+IPLProcessProperty *IPLProcessPropertyInt::clone()
+{
+    return new IPLProcessPropertyInt(*this);
+}
+
 void IPLProcessPropertyInt::fromJson(std::string value)
 {
     _value = atoi(value.c_str());
@@ -70,6 +75,11 @@ void IPLProcessPropertyUnsignedInt::fromJson(std::string value)
     _value = (unsigned int) atol(value.c_str());
 }
 
+IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone()
+{
+    return new IPLProcessPropertyUnsignedInt(*this);
+}
+
 
 IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, double value, double min, double max)
 {
@@ -105,6 +115,11 @@ void IPLProcessPropertyDouble::fromJson(std::string value)
     _value = atof(value.c_str());
 }
 
+IPLProcessProperty *IPLProcessPropertyDouble::clone()
+{
+    return new IPLProcessPropertyDouble(*this);
+}
+
 
 IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, float value, float min, float max)
 {
@@ -138,6 +153,11 @@ std::string IPLProcessPropertyFloat::toJson()
 void IPLProcessPropertyFloat::fromJson(std::string value)
 {
     _value = atof(value.c_str());
+}
+
+IPLProcessProperty *IPLProcessPropertyFloat::clone()
+{
+    return new IPLProcessPropertyFloat(*this);
 }
 
 
@@ -181,6 +201,11 @@ void IPLProcessPropertyBool::fromJson(std::string value)
         _value = false;
 }
 
+IPLProcessProperty *IPLProcessPropertyBool::clone()
+{
+    return new IPLProcessPropertyBool(*this);
+}
+
 
 IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, std::string value)
 {
@@ -214,6 +239,11 @@ std::string IPLProcessPropertyString::toJson()
 void IPLProcessPropertyString::fromJson(std::string value)
 {
     _value = value;
+}
+
+IPLProcessProperty *IPLProcessPropertyString::clone()
+{
+    return new IPLProcessPropertyString(*this);
 }
 
 
@@ -263,6 +293,11 @@ void IPLProcessPropertyVectorInt::fromJson(std::string value)
     }
 }
 
+IPLProcessProperty *IPLProcessPropertyVectorInt::clone()
+{
+    return new IPLProcessPropertyVectorInt(*this);
+}
+
 
 IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, IPLColor value)
 {
@@ -300,6 +335,11 @@ void IPLProcessPropertyColor::fromJson(std::string value)
     _value = IPLColor::fromRGB(atof(token1), atof(token2), atof(token3));
 }
 
+IPLProcessProperty *IPLProcessPropertyColor::clone()
+{
+    return new IPLProcessPropertyColor(*this);
+}
+
 IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, IPLPoint value)
 {
     _process = process;
@@ -333,4 +373,9 @@ void IPLProcessPropertyPoint::fromJson(std::string value)
     char* token1 = strtok(input, "|");
     char* token2 = strtok(token1, "|");
     _value = IPLPoint(atof(token1), atof(token2));
+}
+
+IPLProcessProperty *IPLProcessPropertyPoint::clone()
+{
+    return new IPLProcessPropertyPoint(*this);
 }

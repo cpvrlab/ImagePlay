@@ -24,10 +24,12 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _isSequence         = other._isSequence;
     _resultReady        = other._resultReady;
     _title              = other._title;
-    _properties         = other._properties;
     _category           = other._category;
     _keywords           = other._keywords;
     _openCVSupport      = other._openCVSupport;
+
+    for (auto &entry: other._properties)
+        _properties[entry.first].reset(entry.second->clone());
 
     _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title));
 }
