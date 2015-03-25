@@ -983,7 +983,10 @@ void MainWindow::closeEvent(QCloseEvent* e)
     {
         writeSettings();
 
-        delete _imageViewer;
+        //TODO: Application crashed here (update calls after the deallocation). Further investigation might be necessary.
+//        delete _imageViewer;
+        _imageViewer->deleteLater();
+        _imageViewer = NULL;
 
         // try closing any videocapture items
         IPLCameraIO::release();
