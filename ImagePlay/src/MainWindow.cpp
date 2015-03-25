@@ -552,7 +552,7 @@ void MainWindow::addEdge(IPProcessEdge *edge)
     else
     {
         // show message
-        showMessage("Connection not possible", MainWindow::MESSAGE_ERROR);
+        showMessage("Connection not possible: Output and input not compatible.", MainWindow::MESSAGE_ERROR);
     }
 }
 
@@ -640,6 +640,11 @@ bool MainWindow::readProcessFile()
             QVariant value   = propertyObject.value("value").toVariant();
 
             IPLProcessProperty* processProperty = (IPLProcessProperty*) newStep->process()->property(key.toStdString());
+            if(!processProperty)
+            {
+                qWarning() << "Invalid process property: " << key;
+                continue;
+            }
             processProperty->fromJson(value.toString().toStdString());
         }
 

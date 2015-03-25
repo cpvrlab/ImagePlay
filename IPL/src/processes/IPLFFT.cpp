@@ -13,7 +13,7 @@ void IPLFFT::init()
 
     // inputs and outputs
     addInput("Grayscale Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Complex Image", IPLImage::IMAGE_COMPLEX);
+    addOutput("Complex Image", IPLData::IMAGE_COMPLEX);
 
     // properties
     addProcessPropertyInt("mode", "Windowing Function:None|Hanning|Hamming|Blackman|Border", "", IPL_INT_RADIOBUTTONS, 0);

@@ -14,6 +14,8 @@ IPLComplexImage::IPLComplexImage(const IPLComplexImage &other)
     {
         _height = other._height;
         _width = other._width;
+        _type = other._type;
+        _rgb32 = other._rgb32;
 
         newPlane();
 

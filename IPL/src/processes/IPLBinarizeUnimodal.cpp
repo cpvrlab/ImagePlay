@@ -16,7 +16,6 @@ void IPLBinarizeUnimodal::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyString("description", "", "Binarize image unimodal image (Rosin).", IPL_LABEL, "");
 }
 
 void IPLBinarizeUnimodal::destroy()

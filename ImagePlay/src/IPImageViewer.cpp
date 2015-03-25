@@ -72,7 +72,7 @@ void IPImageViewer::updateImage()
         _rawImage = NULL;
 
         // convert from IPLImage
-        _rawData = _processStep->process()->getResultData( _resultIndex );
+        _rawData = _processStep->process()->getResultData(_resultIndex);
 
         // if the result is invalid, abort
         if(!_rawData)
