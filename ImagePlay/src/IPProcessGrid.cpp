@@ -15,7 +15,6 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
     setMouseTracking(true);
 
     _scale = 1.0;
-
     _currentUpdateID = 0;
     _updateID = 0;
 
