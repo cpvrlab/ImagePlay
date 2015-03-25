@@ -26,7 +26,7 @@ public:
 
         _dialog = NULL;
 
-        _colorPickCursor = new QCursor(QPixmap(":/icons/colorpicker_cursor.png"), 9, 21);
+        _colorPickCursor = new QCursor(QPixmap(":/colorpicker_cursor.png"), 9, 21);
 
         IPLColor value = ((IPLProcessPropertyColor*) property)->value();
 
@@ -79,7 +79,7 @@ public:
 
         _btnColorPicker = new QPushButton(this);
         _btnColorPicker->setCheckable(true);
-        _btnColorPicker->setIcon(QIcon(":/icons/colorpicker.png"));
+        _btnColorPicker->setIcon(QIcon(":/colorpicker.png"));
 
         // set up layout
         _layout->addWidget(_colorLabel, 0, 1, 1, 1);
