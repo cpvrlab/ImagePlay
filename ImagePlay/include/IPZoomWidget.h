@@ -33,11 +33,11 @@ public:
     void        setPositionLocked       (bool locked);
 
 private:
-    IPLImage*   _image;
-    int         _x;
-    int         _y;
-    int         _columnOffset;
-    bool        _positionLocked;
+    QScopedPointer<IPLImage> _image;
+    int                      _x;
+    int                      _y;
+    int                      _columnOffset;
+    bool                     _positionLocked;
 
 
     // QWidget interface

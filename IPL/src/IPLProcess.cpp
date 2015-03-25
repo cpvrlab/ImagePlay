@@ -11,7 +11,7 @@ IPLProcess::IPLProcess(void)
     _propertyHandler    = NULL;
     _category           = IPLProcess::CATEGORY_UNDEFINED;
 
-    _properties["title"] = new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title);
+    _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title));
 }
 
 //! copy constructor
@@ -29,7 +29,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _keywords           = other._keywords;
     _openCVSupport      = other._openCVSupport;
 
-    _properties["title"] = new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title);
+    _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title));
 }
 
 IPLProcess::~IPLProcess( void )
@@ -77,101 +77,101 @@ void IPLProcess::addOutput(std::string name, IPLData::IPLDataType type)
 
 void IPLProcess::addProcessPropertyInt(const char *name, const char *title, const char *description, IPLProcessPropertyType type, int value, int min, int max)
 {
-    _properties[name] = new IPLProcessPropertyInt(this, _properties.size(), title, description, type, value, min, max);
+    _properties[name].reset(new IPLProcessPropertyInt(this, _properties.size(), title, description, type, value, min, max));
 }
 
 void IPLProcess::addProcessPropertyUnsignedInt(const char *name, const char *title, const char *description, IPLProcessPropertyType type, unsigned int value, unsigned int min, unsigned int max)
 {
-    _properties[name] = new IPLProcessPropertyUnsignedInt(this, _properties.size(), title, description, type, value, min, max);
+    _properties[name].reset(new IPLProcessPropertyUnsignedInt(this, _properties.size(), title, description, type, value, min, max));
 }
 
 void IPLProcess::addProcessPropertyDouble(const char *name, const char *title, const char *description, IPLProcessPropertyType type, double value, double min, double max)
 {
-    _properties[name] = new IPLProcessPropertyDouble(this, _properties.size(), title, description, type, value, min, max);
+    _properties[name].reset(new IPLProcessPropertyDouble(this, _properties.size(), title, description, type, value, min, max));
 }
 
 void IPLProcess::addProcessPropertyFloat(const char *name, const char *title, const char *description, IPLProcessPropertyType type, float value, float min, float max)
 {
-    _properties[name] = new IPLProcessPropertyFloat(this, _properties.size(), title, description, type, value, min, max);
+    _properties[name].reset(new IPLProcessPropertyFloat(this, _properties.size(), title, description, type, value, min, max));
 }
 
 void IPLProcess::addProcessPropertyBool(const char *name, const char *title, const char *description, IPLProcessPropertyType type, bool value)
 {
-    _properties[name] = new IPLProcessPropertyBool(this, _properties.size(), title, description, type, value);
+    _properties[name].reset(new IPLProcessPropertyBool(this, _properties.size(), title, description, type, value));
 }
 
 void IPLProcess::addProcessPropertyString(const char *name, const char *title, const char *description, IPLProcessPropertyType type, std::string value)
 {
-    _properties[name] = new IPLProcessPropertyString(this, _properties.size(), title, description, type, value);
+    _properties[name].reset(new IPLProcessPropertyString(this, _properties.size(), title, description, type, value));
 }
 
 void IPLProcess::addProcessPropertyVectorInt(const char *name, const char *title, const char *description, IPLProcessPropertyType type, std::vector<int> value)
 {
-    _properties[name] = new IPLProcessPropertyVectorInt(this, _properties.size(), title, description, type, value);
+    _properties[name].reset(new IPLProcessPropertyVectorInt(this, _properties.size(), title, description, type, value));
 }
 
 void IPLProcess::addProcessPropertyColor(const char *name, const char *title, const char *description, IPLProcessPropertyType type, IPLColor value)
 {
-    _properties[name] = new IPLProcessPropertyColor(this, _properties.size(), title, description, type, value);
+    _properties[name].reset(new IPLProcessPropertyColor(this, _properties.size(), title, description, type, value));
 }
 
 void IPLProcess::addProcessPropertyPoint(const char *name, const char *title, const char *description, IPLProcessPropertyType type, IPLPoint value)
 {
-    _properties[name] = new IPLProcessPropertyPoint(this, _properties.size(), title, description, type, value);
+    _properties[name].reset(new IPLProcessPropertyPoint(this, _properties.size(), title, description, type, value));
 }
 
 int IPLProcess::getProcessPropertyInt(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyInt*) _properties[name])->value();
+    return ((IPLProcessPropertyInt*) _properties[name].get())->value();
 }
 
 unsigned int IPLProcess::getProcessPropertyUnsignedInt(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyUnsignedInt*) _properties[name])->value();
+    return ((IPLProcessPropertyUnsignedInt*) _properties[name].get())->value();
 }
 
 double IPLProcess::getProcessPropertyDouble(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyDouble*) _properties[name])->value();
+    return ((IPLProcessPropertyDouble*) _properties[name].get())->value();
 }
 
 float IPLProcess::getProcessPropertyFloat(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyFloat*) _properties[name])->value();
+    return ((IPLProcessPropertyFloat*) _properties[name].get())->value();
 }
 
 bool IPLProcess::getProcessPropertyBool(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyBool*) _properties[name])->value();
+    return ((IPLProcessPropertyBool*) _properties[name].get())->value();
 }
 
 std::string IPLProcess::getProcessPropertyString(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyString*) _properties[name])->value();
+    return ((IPLProcessPropertyString*) _properties[name].get())->value();
 }
 
 std::vector<int> IPLProcess::getProcessPropertyVectorInt(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyVectorInt*) _properties[name])->value();
+    return ((IPLProcessPropertyVectorInt*) _properties[name].get())->value();
 }
 
 IPLColor IPLProcess::getProcessPropertyColor(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyColor*) _properties[name])->value();
+    return ((IPLProcessPropertyColor*) _properties[name].get())->value();
 }
 
 IPLPoint IPLProcess::getProcessPropertyPoint(const char *name)
 {
     checkPropertyKey(name);
-    return ((IPLProcessPropertyPoint*) _properties[name])->value();
+    return ((IPLProcessPropertyPoint*) _properties[name].get())->value();
 }
 
 //template<class T> void IPLProcess::addProcessProperty(const char *name, const char *title, const char *description, int type, T value, T min /* =0 */, T max /* = 0 */)
@@ -184,9 +184,9 @@ void IPLProcess::setOutputName(int index, std::string name)
 std::string IPLProcess::toJson()
 {
     std::ostringstream json;
-    for(auto it = _properties.begin(); it != _properties.end(); ++it)
+    for (auto &entry: _properties)
     {
-        IPLProcessProperty* property = (IPLProcessProperty*) it->second;
+        auto &property = entry.second;
         json << "{\n";
         json << "   \"type\": \"bool\"\n";
         json << "   \"value\": \"" << property->type() << "\"\n";
@@ -241,7 +241,7 @@ IPLProcessPropertyMap *IPLProcess::properties()
 IPLProcessProperty *IPLProcess::property(std::string key)
 {
     if(_properties.count(key))
-        return _properties[key];
+        return _properties[key].get();
     else
         return NULL;
 }
@@ -249,7 +249,7 @@ IPLProcessProperty *IPLProcess::property(std::string key)
 void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
 {
     //_propertyMutex.lock();
-    _properties[key] = value;
+    _properties[key].reset(value);
     //_propertyMutex.unlock();
 }
 

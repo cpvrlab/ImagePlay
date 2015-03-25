@@ -6,23 +6,21 @@ IPZoomWidget::IPZoomWidget(QWidget *parent) :
     _x = 0;
     _y = 0;
     _columnOffset = 1;
-    _image = NULL;
     _positionLocked = false;
+    _image.reset(NULL);
 }
 
 void IPZoomWidget::setImage(IPLImage *image)
 {
-    delete _image;
-
     if(image)
     {
-        _image = new IPLImage(*image);
+        _image.reset(new IPLImage(*image));
         setVisible(true);
         update();
     }
     else
     {
-        _image = NULL;
+        _image.reset(NULL);
         setVisible(false);
     }
 }

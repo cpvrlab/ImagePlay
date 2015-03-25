@@ -12,13 +12,14 @@
 #include <map>
 #include <vector>
 #include <mutex>
+#include <memory>
 
 class IPLProcessProperty;
 class IPLProgressEventHandler;
 class IPLPropertyChangedEventHandler;
 
 //! IPLProcessPropertyMap
-typedef std::map<std::string, IPLProcessProperty*> IPLProcessPropertyMap;
+typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
 
 /**
  * @brief The IPLProcessMessage struct for passing around messages and errors

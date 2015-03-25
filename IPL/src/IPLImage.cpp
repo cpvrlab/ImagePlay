@@ -191,7 +191,7 @@ cv::Mat IPLImage::toCvMat()
 }
 
 uchar* IPLImage::rgb32() {
-    delete _rgb32;
+    delete[] _rgb32;
     _rgb32 = new uchar[_height*_width*4];
     if(_type == IMAGE_BW)
     {

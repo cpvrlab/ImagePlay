@@ -16,6 +16,7 @@
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QApplication>
+#include <QScopedPointer>
 
 #include "IPL_processes.h"
 #include "IPHistogramThread.h"
@@ -33,10 +34,11 @@ public:
     void updateHistogram(IPLImage* image);
     void setLogarithmic(bool logarithmic);
     IPLData::IPLDataType type()   { return _type; }
-    IPLHistogram* histogram()       { return _histogram; }
-    IPLHistogram* histogramR()      { return _histogramR; }
-    IPLHistogram* histogramG()      { return _histogramG; }
-    IPLHistogram* histogramB()      { return _histogramB; }
+    //TODO: Use references?
+    IPLHistogram* histogram()       { return _histogram.data(); }
+    IPLHistogram* histogramR()      { return _histogramR.data(); }
+    IPLHistogram* histogramG()      { return _histogramG.data(); }
+    IPLHistogram* histogramB()      { return _histogramB.data(); }
 signals:
     void highlightChangedGrayscale(int, int);
     void highlightChangedColor(int, int, int, int);
@@ -45,15 +47,15 @@ signals:
 public slots:
 
 private:
-    int                     _bins;
-    int                     _planes;
-    bool                    _logarithmic;
-    IPLData::IPLDataType  _type;
-    IPLHistogram*           _histogram;
-    IPLHistogram*           _histogramR;
-    IPLHistogram*           _histogramG;
-    IPLHistogram*           _histogramB;
-    int                     _hightlightPosition;
+    int                          _bins;
+    int                          _planes;
+    bool                         _logarithmic;
+    IPLData::IPLDataType         _type;
+    QScopedPointer<IPLHistogram> _histogram;
+    QScopedPointer<IPLHistogram> _histogramR;
+    QScopedPointer<IPLHistogram> _histogramG;
+    QScopedPointer<IPLHistogram> _histogramB;
+    int                          _hightlightPosition;
 
     // QWidget interface
 protected:

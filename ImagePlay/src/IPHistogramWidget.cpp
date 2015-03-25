@@ -8,10 +8,10 @@ IPHistogramWidget::IPHistogramWidget(QWidget *parent) :
     _logarithmic = false;
     _hightlightPosition = -1;
 
-    _histogram = NULL;
-    _histogramR = NULL;
-    _histogramG = NULL;
-    _histogramB = NULL;
+    _histogram.reset(NULL);
+    _histogramR.reset(NULL);
+    _histogramG.reset(NULL);
+    _histogramB.reset(NULL);
 
     _type = IPLData::UNDEFINED;
 
@@ -37,17 +37,17 @@ void IPHistogramWidget::updateHistogram(IPLImage *image)
         timer.start();
         if(_type == IPLImage::IMAGE_BW)
         {
-            _histogram = new IPLHistogram(image->plane(0), 2, 100);
+            _histogram.reset(new IPLHistogram(image->plane(0), 2, 100));
         }
         else if(_type == IPLData::IMAGE_GRAYSCALE)
         {
-            _histogram = new IPLHistogram(image->plane(0), 256, 100);
+            _histogram.reset(new IPLHistogram(image->plane(0), 256, 100));
         }
         else if(_type == IPLData::IMAGE_COLOR)
         {
-            _histogramR = new IPLHistogram(image->plane(0), 256, 100);
-            _histogramG = new IPLHistogram(image->plane(1), 256, 100);
-            _histogramB = new IPLHistogram(image->plane(2), 256, 100);
+            _histogramR.reset(new IPLHistogram(image->plane(0), 256, 100));
+            _histogramG.reset(new IPLHistogram(image->plane(1), 256, 100));
+            _histogramB.reset(new IPLHistogram(image->plane(2), 256, 100));
         }
 
         // repaint

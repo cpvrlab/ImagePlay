@@ -727,8 +727,8 @@ bool MainWindow::writeProcessFile()
         for(auto it = propertyMap->begin(); it != propertyMap->end(); ++it)
         {
             QString key = QString::fromStdString(it->first);
-            IPLProcessProperty* p = it->second;
 
+            auto &p = it->second;
             QString propertyJsonString = QString::fromStdString(p->toJson().c_str());
 
             QJsonParseError error;

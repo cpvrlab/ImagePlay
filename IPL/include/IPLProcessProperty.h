@@ -10,6 +10,7 @@
 #include <map>
 #include <sstream>
 #include <vector>
+#include <memory>
 
 class IPLProcess;
 
@@ -204,7 +205,7 @@ private:
 };
 
 //! IPLProcessPropertyMap
-typedef std::map<std::string, IPLProcessProperty*> IPLProcessPropertyMap;
+typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
 
 
 #endif // IPLPROCESSPROPERTY_H
