@@ -15,11 +15,16 @@ void IPZoomWidget::setImage(IPLImage *image)
     delete _image;
 
     if(image)
+    {
         _image = new IPLImage(*image);
+        setVisible(true);
+        update();
+    }
     else
+    {
         _image = NULL;
-
-    update();
+        setVisible(false);
+    }
 }
 
 void IPZoomWidget::setPosition(int x, int y)

@@ -15,8 +15,8 @@ void IPLFrequencyFilter::init()
 
     // inputs and outputs
     addInput("Complex Image", IPLData::IMAGE_COMPLEX);
-    addOutput("Complex Image", IPLImage::IMAGE_COMPLEX);
-    addOutput("Filter", IPLImage::IMAGE_GRAYSCALE);
+    addOutput("Complex Image", IPLData::IMAGE_COMPLEX);
+    //addOutput("Filter", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
     addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "", IPL_INT_RADIOBUTTONS, 0);
@@ -100,8 +100,5 @@ bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
 
 IPLData* IPLFrequencyFilter::getResultData(int index)
 {
-    if(index == 0)
-        return _result;
-    else
-        return _filter;
+    return _result;
 }

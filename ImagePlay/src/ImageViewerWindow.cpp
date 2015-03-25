@@ -336,21 +336,28 @@ void ImageViewerWindow::zoomAllViewers(ZoomAction action)
     int zoomFactor = 0;
     while (it.hasNext())
     {
-        it.next();
+        try
+        {
+            it.next();
 
-        if(action == ImageViewerWindow::ZOOM_IN)
-            it.value()->zoomIn();
-        else if(action == ImageViewerWindow::ZOOM_OUT)
-            it.value()->zoomOut();
-        else if(action == ImageViewerWindow::ZOOM_FIT)
-            it.value()->zoomFit();
-        else if(action == ImageViewerWindow::ZOOM_RESET)
-            it.value()->zoomReset();
+            if(action == ImageViewerWindow::ZOOM_IN)
+                it.value()->zoomIn();
+            else if(action == ImageViewerWindow::ZOOM_OUT)
+                it.value()->zoomOut();
+            else if(action == ImageViewerWindow::ZOOM_FIT)
+                it.value()->zoomFit();
+            else if(action == ImageViewerWindow::ZOOM_RESET)
+                it.value()->zoomReset();
 
-        zoomFactor = it.value()->zoomFactor();
+            zoomFactor = it.value()->zoomFactor();
 
-        it.value()->horizontalScrollBar()->setValue(_horizontalScrollValue);
-        it.value()->verticalScrollBar()->setValue(_verticalScrollValue);
+            it.value()->horizontalScrollBar()->setValue(_horizontalScrollValue);
+            it.value()->verticalScrollBar()->setValue(_verticalScrollValue);
+        }
+        catch(std::exception& e)
+        {
+            qWarning() << "Error when zooming: " << e.what();
+        }
     }
 
     on_zoomChanged(zoomFactor);
@@ -465,6 +472,8 @@ void ImageViewerWindow::tabChanged(int tabIndex)
         int index = item->resultIndex();
         ui->comboBoxResults->setCurrentIndex(index);
     }
+
+    updateImage();
 }
 //-----------------------------------------------------------------------------
 /*!

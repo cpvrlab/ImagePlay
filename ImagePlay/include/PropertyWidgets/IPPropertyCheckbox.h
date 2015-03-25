@@ -33,9 +33,6 @@ public:
 
         // connect signals and slots
         connect(_checkbox, &QCheckBox::stateChanged, this, &IPPropertyCheckbox::updateValue );
-
-        // update everything
-        //updateValue();
     }
     void setMinimum(int)    {  }
     void setMaximum(int)    {  }
