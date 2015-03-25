@@ -34,6 +34,20 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", IPL_STRING, _title));
 }
 
+IPLProcess::IPLProcess(IPLProcess &&other):
+    _className(std::move(other._className)),
+    _handler(std::move(other._handler)),
+    _propertyHandler(std::move(other._propertyHandler)),
+    _isSource(std::move(other._isSource)),
+    _isSequence(std::move(other._isSequence)),
+    _resultReady(std::move(other._resultReady)),
+    _title(std::move(other._title)),
+    _category(std::move(other._category)),
+    _keywords(std::move(other._keywords)),
+    _openCVSupport(std::move(other._openCVSupport)),
+    _properties(std::move(other._properties))
+{}
+
 IPLProcess::~IPLProcess( void )
 {
 

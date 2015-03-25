@@ -215,7 +215,7 @@ private:
 };
 
 //! IPLProcessPropertyMap
-typedef std::map<std::string, std::unique_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
+typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
 
 
 #endif // IPLPROCESSPROPERTY_H
