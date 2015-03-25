@@ -48,8 +48,8 @@ public:
     void                    propertyChanged         (IPLProcess *);
     void                    setSequenceIndex        (int index);
     void                    setSequenceRunning      (bool status)                           { _isSequenceRunning = status; }
-    void                    setParamsHaveChanged    ()                                      { _paramsHaveChanged = true; }
     void                    setMainWindow           (MainWindow* mainWindow)                { _mainWindow = mainWindow; }
+    void                    requestUpdate           ();
     MainWindow*             mainWindow              ()                                      { return _mainWindow; }
     IPProcessGridScene*     scene                   ()                                      { return _scene; }
 
@@ -65,7 +65,6 @@ private:
     float                   _scale;                 //!< Scale for zooming
     MainWindow*             _mainWindow;            //!< MainWindow
     bool                    _isRunning;             //!< Is running
-    bool                    _paramsHaveChanged;     //!< Params have changed
     IPProcessStep*          _currentStep;           //!< Currently active step, settings shown on the left side
     QList<IPProcessStep*>   _processList;           //!< Ordered process list
     int                     _sequenceCount;         //!< Image sequence count
@@ -73,6 +72,8 @@ private:
     int                     _lastSequenceIndex;     //!< Last image sequence index
     bool                    _isSequenceRunning;     //!< Is sequence running
     bool                    _lastProcessSuccess;    //!< Last process was successful
+    long long               _currentUpdateID;       //!< Used to check if an update is needed
+    long long               _updateID;              //!<
 
     // QWidget interface
 protected:

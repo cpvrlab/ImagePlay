@@ -16,8 +16,10 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
 
     _scale = 1.0;
 
+    _currentUpdateID = 0;
+    _updateID = 0;
+
     _isRunning = false;
-    _paramsHaveChanged = false;
     _isSequenceRunning = true;
 
     _currentStep = NULL;
@@ -187,7 +189,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     }
 
     // if already running or nothing has changed, exit
-    if(_isRunning || !_paramsHaveChanged)
+    if(_isRunning || (_currentUpdateID == _updateID))
     {
         return;
     }
@@ -195,6 +197,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _mainWindow->lockScene();
     _isRunning = true;
     _sequenceCount = 0;
+    _currentUpdateID = _updateID;
 
     buildQueue();
 
@@ -308,7 +311,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _mainWindow->updateGraphicsView();
     _mainWindow->unlockScene();
 
-    _paramsHaveChanged = false;
     _isRunning = false;
     _currentStep = NULL;
 
@@ -336,9 +338,14 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         {
             process->setNeedsUpdate(true);
             propertyChanged(process);
-            setParamsHaveChanged();
+            requestUpdate();
         }
     }
+
+    if(_updateID > _currentUpdateID)
+        _mainWindow->execute(false);
+
+    _updateID = _currentUpdateID;
 
     // only for testing the camera
     if(graphNeedsUpdate)
@@ -467,7 +474,11 @@ void IPProcessGrid::propertyChanged(IPLProcess* process)
 
 void IPProcessGrid::setSequenceIndex(int index)
 {
-    _paramsHaveChanged = true; // force future update
     _lastSequenceIndex = _sequenceIndex;
     _sequenceIndex = index;
+}
+
+void IPProcessGrid::requestUpdate()
+{
+    _updateID++;
 }

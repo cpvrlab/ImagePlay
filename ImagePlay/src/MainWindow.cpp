@@ -815,7 +815,7 @@ void MainWindow::execute(bool forcedUpdate/* = false */)
     if(_isPlaying)
     {
         if(forcedUpdate)
-            ui->graphicsView->setParamsHaveChanged();
+            ui->graphicsView->requestUpdate();
 
         ui->graphicsView->execute(forcedUpdate);
     }
@@ -824,7 +824,7 @@ void MainWindow::execute(bool forcedUpdate/* = false */)
 void MainWindow::setParamsHaveChanged()
 {
     _unsavedChanges = true;
-    ui->graphicsView->setParamsHaveChanged();
+    ui->graphicsView->requestUpdate();
 }
 
 void MainWindow::handleProgress(int progress)
