@@ -32,7 +32,8 @@ cv::VideoCapture *IPLCameraIO::camera()
 
 void IPLCameraIO::release()
 {
-    _camera->release();
+    if(_camera)
+        _camera->release();
     //delete _camera;
     //_camera = NULL;
 }
