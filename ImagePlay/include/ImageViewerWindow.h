@@ -96,8 +96,8 @@ private slots:
     void tabChanged(int);
     void on_radioLinear_clicked();
     void on_radioLogarithmic_clicked();
-    void histogramHighlightChangedGrayscale(int position, int value);
-    void histogramHighlightChangedColor(int position, int r, int g, int b);
+    void histogramHighlightChangedGrayscale(int position, int value, float percentage);
+    void histogramHighlightChangedColor(int position, int r, int g, int b, float percentageR, float percentageG, float percentageB);
     void on_actionHideSidebar_triggered(bool checked);
     void on_btnZoomIn_clicked();
     void on_btnZoomOut_clicked();

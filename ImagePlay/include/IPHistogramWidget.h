@@ -40,8 +40,8 @@ public:
     IPLHistogram* histogramG()      { return _histogramG.data(); }
     IPLHistogram* histogramB()      { return _histogramB.data(); }
 signals:
-    void highlightChangedGrayscale(int, int);
-    void highlightChangedColor(int, int, int, int);
+    void highlightChangedGrayscale(int, int, float);
+    void highlightChangedColor(int, int, int, int, float, float, float);
     void resetHighlightValue();
 
 public slots:

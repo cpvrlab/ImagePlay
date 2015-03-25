@@ -497,14 +497,14 @@ void ImageViewerWindow::on_radioLogarithmic_clicked()
 /*!
 ImageViewerWindow::histogramHighlightChangedGrayscale
 */
-void ImageViewerWindow::histogramHighlightChangedGrayscale(int position, int value)
+void ImageViewerWindow::histogramHighlightChangedGrayscale(int position, int value, float percentage)
 {
-    QString text("<table width=\"150\"><tr>");
+    QString text("<table width=\"200\"><tr>");
     text.append("<td width=\"70\">Level: %1</td> ");
-    text.append("<td width=\"80\">Value: %2</td>");
+    text.append("<td width=\"130\">Value: %2 (%3%)</td>");
     text.append("</tr></table>");
 
-    text = text.arg(position).arg(value);
+    text = text.arg(position).arg(value).arg(percentage, 0, 'f', 1);
 
     ui->labelHistogramValue->setText(text);
 }
@@ -512,17 +512,21 @@ void ImageViewerWindow::histogramHighlightChangedGrayscale(int position, int val
 /*!
 ImageViewerWindow::histogramHighlightChangedColor
 */
-void ImageViewerWindow::histogramHighlightChangedColor(int position, int r, int g, int b)
+void ImageViewerWindow::histogramHighlightChangedColor(int position, int r, int g, int b, float percentageR, float percentageG, float percentageB)
 {
-    QString text("<table width=\"150\"><tr>");
+    QString text("<table width=\"200\"><tr>");
     text.append("<td colspan=\"3\">Level: %1</td>");
     text.append("</tr><tr>");
-    text.append("<td width=\"50\" style=\"color: #FF0000\">R: %2 </td>");
-    text.append("<td width=\"50\" style=\"color: #41DB00\">G: %3 </td>");
-    text.append("<td width=\"50\" style=\"color: #0094FF\">B: %4</td>");
+    text.append("<td width=\"66\" style=\"color: #FF0000\">R: %2</td>");
+    text.append("<td width=\"66\" style=\"color: #41DB00\">G: %3</td>");
+    text.append("<td width=\"66\" style=\"color: #0094FF\">B: %4</td>");
+    text.append("</tr><tr>");
+    text.append("<td width=\"66\" style=\"color: #FF0000\">(%5%)</td>");
+    text.append("<td width=\"66\" style=\"color: #41DB00\">(%6%)</td>");
+    text.append("<td width=\"66\" style=\"color: #0094FF\">(%7%)</td>");
     text.append("</tr></table>");
 
-    text = text.arg(position).arg(r).arg(g).arg(b);
+    text = text.arg(position).arg(r).arg(g).arg(b).arg(percentageR, 0, 'f', 1).arg(percentageG, 0, 'f', 1).arg(percentageB, 0, 'f', 1);
 
     ui->labelHistogramValue->setText(text);
 }

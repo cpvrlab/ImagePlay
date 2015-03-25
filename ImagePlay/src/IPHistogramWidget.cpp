@@ -149,6 +149,14 @@ void IPHistogramWidget::paintEvent(QPaintEvent* e)
         std::vector<int> values = _logarithmic ? _histogram->logarithmic() : _histogram->linear();
         painter.fillRect(0,100-values[0],127,values[0], Qt::gray);
         painter.fillRect(127,100-values[1],128,values[1], Qt::gray);
+
+        if(_hightlightPosition > -1)
+        {
+            painter.setPen(penWhite);
+            painter.setCompositionMode(QPainter::CompositionMode_Difference);
+            painter.drawLine(_hightlightPosition,0,_hightlightPosition,100);
+            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        }
     }
 
     QWidget::paintEvent(e);
@@ -165,14 +173,26 @@ void IPHistogramWidget::mouseMoveEvent(QMouseEvent* event)
         int valueR = _histogramR->rawValueAt(_hightlightPosition);
         int valueG = _histogramG->rawValueAt(_hightlightPosition);
         int valueB = _histogramB->rawValueAt(_hightlightPosition);
+        float percentageR = _histogramR->percentageAt(_hightlightPosition);
+        float percentageG = _histogramG->percentageAt(_hightlightPosition);
+        float percentageB = _histogramB->percentageAt(_hightlightPosition);
 
-        emit highlightChangedColor(_hightlightPosition, valueR, valueG, valueB);
+        emit highlightChangedColor(_hightlightPosition, valueR, valueG, valueB, percentageR, percentageG, percentageB);
     }
     else if(_type == IPLData::IMAGE_GRAYSCALE)
     {
         int value = _histogram->rawValueAt(_hightlightPosition);
+        float percentage = _histogram->percentageAt(_hightlightPosition);
 
-        emit highlightChangedGrayscale(_hightlightPosition, value);
+        emit highlightChangedGrayscale(_hightlightPosition, value, percentage);
+    }
+    else if(_type == IPLData::IMAGE_BW)
+    {
+        int pos = _hightlightPosition < width()/2 ? 0 : 1;
+        int value = _histogram->rawValueAt(pos);
+        int percentage = _histogram->percentageAt(pos);
+
+        emit highlightChangedGrayscale(pos, value, percentage);
     }
 }
 

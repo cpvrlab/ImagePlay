@@ -122,6 +122,11 @@ public:
         return _histogram.at(level);
     }
 
+    float percentageAt(int level)
+    {
+        return 100.0 * _histogram.at(level) / _totalValues;
+    }
+
 private:
     IPLImagePlane*      _plane;
     int                 _bins;
