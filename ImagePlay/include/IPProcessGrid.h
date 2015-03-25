@@ -52,6 +52,7 @@ public:
     void                    requestUpdate           ();
     MainWindow*             mainWindow              ()                                      { return _mainWindow; }
     IPProcessGridScene*     scene                   ()                                      { return _scene; }
+    void                    stopExecution           ()                                      { _stopExecution = true; }
 
 signals:
     void                    sequenceChanged         (int index, int count);
@@ -74,6 +75,7 @@ private:
     bool                    _lastProcessSuccess;    //!< Last process was successful
     long long               _currentUpdateID;       //!< Used to check if an update is needed
     long long               _updateID;              //!<
+    bool                    _stopExecution;         //!< Used to stop the execution early
 
     // QWidget interface
 protected:

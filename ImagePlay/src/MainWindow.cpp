@@ -981,6 +981,7 @@ void MainWindow::closeEvent(QCloseEvent* e)
     int reply = question.exec();
     if (reply == QMessageBox::Yes)
     {
+
         writeSettings();
 
         //TODO: Application crashed here (update calls after the deallocation). Further investigation might be necessary.
@@ -990,6 +991,8 @@ void MainWindow::closeEvent(QCloseEvent* e)
 
         // try closing any videocapture items
         IPLCameraIO::release();
+
+        ui->graphicsView->stopExecution();
 
         QApplication::quit();
     }
