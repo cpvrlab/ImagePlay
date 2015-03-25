@@ -109,7 +109,6 @@ gcc:!clang {
     QMAKE_LFLAGS   += -fopenmp
     LIBS += -lgomp
 }
-message($$CONFIG)
 
 
 # IPL
