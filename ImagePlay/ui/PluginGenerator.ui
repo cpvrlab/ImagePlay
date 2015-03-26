@@ -224,6 +224,7 @@
   <tabstop>comboBoxOpenCV</tabstop>
   <tabstop>inputClassName</tabstop>
   <tabstop>inputTitle</tabstop>
+  <tabstop>inputDescription</tabstop>
   <tabstop>inputKeywords</tabstop>
   <tabstop>btnGenerate</tabstop>
   <tabstop>btnCancel</tabstop>

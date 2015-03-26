@@ -53,6 +53,9 @@ FORMS       += $$files(*.ui,true)
 RESOURCES   += $$files(*.qrc,true)
 OTHER_FILES += $$files(*,true)
 
+# exclude plugin templates
+HEADERS     -= media/plugin_development/_template/NAME.h
+
 RC_FILE = res/icon.rc
 
 
@@ -70,11 +73,10 @@ win32: {
     #copy dlls
     #copy media
     QMAKE_POST_LINK +=  windeployqt.exe --no-angle --no-svg --no-system-d3d-compiler --no-quick-import --no-translations ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.exe & \
-                        $${QMAKE_COPY} ..\\_lib\\windows\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\ & \
-                        mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
-                        $${QMAKE_COPY} media\\process_icons\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
-                        mkdir ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
-                        $${QMAKE_COPY} media\\images\\ ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
+                        $${QMAKE_COPY_DIR} ..\\_lib\\windows ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\ & \
+                        $${QMAKE_COPY_DIR} media\\process_icons ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
+                        $${QMAKE_COPY_DIR} media\\images ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
+                        $${QMAKE_COPY_DIR} media\\plugin_development ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
 }
@@ -121,9 +123,9 @@ linux: {
 }
 
 msvc {
-    QMAKE_CXXFLAGS_RELEASE -= -O1
-    QMAKE_CXXFLAGS_RELEASE -= -O2
-    QMAKE_CXXFLAGS_RELEASE *= -O3
+    #QMAKE_CXXFLAGS_RELEASE -= -O1
+    #QMAKE_CXXFLAGS_RELEASE -= -O2
+    #QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 
 clang {
