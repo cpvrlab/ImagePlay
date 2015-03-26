@@ -15,6 +15,7 @@ void IPLMorphologyBinary::init()
     // 0 1 0
     // 0 0 0
     int nrElements = 9;
+    _kernel.clear();
     for(int i=0; i<nrElements; i++)
     {
         _kernel.push_back((i==4 ? 1 : 0));
