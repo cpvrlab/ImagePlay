@@ -7,7 +7,7 @@ IPLProcess::IPLProcess(void)
     _resultReady        = false;
     _needsUpdate        = true;
     _openCVSupport      = IPLProcess::OPENCV_NONE;
-    _handler            = NULL;
+    _progressHandler    = NULL;
     _propertyHandler    = NULL;
     _category           = IPLProcess::CATEGORY_UNDEFINED;
 
@@ -18,7 +18,7 @@ IPLProcess::IPLProcess(void)
 IPLProcess::IPLProcess(const IPLProcess &other)
 {
     _className          = other._className;
-    _handler            = other._handler;
+    _progressHandler    = other._progressHandler;
     _propertyHandler    = other._propertyHandler;
     _isSource           = other._isSource;
     _isSequence         = other._isSequence;
@@ -27,6 +27,8 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _category           = other._category;
     _keywords           = other._keywords;
     _openCVSupport      = other._openCVSupport;
+    _inputs             = other._inputs;
+    _outputs            = other._outputs;
 
     for (auto &entry: other._properties)
         _properties[entry.first].reset(entry.second->clone());
@@ -36,7 +38,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
 
 IPLProcess::IPLProcess(IPLProcess &&other):
     _className(std::move(other._className)),
-    _handler(std::move(other._handler)),
+    _progressHandler(std::move(other._progressHandler)),
     _propertyHandler(std::move(other._propertyHandler)),
     _isSource(std::move(other._isSource)),
     _isSequence(std::move(other._isSequence)),
@@ -45,7 +47,9 @@ IPLProcess::IPLProcess(IPLProcess &&other):
     _category(std::move(other._category)),
     _keywords(std::move(other._keywords)),
     _openCVSupport(std::move(other._openCVSupport)),
-    _properties(std::move(other._properties))
+    _properties(std::move(other._properties)),
+    _inputs(std::move(other._inputs)),
+    _outputs(std::move(other._outputs))
 {}
 
 IPLProcess::~IPLProcess( void )
@@ -225,14 +229,14 @@ void IPLProcess::checkPropertyKey(const char *name)
 
 void IPLProcess::registerProgressEventHandler(IPLProgressEventHandler *handler)
 {
-    _handler = handler;
+    _progressHandler = handler;
 }
 
 void IPLProcess::notifyProgressEventHandler(int percent)
 {
-    if(_handler != NULL)
+    if(_progressHandler != NULL)
     {
-        _handler->updateProgress(percent);
+        _progressHandler->updateProgress(percent);
     }
 }
 

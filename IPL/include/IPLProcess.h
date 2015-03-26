@@ -193,7 +193,7 @@ private:
     bool                            _isSequence;
     bool                            _resultReady;
     bool                            _needsUpdate;
-    IPLProgressEventHandler*        _handler;
+    IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     //std::mutex                    _propertyMutex;
     std::string                     _className;

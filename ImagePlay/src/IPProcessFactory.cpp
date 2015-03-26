@@ -36,6 +36,8 @@ IPLProcess* IPProcessFactory::getInstance(QString name)
         // return a fresh copy of the template process
         IPLProcess* process = _map.value(name)->clone();
         process->properties()->clear();
+        process->inputs()->clear();
+        process->outputs()->clear();
         //process->addProcessPropertyString("title", "Title", "", IPL_STRING, process->title());
         process->init();
         return process;

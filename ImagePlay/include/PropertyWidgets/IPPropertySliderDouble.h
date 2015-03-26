@@ -19,7 +19,7 @@ public:
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
-        _property = NULL;
+        _property = property;
 
         double min   = ((IPLProcessPropertyDouble*) property)->min();
         double max   = ((IPLProcessPropertyDouble*) property)->max();
@@ -43,8 +43,6 @@ public:
         _spinner->setMaximum(max);
         _spinner->setValue(value);
         _spinner->setSingleStep(0.01);
-
-        _property = property;
     }
     void setMinimum(double v)  { _slider->setMinimum(v*100); }
     void setMaximum(double v)  { _slider->setMaximum(v*100); }

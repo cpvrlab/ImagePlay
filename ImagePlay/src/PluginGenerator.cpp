@@ -70,6 +70,7 @@ void PluginGenerator::on_btnGenerate_clicked()
     // get values
     _className = ui->inputClassName->text();
     _title = ui->inputClassName->text();
+    _description = ui->inputDescription->text();
     _keywords = ui->inputClassName->text();
     _author = ui->inputClassName->text();
     _category = ui->comboBoxCategory->currentText();
@@ -111,10 +112,6 @@ bool PluginGenerator::generateFiles()
         dir.mkdir(".");
     }
 
-    // copy interface
-    QFile file(_basePath + "TEMPLATE/plugininterface.h");
-    file.copy(_basePath + _className + "/plugininterface.h");
-
     // copy files and replace placeholders
     bool success = true;
     success &= generateFile("NAME.h", _className + ".h", _className);
@@ -126,7 +123,7 @@ bool PluginGenerator::generateFiles()
 
 bool PluginGenerator::generateFile(QString inputName, QString outputName, QString folder)
 {
-    QFile fileTemplate(_basePath + "TEMPLATE/" + inputName);
+    QFile fileTemplate(_basePath + "_template/" + inputName);
     if (!fileTemplate.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qWarning() << fileTemplate.fileName() << " not readable!";
@@ -146,6 +143,7 @@ bool PluginGenerator::generateFile(QString inputName, QString outputName, QStrin
         QString line = in.readLine();
         line = line.replace("%CLASSNAME%", _className);
         line = line.replace("%TITLE%", _title);
+        line = line.replace("%DESCRIPTION%", _description);
         line = line.replace("%KEYWORDS%", _keywords);
         line = line.replace("%AUTHOR%", _author);
         line = line.replace("%CATEGORY%", _category);

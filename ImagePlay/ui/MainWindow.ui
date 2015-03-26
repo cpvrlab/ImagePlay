@@ -571,9 +571,6 @@
    </property>
   </action>
   <action name="actionGeneratePlugin">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="text">
     <string>Generate Plugin Code</string>
    </property>

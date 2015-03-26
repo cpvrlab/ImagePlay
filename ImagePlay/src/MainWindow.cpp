@@ -282,7 +282,9 @@ void MainWindow::setActiveProcessStep(IPProcessStep* step)
 
         if(_synchronizeViews)
         {
+            _allowChangeActiveProcessStep = false;
             _imageViewer->setActiveStep(_activeProcessStep->stepID());
+            _allowChangeActiveProcessStep = true;
         }
 
         if(_lastActiveProcessStep)

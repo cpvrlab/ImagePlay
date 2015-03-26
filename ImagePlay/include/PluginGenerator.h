@@ -32,6 +32,7 @@ private:
     QString _basePath;
     QString _className;
     QString _title;
+    QString _description;
     QString _keywords;
     QString _category;
     QString _openCV;
