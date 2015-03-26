@@ -9,6 +9,7 @@ void IPLMedian::init()
     setClassName("IPLMedian");
     setTitle("Median Operator");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setOpenCVSupport(IPLProcess::OPENCV_OPTIONAL);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
@@ -23,7 +24,7 @@ void IPLMedian::destroy()
     delete _result;
 }
 
-bool IPLMedian::processInputData(IPLImage* image , int, bool)
+bool IPLMedian::processInputData(IPLImage* image , int, bool useOpenCV)
 {
     // delete previous result
     delete _result;
@@ -31,10 +32,9 @@ bool IPLMedian::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    _result = new IPLImage( image->type(), width, height );
 
     // get properties
-    int window = getProcessPropertyInt("window") * 2 - 1;
+    int window = getProcessPropertyInt("window");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();
@@ -43,45 +43,60 @@ bool IPLMedian::processInputData(IPLImage* image , int, bool)
     int w2 = window/2;
     int area = window*window;
 
-    #pragma omp parallel for
-    for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
+    if (!useOpenCV)
     {
-        IPLImagePlane* plane = image->plane( planeNr );
-        IPLImagePlane* newplane = _result->plane( planeNr );
+        _result = new IPLImage( image->type(), width, height );
 
-        ipl_basetype* list = new ipl_basetype[area];
-
-        for(int x=0; x<width; x++)
+        #pragma omp parallel for
+        for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
         {
-            // progress
-            notifyProgressEventHandler(100*progress++/maxProgress);
+            IPLImagePlane* plane = image->plane( planeNr );
+            IPLImagePlane* newplane = _result->plane( planeNr );
+
+            ipl_basetype* list = new ipl_basetype[area];
 
             for(int y=0; y<height; y++)
             {
-                int i =0;
-                for( int kx=-w2; kx<=w2; kx++ )
+                // progress
+                notifyProgressEventHandler(100*progress++/maxProgress);
+
+                for(int x=0; x<width; x++)
                 {
+                    int i =0;
                     for( int ky=-w2; ky<=w2; ky++ )
                     {
-                        list[i++] = plane->bp(x+kx, y+ky);
+                        for( int kx=-w2; kx<=w2; kx++ )
+                        {
+                            list[i++] = plane->bp(x+kx, y+ky);
+                        }
                     }
-                }
 
-                // insert sort list
-                for( int k=area; k>=0; k--)
-                {
-                    int j = k+1;
-                    ipl_basetype temp = list[k];
-                    while( j < area && temp > list[j] )
+                    // insert sort list
+                    for( int k=area; k>=0; k--)
                     {
-                        list[j-1] = list[j];
-                        j++;
+                        int j = k+1;
+                        ipl_basetype temp = list[k];
+                        while( j < area && temp > list[j] )
+                        {
+                            list[j-1] = list[j];
+                            j++;
+                        }
+                        list[j-1] = temp;
                     }
-                    list[j-1] = temp;
+                    newplane->p(x,y) = list[area/2];
                 }
-                newplane->p(x,y) = list[area/2];
             }
         }
+    }
+    else
+    {
+        notifyProgressEventHandler(50*progress++/maxProgress);
+
+        auto src = image->toCvMat();
+        cv::Mat dst;
+
+        cv::medianBlur(src,dst,window);
+        _result = new IPLImage(dst);
     }
     return true;
 }
