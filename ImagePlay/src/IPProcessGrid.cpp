@@ -408,7 +408,7 @@ void IPProcessGrid::zoomTo(float newScale)
     setMatrix(matrix);
 
     // update statusbar
-    _mainWindow->statusBar()->showMessage(QString("Zoom: ").append(QString::number(_scale*100)).append("%"));
+    _mainWindow->statusBar()->showMessage(QString("Zoom: %1%").arg(QString::number(_scale*100, 'f', 0)));
 }
 
 /*!
