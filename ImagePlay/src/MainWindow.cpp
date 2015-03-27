@@ -391,6 +391,12 @@ void MainWindow::loadProcesses()
 
 void MainWindow::loadPlugins()
 {
+#if defined(_WIN32)
+    static const auto pluginFilter = QStringList() << "*.dll";
+#else
+    static const auto pluginFilter = QStringList() << "*.so";
+#endif
+
     ui->processTabWidget->clear();
 
     QDir pluginsDir(qApp->applicationDirPath() + "/plugins");
@@ -409,9 +415,9 @@ void MainWindow::loadPlugins()
     }
 
     // create new directory, copy dlls
-    tmpPluginsDir.mkdir(".");
+    tmpPluginsDir.mkpath(".");
 
-    pluginsDir.setNameFilters(QStringList() << "*.dll");
+    pluginsDir.setNameFilters(pluginFilter);
     foreach (QString fileName, pluginsDir.entryList(QDir::Files))
     {
         QFile file(pluginsDir.filePath(fileName));
@@ -420,7 +426,7 @@ void MainWindow::loadPlugins()
 
     if(tmpPluginsDir.exists())
     {
-        tmpPluginsDir.setNameFilters(QStringList() << "*.dll");
+        tmpPluginsDir.setNameFilters(pluginFilter);
 
         foreach (QString fileName, tmpPluginsDir.entryList(QDir::Files))
         {
