@@ -23,7 +23,7 @@ void IPLCanny::init()
     addOutput("Gradient", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 3,3,9);
+    addProcessPropertyInt("window", "Odd", "", IPL_INT_SLIDER_ODD, 3, 3, 7);
     addProcessPropertyDouble("sigma", "Sigma", "", IPL_DOUBLE_SLIDER, 1.5, 0.5, 10);
 }
 
@@ -158,6 +158,11 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
     // get properties
     int window      = getProcessPropertyInt("window");
     double sigma    = getProcessPropertyDouble("sigma");
+
+    std::stringstream s;
+    s << "Window: ";
+    s << window;
+    addInformation(s.str());
 
     //! @todo currently only the opencv implementation works
     if(useOpenCV || true)

@@ -130,7 +130,8 @@ IPLImagePlane* IPLImage::plane(int planeNr)
 {
     if(planeNr >= (int)_planes.size() || planeNr < 0)
     {
-        std::stringstream error("Invalid plane number: ");
+        std::stringstream error;
+        error << ("Invalid plane number: ");
         error << planeNr;
         throw std::runtime_error(error.str());
         return NULL;

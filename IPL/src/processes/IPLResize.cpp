@@ -32,10 +32,6 @@ void IPLResize::destroy()
 
 bool IPLResize::processInputData(IPLImage* image , int, bool)
 {
-    // delete previous result
-    delete _result;
-    _result = NULL;
-
     // get properties
     int mode = getProcessPropertyInt("mode");
     int width = getProcessPropertyInt("width");
@@ -72,8 +68,6 @@ bool IPLResize::processInputData(IPLImage* image , int, bool)
     s << "<b>Height</b>: " << height << "\n";
     s << "<b>Width</b>: " << width;
     addInformation(s.str());
-
-    _result = new IPLImage(image->type(), width, height);
 
     cv::Mat result;
     if(mode == 0)
