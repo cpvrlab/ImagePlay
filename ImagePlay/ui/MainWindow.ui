@@ -211,9 +211,9 @@
       </widget>
      </item>
      <item>
-      <widget class="IPFilterLineEdit" name="lineEdit">
+      <widget class="IPFilterLineEdit" name="txtFilter">
        <property name="placeholderText">
-        <string>Search...</string>
+        <string>Search (Ctrl+F)...</string>
        </property>
       </widget>
      </item>

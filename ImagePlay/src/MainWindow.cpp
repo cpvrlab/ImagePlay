@@ -90,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // read and apply settings
     readSettings();
+
+    setFilterFocus();
 }
 
 MainWindow::~MainWindow()
@@ -476,6 +478,12 @@ void MainWindow::reloadPlugins()
 
     // activate plugin tab
     ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
+}
+
+void MainWindow::setFilterFocus()
+{
+    ui->txtFilter->setFocus();
+    ui->txtFilter->setSelection(0, ui->txtFilter->text().length());
 }
 
 void MainWindow::showMessage(QString msg, MessageType status)
@@ -870,7 +878,7 @@ void MainWindow::on_actionZoomReset_triggered()
 }
 
 
-void MainWindow::on_lineEdit_textChanged(const QString &text)
+void MainWindow::on_txtFilter_textChanged(const QString &text)
 {
     ui->processTabWidget->filter(text);
 }
@@ -1019,9 +1027,15 @@ void MainWindow::on_sequenceChanged(int index, int count)
 
 void MainWindow::keyReleaseEvent(QKeyEvent* event)
 {
+    Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
+
     if(event->key() == Qt::Key_Escape)
     {
         hideProcessSettings();
+    }
+    if(event->key() == Qt::Key_F && modifiers&Qt::ControlModifier)
+    {
+        setFilterFocus();
     }
 }
 

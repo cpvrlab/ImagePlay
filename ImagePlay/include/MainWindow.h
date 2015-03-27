@@ -74,6 +74,7 @@ public:
     void                    loadPlugins                     ();
     void                    unloadPlugins                   ();
     void                    reloadPlugins                   ();
+    void                    setFilterFocus                  ();
     // disable right click toolbar menu
     QMenu*                  createPopupMenu                 ()                              { return NULL; }
     bool                    synchronizeViews                ()                              { return _synchronizeViews; }
@@ -113,7 +114,7 @@ private slots:
     void                    on_actionZoomIn_triggered       ();
     void                    on_actionZoomOut_triggered      ();
     void                    on_actionZoomReset_triggered    ();
-    void                    on_lineEdit_textChanged         (const QString &arg1);
+    void                    on_txtFilter_textChanged        (const QString &arg1);
     void                    on_actionSettings_2_triggered   ();
     void                    on_actionAbout_triggered        ();
     void                    on_buttonBox_rejected           ();
