@@ -29,6 +29,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _openCVSupport      = other._openCVSupport;
     _inputs             = other._inputs;
     _outputs            = other._outputs;
+    _messages           = other._messages;
 
     for (auto &entry: other._properties)
         _properties[entry.first].reset(entry.second->clone());
@@ -49,7 +50,8 @@ IPLProcess::IPLProcess(IPLProcess &&other):
     _openCVSupport(std::move(other._openCVSupport)),
     _properties(std::move(other._properties)),
     _inputs(std::move(other._inputs)),
-    _outputs(std::move(other._outputs))
+    _outputs(std::move(other._outputs)),
+    _messages(std::move(other._messages))
 {}
 
 IPLProcess::~IPLProcess( void )

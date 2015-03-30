@@ -8,7 +8,7 @@
 #             WITHOUT ANY WARRANTIES WHETHER EXPRESSED OR IMPLIED.
 ##############################################################################
 
-QT       += core gui network
+QT       += core gui
 
 PRECOMPILED_HEADER = include/stafx.h
 

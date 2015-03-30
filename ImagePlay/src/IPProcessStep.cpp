@@ -186,7 +186,7 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
 
 
         // icon
-        _icon.paint(painter,9,41,14,14);
+        //_icon.paint(painter,9,41,14,14);
 
     }
 

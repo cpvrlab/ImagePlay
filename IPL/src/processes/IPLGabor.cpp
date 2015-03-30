@@ -19,7 +19,7 @@ void IPLGabor::init()
     addOutput("Power Gabor ", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 5, 3, 15);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 5, 3, 15);
     addProcessPropertyInt("wavelength", "Wavelength", "", IPL_INT_SLIDER, 5, 1, 15);
     addProcessPropertyDouble("direction", "Direction", "", IPL_DOUBLE_SLIDER, 0, 0, 2*PI);
     addProcessPropertyDouble("deviation", "Deviation", "", IPL_DOUBLE_SLIDER, 5, 1, 10);

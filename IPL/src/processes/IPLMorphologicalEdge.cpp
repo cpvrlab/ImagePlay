@@ -15,7 +15,7 @@ void IPLMorphologicalEdge::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 9);
 }
 
 void IPLMorphologicalEdge::destroy()
@@ -34,7 +34,7 @@ bool IPLMorphologicalEdge::processInputData(IPLImage* image , int, bool)
     _result = new IPLImage( image->type(), width, height );
 
     // get properties
-    int window = getProcessPropertyInt("window") * 2 - 1;
+    int window = getProcessPropertyInt("window");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes() * 2;
@@ -50,32 +50,32 @@ bool IPLMorphologicalEdge::processInputData(IPLImage* image , int, bool)
         IPLImagePlane* newplane = _result->plane( planeNr );
         IPLImagePlane* average = new IPLImagePlane(width, height);
 
-        for(int x=0; x<width; x++)
+        for(int x=w2; x<width-w2; x++)
         {
             // progress
             notifyProgressEventHandler(100*progress++/maxProgress);
-            for(int y=0; y<height; y++)
+            for(int y=w2; y<height-w2; y++)
             {
                 ipl_basetype sum = 0;
                 for( int kx=-w2; kx<=w2; kx++ )
                 {
                     for( int ky=-w2; ky<=w2; ky++ )
                     {
-                        if( kx || ky ) sum += plane->bp(x+kx, y+ky);
+                        if( kx || ky ) sum += plane->p(x+kx, y+ky);
                     }
                 }
                 average->p(x,y) = sum;
             }
         }
-        for(int x=0; x<width; x++)
+        for(int x=w2; x<width-w2; x++)
         {
             // progress
             notifyProgressEventHandler(100*progress++/maxProgress);
 
-            for(int y=0; y<height; y++)
+            for(int y=w2; y<height-w2; y++)
             {
-                int minc = (area-1);
-                int maxc = 0;
+                float minc = (area-1);
+                float maxc = 0;
                 for( int kx=-w2; kx<=w2; kx++ )
                 {
                     for( int ky=-w2; ky<=w2; ky++ )
