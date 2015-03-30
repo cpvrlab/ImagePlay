@@ -119,7 +119,11 @@ linux: {
     LIBS += -lopencv_highgui
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
-                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/ \
+                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/ &&\
+                        $${QMAKE_MKDIR} ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
+                        rm -rf ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_template && \
+                        $${QMAKE_COPY_DIR} media/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
+                        $${QMAKE_COPY_DIR} media/plugin_development/_template ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development \
 }
 
 msvc {
