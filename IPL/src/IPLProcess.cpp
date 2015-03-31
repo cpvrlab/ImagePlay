@@ -277,12 +277,16 @@ void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
 
 void IPLProcess::resetMessages()
 {
+    _messageMutex.lock();
     _messages.clear();
+    _messageMutex.unlock();
 }
 
 void IPLProcess::addMessage(IPLProcessMessage msg)
 {
+    _messageMutex.lock();
     _messages.push_back(msg);
+    _messageMutex.unlock();
 }
 
 void IPLProcess::addError(std::string msg)

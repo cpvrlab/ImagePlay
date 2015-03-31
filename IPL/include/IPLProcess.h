@@ -40,17 +40,6 @@ struct IPLSHARED_EXPORT IPLProcessMessage
         this->type = type;
     }
 
-    IPLProcessMessage(const IPLProcessMessage& other)
-    {
-        this->msg = other.msg;
-        this->type = other.type;
-    }
-
-    IPLProcessMessage(IPLProcessMessage &&other):
-        msg(std::move(other.msg)),
-        type(std::move(other.type))
-    {}
-
     IPLProcessMessageType   type;
     std::string             msg;
 
@@ -207,6 +196,7 @@ private:
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     //std::mutex                    _propertyMutex;
+    std::mutex                      _messageMutex;
     std::string                     _className;
     std::string                     _title;
     std::string                     _description;
