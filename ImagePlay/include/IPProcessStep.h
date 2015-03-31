@@ -67,12 +67,7 @@ public:
     void                    updateThumbnail ();
 
 public slots:
-    void setProgress(int progress)          {
-        _progress = progress > 100 ? 100 : (progress < 0 ? 0 : progress); // 0-100
-
-        // redraw
-        update(boundingRect());
-    }
+    void                    setProgress     (int progress);
 
 private:
     static long             _stepCounter;   //!< auto increment for step ID

@@ -31,7 +31,7 @@
     #pragma warning(disable:4251) // class 'type' needs to have dll-interface to be used by clients of class 'type2'
     #pragma warning(disable:4100) // unreferenced formal parameter
     #pragma warning(disable:4996) // strtok unsafe
-    #pragma warning(disable: 4244) // possible loss of data
+    #pragma warning(disable:4244) // possible loss of data
 #endif
 
 #if defined(IPL_LIBRARY)

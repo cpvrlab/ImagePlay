@@ -41,7 +41,6 @@ public:
         _presets.push_back(IPKernelPreset("Gaussian Blur 5x5",  presetGaussianBlur5, 25));
         _presets.push_back(IPKernelPreset("Laplace of Gaussian 3x3",  presetLoG3, 9));
         _presets.push_back(IPKernelPreset("Laplace of Gaussian 5x5",  presetLoG5, 25));
-        _presets.push_back(IPKernelPreset("Gaussian Blur 5x5",  presetGaussianBlur5, 25));
         _presets.push_back(IPKernelPreset("Edge Enhance",   presetEdgeEnhance, 9));
         _presets.push_back(IPKernelPreset("Edge Detect",    presetEdgeDetect, 9));
         _presets.push_back(IPKernelPreset("Emboss",         presetEmboss, 9));
