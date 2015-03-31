@@ -129,6 +129,8 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
     }
     else
     {
+        notifyProgressEventHandler(50);
+
         cv::Mat src = image->toCvMat();
         cv::Mat dst;
         cv::Mat kernel(kernelWidth, kernelWidth, CV_32FC1 );
