@@ -84,7 +84,6 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
     /// @todo implement manhattan distance threshold instead
     /// of stupid iterations...
 
-    #pragma omp parallel for schedule(dynamic)
     for(int it=0; it<_iterations; it++)
     {
         // DILATE
