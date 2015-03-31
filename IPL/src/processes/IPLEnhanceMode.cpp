@@ -16,7 +16,7 @@ void IPLEnhanceMode::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER, 3, 15);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 15);
 }
 
 void IPLEnhanceMode::destroy()
