@@ -122,6 +122,8 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, in
 
     _mainWindow->setThreadRunning(true);
     process->setResultReady(false);
+    process->resetMessages();
+
     thread.start();
     while(!thread.isFinished())
     {

@@ -19,7 +19,6 @@ void IPProcessThread::run()
 
     try
     {
-        _process->resetMessages();
         _success = _process->processInputData(_image, _inputIndex, _useOpenCV);
     }
     catch(std::exception &e)

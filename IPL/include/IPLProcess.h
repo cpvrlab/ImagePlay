@@ -46,6 +46,11 @@ struct IPLSHARED_EXPORT IPLProcessMessage
         this->type = other.type;
     }
 
+    IPLProcessMessage(IPLProcessMessage &&other):
+        msg(std::move(other.msg)),
+        type(std::move(other.type))
+    {}
+
     IPLProcessMessageType   type;
     std::string             msg;
 
