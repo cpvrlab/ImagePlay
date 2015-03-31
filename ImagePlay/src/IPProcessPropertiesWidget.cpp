@@ -60,6 +60,16 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             IPPropertySliderInt* widget = new IPPropertySliderInt((IPLProcessPropertyInt*) property, this);
             addPropertyWidget(property->name(), property->description(), widget);
         }
+        else if(property->type() == IPL_INT_SLIDER_ODD)
+        {
+            IPPropertySliderIntOdd* widget = new IPPropertySliderIntOdd((IPLProcessPropertyInt*) property, this);
+            addPropertyWidget(property->name(), property->description(), widget);
+        }
+        else if(property->type() == IPL_INT_SLIDER_EVEN)
+        {
+            IPPropertySliderIntEven* widget = new IPPropertySliderIntEven((IPLProcessPropertyInt*) property, this);
+            addPropertyWidget(property->name(), property->description(), widget);
+        }
         else if(property->type() == IPL_INT)
         {
             IPPropertySpinnerInt* widget = new IPPropertySpinnerInt((IPLProcessPropertyInt*) property, this);

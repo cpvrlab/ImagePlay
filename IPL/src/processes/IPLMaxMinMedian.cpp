@@ -15,7 +15,7 @@ void IPLMaxMinMedian::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 9);
 }
 
 void IPLMaxMinMedian::destroy()
@@ -35,7 +35,6 @@ bool IPLMaxMinMedian::processInputData(IPLImage* image , int, bool)
 
     // get properties
     int window = getProcessPropertyInt("window");
-    window = (window/2)*2+1;
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

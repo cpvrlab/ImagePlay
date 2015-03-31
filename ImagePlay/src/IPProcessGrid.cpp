@@ -408,7 +408,7 @@ void IPProcessGrid::zoomTo(float newScale)
     setMatrix(matrix);
 
     // update statusbar
-    _mainWindow->statusBar()->showMessage(QString("Zoom: ").append(QString::number(_scale*100)).append("%"));
+    _mainWindow->statusBar()->showMessage(QString("Zoom: %1%").arg(QString::number(_scale*100, 'f', 0)));
 }
 
 /*!
@@ -446,6 +446,8 @@ void IPProcessGrid::resizeEvent(QResizeEvent *)
  */
 void IPProcessGrid::keyPressEvent(QKeyEvent *event)
 {
+    Qt::KeyboardModifiers modifiers = event->modifiers();
+
     if(event->key() == Qt::Key_Space)
     {
         setDragMode(QGraphicsView::ScrollHandDrag);
@@ -458,11 +460,12 @@ void IPProcessGrid::keyPressEvent(QKeyEvent *event)
  */
 void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
 {
+    Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
+
     if(event->key() == Qt::Key_Space)
     {
         setDragMode(QGraphicsView::RubberBandDrag);
     }
-
     if(event->key() == Qt::Key_Delete)
     {
         _scene->deleteSelectedItems();
@@ -470,6 +473,11 @@ void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
     if(event->key() == Qt::Key_Escape)
     {
         _mainWindow->hideProcessSettings();
+    }
+    if(event->key() == Qt::Key_F && modifiers&Qt::ControlModifier)
+    {
+        _mainWindow->hideProcessSettings();
+        _mainWindow->setFilterFocus();
     }
 }
 

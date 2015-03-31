@@ -12,6 +12,8 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include "PropertyWidgets/IPPropertySliderInt.h"
+#include "PropertyWidgets/IPPropertySliderIntOdd.h"
+#include "PropertyWidgets/IPPropertySliderIntEven.h"
 #include "PropertyWidgets/IPPropertySpinnerInt.h"
 #include "PropertyWidgets/IPPropertySliderDouble.h"
 #include "PropertyWidgets/IPPropertyFileOpen.h"

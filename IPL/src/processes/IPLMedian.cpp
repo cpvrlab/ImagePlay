@@ -16,7 +16,7 @@ void IPLMedian::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 9);
 }
 
 void IPLMedian::destroy()

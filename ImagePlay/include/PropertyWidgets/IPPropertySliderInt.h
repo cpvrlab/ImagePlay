@@ -36,14 +36,15 @@ public:
         _slider->setMinimum(min);
         _slider->setMaximum(max);
         _slider->setValue(value);
+        _slider->setSingleStep(1);
 
         _spinner->setMinimum(min);
         _spinner->setMaximum(max);
         _spinner->setValue(value);
 
-        connect(_slider, &QSlider::sliderReleased, this, &IPPropertySliderInt::updateValue );
-        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderInt::updateSpinner );
-        connect(_spinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertySliderInt::updateSlider );
+        //connect(_slider, &QSlider::sliderReleased, this, &IPPropertySliderInt::updateValue );
+        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderInt::onSliderChanged );
+        connect(_spinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertySliderInt::onSpinnerChanged);
     }
     void setMinimum(int v)  { _slider->setMinimum(v);  _spinner->setMinimum(v); }
     void setMaximum(int v)  { _slider->setMaximum(v);  _spinner->setMaximum(v); }
@@ -54,22 +55,23 @@ public:
 signals:
 
 public slots:
-    void updateSpinner(int v)
+    void onSliderChanged(int v)
     {
+        qDebug() << "onSliderChanged";
         _spinner->setValue(v);
 
         updateValue();
     }
 
-    void updateSlider(int v)
+    void onSpinnerChanged(int v)
     {
+        qDebug() << "onSpinnerChanged";
         _slider->setValue(v);
-
-        updateValue();
     }
 
     void updateValue()
     {
+        qDebug() << "updateValue";
         int v = _slider->value();
 
         // prevent double changes

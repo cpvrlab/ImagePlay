@@ -31,12 +31,11 @@ void IPLAddNoise::destroy()
 
 bool IPLAddNoise::processInputData(IPLImage* image , int, bool)
 {
-    // delete previous result
-    delete _result;
-    _result = NULL;
-
     int width = image->width();
     int height = image->height();
+
+    // delete previous result
+    delete _result;
     _result = new IPLImage( image->type(), width, height );
 
     // get properties
