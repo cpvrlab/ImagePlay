@@ -23,7 +23,7 @@ void IPLCanny::init()
     addOutput("Gradient", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyInt("window", "Odd", "", IPL_INT_SLIDER_ODD, 3, 3, 7);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 7);
     addProcessPropertyDouble("sigma", "Sigma", "", IPL_DOUBLE_SLIDER, 1.5, 0.5, 10);
 }
 
@@ -182,7 +182,6 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
 
     // Create a Gaussian 1D filter
     int N = ceil( sigma * sqrt( 2.0*log( 1.0/0.015 ) ) + 1.0 );
-    window = 2*N+1;
     double ssq = sigma*sigma;
     double* gau = new double [window];
     double* dgau = new double [window];

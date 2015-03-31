@@ -16,7 +16,7 @@ void IPLLaplaceOfGaussian::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3,3,9);
     addProcessPropertyDouble("deviation", "Deviation", "", IPL_DOUBLE_SLIDER, 1,1,10);
     addProcessPropertyBool("zeroCrossing", "Zero Crossing", "", IPL_BOOL_CHECKBOX, false);
 }
@@ -37,7 +37,7 @@ bool IPLLaplaceOfGaussian::processInputData(IPLImage* image , int, bool)
     _result = new IPLImage( image->type(), width, height );
 
     // get properties
-    int window = getProcessPropertyInt("window") * 2 - 1;
+    int window = getProcessPropertyInt("window");
     double deviation = getProcessPropertyDouble("deviation");
     bool zeroCrossing = getProcessPropertyBool("zeroCrossing");
 
@@ -99,10 +99,10 @@ bool IPLLaplaceOfGaussian::processInputData(IPLImage* image , int, bool)
                 for(int y=1; y<height-1; y++)
                 {
                     newplane->p(x,y) = 0;
-                    if( tmpPlane->p(x-1,y)*tmpPlane->bp(x+1,y) < 0.0 ) newplane->p(x,y) = 1.0;
-                    if( tmpPlane->p(x,y-1)*tmpPlane->bp(x,y+1) < 0.0 ) newplane->p(x,y) = 1.0;
-                    if( tmpPlane->p(x-1,y-1)*tmpPlane->bp(x+1,y+1) < 0.0 ) newplane->p(x,y) = 1.0;
-                    if( tmpPlane->p(x-1,y+1)*tmpPlane->bp(x+1,y-1) < 0.0 ) newplane->p(x,y) = 1.0;
+                    if( tmpPlane->p(x-1,y)*tmpPlane->p(x+1,y) < 0.0 ) newplane->p(x,y) = 1.0;
+                    if( tmpPlane->p(x,y-1)*tmpPlane->p(x,y+1) < 0.0 ) newplane->p(x,y) = 1.0;
+                    if( tmpPlane->p(x-1,y-1)*tmpPlane->p(x+1,y+1) < 0.0 ) newplane->p(x,y) = 1.0;
+                    if( tmpPlane->p(x-1,y+1)*tmpPlane->p(x+1,y-1) < 0.0 ) newplane->p(x,y) = 1.0;
                 }
             }
         }

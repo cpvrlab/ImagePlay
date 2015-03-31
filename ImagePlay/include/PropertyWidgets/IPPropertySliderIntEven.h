@@ -33,10 +33,12 @@ public:
         layout()->addWidget(_slider);
         layout()->addWidget(_spinner);
 
-        _slider->setMinimum(min);
-        _slider->setMaximum(max/2);
-        _slider->setValue(value/2);
+        // slider scale is 0 - (max-min/2), step is 1
+        _slider->setMinimum(0);
+        _slider->setMaximum((max-min)/2);
+        _slider->setValue((value-min)/2);
 
+        // spinner scale is min - max, step is 2
         _spinner->setMinimum(min);
         _spinner->setMaximum(max);
         _spinner->setValue(value);
@@ -60,15 +62,12 @@ public slots:
     {
         if(_ignoreEvents)
             return;
-        qDebug() << "updateSpinner";
-        _spinner->setValue(v*2-1);
+        _spinner->setValue(v*2+_spinner->minimum());
     }
 
     void onSpinnerChanged(int v)
     {
-        qDebug() << "updateSlider";
-
-        // only allow odd values
+        // only allow even values
         if(v%2 != 0)
         {
             _ignoreEvents = true;
@@ -79,17 +78,16 @@ public slots:
             _ignoreEvents = false;
             return;
         }
-        _slider->setValue((v+1)/2);
+        _slider->setValue((v-_spinner->minimum())/2);
 
         updateValue();
     }
 
     void updateValue()
     {
-        qDebug() << "updateValue";
         int v = _spinner->value();
 
-        // prevent double changes
+        // prevent duplicate changes
         if(v == _lastValue)
         {
             return;

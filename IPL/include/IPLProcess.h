@@ -40,6 +40,12 @@ struct IPLSHARED_EXPORT IPLProcessMessage
         this->type = type;
     }
 
+    IPLProcessMessage(const IPLProcessMessage& other)
+    {
+        this->msg = other.msg;
+        this->type = other.type;
+    }
+
     IPLProcessMessageType   type;
     std::string             msg;
 

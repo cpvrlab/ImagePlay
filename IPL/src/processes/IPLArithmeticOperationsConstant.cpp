@@ -6,7 +6,6 @@ using namespace std;
 #define Arithmetic_Sub(A,B)          max(0.0f, (A - B))
 #define Arithmetic_Mul(A,B)          min(1.0f, (A * B))
 #define Arithmetic_Div(A,B)          min(1.0f, ((B > 0.0f ? (A / B) : 1.0f)))
-#define Arithmetic_Max(A,B)          max(A, B)
 
 void IPLArithmeticOperationsConstant::init()
 {
@@ -20,6 +19,7 @@ void IPLArithmeticOperationsConstant::init()
     setTitle("Arithmetic Operations Constant");
     setCategory(IPLProcess::CATEGORY_ARITHMETIC);
     setDescription("Performs arithmetic operations based an input image and a constant.");
+    setKeywords("add, substract, multiply, divide");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
