@@ -50,35 +50,56 @@ typedef float           ipl_basetype;
 
 #define PI 3.14159265359
 
-/*!
- * \brief The IPLProcessPropertyType enum
- */
-enum IPLProcessPropertyType
+enum IPLProcessWidgetType
 {
-    IPL_INT,
-    IPL_DOUBLE,
-    IPL_INT_SLIDER,
-    IPL_INT_SLIDER_ODD,
-    IPL_INT_SLIDER_EVEN,
-    IPL_DOUBLE_SLIDER,
-    IPL_COLOR_RGB,
-    IPL_COLOR_HSL,
-    IPL_COLOR_HSV,
-    IPL_FILE_OPEN,
-    IPL_FILE_SAVE,
-    IPL_FOLDER,
-    IPL_BOOL_CHECKBOX,
-    IPL_INT_CHECKBOXES,
-    IPL_INT_RADIOBUTTONS,
-    IPL_INT_COMBOBOX,
-    IPL_INT_KERNEL,
-    IPL_INT_BINARY_MORPHOLOGY,
-    IPL_INT_BINARY_MORPHOLOGY_TRISTATE,
-    IPL_INT_GRAYSCALE_MORPHOLOGY,
-    IPL_DOUBLE_GAMMA,
-    IPL_STRING,
-    IPL_LABEL,
-    IPL_POINT
+    IPL_WIDGET_DEFAULT = 0,
+    IPL_WIDGET_HIDDEN,
+
+    //Bitfield or Booleans
+    IPL_WIDGET_CHECKBOXES,
+
+    //Enumerated integer
+    IPL_WIDGET_RADIOBUTTONS,
+    IPL_WIDGET_COMBOBOX,
+
+    //Numeric
+    IPL_WIDGET_SLIDER,
+    IPL_WIDGET_SPINNER,
+
+    //Integer
+    IPL_WIDGET_SLIDER_ODD,
+    IPL_WIDGET_SLIDER_EVEN,
+
+    //String
+    IPL_WIDGET_TEXTFIELD,
+    IPL_WIDGET_LABEL,
+    IPL_WIDGET_TITLE,
+    IPL_WIDGET_FILE_OPEN,
+    IPL_WIDGET_FILE_SAVE,
+    IPL_WIDGET_FOLDER,
+
+    //Kernel
+    IPL_WIDGET_KERNEL,
+
+    //Morphology
+    IPL_WIDGET_BINARY_MORPHOLOGY,
+    IPL_WIDGET_BINARY_MORPHOLOGY_TRISTATE,
+    IPL_WIDGET_GRAYSCALE_MORPHOLOGY,
+
+    //Color
+    IPL_WIDGET_COLOR_RGB,
+    IPL_WIDGET_COLOR_HSL,
+    IPL_WIDGET_COLOR_HSV,
+
+    //Points
+    IPL_WIDGET_POINT,
+
+    //Add additional widget types here
+    //...
+
+    IPL_NUM_WIDGETS
 };
+
+const char *widgetName(IPLProcessWidgetType type);
 
 #endif // IPL_GLOBAL_H
