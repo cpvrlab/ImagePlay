@@ -23,8 +23,8 @@ void IPLCanny::init()
     addOutput("Gradient", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 7);
-    addProcessPropertyDouble("sigma", "Sigma", "", IPL_DOUBLE_SLIDER, 1.5, 0.5, 10);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 7);
+    addProcessPropertyDouble("sigma", "Sigma", "", 1.5, IPL_WIDGET_SLIDER, 0.5, 10);
 }
 
 void IPLCanny::destroy()

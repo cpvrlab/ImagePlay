@@ -16,10 +16,10 @@ void IPLCanvasSize::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("width",      "Width", "", IPL_INT_SLIDER, 512, 1, 4096);
-    addProcessPropertyInt("height",     "Height", "", IPL_INT_SLIDER, 512, 1, 4096);
-    addProcessPropertyInt("anchor",     "Anchor:Top Left|Top|Top Right|Left|Center|Right|Bottom Left|Bottom|Bottom Right", "", IPL_INT_COMBOBOX, 4);
-    addProcessPropertyColor("color",    "Background", "If extending the canvas, the background is filled with this color", IPL_COLOR_RGB, IPLColor(0,0,0));
+    addProcessPropertyInt("width",      "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyInt("height",     "Height", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyInt("anchor",     "Anchor:Top Left|Top|Top Right|Left|Center|Right|Bottom Left|Bottom|Bottom Right", "", 4, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyColor("color",    "Background", "If extending the canvas, the background is filled with this color", IPLColor(0,0,0), IPL_WIDGET_COLOR_RGB);
 }
 
 void IPLCanvasSize::destroy()

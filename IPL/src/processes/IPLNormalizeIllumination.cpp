@@ -19,8 +19,8 @@ void IPLNormalizeIllumination::init()
     addOutput("Illumination Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("cycles", "Cycles", "", IPL_INT_SLIDER, 4,1,10);
-    addProcessPropertyDouble("factor", "Factor", "", IPL_DOUBLE_SLIDER, 1.0,1.0,10.0);
+    addProcessPropertyInt("cycles", "Cycles", "", 4, IPL_WIDGET_SLIDER, 1, 10);
+    addProcessPropertyDouble("factor", "Factor", "", 1.0, IPL_WIDGET_SLIDER, 1.0, 10.0);
 }
 
 void IPLNormalizeIllumination::destroy()

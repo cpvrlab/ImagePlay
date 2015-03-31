@@ -16,13 +16,13 @@ void IPLResize::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("mode", "Mode:Absolute|Factor", "Uses either height and width or factor x and factor y", IPL_INT_COMBOBOX, 0, 0, 1);
-    addProcessPropertyInt("width", "Width", "", IPL_INT_SLIDER, 512, 1, 4096);
-    addProcessPropertyInt("height", "Height", "", IPL_INT_SLIDER, 512, 1, 4096);
-    addProcessPropertyDouble("factor_x", "Factor X", "", IPL_DOUBLE_SLIDER, 1.0, 0.1, 10.0);
-    addProcessPropertyDouble("factor_y", "Factor Y", "", IPL_DOUBLE_SLIDER, 1.0, 0.1, 10.0);
-    addProcessPropertyInt("keep_aspect_ratio", "Keep Aspect Ratio:None|Based on width|Based on height", "", IPL_INT_COMBOBOX, 0, 0, 1);
-    addProcessPropertyInt("interpolation", "Interpolation:Nearest|Linear|Area|Cubic|Lanczos4", "", IPL_INT_COMBOBOX, 0, 0, 4);
+    addProcessPropertyInt("mode", "Mode:Absolute|Factor", "Uses either height and width or factor x and factor y", 0, IPL_WIDGET_COMBOBOX, 0, 1);
+    addProcessPropertyInt("width", "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyInt("height", "Height", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyDouble("factor_x", "Factor X", "", 1.0, IPL_WIDGET_SLIDER, 0.1, 10.0);
+    addProcessPropertyDouble("factor_y", "Factor Y", "", 1.0, IPL_WIDGET_SLIDER, 0.1, 10.0);
+    addProcessPropertyInt("keep_aspect_ratio", "Keep Aspect Ratio:None|Based on width|Based on height", "", 0, IPL_WIDGET_COMBOBOX, 0, 1);
+    addProcessPropertyInt("interpolation", "Interpolation:Nearest|Linear|Area|Cubic|Lanczos4", "", 0, IPL_WIDGET_COMBOBOX, 0, 4);
 }
 
 void IPLResize::destroy()

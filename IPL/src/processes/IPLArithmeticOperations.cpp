@@ -36,8 +36,7 @@ void IPLArithmeticOperations::init()
 
     // properties
     addProcessPropertyInt("operation", "Operation:ADD|SUB|MUL|DIV|MIN|MAX|AND|OR|XOR|NOT|ATAN2",
-                          "Boolean operations need binary images as input",
-                          IPL_INT_RADIOBUTTONS, 0);
+                          "Boolean operations need binary images as input", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLArithmeticOperations::destroy()

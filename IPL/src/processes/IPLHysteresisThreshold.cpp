@@ -16,8 +16,8 @@ void IPLHysteresisThreshold::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyDouble("lowThreshold", "Low Threshold", "", IPL_DOUBLE_SLIDER, 0.3, 0.0, 1.0);
-    addProcessPropertyDouble("highThreshold", "High Threshold", "", IPL_DOUBLE_SLIDER, 0.6, 0.0, 1.0);
+    addProcessPropertyDouble("lowThreshold", "Low Threshold", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highThreshold", "High Threshold", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLHysteresisThreshold::destroy()

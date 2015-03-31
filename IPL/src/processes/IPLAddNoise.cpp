@@ -17,11 +17,11 @@ void IPLAddNoise::init()
     addOutput("Gray Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "", IPL_INT_COMBOBOX, 0);
-    addProcessPropertyDouble("probability", "Probability", "", IPL_DOUBLE_SLIDER, 0.2, 0.0, 0.99);
-    addProcessPropertyDouble("amplitude", "Amplitude", "", IPL_DOUBLE_SLIDER, 0.2, 0.0, 1.0);
-    addProcessPropertyDouble("stdDev", "Standard Deviation (Gauss)", "", IPL_DOUBLE_SLIDER, 0.1, 0.0, 1.0);
-    addProcessPropertyInt("gaussType", "Type(Gauss):Multiplicative|Additive", "", IPL_INT_RADIOBUTTONS, 0);
+    addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "", 0, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyDouble("probability", "Probability", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 0.99);
+    addProcessPropertyDouble("amplitude", "Amplitude", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("stdDev", "Standard Deviation (Gauss)", "", 0.1, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyInt("gaussType", "Type(Gauss):Multiplicative|Additive", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLAddNoise::destroy()

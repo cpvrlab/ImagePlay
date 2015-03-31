@@ -16,8 +16,8 @@ void IPLBinarizeSavola::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window Size", "",IPL_INT_SLIDER_ODD, 3, 3, 9);
-    addProcessPropertyDouble("aboveMean", "Above Mean", "", IPL_DOUBLE_SLIDER, 0.0, 0.0, 1.0);
+    addProcessPropertyInt("window", "Window Size", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
+    addProcessPropertyDouble("aboveMean", "Above Mean", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLBinarizeSavola::destroy()

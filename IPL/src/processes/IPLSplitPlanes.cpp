@@ -13,8 +13,8 @@ void IPLSplitPlanes::init()
     setCategory(IPLProcess::CATEGORY_CONVERSIONS);
 
     // properties
-    addProcessPropertyInt("output_type", "Color Model:RGB|HSV|HSL", "", IPL_INT_RADIOBUTTONS, _outputType);
-    addProcessPropertyInt("hue_shift", "Hue Shift", "0° - 360°", IPL_INT_SLIDER, _hueShift, 0, 360);
+    addProcessPropertyInt("output_type", "Color Model:RGB|HSV|HSL", "", _outputType, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("hue_shift", "Hue Shift", "0° - 360°", _hueShift, IPL_WIDGET_SLIDER, 0, 360);
 
     // inputs and outputs
     addInput("Color Image", IPLData::IMAGE_COLOR);

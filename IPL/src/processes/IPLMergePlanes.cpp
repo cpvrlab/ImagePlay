@@ -17,7 +17,7 @@ void IPLMergePlanes::init()
                    "the RGB, HSI, HLS, or HSV color system");
 
     // properties
-    addProcessPropertyInt("input_type", "Color Model:RGB|HSV|HSL", "", IPL_INT_RADIOBUTTONS, _inputType);
+    addProcessPropertyInt("input_type", "Color Model:RGB|HSV|HSL", "", _inputType, IPL_WIDGET_RADIOBUTTONS);
 
     // inputs and outputs
     addInput("Plane 1", IPLData::IMAGE_GRAYSCALE);

@@ -16,8 +16,8 @@ void IPLLocalThreshold::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 9);
-    addProcessPropertyDouble("aboveMean", "Above Mean", "", IPL_DOUBLE_SLIDER, 0.5, 0.0, 9.0);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
+    addProcessPropertyDouble("aboveMean", "Above Mean", "", 0.5, IPL_WIDGET_SLIDER, 0.0, 9.0);
 }
 
 void IPLLocalThreshold::destroy()

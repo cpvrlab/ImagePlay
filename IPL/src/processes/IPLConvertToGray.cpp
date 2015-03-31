@@ -18,9 +18,9 @@ void IPLConvertToGray::init()
     addOutput("Gray Image", IPLData::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyDouble("weight_r", "Weight R", "", IPL_DOUBLE_SLIDER, 0.2125, 0.0, 1.0);
-    addProcessPropertyDouble("weight_g", "Weight G", "", IPL_DOUBLE_SLIDER, 0.7154, 0.0, 1.0);
-    addProcessPropertyDouble("weight_b", "Weight B", "", IPL_DOUBLE_SLIDER, 0.0721, 0.0, 1.0);
+    addProcessPropertyDouble("weight_r", "Weight R", "", 0.2125, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("weight_g", "Weight G", "", 0.7154, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("weight_b", "Weight B", "", 0.0721, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLConvertToGray::destroy()

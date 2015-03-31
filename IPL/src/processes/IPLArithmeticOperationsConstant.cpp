@@ -27,8 +27,8 @@ void IPLArithmeticOperationsConstant::init()
 
     // properties
     addProcessPropertyInt("operation", "Operation:ADD Constant|SUB Constant|MUL Constant|DIV Constant",
-                          "", IPL_INT_RADIOBUTTONS, 0);
-    addProcessPropertyDouble("constant", "Constant", "", IPL_DOUBLE_SLIDER, 1.0, 0.0, 16.0);
+                          "", 0, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyDouble("constant", "Constant", "", 1.0, IPL_WIDGET_SLIDER, 0.0, 16.0);
 }
 
 void IPLArithmeticOperationsConstant::destroy()

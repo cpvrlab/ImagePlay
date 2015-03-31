@@ -20,7 +20,7 @@ void IPLGaussianLowPass::init()
     addOutput("Kernel", IPLData::MATRIX);
 
     // properties
-    addProcessPropertyDouble("sigma", "Sigma", "Standard deviation σ", IPL_DOUBLE_SLIDER, 2.0, 0.5, 25.0);
+    addProcessPropertyDouble("sigma", "Sigma", "Standard deviation σ", 2.0, IPL_WIDGET_SLIDER, 0.5, 25.0);
 }
 
 void IPLGaussianLowPass::destroy()

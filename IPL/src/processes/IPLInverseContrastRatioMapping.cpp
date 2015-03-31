@@ -16,7 +16,7 @@ void IPLInverseContrastRatioMapping::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 3, 3, 15);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 15);
 }
 
 void IPLInverseContrastRatioMapping::destroy()

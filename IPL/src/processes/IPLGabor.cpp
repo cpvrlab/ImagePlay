@@ -19,10 +19,10 @@ void IPLGabor::init()
     addOutput("Power Gabor ", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 5, 3, 15);
-    addProcessPropertyInt("wavelength", "Wavelength", "", IPL_INT_SLIDER, 5, 1, 15);
-    addProcessPropertyDouble("direction", "Direction", "", IPL_DOUBLE_SLIDER, 0, 0, 2*PI);
-    addProcessPropertyDouble("deviation", "Deviation", "", IPL_DOUBLE_SLIDER, 5, 1, 10);
+    addProcessPropertyInt("window", "Window", "", 5, IPL_WIDGET_SLIDER_ODD, 3, 15);
+    addProcessPropertyInt("wavelength", "Wavelength", "", 5, IPL_WIDGET_SLIDER, 1, 15);
+    addProcessPropertyDouble("direction", "Direction", "", 0, IPL_WIDGET_SLIDER, 0, 2*PI);
+    addProcessPropertyDouble("deviation", "Deviation", "", 5, IPL_WIDGET_SLIDER, 1, 10);
 }
 
 void IPLGabor::destroy()

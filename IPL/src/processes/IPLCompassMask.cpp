@@ -56,8 +56,8 @@ void IPLCompassMask::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("maskType", "Mask Type:Prewitt|Kirsch|ThreeLevel|Sobel", "", IPL_INT_COMBOBOX, 0);
-    addProcessPropertyInt("direction", "Direction:N|NW|W|SW|S|SE|E|NE", "", IPL_INT_COMBOBOX, 0);
+    addProcessPropertyInt("maskType", "Mask Type:Prewitt|Kirsch|ThreeLevel|Sobel", "", 0, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyInt("direction", "Direction:N|NW|W|SW|S|SE|E|NE", "", 0, IPL_WIDGET_COMBOBOX);
 }
 
 void IPLCompassMask::destroy()

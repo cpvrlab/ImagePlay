@@ -15,7 +15,7 @@ void IPLMin::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER_ODD, 1,1,9);
+    addProcessPropertyInt("window", "Window", "", 1, IPL_WIDGET_SLIDER_ODD, 1, 9);
 }
 
 void IPLMin::destroy()

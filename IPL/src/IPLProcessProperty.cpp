@@ -1,17 +1,20 @@
 #include "IPLProcessProperty.h"
 
 
-IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, int value, int min, int max)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = min;
-    _max = max;
-}
+IPLProcessProperty::IPLProcessProperty(int position, const char *name, const char *description, IPLProcess *process, IPLProcessWidgetType widget):
+    _position(position),
+    _name(name),
+    _description(description),
+    _process(process),
+    _widget(widget)
+{}
+
+IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, const char *name, const char *description, int value, IPLProcessWidgetType widget, int min, int max):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value),
+    _min(min),
+    _max(max)
+{}
 
 void IPLProcessPropertyInt::setValue(int value)
 {
@@ -20,17 +23,18 @@ void IPLProcessPropertyInt::setValue(int value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyInt::toJson()
+std::string IPLProcessPropertyInt::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"int\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value << "\"\n";
     json << "}";
     return json.str();
 }
 
-IPLProcessProperty *IPLProcessPropertyInt::clone()
+IPLProcessProperty *IPLProcessPropertyInt::clone() const
 {
     return new IPLProcessPropertyInt(*this);
 }
@@ -41,17 +45,12 @@ void IPLProcessPropertyInt::fromJson(std::string value)
 }
 
 
-IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, unsigned int value, unsigned int min, unsigned int max)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = min;
-    _max = max;
-}
+IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char *name, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value),
+    _min(min),
+    _max(max)
+{}
 
 void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
 {
@@ -60,11 +59,12 @@ void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyUnsignedInt::toJson()
+std::string IPLProcessPropertyUnsignedInt::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"uint\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value << "\"\n";
     json << "}";
     return json.str();
@@ -75,23 +75,18 @@ void IPLProcessPropertyUnsignedInt::fromJson(std::string value)
     _value = (unsigned int) atol(value.c_str());
 }
 
-IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone()
+IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone() const
 {
     return new IPLProcessPropertyUnsignedInt(*this);
 }
 
 
-IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, double value, double min, double max)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = min;
-    _max = max;
-}
+IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char *name, const char *description, double value, IPLProcessWidgetType widget, double min, double max):
+    IPLProcessProperty(position,name,description,process, widget),
+    _value(value),
+    _min(min),
+    _max(max)
+{}
 
 void IPLProcessPropertyDouble::setValue(double value)
 {
@@ -100,11 +95,12 @@ void IPLProcessPropertyDouble::setValue(double value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyDouble::toJson()
+std::string IPLProcessPropertyDouble::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"double\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value << "\"\n";
     json << "}";
     return json.str();
@@ -115,23 +111,18 @@ void IPLProcessPropertyDouble::fromJson(std::string value)
     _value = atof(value.c_str());
 }
 
-IPLProcessProperty *IPLProcessPropertyDouble::clone()
+IPLProcessProperty *IPLProcessPropertyDouble::clone() const
 {
     return new IPLProcessPropertyDouble(*this);
 }
 
 
-IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, float value, float min, float max)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = min;
-    _max = max;
-}
+IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char *name, const char *description, float value, IPLProcessWidgetType widget, float min, float max):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value),
+    _min(min),
+    _max(max)
+{}
 
 void IPLProcessPropertyFloat::setValue(float value)
 {
@@ -140,11 +131,12 @@ void IPLProcessPropertyFloat::setValue(float value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyFloat::toJson()
+std::string IPLProcessPropertyFloat::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"float\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value << "\"\n";
     json << "}";
     return json.str();
@@ -155,23 +147,16 @@ void IPLProcessPropertyFloat::fromJson(std::string value)
     _value = atof(value.c_str());
 }
 
-IPLProcessProperty *IPLProcessPropertyFloat::clone()
+IPLProcessProperty *IPLProcessPropertyFloat::clone() const
 {
     return new IPLProcessPropertyFloat(*this);
 }
 
 
-IPLProcessPropertyBool::IPLProcessPropertyBool(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, bool value)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = false;
-    _max = true;
-}
+IPLProcessPropertyBool::IPLProcessPropertyBool(IPLProcess *process, int position, const char *name, const char *description, bool value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value)
+{}
 
 void IPLProcessPropertyBool::setValue(bool value)
 {
@@ -180,11 +165,12 @@ void IPLProcessPropertyBool::setValue(bool value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyBool::toJson()
+std::string IPLProcessPropertyBool::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"bool\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     if(_value)
         json << "   \"value\": true\n";
     else
@@ -201,36 +187,37 @@ void IPLProcessPropertyBool::fromJson(std::string value)
         _value = false;
 }
 
-IPLProcessProperty *IPLProcessPropertyBool::clone()
+IPLProcessProperty *IPLProcessPropertyBool::clone() const
 {
     return new IPLProcessPropertyBool(*this);
 }
 
 
-IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, std::string value)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-    _min = "";
-    _max = "";
-}
+IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char *name, const char *description, const std::string &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value)
+{}
 
-void IPLProcessPropertyString::setValue(std::string value)
+void IPLProcessPropertyString::setValue(const std::string &value)
 {
     _value = value;
     _process->setNeedsUpdate(true);
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyString::toJson()
+void IPLProcessPropertyString::setValue(std::string &&value)
+{
+    _value = std::move(value);
+    _process->setNeedsUpdate(true);
+    _process->notifyPropertyChangedEventHandler();
+}
+
+std::string IPLProcessPropertyString::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"string\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \"" << _value << "\"\n";
     json << "}";
     return json.str();
@@ -241,34 +228,37 @@ void IPLProcessPropertyString::fromJson(std::string value)
     _value = value;
 }
 
-IPLProcessProperty *IPLProcessPropertyString::clone()
+IPLProcessProperty *IPLProcessPropertyString::clone() const
 {
     return new IPLProcessPropertyString(*this);
 }
 
 
-IPLProcessPropertyVectorInt::IPLProcessPropertyVectorInt(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, std::vector<int> value)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-}
+IPLProcessPropertyVectorInt::IPLProcessPropertyVectorInt(IPLProcess *process, int position, const char *name, const char *description, const std::vector<int> &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value)
+{}
 
-void IPLProcessPropertyVectorInt::setValue(std::vector<int> value)
+void IPLProcessPropertyVectorInt::setValue(const std::vector<int> &value)
 {
     _value = value;
     _process->setNeedsUpdate(true);
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyVectorInt::toJson()
+void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
+{
+    _value = std::move(value);
+    _process->setNeedsUpdate(true);
+    _process->notifyPropertyChangedEventHandler();
+}
+
+std::string IPLProcessPropertyVectorInt::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"vector<int>\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \"";
     for(size_t i=0; i<_value.size(); i++)
     {
@@ -293,34 +283,37 @@ void IPLProcessPropertyVectorInt::fromJson(std::string value)
     }
 }
 
-IPLProcessProperty *IPLProcessPropertyVectorInt::clone()
+IPLProcessProperty *IPLProcessPropertyVectorInt::clone() const
 {
     return new IPLProcessPropertyVectorInt(*this);
 }
 
 
-IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, IPLColor value)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-}
+IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char *name, const char *description, const IPLColor &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value)
+{}
 
-void IPLProcessPropertyColor::setValue(IPLColor value)
+void IPLProcessPropertyColor::setValue(const IPLColor &value)
 {
     _value = value;
     _process->setNeedsUpdate(true);
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyColor::toJson()
+void IPLProcessPropertyColor::setValue(IPLColor &&value)
+{
+    _value = std::move(value);
+    _process->setNeedsUpdate(true);
+    _process->notifyPropertyChangedEventHandler();
+}
+
+std::string IPLProcessPropertyColor::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"color\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value.red() << "|" << _value.green() << "|"<< _value.blue() << "|" << "\"\n";
     json << "}";
     return json.str();
@@ -335,33 +328,36 @@ void IPLProcessPropertyColor::fromJson(std::string value)
     _value = IPLColor::fromRGB(atof(token1), atof(token2), atof(token3));
 }
 
-IPLProcessProperty *IPLProcessPropertyColor::clone()
+IPLProcessProperty *IPLProcessPropertyColor::clone() const
 {
     return new IPLProcessPropertyColor(*this);
 }
 
-IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char *name, const char *description, IPLProcessPropertyType type, IPLPoint value)
-{
-    _process = process;
-    _position = position;
-    _name = name;
-    _description = description;
-    _type = type;
-    _value = value;
-}
+IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char *name, const char *description, const IPLPoint &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,description,process,widget),
+    _value(value)
+{}
 
-void IPLProcessPropertyPoint::setValue(IPLPoint value)
+void IPLProcessPropertyPoint::setValue(const IPLPoint &value)
 {
     _value = value;
     _process->setNeedsUpdate(true);
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyPoint::toJson()
+void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
+{
+    _value = std::move(value);
+    _process->setNeedsUpdate(true);
+    _process->notifyPropertyChangedEventHandler();
+}
+
+std::string IPLProcessPropertyPoint::toJson() const
 {
     std::ostringstream json;
     json << "{\n";
     json << "   \"type\": \"point\",\n";
+    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
     json << "   \"value\": \""  << _value.x() << "|" << _value.y() << "\"\n";
     json << "}";
     return json.str();
@@ -375,7 +371,7 @@ void IPLProcessPropertyPoint::fromJson(std::string value)
     _value = IPLPoint(atof(token1), atof(token2));
 }
 
-IPLProcessProperty *IPLProcessPropertyPoint::clone()
+IPLProcessProperty *IPLProcessPropertyPoint::clone() const
 {
     return new IPLProcessPropertyPoint(*this);
 }

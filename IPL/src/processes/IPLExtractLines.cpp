@@ -15,7 +15,7 @@ void IPLExtractLines::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 3,3,15);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER, 3, 15);
 }
 
 void IPLExtractLines::destroy()

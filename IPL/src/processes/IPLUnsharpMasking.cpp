@@ -15,8 +15,8 @@ void IPLUnsharpMasking::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 3, 3, 9);
-    addProcessPropertyDouble("factor", "Factor", "", IPL_DOUBLE_SLIDER, 0.3, 0.1, 0.9);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER, 3, 9);
+    addProcessPropertyDouble("factor", "Factor", "", 0.3, IPL_WIDGET_SLIDER, 0.1, 0.9);
 }
 
 void IPLUnsharpMasking::destroy()

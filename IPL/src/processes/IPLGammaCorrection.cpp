@@ -16,7 +16,7 @@ void IPLGammaCorrection::init()
     addOutput("Gray Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyDouble("gamma", "Gamma", "0.0 < threshold < 1.0", IPL_DOUBLE_SLIDER, _gamma, 0.1, 10.0);
+    addProcessPropertyDouble("gamma", "Gamma", "0.0 < threshold < 1.0", _gamma, IPL_WIDGET_SLIDER, 0.1, 10.0);
 }
 
 void IPLGammaCorrection::destroy()
