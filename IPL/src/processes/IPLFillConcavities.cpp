@@ -17,8 +17,8 @@ void IPLFillConcavities::init()
     addOutput("Gray Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyInt("type", "Type:Bright|Dark", "", IPL_INT_RADIOBUTTONS, 0);
-    addProcessPropertyInt("iterations", "iterations", "", IPL_INT_SLIDER, 1, 1, 100);
+    addProcessPropertyInt("type", "Type:Bright|Dark", "", 0, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("iterations", "iterations", "", 1, IPL_WIDGET_SLIDER, 1, 100);
 }
 
 void IPLFillConcavities::destroy()

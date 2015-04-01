@@ -20,7 +20,7 @@ void IPLLoadImage::init()
     // all properties which can later be changed by GUI
     addProcessPropertyString("path", "File",
                              "*.bmp, *.gif, *.hdr, *.jpg, *.png, *.psd, *.tiff, *.cr2 and many more...",
-                             IPL_FILE_OPEN, _path);
+                             _path, IPL_WIDGET_FILE_OPEN);
 }
 
 void IPLLoadImage::destroy()

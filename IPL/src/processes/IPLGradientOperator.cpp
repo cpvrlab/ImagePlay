@@ -16,7 +16,7 @@ void IPLGradientOperator::init()
     addOutput("Image", IPLData::IMAGE_ORIENTED);
 
     // properties
-    addProcessPropertyInt("algorithm", "Algorithm:Fast Gradient|Roberts|Sobel|Cubic Spline", "", IPL_INT_RADIOBUTTONS, 0);
+    addProcessPropertyInt("algorithm", "Algorithm:Fast Gradient|Roberts|Sobel|Cubic Spline", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLGradientOperator::destroy()

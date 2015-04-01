@@ -19,10 +19,10 @@ void IPLFrequencyFilter::init()
     //addOutput("Filter", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "", IPL_INT_RADIOBUTTONS, 0);
-    addProcessPropertyDouble("lowCutoff", "Low Cutoff", "", IPL_DOUBLE_SLIDER, 0.0, 0.0, 1.0);
-    addProcessPropertyDouble("highCutoff", "High Cutoff", "", IPL_DOUBLE_SLIDER, 0.0, 0.0, 1.0);
-    addProcessPropertyBool("keepDC", "Keep DC", "", IPL_BOOL_CHECKBOX, false);
+    addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "", 0, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyDouble("lowCutoff", "Low Cutoff", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highCutoff", "High Cutoff", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyBool("keepDC", "Keep DC", "", false, IPL_WIDGET_CHECKBOXES);
 }
 
 void IPLFrequencyFilter::destroy()

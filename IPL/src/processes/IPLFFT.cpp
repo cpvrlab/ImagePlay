@@ -16,7 +16,7 @@ void IPLFFT::init()
     addOutput("Complex Image", IPLData::IMAGE_COMPLEX);
 
     // properties
-    addProcessPropertyInt("mode", "Windowing Function:None|Hanning|Hamming|Blackman|Border", "", IPL_INT_RADIOBUTTONS, 0);
+    addProcessPropertyInt("mode", "Windowing Function:None|Hanning|Hamming|Blackman|Border", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLFFT::destroy()

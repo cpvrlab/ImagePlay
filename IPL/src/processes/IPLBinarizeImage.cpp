@@ -17,7 +17,7 @@ void IPLBinarizeImage::init()
     addOutput("Gray Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", IPL_DOUBLE_SLIDER, 0.5, 0.0, 1.0);
+    addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", 0.5, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLBinarizeImage::destroy()

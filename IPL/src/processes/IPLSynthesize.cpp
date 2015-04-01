@@ -23,14 +23,14 @@ void IPLSynthesize::init()
     addOutput("Image", IPLData::IMAGE_GRAYSCALE);
 
     // all properties which can later be changed by gui
-    addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","", IPL_INT_RADIOBUTTONS, _type);
-    addProcessPropertyInt("width", "Width","", IPL_INT_SLIDER, _width, 1, 1024);
-    addProcessPropertyInt("height", "Height","", IPL_INT_SLIDER, _height, 1, 1024);
-    addProcessPropertyDouble("amplitude", "Amptlitude","", IPL_DOUBLE_SLIDER, _amplitude, 0.0f, 1.0f);
-    addProcessPropertyDouble("offset", "Offset","", IPL_DOUBLE_SLIDER, _offset, 0.0f, 1.0f);
-    addProcessPropertyInt("wavelength", "Wavelength","", IPL_INT_SLIDER, _wavelength, 1, 1024);
-    addProcessPropertyInt("direction", "Direction","", IPL_INT_SLIDER, _direction, 0, 360);
-    addProcessPropertyInt("decay", "Decay","", IPL_INT_SLIDER, _decay, 0, 1024);
+    addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","", _type, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("width", "Width","", _width, IPL_WIDGET_SLIDER, 1, 1024);
+    addProcessPropertyInt("height", "Height","", _height, IPL_WIDGET_SLIDER, 1, 1024);
+    addProcessPropertyDouble("amplitude", "Amptlitude","", _amplitude, IPL_WIDGET_SLIDER, 0.0f, 1.0f);
+    addProcessPropertyDouble("offset", "Offset","", _offset, IPL_WIDGET_SLIDER, 0.0f, 1.0f);
+    addProcessPropertyInt("wavelength", "Wavelength","", _wavelength, IPL_WIDGET_SLIDER, 1, 1024);
+    addProcessPropertyInt("direction", "Direction","", _direction, IPL_WIDGET_SLIDER, 0, 360);
+    addProcessPropertyInt("decay", "Decay","", _decay, IPL_WIDGET_SLIDER, 0, 1024);
 }
 
 void IPLSynthesize::destroy()

@@ -53,11 +53,10 @@ void IPLBlendImages::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyDouble("factorA", "Weight A", "", IPL_DOUBLE_SLIDER, _factorA, 0.0, 1.0);
-    addProcessPropertyDouble("factorB", "Weight B", "Adjust the weight for each input image",
-                             IPL_DOUBLE_SLIDER, _factorB, 0.0, 1.0);
+    addProcessPropertyDouble("factorA", "Weight A", "", _factorA, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("factorB", "Weight B", "Adjust the weight for each input image", _factorB, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyInt("operation", "Operation:Normal|Lighten|Darken|Multiply|Average|Add|Subtract|Difference|Negation|Screen|Exclusion|Overlay|Soft Light|Hard Light|Color Dodge|Color Burn|Linear Dodge|Linear Burn|Linear Light|Vivid light|Pin Light|Hard Mix|Reflect|Glow|Phoenix",
-                             "", IPL_INT_COMBOBOX, _operation);
+                             "", _operation, IPL_WIDGET_COMBOBOX);
 }
 
 void IPLBlendImages::destroy()

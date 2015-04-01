@@ -186,7 +186,7 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
 
 
         // icon
-        _icon.paint(painter,9,41,14,14);
+        //_icon.paint(painter,9,41,14,14);
 
     }
 
@@ -293,6 +293,14 @@ void IPProcessStep::updateThumbnail()
     }
 }
 
+void IPProcessStep::setProgress(int progress)
+{
+    _progress = progress > 100 ? 100 : (progress < 0 ? 0 : progress); // 0-100
+
+    // redraw
+    update(boundingRect());
+}
+
 /*!
  * \brief IPProcessStep::mousePressEvent
  * \param event
@@ -306,7 +314,16 @@ void IPProcessStep::mousePressEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
-    //setOpacity(0.5);
+    // bring the item to the front
+    setZValue(1000);
+    if(scene()->selectedItems().length() > 1)
+    {
+        for(int i=0; i < scene()->selectedItems().length(); i++)
+        {
+            IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
+            item->setZValue(1000);
+        }
+    }
 
     // save last position
     _lastPosition = pos();
@@ -330,6 +347,17 @@ void IPProcessStep::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void IPProcessStep::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     IPProcessGridScene* scn = (IPProcessGridScene*) scene();
+
+    // bring the items to the background again
+    setZValue(0);
+    if(scene()->selectedItems().length() > 1)
+    {
+        for(int i=0; i < scene()->selectedItems().length(); i++)
+        {
+            IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
+            item->setZValue(0);
+        }
+    }
 
     // check for items for connection
     if(_connecting)
@@ -363,41 +391,43 @@ void IPProcessStep::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
-    //setOpacity(1.0);
-
     // snap after dragging
     snapToGrid();
 
     // snap all if multiselect
     bool groupIsColliding = false;
-    if(scene()->selectedItems().length() > 1)
+    if(scene()->selectedItems().length() > 0)
     {
         for(int i=0; i < scene()->selectedItems().length(); i++)
         {
             IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
-            item->snapToGrid();
-
-            // if colliding with other item, reset position
-            if(item->collidingItems().length() > 0)
+            for(QGraphicsItem* currentItem : item->collidingItems())
             {
-                groupIsColliding = true;
+                IPProcessStep* step = dynamic_cast<IPProcessStep*>(currentItem);
+                if(step)
+                {
+                    groupIsColliding = true;
+                    break;
+                }
             }
         }
     }
-    /*if(groupIsColliding)
+    if(groupIsColliding)
     {
         for(int i=0; i < scene()->selectedItems().length(); i++)
         {
             IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
             item->setPos(item->_lastPosition);
         }
-    }*/
-    // if colliding with other item, reset position
-    /*if(collidingItems().size() > 0)
+    }
+
+    for(int i=0; i < scene()->selectedItems().length(); i++)
     {
-        setPos(_lastPosition);
-        return;
-    }*/
+        IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
+        item->snapToGrid();
+    }
+
+    setCursor(Qt::SizeAllCursor);
 
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -408,14 +438,6 @@ void IPProcessStep::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void IPProcessStep::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    /*QPointF scenePos = event->scenePos();
-    // don't allow negative values
-    if(scenePos.x() < 32)
-        scenePos.setX(32);
-    if(scenePos.y() < 32)
-        scenePos.setY(32);
-    event->setScenePos(scenePos);*/
-
     if(_connecting)
     {
         // update temporary arrow position
@@ -427,6 +449,33 @@ void IPProcessStep::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     // notify the scene that the geometry has changed
     //prepareGeometryChange();
     //qDebug() << "prepareGeometryChange";
+
+    // if colliding with other item, change cursor
+    bool groupIsColliding = false;
+    if(scene()->selectedItems().length() > 0)
+    {
+        for(int i=0; i < scene()->selectedItems().length(); i++)
+        {
+            IPProcessStep* item = (IPProcessStep*) scene()->selectedItems().at(i);
+            for(QGraphicsItem* currentItem : item->collidingItems())
+            {
+                IPProcessStep* step = dynamic_cast<IPProcessStep*>(currentItem);
+                if(step)
+                {
+                    groupIsColliding = true;
+                    break;
+                }
+            }
+        }
+    }
+    if(groupIsColliding)
+    {
+        setCursor(Qt::ForbiddenCursor);
+    }
+    else
+    {
+        setCursor(Qt::SizeAllCursor);
+    }
 
     QGraphicsItem::mouseMoveEvent(event);
 }

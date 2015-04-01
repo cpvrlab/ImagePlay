@@ -25,15 +25,16 @@ void IPLSaveImage::init()
 
     // all properties which can later be changed by gui
     addProcessPropertyString("path", "File:Bitmap (*.bmp);;OpenEXR (*.exr);;JPEG (*.jpg);;PNG (*.png);;Portable BitMap (*.pbm);;Portable GrayMap (*.pgm);;Portable PixMap (*.ppm)",
-                                                                             "Bitmap (*.bmp); OpenEXR (*.exr); JPEG (*.jpg); PNG (*.png); Portable BitMap (*.pbm); Portable GrayMap (*.pgm); Portable PixMap (*.ppm)", IPL_FILE_SAVE, _path);
-    addProcessPropertyInt("jpeg_quality", "JPEG Quality", "0-100", IPL_INT_SLIDER, _jpeg_quality, 1, 100);
-    addProcessPropertyInt("jpeg_progressive", "JPEG Progressive", "", IPL_BOOL_CHECKBOX, _jpeg_progressive);
+                             "Bitmap (*.bmp); OpenEXR (*.exr); JPEG (*.jpg); PNG (*.png); Portable BitMap (*.pbm); Portable GrayMap (*.pgm); Portable PixMap (*.ppm)",
+                             _path, IPL_WIDGET_FILE_SAVE);
+    addProcessPropertyInt("jpeg_quality", "JPEG Quality", "0-100", _jpeg_quality, IPL_WIDGET_SLIDER, 1, 100);
+    addProcessPropertyInt("jpeg_progressive", "JPEG Progressive", "", _jpeg_progressive, IPL_WIDGET_CHECKBOXES);
 
-    addProcessPropertyInt("bmp_type", "BMP Type:DEFAULT|RLE", "", IPL_INT_RADIOBUTTONS, _bmp_type);
-    addProcessPropertyInt("png_type", "PNG Type:DEFAULT|INTERLACED", "", IPL_INT_RADIOBUTTONS, _png_type);
-    addProcessPropertyInt("pnm_type", "PNM Type:RAW|ASCII", "", IPL_INT_RADIOBUTTONS, _pnm_type);
+    addProcessPropertyInt("bmp_type", "BMP Type:DEFAULT|RLE", "", _bmp_type, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("png_type", "PNG Type:DEFAULT|INTERLACED", "", _png_type, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("pnm_type", "PNM Type:RAW|ASCII", "", _pnm_type, IPL_WIDGET_RADIOBUTTONS);
 
-    addProcessPropertyBool("preview", "Don't save, only Preview", "", IPL_BOOL_CHECKBOX, _preview);
+    addProcessPropertyBool("preview", "Don't save, only Preview", "", _preview, IPL_WIDGET_CHECKBOXES);
 
     // BMP_DEFAULT|BMP_SAVE_RLE|EXR|J2K|JPEG|JPEG_PROGRESSIVE|
     // PNG_DEFAULT|PNG_INTERLACED|PNM_SAVE_RAW|PNM_SAVE_ASCII|

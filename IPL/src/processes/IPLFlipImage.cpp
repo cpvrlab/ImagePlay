@@ -16,7 +16,7 @@ void IPLFlipImage::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("direction", "Direction:Horizontal|Vertical", "", IPL_INT_RADIOBUTTONS, 0);
+    addProcessPropertyInt("direction", "Direction:Horizontal|Vertical", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLFlipImage::destroy()

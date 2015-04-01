@@ -15,7 +15,7 @@ void IPLOnePixelEdge::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
 }
 
 void IPLOnePixelEdge::destroy()
@@ -48,12 +48,12 @@ bool IPLOnePixelEdge::processInputData(IPLImage* image , int, bool)
         IPLImagePlane* plane = image->plane( planeNr );
         IPLImagePlane* newplane = _result->plane( planeNr );
 
-        for(int x=0; x<width; x++)
+        for(int x=w2; x<width-w2; x++)
         {
             // progress
             notifyProgressEventHandler(100*progress++/maxProgress);
 
-            for(int y=0; y<height; y++)
+            for(int y=w2; y<height-w2; y++)
             {
                 ipl_basetype kmin = 1.0;
                 ipl_basetype pix  = plane->bp(x,y);

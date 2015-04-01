@@ -9,14 +9,15 @@ void IPLLocalThreshold::init()
     setClassName("IPLLocalThreshold");
     setTitle("Local Threshold");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
+    setDescription("Niblack's Local Average Threshold");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1, 1, 9);
-    addProcessPropertyDouble("aboveMean", "Above Mean", "", IPL_DOUBLE_SLIDER, 0.5, 0.0, 9.0);
+    addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
+    addProcessPropertyDouble("aboveMean", "Above Mean", "", 0.5, IPL_WIDGET_SLIDER, 0.0, 9.0);
 }
 
 void IPLLocalThreshold::destroy()
@@ -55,18 +56,18 @@ bool IPLLocalThreshold::processInputData(IPLImage* image , int, bool)
         int w2 = window/2;
         double area = (double)window*(double)window;
 
-        for(int y=0; y<height; y++)
+        for(int y=w2; y < height-w2; y++)
         {
             // progress
             notifyProgressEventHandler(100*progress++/maxProgress);
-            for(int x=0; x<width; x++)
+            for(int x=w2; x < width-w2; x++)
             {
                 double localMean = 0.0;
                 for( int kx=-w2; kx<=w2; kx++ )
                 {
                     for( int ky=-w2; ky<=w2; ky++ )
                     {
-                        localMean += (double)plane->bp(x+kx,y+ky);
+                        localMean += (double)plane->p(x+kx,y+ky);
                     }
                 }
                 localMean /= area;
@@ -75,12 +76,12 @@ bool IPLLocalThreshold::processInputData(IPLImage* image , int, bool)
                 {
                     for( int ky=-w2; ky<=w2; ky++ )
                     {
-                        double diff =  (double)plane->bp(x+kx, y+ky) - localMean;
+                        double diff =  (double)plane->p(x+kx, y+ky) - localMean;
                         deviation += diff * diff;
                     }
                 }
                 deviation = sqrt( deviation / area );
-                int T = (int) (localMean + aboveMean*deviation);
+                double T = (localMean + aboveMean*deviation);
 
                 newplane->p(x,y) = (plane->p(x,y) >= T) ? 1.0 : 0.0;
             }

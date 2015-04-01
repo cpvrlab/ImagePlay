@@ -18,11 +18,11 @@ void IPLCamera::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // all properties which can later be changed by gui
-    addProcessPropertyInt("width", "Width", "", IPL_INT_SLIDER, 640, 640, 1920);
-    addProcessPropertyInt("height", "Height", "", IPL_INT_SLIDER, 480, 480, 1080);
-    addProcessPropertyInt("brightness", "Brightness", "", IPL_INT_SLIDER, 128, 0, 255);
-    addProcessPropertyInt("contrast", "Contrast", "", IPL_INT_SLIDER, 128, 0, 255);
-    addProcessPropertyDouble("exposure", "Exposure", "", IPL_DOUBLE_SLIDER, 0.5, 0.0, 1.0);
+    addProcessPropertyInt("width", "Width", "", 640, IPL_WIDGET_SLIDER, 640, 1920);
+    addProcessPropertyInt("height", "Height", "", 480, IPL_WIDGET_SLIDER, 480, 1080);
+    addProcessPropertyInt("brightness", "Brightness", "", 128, IPL_WIDGET_SLIDER, 0, 255);
+    addProcessPropertyInt("contrast", "Contrast", "", 128, IPL_WIDGET_SLIDER, 0, 255);
+    addProcessPropertyDouble("exposure", "Exposure", "", 0.5, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLCamera::destroy()

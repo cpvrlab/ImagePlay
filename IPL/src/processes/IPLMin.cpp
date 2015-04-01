@@ -15,7 +15,7 @@ void IPLMin::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window", "", IPL_INT_SLIDER, 1,1,30);
+    addProcessPropertyInt("window", "Window", "", 1, IPL_WIDGET_SLIDER_ODD, 1, 9);
 }
 
 void IPLMin::destroy()
@@ -34,7 +34,7 @@ bool IPLMin::processInputData(IPLImage* image , int, bool)
     _result = new IPLImage( image->type(), width, height );
 
     // get properties
-    int window = getProcessPropertyInt("window") * 2 - 1;
+    int window = getProcessPropertyInt("window");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

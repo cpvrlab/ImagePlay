@@ -25,7 +25,7 @@ void IPLMorphologyHitMiss::init()
     addOutput("Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyVectorInt("kernel", "Kernel", "", IPL_INT_BINARY_MORPHOLOGY_TRISTATE, _kernel);
+    addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_BINARY_MORPHOLOGY_TRISTATE);
 }
 
 void IPLMorphologyHitMiss::destroy()

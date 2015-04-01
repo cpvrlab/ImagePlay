@@ -9,16 +9,15 @@ void IPLBinarizeSavola::init()
     setClassName("IPLBinarizeSavola");
     setTitle("Local Threshold (Savola)");
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setDescription("Local Threshold as proposed by Savola et. al.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("window", "Window Size", "",IPL_INT_SLIDER, 3, 3, 9);
-    addProcessPropertyDouble("aboveMean", "Above Mean",
-                             "Local Threshold as proposed by Savola et. al.",
-                             IPL_DOUBLE_SLIDER, 0.0, 0.0, 1.0);
+    addProcessPropertyInt("window", "Window Size", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
+    addProcessPropertyDouble("aboveMean", "Above Mean", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLBinarizeSavola::destroy()

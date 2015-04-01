@@ -16,7 +16,7 @@ void IPLEqualizeHistogram::init()
     addOutput("Gray Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyDouble("factor", "Factor", "", IPL_DOUBLE_SLIDER, 1.0, 0.0, 5.0);
+    addProcessPropertyDouble("factor", "Factor", "", 1.0, IPL_WIDGET_SLIDER, 0.0, 5.0);
 }
 
 void IPLEqualizeHistogram::destroy()

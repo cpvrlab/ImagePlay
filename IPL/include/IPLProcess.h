@@ -17,6 +17,7 @@
 class IPLProcessProperty;
 class IPLProgressEventHandler;
 class IPLPropertyChangedEventHandler;
+class IPLProcessPropertyString;
 
 //! IPLProcessPropertyMap
 typedef std::map<std::string, std::shared_ptr<IPLProcessProperty>> IPLProcessPropertyMap;
@@ -163,15 +164,15 @@ public:
 
     void                    addInput                            (std::string name, IPLData::IPLDataType type);
     void                    addOutput                           (std::string name, IPLData::IPLDataType type);
-    void                    addProcessPropertyInt               (const char* name, const char* title, const char* description, IPLProcessPropertyType type, int value, int min = 0, int max = 0);
-    void                    addProcessPropertyUnsignedInt       (const char* name, const char* title, const char* description, IPLProcessPropertyType type, unsigned int value, unsigned int min = 0, unsigned int max = 0);
-    void                    addProcessPropertyDouble            (const char* name, const char* title, const char* description, IPLProcessPropertyType type, double value, double min = 0.0, double max = 0.0);
-    void                    addProcessPropertyFloat             (const char* name, const char* title, const char* description, IPLProcessPropertyType type, float value, float min = 0.0f, float max = 0.0f);
-    void                    addProcessPropertyBool              (const char* name, const char* title, const char* description, IPLProcessPropertyType type, bool value);
-    void                    addProcessPropertyString            (const char* name, const char* title, const char* description, IPLProcessPropertyType type, std::string value);
-    void                    addProcessPropertyVectorInt         (const char* name, const char* title, const char* description, IPLProcessPropertyType type, std::vector<int> value);
-    void                    addProcessPropertyColor             (const char* name, const char* title, const char* description, IPLProcessPropertyType type, IPLColor value);
-    void                    addProcessPropertyPoint             (const char* name, const char* title, const char* description, IPLProcessPropertyType type, IPLPoint value);
+    void                    addProcessPropertyInt               (const char* name, const char* title, const char* description, int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, int min = 0, int max = 0);
+    void                    addProcessPropertyUnsignedInt       (const char* name, const char* title, const char* description, unsigned int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, unsigned int min = 0, unsigned int max = 0);
+    void                    addProcessPropertyDouble            (const char* name, const char* title, const char* description, double value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, double min = 0.0, double max = 0.0);
+    void                    addProcessPropertyFloat             (const char* name, const char* title, const char* description, float value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, float min = 0.0f, float max = 0.0f);
+    void                    addProcessPropertyBool              (const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyString            (const char* name, const char* title, const char* description, const std::string &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyVectorInt         (const char* name, const char* title, const char* description, const std::vector<int> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyColor             (const char* name, const char* title, const char* description, const IPLColor &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyPoint             (const char* name, const char* title, const char* description, const IPLPoint &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     int                     getProcessPropertyInt               (const char* name);
     unsigned int            getProcessPropertyUnsignedInt       (const char* name);
     double                  getProcessPropertyDouble            (const char* name);
@@ -196,6 +197,7 @@ private:
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     //std::mutex                    _propertyMutex;
+    std::mutex                      _messageMutex;
     std::string                     _className;
     std::string                     _title;
     std::string                     _description;

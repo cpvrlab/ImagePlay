@@ -33,11 +33,11 @@ void IPLConvolutionFilter::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyVectorInt("kernel", "Kernel", "", IPL_INT_KERNEL, _kernel);
-    addProcessPropertyBool("normalize", "Normalize", "Divisor is computed automatically", IPL_BOOL_CHECKBOX, true);
-    addProcessPropertyInt("divisor", "Divisor", "", IPL_INT_SLIDER, 1, 1, 512);
-    addProcessPropertyDouble("offset", "Offset", "", IPL_DOUBLE_SLIDER, 0.0, -1.0, 1.0);
-    addProcessPropertyInt("borders", "Borders:Crop|Extend|Wrap", "Wrap is not available under OpenCV.", IPL_INT_RADIOBUTTONS, 0);
+    addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_KERNEL);
+    addProcessPropertyBool("normalize", "Normalize", "Divisor is computed automatically", true, IPL_WIDGET_CHECKBOXES);
+    addProcessPropertyInt("divisor", "Divisor", "", 1, IPL_WIDGET_SLIDER, 1, 512);
+    addProcessPropertyDouble("offset", "Offset", "", 0.0, IPL_WIDGET_SLIDER, -1.0, 1.0);
+    addProcessPropertyInt("borders", "Borders:Crop|Extend|Wrap", "Wrap is not available under OpenCV.", 0, IPL_WIDGET_RADIOBUTTONS, 0, 0);
 }
 
 void IPLConvolutionFilter::destroy()
@@ -129,6 +129,8 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
     }
     else
     {
+        notifyProgressEventHandler(50);
+
         cv::Mat src = image->toCvMat();
         cv::Mat dst;
         cv::Mat kernel(kernelWidth, kernelWidth, CV_32FC1 );

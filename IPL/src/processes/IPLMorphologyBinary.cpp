@@ -29,11 +29,11 @@ void IPLMorphologyBinary::init()
     addOutput("Image", IPLImage::IMAGE_BW);
 
     // properties
-    addProcessPropertyVectorInt("kernel", "Kernel", "", IPL_INT_BINARY_MORPHOLOGY, _kernel);
+    addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_BINARY_MORPHOLOGY);
     addProcessPropertyInt("iterations", "Iterations",
                           "Run the algorithm x times\nCaution: big kernels and too many iterations can take a long time to compute!",
-                          IPL_INT_SLIDER, _iterations, 1, 16);
-    addProcessPropertyInt("operation", "Operation:Dilate|Erode|Opening|Closing", "", IPL_INT_RADIOBUTTONS, _operation);
+                          _iterations, IPL_WIDGET_SLIDER, 1, 16);
+    addProcessPropertyInt("operation", "Operation:Dilate|Erode|Opening|Closing", "", _operation, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLMorphologyBinary::destroy()

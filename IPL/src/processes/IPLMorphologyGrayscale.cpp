@@ -27,8 +27,8 @@ void IPLMorphologyGrayscale::init()
 
     // properties
 //    _properties["kernel"]       = new IPLProcessPropertyVectorInt(this, 0, "Kernel", "", IPL_INT_GRAYSCALE_MORPHOLOGY, _kernel);
-    addProcessPropertyVectorInt("kernel", "Kernel", "", IPL_INT_BINARY_MORPHOLOGY, _kernel);
-    addProcessPropertyInt("operation", "Operation:Dilate|Erode|Open|Close", "", IPL_INT_RADIOBUTTONS, _operation);
+    addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_BINARY_MORPHOLOGY);
+    addProcessPropertyInt("operation", "Operation:Dilate|Erode|Open|Close", "", _operation, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLMorphologyGrayscale::destroy()

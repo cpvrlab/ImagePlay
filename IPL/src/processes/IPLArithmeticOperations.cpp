@@ -25,9 +25,9 @@ void IPLArithmeticOperations::init()
     // basic settings
     setClassName("IPLArithmeticOperations");
     setTitle("Arithmetic Operations");
-    setKeywords("add, substract, multiply, divide, minimum, maximum, and, or, xor, exclusive or, not, atan, arcus tangens");
     setCategory(IPLProcess::CATEGORY_ARITHMETIC);
     setDescription("Performs arithmetic operations based on two input images.");
+    setKeywords("add, substract, multiply, divide, minimum, maximum, and, or, xor, exclusive or, not, atan, arcus tangens");
 
     // inputs and outputs
     addInput("Image A", IPLData::IMAGE_COLOR);
@@ -36,8 +36,7 @@ void IPLArithmeticOperations::init()
 
     // properties
     addProcessPropertyInt("operation", "Operation:ADD|SUB|MUL|DIV|MIN|MAX|AND|OR|XOR|NOT|ATAN2",
-                          "Boolean operations need binary images as input",
-                          IPL_INT_RADIOBUTTONS, 0);
+                          "Boolean operations need binary images as input", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLArithmeticOperations::destroy()

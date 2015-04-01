@@ -71,36 +71,36 @@ public:
         return color;
     }
 
-    float red()
+    float red() const
     {
         return r;
     }
 
-    float green()
+    float green() const
     {
         return g;
     }
 
-    float blue()
+    float blue() const
     {
         return b;
     }
 
-    float hue()
+    float hue() const
     {
         float hsv[3];
         rgbToHsv(r, g, b, hsv);
         return hsv[0];
     }
 
-    float saturation()
+    float saturation() const
     {
         float hsv[3];
         rgbToHsv(r, g, b, hsv);
         return hsv[1];
     }
 
-    float value()
+    float value() const
     {
 
         float hsv[3];
@@ -108,7 +108,7 @@ public:
         return hsv[2];
     }
 
-    float lightness()
+    float lightness() const
     {
         float hsl[3];
         rgbToHsl(r, g, b, hsl);

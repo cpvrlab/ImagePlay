@@ -16,10 +16,10 @@ void IPLRotate::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("angle", "Angle", "", IPL_INT_SLIDER, 0, -180, 180);
-    addProcessPropertyDouble("scale", "Scaling", "", IPL_DOUBLE_SLIDER, 1.0, 0.1, 10.0);
-    addProcessPropertyPoint("center", "Center", "", IPL_POINT, IPLPoint(0,0));
-    addProcessPropertyInt("interpolation", "Interpolation:Nearest|Linear|Area|Cubic|Lanczos4", "", IPL_INT_COMBOBOX, 0, 0, 4);
+    addProcessPropertyInt("angle", "Angle", "", 0, IPL_WIDGET_SLIDER, -180, 180);
+    addProcessPropertyDouble("scale", "Scaling", "", 1.0, IPL_WIDGET_SLIDER, 0.1, 10.0);
+    addProcessPropertyPoint("center", "Center", "", IPLPoint(0,0), IPL_WIDGET_POINT);
+    addProcessPropertyInt("interpolation", "Interpolation:Nearest|Linear|Area|Cubic|Lanczos4", "", 0, IPL_WIDGET_COMBOBOX, 0, 4);
 }
 
 void IPLRotate::destroy()

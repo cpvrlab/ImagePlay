@@ -22,8 +22,8 @@ public:
     void setX(double value)       { _x = value; }
     void setY(double value)       { _y = value; }
 
-    double x()  { return _x; }
-    double y()  { return _y; }
+    double x() const  { return _x; }
+    double y() const  { return _y; }
 
     std::string toString(int x, int y);
 private:

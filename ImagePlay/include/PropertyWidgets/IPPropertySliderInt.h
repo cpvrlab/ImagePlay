@@ -57,7 +57,6 @@ signals:
 public slots:
     void onSliderChanged(int v)
     {
-        qDebug() << "onSliderChanged";
         _spinner->setValue(v);
 
         updateValue();
@@ -65,13 +64,11 @@ public slots:
 
     void onSpinnerChanged(int v)
     {
-        qDebug() << "onSpinnerChanged";
         _slider->setValue(v);
     }
 
     void updateValue()
     {
-        qDebug() << "updateValue";
         int v = _slider->value();
 
         // prevent double changes
