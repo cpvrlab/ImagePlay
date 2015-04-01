@@ -315,12 +315,13 @@ ImageViewerWindow::sortTabs
 void ImageViewerWindow::sortTabs()
 {
     // sort tabs according to their process order
-    /*for(int i=0; i<ui->tabWidget->tabBar()->count(); i++)
+    for(int i=0; i<ui->tabWidget->tabBar()->count()-1; i++)
     {
-        ui->tabWidget->tabBar()->setTabData(i, 123);
-        QVariant data = ui->tabWidget->tabBar()->tabData(i);
-        qDebug() << "TAB: " << data;
-    }*/
+        ui->tabWidget->tabBar()->moveTab(i, (i+1));
+        //ui->tabWidget->tabBar()->setTabData(i, 123);
+        //QVariant data = ui->tabWidget->tabBar()->tabData(i);
+        //qDebug() << "TAB: " << data;
+    }
 }
 //-----------------------------------------------------------------------------
 /*!
