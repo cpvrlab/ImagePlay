@@ -19,6 +19,8 @@ ImageViewerWindow::ImageViewerWindow(MainWindow *mainWindow) :
     _colorPickHandler = NULL;
     _coordinatePickHandler = NULL;
 
+    _ignoreZoomEvents = false;
+
 //    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
     QPalette darkPalette;
@@ -332,6 +334,9 @@ ImageViewerWindow::zoomAllViewers
 */
 void ImageViewerWindow::zoomAllViewers(ZoomAction action)
 {
+    if(_ignoreZoomEvents)
+        return;
+
     // apply zoom and scroll position to all viewers
 //    int horizontalScroll = ((IPImageViewer*) ui->tabWidget->currentWidget())->horizontalScrollBar()->value();
 //    int verticalScroll = ((IPImageViewer*) ui->tabWidget->currentWidget())->verticalScrollBar()->value();
@@ -355,8 +360,10 @@ void ImageViewerWindow::zoomAllViewers(ZoomAction action)
 
             zoomFactor = it.value()->zoomFactor();
 
+            //_ignoreZoomEvents = true;
             it.value()->horizontalScrollBar()->setValue(_horizontalScrollValue);
             it.value()->verticalScrollBar()->setValue(_verticalScrollValue);
+            //_ignoreZoomEvents = false;
         }
         catch(std::exception& e)
         {
@@ -623,11 +630,10 @@ void ImageViewerWindow::on_btnZoomReset_clicked()
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::on_scrollBarsChanged
-
-@TODO scrollbars currently don't work
 */
 void ImageViewerWindow::on_scrollBarsChanged(int horizontal, int vertical)
 {
+    //qDebug() << "on_scrollBarsChanged: " << horizontal << "," << vertical;
     _horizontalScrollValue = horizontal;
     _verticalScrollValue = vertical;
 

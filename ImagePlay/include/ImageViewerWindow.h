@@ -127,6 +127,8 @@ private:
     IPLCoordinatePickHandler*   _coordinatePickHandler;
     QColor                      _currentColor;
     QPoint                      _currentPosition;
+    bool                        _ignoreZoomEvents;
+
 
     // QWidget interface
 protected:
