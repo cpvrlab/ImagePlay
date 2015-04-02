@@ -1,5 +1,27 @@
 # Change Log
 
+## 6.0.0-beta.2 - 2015-04-01
+### Added
+- A first version of the plugin SDK is supplied in /plugin_development/
+ - To set up your plugin, use "ImagePlay -> Tools -> Generate Plugin Code"
+- Keyboard shortcut for quickly searching in the process library: [CTRL + F]
+- New property widgets: IPL_WIDGET_SLIDER_ODD and IPL_WIDGET_SLIDER_EVEN
+- OpenCV implementation for 2D convolutions
+
+### Changed
+- Switched the property GUI code to RTTI based dynamic_cast calls
+
+### Fixed
+- Process items in the graph can't be placed over other items anymore
+- Fixed a severe threading issue which occurred when using IPLProcess::addMessage
+- General stability improvements
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
+
 ## 6.0.0-beta.1 - 2015-03-18
 ### Added
 - Added example images in /images/
