@@ -9,7 +9,9 @@ void IPLHysteresisThreshold::init()
     setClassName("IPLHysteresisThreshold");
     setTitle("Hysteresis Threshold");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
-    setDescription("Apply hysteresis threshold.");
+    setDescription("Hysteresis thersholding of edge pixels. Starting at pixels with a "
+                   "value greater than the high threshold, trace a connected sequence "
+                   "of pixels that have a value greater than the low threhsold.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
@@ -39,7 +41,8 @@ bool IPLHysteresisThreshold::processInputData(IPLImage* image , int, bool)
         _result = new IPLImage( image->type(), width, height );
 
     // get properties
-    float threshold = getProcessPropertyDouble("threshold");
+    float lowThreshold = getProcessPropertyDouble("lowThreshold");
+    float highThreshold = getProcessPropertyDouble("highThreshold");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();
@@ -50,19 +53,49 @@ bool IPLHysteresisThreshold::processInputData(IPLImage* image , int, bool)
     {
         IPLImagePlane* plane = image->plane( planeNr );
         IPLImagePlane* newplane = _result->plane( planeNr );
+        for(int y=0; y<height; y++)
         {
-            for(int y=0; y<height; y++)
+            // progress
+            notifyProgressEventHandler(100*progress++/maxProgress);
+
+            for(int x=0; x<width; x++)
             {
-                // progress
-                notifyProgressEventHandler(100*progress++/maxProgress);
-                for(int x=0; x<width; x++)
-                {
-                    newplane->p(x,y) = (plane->p(x,y) < threshold) ? 0.0f : 1.0f;
-                }
+               if(plane->p(x,y) >= highThreshold)
+                   trace(x, y, plane, newplane, lowThreshold);
             }
         }
     }
     return true;
+}
+
+int IPLHysteresisThreshold::trace(int x, int y, IPLImagePlane* plane, IPLImagePlane* image, float lowThreshold)
+{
+    int width = plane->width();
+    int height = plane->height();
+    Queue queue;
+    queue.push_back(Pixel(x, y));
+    while(!queue.empty())
+    {
+        Pixel c = queue.front();
+        queue.pop_front();
+
+        if(c.x < width && c.x >= 0.0 && c.y < height && c.y >= 0.0)
+        {
+            if(plane->p(c.x,c.y)>lowThreshold && (image->p(c.x,c.y) == 0.0))
+            {
+                image->p(c.x,c.y) = 1.0;
+                queue.push_back( Pixel( c.x+1, c.y ) );
+                queue.push_back( Pixel( c.x, c.y+1 ) );
+                queue.push_back( Pixel( c.x-1, c.y ) );
+                queue.push_back( Pixel( c.x, c.y-1 ) );
+                queue.push_back( Pixel( c.x+1, c.y+1 ) );
+                queue.push_back( Pixel( c.x-1, c.y+1 ) );
+                queue.push_back( Pixel( c.x-1, c.y-1 ) );
+                queue.push_back( Pixel( c.x+1, c.y-1 ) );
+            }
+        }
+    }
+    return 0;
 }
 
 IPLData* IPLHysteresisThreshold::getResultData( int )

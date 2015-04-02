@@ -321,7 +321,7 @@ void MainWindow::loadProcesses()
 
     // register all processes to the factory
     _factory->registerProcess("IPLConvertToGray",       new IPLConvertToGray);
-    _factory->registerProcess("IPLBinarizeImage",       new IPLBinarizeImage);
+    _factory->registerProcess("IPLBinarize",       new IPLBinarize);
     _factory->registerProcess("IPLLoadImage",           new IPLLoadImage);
     _factory->registerProcess("IPLCamera",              new IPLCamera);
     _factory->registerProcess("IPLLoadImageSequence",   new IPLLoadImageSequence);

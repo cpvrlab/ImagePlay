@@ -25,6 +25,8 @@ void IPLCanny::init()
     // properties
     addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 7);
     addProcessPropertyDouble("sigma", "Sigma", "", 1.5, IPL_WIDGET_SLIDER, 0.5, 10);
+    addProcessPropertyDouble("lowThreshold", "Low Threshold", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highThreshold", "Hight Threshold", "Thresholds for the hysteresis procedure", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLCanny::destroy()
@@ -156,8 +158,10 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
     _binaryImage = new IPLImage( IPLData::IMAGE_BW, width, height );
 
     // get properties
-    int window      = getProcessPropertyInt("window");
-    double sigma    = getProcessPropertyDouble("sigma");
+    int window              = getProcessPropertyInt("window");
+    double sigma            = getProcessPropertyDouble("sigma");
+    double lowThreshold     = getProcessPropertyDouble("lowThreshold");
+    double highThreshold    = getProcessPropertyDouble("highThreshold");
 
     std::stringstream s;
     s << "Window: ";
@@ -170,7 +174,7 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
         cv::Mat input;
         cv::Mat output;
         cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
-        cv::Canny(input, output, sigma*128, sigma*255, window);
+        cv::Canny(input, output, lowThreshold*255, highThreshold*255, window);
 
         delete _result;
         _result = new IPLImage(output);

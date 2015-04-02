@@ -57,7 +57,7 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
         closedir(d);
     }
 
-    _sequenceCount = fileList.size();
+    _sequenceCount = (int)fileList.size();
 
     if(_sequenceCount < 1)
     {

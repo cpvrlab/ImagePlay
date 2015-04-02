@@ -1,5 +1,5 @@
-#ifndef IPLBINARIZEIMAGE_H
-#define IPLBINARIZEIMAGE_H
+#ifndef IPLBinarize_H
+#define IPLBinarize_H
 
 #include "IPL_global.h"
 #include "IPLProcess.h"
@@ -7,13 +7,13 @@
 #include <string>
 
 /**
- * @brief The IPLBinarizeImage class
+ * @brief The IPLBinarize class
  */
-class IPLSHARED_EXPORT IPLBinarizeImage : public IPLClonableProcess<IPLBinarizeImage>
+class IPLSHARED_EXPORT IPLBinarize : public IPLClonableProcess<IPLBinarize>
 {
 public:
-    IPLBinarizeImage() : IPLClonableProcess() { init(); }
-    ~IPLBinarizeImage()  { destroy(); }
+    IPLBinarize() : IPLClonableProcess() { init(); }
+    ~IPLBinarize()  { destroy(); }
 
     void                    init                    ();
     void                    destroy                 ();
@@ -25,4 +25,4 @@ protected:
     IPLImage*               _result;
 };
 
-#endif // IPLBINARIZEIMAGE_H
+#endif // IPLBinarize_H

@@ -53,7 +53,7 @@ bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
     // get properties
     _path           = getProcessPropertyString("path");
     _jpeg_quality   = getProcessPropertyInt("jpeg_quality");
-    _jpeg_progressive=getProcessPropertyInt("jpeg_progressive");
+    _jpeg_progressive=(getProcessPropertyInt("jpeg_progressive") == 1);
     _bmp_type       = getProcessPropertyInt("bmp_type");
     _png_type       = getProcessPropertyInt("png_type");
     _pnm_type       = getProcessPropertyInt("pnm_type");

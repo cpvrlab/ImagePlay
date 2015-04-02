@@ -1,12 +1,12 @@
-#include "IPLBinarizeImage.h"
+#include "IPLBinarize.h"
 
-void IPLBinarizeImage::init()
+void IPLBinarize::init()
 {
     // init
     _result     = NULL;
 
     // basic settings
-    setClassName("IPLBinarizeImage");
+    setClassName("IPLBinarize");
     setTitle("Binarize");
     setKeywords("threshold");
     setDescription("Converts an image with the color format binary, gray-scale, or color to a binary image. The threshold can be set between 0.0 and 1.0");
@@ -20,12 +20,12 @@ void IPLBinarizeImage::init()
     addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", 0.5, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
-void IPLBinarizeImage::destroy()
+void IPLBinarize::destroy()
 {
     delete _result;
 }
 
-bool IPLBinarizeImage::processInputData(IPLImage* image , int, bool)
+bool IPLBinarize::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -50,22 +50,20 @@ bool IPLBinarizeImage::processInputData(IPLImage* image , int, bool)
     {
         IPLImagePlane* plane = image->plane( planeNr );
         IPLImagePlane* newplane = _result->plane( planeNr );
+        for(int y=0; y<height; y++)
         {
-            for(int y=0; y<height; y++)
+            // progress
+            notifyProgressEventHandler(100*progress++/maxProgress);
+            for(int x=0; x<width; x++)
             {
-                // progress
-                notifyProgressEventHandler(100*progress++/maxProgress);
-                for(int x=0; x<width; x++)
-                {
-                    newplane->p(x,y) = (plane->p(x,y) < threshold) ? 0.0f : 1.0f;
-                }
+                newplane->p(x,y) = (plane->p(x,y) < threshold) ? 0.0f : 1.0f;
             }
         }
     }
     return true;
 }
 
-IPLImage* IPLBinarizeImage::getResultData( int )
+IPLImage* IPLBinarize::getResultData(int)
 {
     return _result;
 }

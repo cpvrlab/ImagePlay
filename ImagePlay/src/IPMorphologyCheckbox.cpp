@@ -7,7 +7,7 @@ IPMorphologyCheckbox::IPMorphologyCheckbox(QWidget *parent) :
 }
 
 
-void IPMorphologyCheckbox::paintEvent(QPaintEvent* e)
+void IPMorphologyCheckbox::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);

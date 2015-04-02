@@ -9,7 +9,7 @@
 #include "IPLLoadImageSequence.h"
 #include "IPLSynthesize.h"
 #include "IPLSaveImage.h"
-#include "IPLBinarizeImage.h"
+#include "IPLBinarize.h"
 #include "IPLGaussianLowPass.h"
 #include "IPLGammaCorrection.h"
 #include "IPLSplitPlanes.h"
