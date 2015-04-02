@@ -19,12 +19,24 @@ class IPLProcess;
 class IPLSHARED_EXPORT IPLProcessProperty
 {
 public:
+    struct SerializedData
+    {
+        std::string type;
+        std::string widget;
+        std::string widgetName;
+        std::string value;
+    };
+
+    struct DeserialationFailed : public std::runtime_error
+    { DeserialationFailed(): std::runtime_error("") {} };
+
     int position() const                  { return _position; }
     const char* name() const              { return _name; }
     const char* description() const       { return _description; }
     IPLProcessWidgetType widget() const   { return _widget; }
-    virtual std::string toJson() const = 0;
-    virtual void fromJson(std::string) = 0;
+    virtual const char* type() const = 0;
+    virtual SerializedData serialize() const = 0;
+    virtual void deserialize(const SerializedData &data) = 0;
     virtual IPLProcessProperty *clone() const = 0;
 
 protected:
@@ -54,8 +66,9 @@ public:
     int max() const                         { return _max; }
     int value() const                       { return _value; }
     void setValue(int value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const        { return "int"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -74,8 +87,9 @@ public:
     unsigned int max() const                         { return _max; }
     unsigned int value() const                       { return _value; }
     void setValue(unsigned int value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const                 { return "uint"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -94,8 +108,9 @@ public:
     double max() const                         { return _max; }
     double value() const                       { return _value; }
     void setValue(double value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const           { return "double"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -114,8 +129,9 @@ public:
     float max() const                         { return _max; }
     float value() const                       { return _value; }
     void setValue(float value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const          { return "float"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -134,8 +150,9 @@ public:
 
     bool value() const                       { return _value; }
     void setValue(bool value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const         { return "bool"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -151,8 +168,9 @@ public:
     std::string value() const                       { return _value; }
     void setValue(const std::string &value);
     void setValue(std::string &&value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const                { return "string"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -169,8 +187,9 @@ public:
     const std::vector<int> &value() const                       { return _value; }
     void setValue(const std::vector<int> &value);
     void setValue(std::vector<int> &&value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const                            { return "vector<int>"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -186,8 +205,9 @@ public:
     const IPLColor &value() const                       { return _value; }
     void setValue(const IPLColor &value);
     void setValue(IPLColor &&value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const                    { return "color"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
@@ -204,8 +224,9 @@ public:
     const IPLPoint &value() const                       { return _value; }
     void setValue(const IPLPoint &value);
     void setValue(IPLPoint &&value);
-    std::string toJson() const;
-    void fromJson(std::string value);
+    virtual const char *type() const                    { return "point"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:

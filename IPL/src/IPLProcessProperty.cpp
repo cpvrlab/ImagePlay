@@ -1,5 +1,191 @@
 #include "IPLProcessProperty.h"
 
+#include <array>
+#include <cctype>
+#include <regex>
+
+template<class T>
+inline std::string serializeValue(const T &value)
+{
+    std::ostringstream buffer;
+    buffer << value;
+    return buffer.str();
+}
+
+template<>
+inline std::string serializeValue<bool>(const bool &value)
+{
+    std::ostringstream buffer;
+    buffer <<  value ? "true" : "false";
+    return buffer.str();
+}
+
+template<>
+inline std::string serializeValue<std::vector<int>>(const std::vector<int> &value)
+{
+    std::ostringstream buffer;
+    buffer << "[";
+    if (value.size() > 0) buffer << value[0];
+    for (int i = 1; i < value.size(); ++i) buffer << "," << value[i];
+    buffer << "]";
+    return buffer.str();
+}
+
+template<>
+inline std::string serializeValue<IPLColor>(const IPLColor &value)
+{
+    std::ostringstream buffer;
+    buffer << "[" << value.red() << "," << value.green() << "," << value.blue() << "]";
+    return buffer.str();
+}
+
+template<>
+inline std::string serializeValue<IPLPoint>(const IPLPoint &value)
+{
+    std::ostringstream buffer;
+    buffer << "[" << value.x() << "," << value.y() << "]";
+    return buffer.str();
+}
+
+template<class T>
+inline IPLProcessProperty::SerializedData serializeProperty(const char *type, IPLProcessWidgetType widget, const T &value)
+{
+    IPLProcessProperty::SerializedData result;
+    result.type = serializeValue(type);
+    result.widget = serializeValue(widget);
+    result.widgetName = serializeValue(widgetName(widget));
+    result.value = serializeValue(value);
+    return result;
+}
+
+inline void deserializeValue(const std::string &data, bool &value)
+{
+    if (data.length() != 4)
+    {
+        value = false;
+        return;
+    }
+
+    static const unsigned char nonAsciiMap = 1<<7;
+    std::string lowercase(data);
+    //tolower is undefined (i.e. might crash) for non-ASCII characters. Since we don't want to parse those, just xor them out
+    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), [](char c) { return c ^ nonAsciiMap; });
+    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), tolower); //Transform to lower case
+    value = lowercase.compare("true") == 0;
+}
+
+inline void deserializeValue(const std::string &data, int &value)
+{
+    int result = 0;
+    if (sscanf(data.c_str(),"%d",&result) < 1)
+        throw IPLProcessProperty::DeserialationFailed();
+    value = result;
+}
+
+inline void deserializeValue(const std::string &data, IPLProcessWidgetType &value)
+{
+    int tmp;
+    deserializeValue(data,tmp);
+    value = (IPLProcessWidgetType) tmp;
+}
+
+inline void deserializeValue(const std::string &data, unsigned int &value)
+{
+    unsigned int result = 0;
+    if (sscanf(data.c_str(),"%u",&result) < 1)
+        throw IPLProcessProperty::DeserialationFailed();
+    value = result;
+}
+
+inline void deserializeValue(const std::string &data, float &value)
+{
+    float result = 0;
+    if (sscanf(data.c_str(),"%f",&result) < 1)
+        throw IPLProcessProperty::DeserialationFailed();
+    value = result;
+}
+
+inline void deserializeValue(const std::string &data, double &value)
+{
+    double result = 0;
+    if (sscanf(data.c_str(),"%lf",&result) < 1)
+        throw IPLProcessProperty::DeserialationFailed();
+    value = result;
+}
+
+inline void deserializeValue(const std::string &data, std::vector<int> &value)
+{
+    std::vector<int> result;
+    std::smatch match;
+    auto pos = data.begin();
+    while(std::regex_search(pos,data.end(),match,std::regex("[-0-9]")))
+    {
+        pos += match.position();
+
+        int charsParsed = 0;
+        int element = 0;
+        if (sscanf(&(*pos),"%d%n",&element,&charsParsed) > 0)
+            result.push_back(element);
+
+        pos += charsParsed;
+    }
+    value.swap(result);
+}
+
+inline void deserializeValue(const std::string &data, IPLColor &value)
+{
+    std::array<float,3> color;
+
+    int i = 0;
+    std::smatch match;
+    auto pos = data.begin();
+    while(i < color.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
+    {
+        pos += match.position();
+
+        int charsParsed = 0;
+        float element = 0;
+        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
+            color[i++] = element;
+
+        pos += charsParsed;
+    }
+    value = IPLColor(color[0], color[1], color[2]);
+}
+
+inline void deserializeValue(const std::string &data, IPLPoint &value)
+{
+    std::array<double,2> point;
+
+    int i = 0;
+    std::smatch match;
+    auto pos = data.begin();
+    while(i < point.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
+    {
+        pos += match.position();
+
+        int charsParsed = 0;
+        float element = 0;
+        if (sscanf(&(*pos),"%lf%n",&element,&charsParsed) > 0)
+            point[i++] = element;
+
+        pos += charsParsed;
+    }
+
+    value = IPLPoint(point[0], point[1]);
+}
+
+inline void deserializeValue(const std::string &data, std::string &value)
+{
+    value = data;
+}
+
+template<class T>
+inline void deserializeProperty(IPLProcessProperty::SerializedData data, IPLProcessWidgetType &widget, T &value)
+{
+    deserializeValue(data.widget,widget);
+    deserializeValue(data.value,value);
+}
 
 IPLProcessProperty::IPLProcessProperty(int position, const char *name, const char *description, IPLProcess *process, IPLProcessWidgetType widget):
     _position(position),
@@ -23,27 +209,20 @@ void IPLProcessPropertyInt::setValue(int value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyInt::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyInt::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"int\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
+}
+
+void IPLProcessPropertyInt::deserialize(const SerializedData &data)
+{
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyInt::clone() const
 {
     return new IPLProcessPropertyInt(*this);
 }
-
-void IPLProcessPropertyInt::fromJson(std::string value)
-{
-    _value = atoi(value.c_str());
-}
-
 
 IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char *name, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max):
     IPLProcessProperty(position,name,description,process,widget),
@@ -59,20 +238,14 @@ void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyUnsignedInt::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyUnsignedInt::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"uint\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyUnsignedInt::fromJson(std::string value)
+void IPLProcessPropertyUnsignedInt::deserialize(const SerializedData &data)
 {
-    _value = (unsigned int) atol(value.c_str());
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone() const
@@ -95,20 +268,14 @@ void IPLProcessPropertyDouble::setValue(double value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyDouble::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyDouble::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"double\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyDouble::fromJson(std::string value)
+void IPLProcessPropertyDouble::deserialize(const SerializedData &data)
 {
-    _value = atof(value.c_str());
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyDouble::clone() const
@@ -131,20 +298,14 @@ void IPLProcessPropertyFloat::setValue(float value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyFloat::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyFloat::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"float\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyFloat::fromJson(std::string value)
+void IPLProcessPropertyFloat::deserialize(const SerializedData &data)
 {
-    _value = atof(value.c_str());
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyFloat::clone() const
@@ -165,26 +326,14 @@ void IPLProcessPropertyBool::setValue(bool value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyBool::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyBool::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"bool\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    if(_value)
-        json << "   \"value\": true\n";
-    else
-        json << "   \"value\": false\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyBool::fromJson(std::string value)
+void IPLProcessPropertyBool::deserialize(const SerializedData &data)
 {
-    if(value == "true")
-        _value = true;
-    else
-        _value = false;
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyBool::clone() const
@@ -212,20 +361,14 @@ void IPLProcessPropertyString::setValue(std::string &&value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyString::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyString::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"string\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \"" << _value << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyString::fromJson(std::string value)
+void IPLProcessPropertyString::deserialize(const SerializedData &data)
 {
-    _value = value;
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyString::clone() const
@@ -253,34 +396,14 @@ void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyVectorInt::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyVectorInt::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"vector<int>\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \"";
-    for(size_t i=0; i<_value.size(); i++)
-    {
-        json << _value[i];
-        if(i<_value.size()-1)
-            json << "|";
-    }
-    json << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyVectorInt::fromJson(std::string value)
+void IPLProcessPropertyVectorInt::deserialize(const SerializedData &data)
 {
-    _value.clear();
-    char* input = (char*) value.c_str();
-    char* token = strtok(input, "|");
-    while(token != NULL)
-    {
-        _value.push_back(atoi(token));
-        token = strtok(NULL, "|");
-    }
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyVectorInt::clone() const
@@ -308,24 +431,14 @@ void IPLProcessPropertyColor::setValue(IPLColor &&value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyColor::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyColor::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"color\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value.red() << "|" << _value.green() << "|"<< _value.blue() << "|" << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyColor::fromJson(std::string value)
+void IPLProcessPropertyColor::deserialize(const SerializedData &data)
 {
-    char* input = (char*) value.c_str();
-    char* token1 = strtok(input, "|");
-    char* token2 = strtok(token1, "|");
-    char* token3 = strtok(token2, "|");
-    _value = IPLColor::fromRGB(atof(token1), atof(token2), atof(token3));
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyColor::clone() const
@@ -352,23 +465,14 @@ void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
     _process->notifyPropertyChangedEventHandler();
 }
 
-std::string IPLProcessPropertyPoint::toJson() const
+IPLProcessProperty::SerializedData IPLProcessPropertyPoint::serialize() const
 {
-    std::ostringstream json;
-    json << "{\n";
-    json << "   \"type\": \"point\",\n";
-    json << "   \"type\": \"" << _widget << "\", //" << widgetName(_widget) << "\n";
-    json << "   \"value\": \""  << _value.x() << "|" << _value.y() << "\"\n";
-    json << "}";
-    return json.str();
+    return serializeProperty(type(),_widget,_value);
 }
 
-void IPLProcessPropertyPoint::fromJson(std::string value)
+void IPLProcessPropertyPoint::deserialize(const SerializedData &data)
 {
-    char* input = (char*) value.c_str();
-    char* token1 = strtok(input, "|");
-    char* token2 = strtok(token1, "|");
-    _value = IPLPoint(atof(token1), atof(token2));
+    deserializeProperty(data,_widget,_value);
 }
 
 IPLProcessProperty *IPLProcessPropertyPoint::clone() const

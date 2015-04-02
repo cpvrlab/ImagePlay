@@ -653,6 +653,7 @@ bool MainWindow::readProcessFile()
             QJsonObject propertyObject = (*it2).toObject();
             QString  key     = propertyObject.value("key").toString();
             QString  type    = propertyObject.value("type").toString();
+            QString  widget    = propertyObject.value("widget").toString();
             QVariant value   = propertyObject.value("value").toVariant();
 
             IPLProcessProperty* processProperty = (IPLProcessProperty*) newStep->process()->property(key.toStdString());
@@ -661,7 +662,13 @@ bool MainWindow::readProcessFile()
                 qWarning() << "Invalid process property: " << key;
                 continue;
             }
-            processProperty->fromJson(value.toString().toStdString());
+
+            IPLProcessProperty::SerializedData data;
+            data.type = type.toStdString();
+            data.widget = widget.toStdString();
+            data.value = value.toString().toStdString();
+
+            processProperty->deserialize(data);
         }
 
         // we need to map the file step ID to the new ID
@@ -745,7 +752,18 @@ bool MainWindow::writeProcessFile()
             QString key = QString::fromStdString(it->first);
 
             auto &p = it->second;
-            QString propertyJsonString = QString::fromStdString(p->toJson().c_str());
+            QString propertyJsonString;
+            {
+                IPLProcessProperty::SerializedData data = p->serialize();
+                std::ostringstream json;
+                json << "{\n";
+                json << " \"type\": \"" << data.type << "\",\n";
+                json << " \"widget\": \"" << data.widget << "\",\n";
+                json << " \"widgetName\": \"" << data.widgetName << "\",\n";
+                json << " \"value\": \"" << data.value << "\"\n";
+                json << "}";
+               propertyJsonString = QString::fromStdString(json.str());
+            }
 
             QJsonParseError error;
             QJsonDocument tmp = QJsonDocument::fromJson(propertyJsonString.toLatin1(), &error);
