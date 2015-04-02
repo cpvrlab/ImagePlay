@@ -48,7 +48,6 @@ public:
         connect(_spinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertySliderIntOdd::onSpinnerChanged );
 
         _ignoreEvents = false;
-
     }
     void setMinimum(int v)  { _slider->setMinimum(v);  _spinner->setMinimum(v); }
     void setMaximum(int v)  { _slider->setMaximum(v);  _spinner->setMaximum(v); }
@@ -79,7 +78,6 @@ public slots:
             _ignoreEvents = false;
             return;
         }
-
         _slider->setValue((v-_spinner->minimum())/2);
 
         updateValue();

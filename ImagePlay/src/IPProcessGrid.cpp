@@ -454,6 +454,22 @@ void IPProcessGrid::keyPressEvent(QKeyEvent *event)
     {
         setDragMode(QGraphicsView::ScrollHandDrag);
     }
+
+    if(event->key() == Qt::Key_F && modifiers&Qt::ControlModifier)
+    {
+        _mainWindow->hideProcessSettings();
+        _mainWindow->setFilterFocus();
+    }
+
+    if(event->key() == Qt::Key_Delete)
+    {
+        _scene->deleteSelectedItems();
+    }
+
+    if(event->key() == Qt::Key_Escape)
+    {
+        _mainWindow->hideProcessSettings();
+    }
 }
 
 /*!
@@ -468,20 +484,8 @@ void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
     {
         setDragMode(QGraphicsView::RubberBandDrag);
     }
-    if(event->key() == Qt::Key_Delete)
-    {
-        _scene->deleteSelectedItems();
-    }
-    if(event->key() == Qt::Key_Escape)
-    {
-        _mainWindow->hideProcessSettings();
-    }
-    if(event->key() == Qt::Key_F && modifiers&Qt::ControlModifier)
-    {
-        _mainWindow->hideProcessSettings();
-        _mainWindow->setFilterFocus();
-    }
 }
+
 
 
 void IPProcessGrid::propertyChanged(IPLProcess* process)

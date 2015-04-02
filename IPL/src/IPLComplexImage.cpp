@@ -65,7 +65,6 @@ unsigned char* IPLComplexImage::rgb32()
                 max = value;
         }
     }
-    float diff = max-min;
     const double delta = 0.00001;
     const double logdelta = log( delta );
     max = (max!=0.0)? log(delta+max) : logdelta;

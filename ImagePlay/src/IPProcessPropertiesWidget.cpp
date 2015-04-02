@@ -81,12 +81,12 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
                 addPropertyWidget(property->name(), property->description(), widget);
                 break;
 
-            case IPL_WIDGET_SLIDER_EVEN:
+            case IPL_WIDGET_SLIDER_ODD:
                 widget = new IPPropertySliderIntOdd(p, this);
                 addPropertyWidget(property->name(), property->description(), widget);
                 break;
 
-            case IPL_WIDGET_SLIDER_ODD:
+            case IPL_WIDGET_SLIDER_EVEN:
                 widget = new IPPropertySliderIntEven(p, this);
                 addPropertyWidget(property->name(), property->description(), widget);
                 break;

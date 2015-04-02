@@ -42,7 +42,7 @@ ConnectionDialog::ConnectionDialog(IPProcessStep *from, IPProcessStep *to, IPPro
 
     int rowL = 1;
     bool isDefaultSet = false;
-    for(size_t i=0; i < _from->process()->outputs()->size(); i++)
+    for(int i=0; i < (int)_from->process()->outputs()->size(); i++)
     {
         QRadioButton* btn = new QRadioButton(QString::fromStdString(_from->process()->outputs()->at(i).name), this);
 
@@ -73,7 +73,7 @@ ConnectionDialog::ConnectionDialog(IPProcessStep *from, IPProcessStep *to, IPPro
 
     int rowR = 1;
     isDefaultSet = false;
-    for(size_t i=0; i < _to->process()->inputs()->size(); i++)
+    for(int i=0; i < (int)_to->process()->inputs()->size(); i++)
     {
         QRadioButton* btn = new QRadioButton(QString::fromStdString(_to->process()->inputs()->at(i).name), this);
 

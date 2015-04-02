@@ -128,7 +128,7 @@ void IPHistogramWidget::paintEvent(QPaintEvent* e)
 
         QPen pen(QColor(255,255,255,100));
         QPen pen2(QColor(255,255,255));
-        for(size_t i=0; i < values.size(); i++)
+        for(int i=0; i < (int) values.size(); i++)
         {
             painter.setPen(pen);
             painter.drawLine(i,100,i,100-values[i]);

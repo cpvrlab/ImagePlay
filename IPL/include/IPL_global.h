@@ -32,6 +32,7 @@
     #pragma warning(disable:4100) // unreferenced formal parameter
     #pragma warning(disable:4996) // strtok unsafe
     #pragma warning(disable:4244) // possible loss of data
+    #define _CRT_SECURE_NO_WARNINGS // this function or variable may be unsave
 #endif
 
 #if defined(IPL_LIBRARY)

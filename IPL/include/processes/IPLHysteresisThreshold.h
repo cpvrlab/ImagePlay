@@ -4,6 +4,8 @@
 #include "IPL_global.h"
 #include "IPLProcess.h"
 
+#include <deque>
+
 /**
  * @brief The IPLHysteresisThreshold class
  */
@@ -20,6 +22,16 @@ public:
 
 protected:
     IPLImage*               _result;
+
+    class Pixel {
+        public: Pixel( int _x, int _y ){ x=_x; y=_y; }
+        int x;
+        int y;
+    };
+    typedef std::deque<Pixel> Queue;
+
+private:
+    int trace(int x, int y, IPLImagePlane *plane, IPLImagePlane *image, float lowThreshold);
 };
 
 #endif // IPLHysteresisThreshold_H

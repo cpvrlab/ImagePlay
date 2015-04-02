@@ -213,7 +213,7 @@
      <item>
       <widget class="IPFilterLineEdit" name="txtFilter">
        <property name="placeholderText">
-        <string>Search (Ctrl+F)...</string>
+        <string>Find (Ctrl+F)...</string>
        </property>
       </widget>
      </item>

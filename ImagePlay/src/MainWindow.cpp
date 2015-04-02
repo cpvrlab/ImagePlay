@@ -91,6 +91,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // read and apply settings
     readSettings();
 
+#ifdef Q_OS_MAC
+    // set the right placeholder text for OS X
+    ui->txtFilter->setPlaceholderText("Find (Cmd+F)...");
+#endif
+
     setFilterFocus();
 }
 
@@ -321,7 +326,7 @@ void MainWindow::loadProcesses()
 
     // register all processes to the factory
     _factory->registerProcess("IPLConvertToGray",       new IPLConvertToGray);
-    _factory->registerProcess("IPLBinarizeImage",       new IPLBinarizeImage);
+    _factory->registerProcess("IPLBinarize",       new IPLBinarize);
     _factory->registerProcess("IPLLoadImage",           new IPLLoadImage);
     _factory->registerProcess("IPLCamera",              new IPLCamera);
     _factory->registerProcess("IPLLoadImageSequence",   new IPLLoadImageSequence);
@@ -1049,7 +1054,7 @@ void MainWindow::on_sequenceChanged(int index, int count)
     ui->sequenceSlider->setMaximum(count-1);
 }
 
-void MainWindow::keyReleaseEvent(QKeyEvent* event)
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
 
