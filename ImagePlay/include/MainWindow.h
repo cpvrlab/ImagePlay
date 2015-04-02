@@ -178,7 +178,7 @@ private:
 protected:
     void                    showEvent                       (QShowEvent *);
     void                    closeEvent                      (QCloseEvent*);
-    void                    keyReleaseEvent                 (QKeyEvent *);
+    void                    keyPressEvent                   (QKeyEvent *);
 };
 
 #endif // MAINWINDOW_H

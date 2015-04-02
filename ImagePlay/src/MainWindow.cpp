@@ -91,6 +91,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // read and apply settings
     readSettings();
 
+#ifdef Q_OS_MAC
+    // set the right placeholder text for OS X
+    ui->txtFilter->setPlaceholderText("Find (Cmd+F)...");
+#endif
+
     setFilterFocus();
 }
 
@@ -1031,7 +1036,7 @@ void MainWindow::on_sequenceChanged(int index, int count)
     ui->sequenceSlider->setMaximum(count-1);
 }
 
-void MainWindow::keyReleaseEvent(QKeyEvent* event)
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
 
