@@ -118,7 +118,7 @@ inline void deserializeValue(const std::string &data, std::vector<int> &value)
     std::vector<int> result;
     std::smatch match;
     auto pos = data.begin();
-    while(std::regex_search(pos,data.end(),match,std::regex("[-0-9]")))
+    while(std::regex_search(pos,data.end(),match,std::regex("[0-9]|-")))
     {
         pos += match.position();
 
