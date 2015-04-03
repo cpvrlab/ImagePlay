@@ -37,11 +37,52 @@ IPLImagePlane::IPLImagePlane( const IPLImagePlane& other )
     _instanceCount++;
 }
 
+IPLImagePlane::IPLImagePlane(IPLImagePlane &&other):
+    _height(other._height),
+    _width(other._width),
+    _plane(other._plane)
+{
+    other._height = 0;
+    other._width = 0;
+    other._plane = NULL;
+    _instanceCount++;
+}
+
 IPLImagePlane::~IPLImagePlane( void )
 {
     deletePlane();
 
     _instanceCount--;
+}
+
+IPLImagePlane &IPLImagePlane::operator=(const IPLImagePlane &other)
+{
+    _height = other._height;
+    _width = other._width;
+    newPlane();
+
+    for(int i=0; i<_height*_width; i++)
+        _plane[i] = other._plane[i];
+}
+
+IPLImagePlane &IPLImagePlane::operator=(IPLImagePlane &&other)
+{
+    _height = other._height;
+    _width = other._width;
+    _plane = other._plane;
+
+    other._height = 0;
+    other._width = 0;
+    other._plane = NULL;
+}
+
+
+void IPLImagePlane::swap(IPLImagePlane &other)
+{
+    IPLImagePlane tmp(std::move(other));
+
+    other = std::move(*this);
+    (*this) = std::move(tmp);
 }
 
 void IPLImagePlane::newPlane( void )

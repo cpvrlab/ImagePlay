@@ -12,7 +12,12 @@ public:
     IPLImagePlane();
     IPLImagePlane( int width, int height );
     IPLImagePlane( const IPLImagePlane& i );
+    IPLImagePlane( IPLImagePlane&& i );
+    IPLImagePlane &operator=(const IPLImagePlane &other);
+    IPLImagePlane &operator=(IPLImagePlane &&other);
     ~IPLImagePlane();
+
+    void swap(IPLImagePlane &other);
 
     //IPLImagePlane& IPLImagePlane::operator=( IPLImagePlane& i );
     //!
