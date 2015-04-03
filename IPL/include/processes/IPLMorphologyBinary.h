@@ -21,16 +21,11 @@ public:
     virtual bool processInputData( IPLImage* data, int inNr, bool useOpenCV );
     virtual IPLImage* getResultData( int outNr );
 
-    void dilate(IPLImagePlane* inputPlane, IPLImagePlane* resultPlane);
-    void invert(IPLImagePlane* inputPlane);
-
 protected:
     IPLImage*           _result;
     std::vector<int>    _kernel;
     int                 _operation;
     int                 _iterations;
-    int                 _progress;
-    int                 _maxProgress;
 };
 
 #endif // IPLMORPHOLOGYBINARY_H
