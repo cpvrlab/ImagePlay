@@ -142,6 +142,15 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
     _iterations = getProcessPropertyInt("iterations");
     _operation  = getProcessPropertyInt("operation");
 
+    if (std::accumulate(_kernel.begin(),_kernel.end(),0) == 0)
+    {
+        //Add an empty image - The image viewer currently may trigger
+        //a segfault if we return NULL.
+        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+        addError("Empty kernel.");
+        return false;
+    }
+
     enum Operation
     {
         DILATE = 0,
