@@ -68,6 +68,10 @@ void applyMorphology(IPLImagePlane &src, IPLImagePlane &dst, int iterations, con
         {
             for (int x = 0; x < src.width(); ++x)
             {
+                //TODO: Speed up this routine
+                //There would be several possibilities such as usage of SIMD techniques
+                //or the reduction of the source image (e.g. to unsigned char)
+
                 bool cancel = false;
                 auto &pixelValue = dst.p(x,y);
                 int i = 0;
@@ -150,6 +154,9 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
         addError("Empty kernel.");
         return false;
     }
+
+    // TODO: implement manhattan distance threshold instead of stupid iterations...
+    // TODO: implement border interpolation properties
 
     enum Operation
     {
