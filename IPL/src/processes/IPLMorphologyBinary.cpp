@@ -11,6 +11,7 @@ void IPLMorphologyBinary::init()
     setClassName("IPLMorphologyBinary");
     setTitle("Binary Morphology");
     setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
+    setOpenCVSupport(IPLOpenCVSupport::OPENCV_OPTIONAL);
 
     // default value
     // 0 0 0
@@ -127,7 +128,7 @@ void close(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const s
 }
 
 
-bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
+bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
 {
     // delete previous result
     delete _result;
@@ -136,20 +137,10 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
     int width = image->width();
     int height = image->height();
 
-    // copy constructor doesnt work:
-    // _result = new IPLImage(*image);
-
-    _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
-
     // get properties
-//    _propertyMutex.lock();
     _kernel     = getProcessPropertyVectorInt("kernel");
     _iterations = getProcessPropertyInt("iterations");
     _operation  = getProcessPropertyInt("operation");
-//    _propertyMutex.unlock();
-
-    /// @todo implement manhattan distance threshold instead
-    /// of stupid iterations...
 
     enum Operation
     {
@@ -159,35 +150,62 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
         CLOSE
     };
 
-    //std::vector<bool> packs its elements bitwise into a vector of
-    //bytes. The kernel therefore uses much less cpu cache this way.
-    std::vector<bool> kernel;
-    kernel.reserve(_kernel.size());
-    for (auto &i: _kernel) kernel.emplace_back(i > 0);
-
-    std::atomic<int> progress(0);
-    int totalLines = image->height()*_iterations;
-
-    auto updateProgress = [&]() {
-        notifyProgressEventHandler(100*((float)++progress)/totalLines);
-    };
-
-    switch(_operation)
+    if (!useOpenCV)
     {
-    case DILATE:
-        dilate(*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
-        break;
-    case ERODE:
-        erode (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
-        break;
-    case OPEN:
-        totalLines *= 2;
-        open  (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
-        break;
-    case CLOSE:
-        totalLines *= 2;
-        close (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
-        break;
+        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+
+        //std::vector<bool> packs its elements bitwise into a vector of
+        //bytes. The kernel therefore uses much less cpu cache this way.
+        std::vector<bool> kernel;
+        kernel.reserve(_kernel.size());
+        for (auto &i: _kernel) kernel.emplace_back(i > 0);
+
+        std::atomic<int> progress(0);
+        int totalLines = image->height()*_iterations;
+        auto updateProgress = [&]() {
+            notifyProgressEventHandler(100*((float)++progress)/totalLines);
+        };
+
+        switch(_operation)
+        {
+        case DILATE:
+            dilate(*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case ERODE:
+            erode (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case OPEN:
+            totalLines *= 2;
+            open  (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case CLOSE:
+            totalLines *= 2;
+            close (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        }
+    }
+    else
+    {
+        notifyProgressEventHandler(50);
+
+        int kernelSize = (int)sqrt((float)_kernel.size());
+        cv::Mat src = image->toCvMat();
+        cv::Mat dst;
+
+        cv::Mat kernel(kernelSize,kernelSize,CV_8UC1);
+        int i = 0;
+        for (auto pixel: _kernel)
+            kernel.at<unsigned char>(i++) = pixel;
+
+        static const int OPERATIONS[4] = {
+            cv::MORPH_DILATE,
+            cv::MORPH_ERODE,
+            cv::MORPH_OPEN,
+            cv::MORPH_CLOSE
+        };
+
+        cv::morphologyEx(src,dst,OPERATIONS[_operation],kernel,cv::Point(-1,-1),_iterations);
+        _result = new IPLImage(dst);
     }
 
     return true;
