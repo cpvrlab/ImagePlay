@@ -174,7 +174,7 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
         //bytes. The kernel therefore uses much less cpu cache this way.
         std::vector<bool> kernel;
         kernel.reserve(_kernel.size());
-        for (auto &i: _kernel) kernel.emplace_back(i > 0);
+        for (auto &i: _kernel) kernel.push_back(i > 0);
 
         std::atomic<int> progress(0);
         int totalLines = image->height()*_iterations;
