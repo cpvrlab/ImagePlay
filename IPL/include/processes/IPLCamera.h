@@ -25,6 +25,7 @@ public:
     virtual IPLImage*       getResultData           (int outNr);
 protected:
     IPLImage*               _result;
+    bool                    _continuous;
 };
 
 #endif // IPLCAMERA_H
