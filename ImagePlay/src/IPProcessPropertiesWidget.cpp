@@ -99,14 +99,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
                 break;
 
             case IPL_WIDGET_COMBOBOX:
-                widget = new IPPropertyCombobox((IPLProcessPropertyInt*) property, this);
-                rawName = property->name(); // name:value1|value2
-                name = rawName.split(":").at(0);
-                addPropertyWidget(name, property->description(), widget);
-                break;
-
-            case IPL_WIDGET_CHECKBOXES:
-                widget = new IPPropertyCheckboxInt((IPLProcessPropertyUnsignedInt*) property, this);
+                widget = new IPPropertyCombobox(p, this);
                 rawName = property->name(); // name:value1|value2
                 name = rawName.split(":").at(0);
                 addPropertyWidget(name, property->description(), widget);
@@ -114,6 +107,30 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 
             default: //IPL_WIDGET_SPINNER
                 IPPropertySpinnerInt* widget = new IPPropertySpinnerInt(p, this);
+                addPropertyWidget(property->name(),property->description(), widget);
+                break;
+            }
+        }
+
+        else if (auto p = dynamic_cast<IPLProcessPropertyUnsignedInt*>(property))
+        {
+            IPPropertyWidget *widget = NULL;
+            QString rawName, name;
+
+
+            switch(p->widget())
+            {
+            //TODO: Implement Sliders, Checkboxes etc.
+
+            case IPL_WIDGET_CHECKBOXES:
+                widget = new IPPropertyCheckboxInt(p, this);
+                rawName = property->name(); // name:value1|value2
+                name = rawName.split(":").at(0);
+                addPropertyWidget(name, property->description(), widget);
+                break;
+
+            default: //IPL_WIDGET_SPINNER
+                IPPropertySpinnerUnsignedInt* widget = new IPPropertySpinnerUnsignedInt(p, this);
                 addPropertyWidget(property->name(),property->description(), widget);
                 break;
             }

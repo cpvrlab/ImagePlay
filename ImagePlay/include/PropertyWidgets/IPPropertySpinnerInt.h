@@ -11,42 +11,58 @@
 
 #include "IPPropertyWidget.h"
 
-class IPPropertySpinnerInt : public IPPropertyWidget
+class IPPropertySpinner : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertySpinnerInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertySpinner(QWidget *parent) : IPPropertyWidget(parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
-        int min   = ((IPLProcessPropertyInt*) property)->min();
-        int max   = ((IPLProcessPropertyInt*) property)->max();
-        int value = ((IPLProcessPropertyInt*) property)->value();
-
         _spinner = new QSpinBox;
 
         layout()->addWidget(_spinner);
-
-        _spinner->setMinimum(min);
-        _spinner->setMaximum(max);
-        _spinner->setValue(value);
-
-        _property = property;
     }
-    void setMinimum(int v)  { _spinner->setMinimum(v); }
-    void setMaximum(int v)  { _spinner->setMaximum(v); }
-    int value()             { return _spinner->value(); }
 
-    void saveValue()        { _property->setValue(value()); }
+protected:
+    template<class T> void setMinimum(T v)  { _spinner->setMinimum(v); }
+    template<class T> void setMaximum(T v)  { _spinner->setMaximum(v); }
+    template<class T> void setValue  (T v)  { _spinner->setValue(v); }
+
+    template<class T> T value() const       { return _spinner->value(); }
 
 signals:
 
 public slots:
 
-private:
-    IPLProcessPropertyInt* _property;
+protected:
     QSpinBox* _spinner;
 };
+
+template<class T>
+class IPPropertySpinnerImpl : public IPPropertySpinner
+{
+public:
+    typedef T Property;
+    typedef decltype(std::declval<T>().value()) Value;
+
+    IPPropertySpinnerImpl(Property* property, QWidget *parent) :
+        IPPropertySpinner(parent)
+    {
+        setMinimum(property->min());
+        setMaximum(property->max());
+        setValue(property->value());
+        _property = property;
+    }
+
+    void saveValue()        { _property->setValue(value<Value>()); }
+
+private:
+    Property* _property;
+};
+
+typedef IPPropertySpinnerImpl<IPLProcessPropertyInt> IPPropertySpinnerInt;
+typedef IPPropertySpinnerImpl<IPLProcessPropertyUnsignedInt> IPPropertySpinnerUnsignedInt;
 
 #endif // IPPROPERTYSPINNERINT_H
