@@ -105,6 +105,11 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
                 addPropertyWidget(name, property->description(), widget);
                 break;
 
+            case IPL_WIDGET_BUTTON:
+                widget = new IPPropertyButtonInt(p, this);
+                addPropertyWidget(name, property->description(), widget);
+                break;
+
             default: //IPL_WIDGET_SPINNER
                 IPPropertySpinnerInt* widget = new IPPropertySpinnerInt(p, this);
                 addPropertyWidget(property->name(),property->description(), widget);
@@ -126,6 +131,11 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
                 widget = new IPPropertyCheckboxInt(p, this);
                 rawName = property->name(); // name:value1|value2
                 name = rawName.split(":").at(0);
+                addPropertyWidget(name, property->description(), widget);
+                break;
+
+            case IPL_WIDGET_BUTTON:
+                widget = new IPPropertyButtonUnsignedInt(p, this);
                 addPropertyWidget(name, property->description(), widget);
                 break;
 
