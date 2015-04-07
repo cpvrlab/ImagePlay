@@ -1,5 +1,7 @@
 #include "IPLConvolutionFilter.h"
 
+#include <numeric>
+
 void IPLConvolutionFilter::init()
 {
     // init
