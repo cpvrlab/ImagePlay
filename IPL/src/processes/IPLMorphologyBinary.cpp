@@ -1,6 +1,7 @@
 #include "IPLMorphologyBinary.h"
 
 #include <atomic>
+#include <numeric>
 
 void IPLMorphologyBinary::init()
 {
