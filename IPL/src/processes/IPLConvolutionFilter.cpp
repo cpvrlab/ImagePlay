@@ -61,6 +61,12 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
     _normalize  = getProcessPropertyBool("normalize");
     _borders    = getProcessPropertyInt("borders");
 
+    if (std::accumulate(_kernel.begin(),_kernel.end(),0) == 0)
+    {
+        addError("Empty Kernel.");
+        return false;
+    }
+
     if(_normalize)
     {
         int sum = 0;
@@ -142,14 +148,13 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
 
         kernel *= divFactor;
 
-        static const auto BORDER_TYPES = {
+        static const int BORDER_TYPES[3] = {
           cv::BORDER_CONSTANT,
           cv::BORDER_REPLICATE,
           cv::BORDER_WRAP
         };
 
-        auto borderType = *(BORDER_TYPES.begin()+_borders);
-        cv::filter2D(src, dst, -1, kernel, cv::Point(-1,-1), _offset, borderType);
+        cv::filter2D(src, dst, -1, kernel, cv::Point(-1,-1), _offset, BORDER_TYPES[_borders]);
         _result = new IPLImage(dst);
     }
 

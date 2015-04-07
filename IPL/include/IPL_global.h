@@ -95,6 +95,9 @@ enum IPLProcessWidgetType
     //Points
     IPL_WIDGET_POINT,
 
+    //Integer: A button that increments the property after each click
+    IPL_WIDGET_BUTTON,
+
     //Add additional widget types here
     //...
 

@@ -1,5 +1,7 @@
 #include "IPLMorphologyBinary.h"
 
+#include <atomic>
+
 void IPLMorphologyBinary::init()
 {
     // init
@@ -9,6 +11,7 @@ void IPLMorphologyBinary::init()
     setClassName("IPLMorphologyBinary");
     setTitle("Binary Morphology");
     setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
+    setOpenCVSupport(IPLOpenCVSupport::OPENCV_OPTIONAL);
 
     // default value
     // 0 0 0
@@ -41,7 +44,95 @@ void IPLMorphologyBinary::destroy()
     delete _result;
 }
 
-bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
+// Both low-level morphology operators can be reduced to logic OR  or AND operations.
+// Those, in turn, can be viewed as simple loops with an exit condition:
+// We loop over all cells in the kernel and check for a predicate. If the predicate
+// is not statisfied, we can exit the loop and color the center pixel accordingly.
+
+// Example: Dilation: If all of the pixels corresponding to an active kernel cell are
+//          zero, the center pixel will result in a zero value. Otherwise, the center
+//          pixel is set to one. Therefore: T = 1, F = 0
+
+//          For the erosion, the equation behaves exactly the opposite way
+//          (i.e. T = 0, F = 1).
+
+template<int T, int F, class CB>
+void applyMorphology(IPLImagePlane &src, IPLImagePlane &dst, int iterations, const std::vector<bool> &kernel, CB progressCallback)
+{
+    int kernelOffset = (int)sqrt((float)kernel.size()) / 2;
+
+    for (int i = 0; i < iterations; ++i)
+    {
+        #pragma omp parallel for default(shared)
+        for (int y = 0; y < src.height(); ++y)
+        {
+            for (int x = 0; x < src.width(); ++x)
+            {
+                //TODO: Speed up this routine
+                //There would be several possibilities such as usage of SIMD techniques
+                //or the reduction of the source image (e.g. to unsigned char)
+
+                bool cancel = false;
+                auto &pixelValue = dst.p(x,y);
+                int i = 0;
+                for( int ky=-kernelOffset; !cancel && ky<=kernelOffset; ky++ )
+                {
+                    for( int kx=-kernelOffset; !cancel && kx<=kernelOffset; kx++ )
+                    {
+                        if (   x+kx < 0 || x+kx >= src.width()
+                            || y+ky < 0 || y+ky >= src.height())
+                            continue;
+
+                        auto &p = src.p(x+kx,y+ky);
+                        bool mask = kernel[i++];
+                        bool pixel = p == (float)T;
+                        cancel = mask && pixel;
+                    }
+                }
+
+                pixelValue = cancel? T : F;
+            }
+            progressCallback();
+        }
+        std::swap(src,dst);
+    }
+    std::swap(src,dst);
+}
+
+template<class CB>
+void dilate(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const std::vector<bool> &kernel, CB progressCallback)
+{
+    IPLImagePlane input(src); //Don't mutate the original image plane
+    applyMorphology<1,0>(input,dst,iterations,kernel,progressCallback);
+}
+
+template<class CB>
+void erode(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const std::vector<bool> &kernel, CB progressCallback)
+{
+    IPLImagePlane input(src); //Don't mutate the original image plane
+    applyMorphology<0,1>(input,dst,iterations,kernel,progressCallback);
+}
+
+template<class CB>
+void open(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const std::vector<bool> &kernel, CB progressCallback)
+{
+    IPLImagePlane input(src); //Don't mutate the original image plane
+    erode (input,dst,iterations,kernel,progressCallback);
+    std::swap(input,dst);
+    dilate(input,dst,iterations,kernel,progressCallback);
+}
+
+template<class CB>
+void close(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const std::vector<bool> &kernel, CB progressCallback)
+{
+    IPLImagePlane input(src); //Don't mutate the original image plane
+    dilate(input,dst,iterations,kernel,progressCallback);
+    std::swap(input,dst);
+    erode (input,dst,iterations,kernel,progressCallback);
+}
+
+
+bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
 {
     // delete previous result
     delete _result;
@@ -50,174 +141,90 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool)
     int width = image->width();
     int height = image->height();
 
-    // copy constructor doesnt work:
-    // _result = new IPLImage(*image);
-
-    _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
-
     // get properties
-//    _propertyMutex.lock();
     _kernel     = getProcessPropertyVectorInt("kernel");
     _iterations = getProcessPropertyInt("iterations");
     _operation  = getProcessPropertyInt("operation");
-//    _propertyMutex.unlock();
 
-    IPLImagePlane* inputPlane = image->plane( 0 );
-    IPLImagePlane* resultPlane = _result->plane( 0 );
-
-    IPLImagePlane* workingPlane = new IPLImagePlane(width, height);
-
-    // the algorithm needs a working plane
-    for(int x=0; x<width; x++)
+    if (std::accumulate(_kernel.begin(),_kernel.end(),0) == 0)
     {
-        for(int y=0; y<height; y++)
-        {
-            resultPlane->p(x,y) = inputPlane->p(x,y);
-            workingPlane->p(x,y) = inputPlane->p(x,y);
-        }
+        //Add an empty image - The image viewer currently may trigger
+        //a segfault if we return NULL.
+        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+        addError("Empty kernel.");
+        return false;
     }
 
+    // TODO: implement manhattan distance threshold instead of stupid iterations...
+    // TODO: implement border interpolation properties
 
-    _progress = 0;
-    _maxProgress = image->height() * image->getNumberOfPlanes() * _iterations;
-
-    /// @todo implement manhattan distance threshold instead
-    /// of stupid iterations...
-
-    for(int it=0; it<_iterations; it++)
+    enum Operation
     {
-        // DILATE
-        if(_operation == 0)
-        {
-            dilate(workingPlane, resultPlane);
-        }
-        // ERODE
-        else if(_operation == 1)
-        {
-            if(it==0)
-                _maxProgress *= 4;
+        DILATE = 0,
+        ERODE,
+        OPEN,
+        CLOSE
+    };
 
-            invert(workingPlane);
-            invert(resultPlane);
-            dilate(workingPlane, resultPlane);
-            invert(resultPlane);
-        }
-        // OPENING (ERODE, DILATE)
-        else if(_operation == 2)
+    if (!useOpenCV)
+    {
+        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+
+        //std::vector<bool> packs its elements bitwise into a vector of
+        //bytes. The kernel therefore uses much less cpu cache this way.
+        std::vector<bool> kernel;
+        kernel.reserve(_kernel.size());
+        for (auto &i: _kernel) kernel.push_back(i > 0);
+
+        std::atomic<int> progress(0);
+        int totalLines = image->height()*_iterations;
+        auto updateProgress = [&]() {
+            notifyProgressEventHandler(100*((float)++progress)/totalLines);
+        };
+
+        switch(_operation)
         {
-            if(it==0)
-                _maxProgress *= 4;
-
-            invert(workingPlane);
-            IPLImagePlane* tmpPlane = new IPLImagePlane(width, height);
-            // the algorithm needs a working plane
-            for(int x=0; x<width; x++)
-            {
-                for(int y=0; y<height; y++)
-                {
-                    tmpPlane->p(x,y) = workingPlane->p(x,y);
-                }
-            }
-            dilate(workingPlane, tmpPlane);
-            invert(tmpPlane);
-            // the algorithm needs a working plane
-            for(int x=0; x<width; x++)
-            {
-                for(int y=0; y<height; y++)
-                {
-                    resultPlane->p(x,y) = tmpPlane->p(x,y);
-                }
-            }
-            dilate(tmpPlane, resultPlane);
+        case DILATE:
+            dilate(*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case ERODE:
+            erode (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case OPEN:
+            totalLines *= 2;
+            open  (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
+        case CLOSE:
+            totalLines *= 2;
+            close (*image->plane(0),*_result->plane(0),_iterations,kernel,updateProgress);
+            break;
         }
-        // CLOSING (DILATE, ERODE)
-        else if(_operation == 3)
-        {
-            if(it==0)
-                _maxProgress *= 4;
+    }
+    else
+    {
+        notifyProgressEventHandler(50);
 
-            IPLImagePlane* tmpPlane = new IPLImagePlane(width, height);
-            dilate(workingPlane, tmpPlane);
-            invert(tmpPlane);
-            // the algorithm needs a working plane
-            for(int x=0; x<width; x++)
-            {
-                for(int y=0; y<height; y++)
-                {
-                    resultPlane->p(x,y) = tmpPlane->p(x,y);
-                }
-            }
-            dilate(tmpPlane, resultPlane);
-            invert(resultPlane);
-        }
+        int kernelSize = (int)sqrt((float)_kernel.size());
+        cv::Mat src = image->toCvMat();
+        cv::Mat dst;
 
+        cv::Mat kernel(kernelSize,kernelSize,CV_8UC1);
+        int i = 0;
+        for (auto pixel: _kernel)
+            kernel.at<unsigned char>(i++) = pixel;
 
-        // copy resultPlane back to workingPlane if still iterating
-        if(it < _iterations-1)
-        {
-            for(int y=0; y<height; y++)
-            {
-                for(int x=0; x<width; x++)
-                {
-                    workingPlane->p(x, y) = resultPlane->p(x, y);
-                }
-            }
-        }
+        static const int OPERATIONS[4] = {
+            cv::MORPH_DILATE,
+            cv::MORPH_ERODE,
+            cv::MORPH_OPEN,
+            cv::MORPH_CLOSE
+        };
+
+        cv::morphologyEx(src,dst,OPERATIONS[_operation],kernel,cv::Point(-1,-1),_iterations);
+        _result = new IPLImage(dst);
     }
 
     return true;
-}
-
-void IPLMorphologyBinary::invert(IPLImagePlane* inputPlane)
-{
-    int width = inputPlane->width();
-    int height = inputPlane->height();
-
-    for(int y=0; y<height; y++)
-    {
-        // progress
-        notifyProgressEventHandler(100*_progress++/_maxProgress);
-
-        for(int x=0; x<width; x++)
-        {
-            inputPlane->p(x,y) = 1.0f - inputPlane->p(x,y);
-        }
-    }
-}
-
-void IPLMorphologyBinary::dilate(IPLImagePlane* workingPlane, IPLImagePlane* resultPlane)
-{
-    int kernelOffset = (int)sqrt((float)_kernel.size()) / 2;
-
-    int width = workingPlane->width();
-    int height = workingPlane->height();
-
-    for(int y=0; y<height; y++)
-    {
-        // progress
-        notifyProgressEventHandler(100*_progress++/_maxProgress);
-
-        for(int x=0; x<width; x++)
-        {
-            if(workingPlane->p(x, y) == 1.0f)
-            {
-                int i = 0;
-                for( int ky=-kernelOffset; ky<=kernelOffset; ky++ )
-                {
-                    for( int kx=-kernelOffset; kx<=kernelOffset; kx++ )
-                    {
-                        int kernelValue = _kernel[i++];
-                        int r = x+kx;
-                        int c = y+ky;
-                        if(kernelValue == 1)
-                        {
-                            resultPlane->bp(r,c) = 1.0f;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 IPLImage* IPLMorphologyBinary::getResultData( int )

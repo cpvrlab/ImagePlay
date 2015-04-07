@@ -11,6 +11,7 @@
 #include <QFormLayout>
 #include <QSpinBox>
 #include <QLineEdit>
+#include "PropertyWidgets/IPPropertyButtonInt.h"
 #include "PropertyWidgets/IPPropertySliderInt.h"
 #include "PropertyWidgets/IPPropertySliderIntOdd.h"
 #include "PropertyWidgets/IPPropertySliderIntEven.h"
