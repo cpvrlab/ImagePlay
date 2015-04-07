@@ -3,7 +3,7 @@
 cv::VideoCapture*   IPLCameraIO::_camera    = NULL;
 IPLImage*           IPLCameraIO::_lastFrame = NULL;
 
-IPLImage* IPLCameraIO::grabFrame()
+IPLImage* IPLCameraIO::grabFrame(bool forcedCapture/* = false*/)
 {
     // connect camera once
     if(!_camera)
@@ -19,6 +19,11 @@ IPLImage* IPLCameraIO::grabFrame()
     // get next frame
     cv::Mat frame;
     *_camera >> frame;
+
+    // workaround: force opencv to grab a new frame
+    if(forcedCapture)
+        *_camera >> frame;
+
 
     _lastFrame = new IPLImage(frame);
 

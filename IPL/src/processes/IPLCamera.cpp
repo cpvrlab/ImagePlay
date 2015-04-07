@@ -71,7 +71,7 @@ bool IPLCamera::processInputData(IPLImage*, int, bool)
     //delete _camera;
     //_camera = NULL;
 
-    _result = IPLCameraIO::grabFrame();
+    _result = IPLCameraIO::grabFrame(!_continuous);
 
     // if we didn't get a frame
     if(!_result)
