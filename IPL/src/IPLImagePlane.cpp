@@ -63,6 +63,8 @@ IPLImagePlane &IPLImagePlane::operator=(const IPLImagePlane &other)
 
     for(int i=0; i<_height*_width; i++)
         _plane[i] = other._plane[i];
+
+    return *this;
 }
 
 IPLImagePlane &IPLImagePlane::operator=(IPLImagePlane &&other)
@@ -74,6 +76,8 @@ IPLImagePlane &IPLImagePlane::operator=(IPLImagePlane &&other)
     other._height = 0;
     other._width = 0;
     other._plane = NULL;
+
+    return *this;
 }
 
 
