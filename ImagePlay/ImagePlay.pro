@@ -123,7 +123,6 @@ linux: {
                         $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/ &&\
                         $${QMAKE_MKDIR} ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
                         rm -rf ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_template && \
-                        $${QMAKE_COPY_DIR} media/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
                         $${QMAKE_COPY_DIR} media/plugin_development/_template ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
                         $${QMAKE_MKDIR} ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib && \
                         $${QMAKE_COPY_DIR} ../IPL/include ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib/include \
