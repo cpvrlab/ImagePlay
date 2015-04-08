@@ -77,6 +77,7 @@ win32: {
                         $${QMAKE_COPY_DIR} media\\process_icons ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
                         $${QMAKE_COPY_DIR} media\\images ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
                         $${QMAKE_COPY_DIR} media\\plugin_development ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development & \
+                        $${QMAKE_COPY_DIR} ..\\IPL\\include ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development\\_lib\\include & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
 }
@@ -123,7 +124,8 @@ linux: {
                         $${QMAKE_MKDIR} ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
                         rm -rf ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_template && \
                         $${QMAKE_COPY_DIR} media/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
-                        $${QMAKE_COPY_DIR} media/plugin_development/_template ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development \
+                        $${QMAKE_COPY_DIR} media/plugin_development/_template ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
+                        $${QMAKE_COPY_DIR} ../IPL/include ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib/include \
 }
 
 msvc {
