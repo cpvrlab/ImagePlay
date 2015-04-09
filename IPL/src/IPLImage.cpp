@@ -7,17 +7,17 @@ IPLImage::IPLImage() : IPLData(IPLData::UNDEFINED)
     _width = 0;
     _height = 0;
     _nrOfPlanes = 0;
-    _rgb32 = NULL;
 
     _instanceCount++;
 }
 
-IPLImage::IPLImage( const IPLImage& other )
+IPLImage::IPLImage(const IPLImage& other)
 {
     _type = other._type;
     _width = other._width;
     _height = other._height;
-    _rgb32 = NULL;
+    _rgb32.resize(_height * _width * 4);
+
     if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
         _planes.push_back(new IPLImagePlane( *(other._planes[i]) ));
@@ -30,7 +30,8 @@ IPLImage::IPLImage( IPLData::IPLDataType t, int width, int height )
     _type = t;
     _width = width;
     _height = height;
-    _rgb32 = NULL;
+    _rgb32.resize(_height * _width * 4);
+
     if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
         _planes.push_back(new IPLImagePlane( width, height ));
@@ -42,9 +43,9 @@ IPLImage::IPLImage( IPLData::IPLDataType t, int width, int height )
 IPLImage::IPLImage(cv::Mat &cvMat)
 {
     // _type = other._type;
-    _rgb32  = NULL;
     _width  = cvMat.cols;
     _height = cvMat.rows;
+    _rgb32.resize(_height * _width * 4);
     _type   = IMAGE_COLOR;
     _nrOfPlanes = cvMat.channels();
     if(_nrOfPlanes > 1)
@@ -119,7 +120,6 @@ IPLImage::IPLImage(cv::Mat &cvMat)
 
 IPLImage::~IPLImage()
 {
-    delete _rgb32;
     for( int i=0; i<_nrOfPlanes; i++ )
         if( _planes[i] ) delete _planes[i];
 
@@ -160,7 +160,6 @@ std::string IPLImage::toString(int x, int y)
         s << ", " << plane(i)->cp(x, y);
     }
 
-
     return s.str();
 }
 
@@ -191,9 +190,8 @@ cv::Mat IPLImage::toCvMat()
     return mat;
 }
 
-uchar* IPLImage::rgb32() {
-    delete[] _rgb32;
-    _rgb32 = new uchar[_height*_width*4];
+uchar* IPLImage::rgb32()
+{
     if(_type == IMAGE_BW)
     {
         int i=0;
@@ -274,5 +272,6 @@ uchar* IPLImage::rgb32() {
             }
         }
     }
-    return _rgb32;
+
+    return _rgb32.data();
 }

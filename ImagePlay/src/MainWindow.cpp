@@ -673,7 +673,15 @@ bool MainWindow::readProcessFile()
             data.widget = widget.toStdString();
             data.value = value.toString().toStdString();
 
-            processProperty->deserialize(data);
+            try
+            {
+                processProperty->deserialize(data);
+            }
+            catch(IPLProcessProperty::DeserialationFailed)
+            {
+                qWarning() << "Deserialation failed: " << key;
+                continue;
+            }
         }
 
         // we need to map the file step ID to the new ID
@@ -832,13 +840,15 @@ bool MainWindow::writeProcessFile()
 
 void MainWindow::lockScene()
 {
-    _imageViewer->setEnabled(false);
+    //_imageViewer->setEnabled(false);
+    _imageViewer->setIgnoreMouseEvents(true);
     ui->graphicsView->setEnabled(false);
 }
 
 void MainWindow::unlockScene()
 {
-    _imageViewer->setEnabled(true);
+    //_imageViewer->setEnabled(true);
+    _imageViewer->setIgnoreMouseEvents(false);
     ui->graphicsView->setEnabled(true);
 }
 
@@ -1028,10 +1038,10 @@ void MainWindow::closeEvent(QCloseEvent* e)
         _imageViewer->deleteLater();
         _imageViewer = NULL;
 
+        ui->graphicsView->stopExecution();
+
         // try closing any videocapture items
         IPLCameraIO::release();
-
-        ui->graphicsView->stopExecution();
 
         QApplication::quit();
     }

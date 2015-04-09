@@ -13,7 +13,6 @@ IPLOrientedImage::IPLOrientedImage( int width, int height )
     _type = IPLImage::IMAGE_ORIENTED;
     _width = width;
     _height = height;
-    _rgb32 = NULL;
 
     // 2 planes are needed for magnitude and phase
     _planes.push_back(new IPLImagePlane( width, height ));

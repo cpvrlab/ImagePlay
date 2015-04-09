@@ -79,6 +79,7 @@ public:
     QPoint lastPos()            { return  _lastPos; }
 
     void zoomAllViewers(ZoomAction action);
+    void scrollAllViewers(int horizontal, int vertical);
 
     int zoomWidgetMode();
     void setZoomWidgetMode(int mode);
@@ -89,7 +90,9 @@ public:
     void clearColorPickHandler();
     void clearCoordinatePickHandler();
 
-private slots:
+    void setIgnoreMouseEvents(bool state)           { _ignoreMouseEvents = state; }
+
+public slots:
     void on_actionNextImage_triggered();
     void on_actionPrevImage_triggered();
     void on_actionShowGrid_triggered(bool checked);
@@ -103,7 +106,8 @@ private slots:
     void on_btnZoomOut_clicked();
     void on_btnZoomFit_clicked();
     void on_btnZoomReset_clicked();
-    void on_scrollBarsChanged(int, int);
+    void on_horizontalScrollBarChanged(int);
+    void on_verticalScrollBarChanged(int);
     void on_zoomChanged(int);
     void on_comboBoxResults_activated(int index);
     void on_mousePositionChanged(int, int);
@@ -128,6 +132,8 @@ private:
     QColor                      _currentColor;
     QPoint                      _currentPosition;
     bool                        _ignoreZoomEvents;
+    bool                        _ignoreScrollEvents;
+    bool                        _ignoreMouseEvents;
 
 
     // QWidget interface

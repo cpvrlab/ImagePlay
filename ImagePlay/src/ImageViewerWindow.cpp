@@ -20,6 +20,7 @@ ImageViewerWindow::ImageViewerWindow(MainWindow *mainWindow) :
     _coordinatePickHandler = NULL;
 
     _ignoreZoomEvents = false;
+    _ignoreMouseEvents = false;
 
 //    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
@@ -94,7 +95,6 @@ void ImageViewerWindow::addProcessStep(IPProcessStep *processStep)
     if(processStep->process())
     {
         IPImageViewer* imageViewer1 = new IPImageViewer(this, ui->tabWidget);
-        connect(imageViewer1, &IPImageViewer::scrollBarsChanged, this, &ImageViewerWindow::on_scrollBarsChanged);
         connect(imageViewer1, &IPImageViewer::zoomChanged, this, &ImageViewerWindow::on_zoomChanged);
         connect(imageViewer1, &IPImageViewer::mousePositionChanged, this, &ImageViewerWindow::on_mousePositionChanged);
         connect(imageViewer1, &IPImageViewer::mouseClicked, this, &ImageViewerWindow::on_mouseClick);
@@ -337,42 +337,34 @@ void ImageViewerWindow::zoomAllViewers(ZoomAction action)
     if(_ignoreZoomEvents)
         return;
 
-    // apply zoom and scroll position to all viewers
-//    int horizontalScroll = ((IPImageViewer*) ui->tabWidget->currentWidget())->horizontalScrollBar()->value();
-//    int verticalScroll = ((IPImageViewer*) ui->tabWidget->currentWidget())->verticalScrollBar()->value();
+    _ignoreZoomEvents = true;
 
+    // apply zoom to all viewers
     QMapIterator<int, IPImageViewer*> it(_imageViewers1);
     int zoomFactor = 0;
     while (it.hasNext())
     {
-        try
-        {
-            it.next();
+        it.next();
 
-            if(action == ImageViewerWindow::ZOOM_IN)
-                it.value()->zoomIn();
-            else if(action == ImageViewerWindow::ZOOM_OUT)
-                it.value()->zoomOut();
-            else if(action == ImageViewerWindow::ZOOM_FIT)
-                it.value()->zoomFit();
-            else if(action == ImageViewerWindow::ZOOM_RESET)
-                it.value()->zoomReset();
+        if(action == ImageViewerWindow::ZOOM_IN)
+            it.value()->zoomIn();
+        else if(action == ImageViewerWindow::ZOOM_OUT)
+            it.value()->zoomOut();
+        else if(action == ImageViewerWindow::ZOOM_FIT)
+            it.value()->zoomFit();
+        else if(action == ImageViewerWindow::ZOOM_RESET)
+            it.value()->zoomReset();
 
-            zoomFactor = it.value()->zoomFactor();
-
-            //_ignoreZoomEvents = true;
-            it.value()->horizontalScrollBar()->setValue(_horizontalScrollValue);
-            it.value()->verticalScrollBar()->setValue(_verticalScrollValue);
-            //_ignoreZoomEvents = false;
-        }
-        catch(std::exception& e)
-        {
-            qWarning() << "Error when zooming: " << e.what();
-        }
+        zoomFactor = it.value()->zoomFactor();
     }
 
+    on_horizontalScrollBarChanged(((IPImageViewer*)ui->tabWidget->currentWidget())->horizontalScrollBar()->value());
+    on_verticalScrollBarChanged(((IPImageViewer*)ui->tabWidget->currentWidget())->verticalScrollBar()->value());
+
+    _ignoreZoomEvents = false;
     on_zoomChanged(zoomFactor);
 }
+
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::zoomWidgetMode
@@ -585,8 +577,6 @@ void ImageViewerWindow::wheelEvent(QWheelEvent* event)
         zoomAllViewers(ZOOM_OUT);
     else
         zoomAllViewers(ZOOM_IN);
-
-    event->ignore();
 }
 
 void ImageViewerWindow::closeEvent(QCloseEvent* e)
@@ -627,18 +617,39 @@ void ImageViewerWindow::on_btnZoomReset_clicked()
 {
     zoomAllViewers(ZOOM_RESET);
 }
-//-----------------------------------------------------------------------------
-/*!
-ImageViewerWindow::on_scrollBarsChanged
-*/
-void ImageViewerWindow::on_scrollBarsChanged(int horizontal, int vertical)
-{
-    //qDebug() << "on_scrollBarsChanged: " << horizontal << "," << vertical;
-    _horizontalScrollValue = horizontal;
-    _verticalScrollValue = vertical;
 
-    zoomAllViewers(ImageViewerWindow::ZOOM_NONE);
+void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
+{
+    // apply scroll position to all viewers
+    QMapIterator<int, IPImageViewer*> it(_imageViewers1);
+    while (it.hasNext())
+    {
+        it.next();
+
+        // skip current tab
+        if(it.value() == ui->tabWidget->currentWidget())
+            continue;
+
+        it.value()->horizontalScrollBar()->setValue(value);
+    }
 }
+
+void ImageViewerWindow::on_verticalScrollBarChanged(int value)
+{
+    // apply scroll position to all viewers
+    QMapIterator<int, IPImageViewer*> it(_imageViewers1);
+    while (it.hasNext())
+    {
+        it.next();
+
+        // skip current tab
+        if(it.value() == ui->tabWidget->currentWidget())
+            continue;
+
+        it.value()->verticalScrollBar()->setValue(value);
+    }
+}
+
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::on_zoomChanged
@@ -680,9 +691,10 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
         return;
 
     if(x < 0 || y < 0)
-    {
         return;
-    }
+
+    if(_ignoreMouseEvents)
+        return;
 
     if(ui->zoomWidget->isPositionLocked())
         return;

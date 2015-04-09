@@ -31,13 +31,13 @@ public:
         layout()->addWidget(_slider);
         layout()->addWidget(_spinner);
 
-        connect(_slider, &QSlider::sliderReleased, this, &IPPropertySliderDouble::updateValue );
         connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderDouble::updateSpinner );
         connect(_spinner, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertySliderDouble::updateSlider );
 
         _slider->setMinimum(min*100);
         _slider->setMaximum(max*100);
         _slider->setValue(value*100);
+        _slider->setTracking(true);
 
         _spinner->setMinimum(min);
         _spinner->setMaximum(max);
@@ -63,14 +63,12 @@ public slots:
     void updateSlider(double v)
     {
         _slider->setValue(v*100);
-
-        updateValue();
     }
 
 
     void updateValue()
     {
-        // prevent double changes
+        // prevent duplicate changes
         if(value() == _lastValue)
         {
             return;

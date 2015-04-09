@@ -35,6 +35,28 @@ public:
         setMouseTracking(true);
     }
 
+    // catch OS X pinch to zoom events
+    bool event(QEvent *event) {
+        if (event->type() == QEvent::NativeGesture) {
+            QNativeGestureEvent *nge = static_cast<QNativeGestureEvent *>(event);
+
+            if (nge->gestureType() == Qt::ZoomNativeGesture) {
+                double v = nge->value();
+
+                if (v < 0)
+                    qDebug() << "Pinch to zoom out"; //((IPImageViewer*)parent())->zoomOut();
+                else
+                    qDebug() << "Pinch to zoom in"; //((IPImageViewer*)parent())->zoomIn();
+
+                // It seems the NativeGestureEvent::pos() incorrectly reports global coordinates
+                //QPoint g = mapFromGlobal(nge->globalPos());
+            }
+
+            return true;
+        }
+        return QWidget::event(event);
+    }
+
 //    void wheelEvent(QWheelEvent* event)     { event->ignore(); }
     void mouseReleaseEvent(QMouseEvent*);
     void mouseDoubleClickEvent(QMouseEvent *);
@@ -82,16 +104,12 @@ public:
     QImage*  image()                            { return _image; }
     void updateMousePosition(int, int);
 signals:
-    void scrollBarsChanged(int, int);
     void zoomChanged(int);
     void mousePositionChanged(int, int);
     void mouseClicked();
     void mouseDoubleClicked();
 
 public slots:
-    void on_scrollBarChanged(int action);
-    void on_horizontalScrollBarChanged(int value);
-    void on_verticalScrollBarChanged(int value);
     void on_mouseClicked();
     void on_mouseDoubleClicked();
 

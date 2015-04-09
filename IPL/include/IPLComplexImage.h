@@ -6,6 +6,8 @@
 #include "IPLImage.h"
 
 #include <complex>
+#include <mutex>
+
 using std::complex;
 typedef std::complex<double> Complex;
 
@@ -20,31 +22,32 @@ public:
                     IPLComplexImage                 (int width, int height);
                     ~IPLComplexImage                ();
 
-    void            newPlane        ();
-    unsigned char*  rgb32           (void);
-    int width(void)                 { return _width; }
-    int height(void)                { return _height; }
+    void            newPlane                        ();
+    unsigned char*  rgb32                           (int mode = 0);
+    int             width                           (void)                  { return _width; }
+    int             height                          (void)                  { return _height; }
 
-    Complex&        c               (int x, int y);
-    ipl_basetype    real            (int x, int y);
-    ipl_basetype    imag            (int x, int y);
-    ipl_basetype    maxReal         ();
-    ipl_basetype    minReal         ();
+    Complex&        c                               (int x, int y);
+    ipl_basetype    real                            (int x, int y);
+    ipl_basetype    imag                            (int x, int y);
+    ipl_basetype    maxReal                         ();
+    ipl_basetype    minReal                         ();
 
-    void            flip            (void);
-    bool            FFT             ();
-    bool            IFFT            ();
+    void            flip                            (void);
+    bool            FFT                             ();
+    bool            IFFT                            ();
 
     // auxiliary class methods
-    static int      nextPowerOf2    (int x);
-    static void     Twiddle         (Complex* x, int N);
-    static void     iTwiddle        (Complex* x, int N);
-    static void     lineFFT         (Complex* x, Complex* twiddle, int N);
+    static int      nextPowerOf2                    (int x);
+    static void     Twiddle                         (Complex* x, int N);
+    static void     iTwiddle                        (Complex* x, int N);
+    static void     lineFFT                         (Complex* x, Complex* twiddle, int N);
 private:
-    int             _height;
-    int             _width;
-    Complex**       _plane;
-    unsigned char*  _rgb32;
+    int                 _height;
+    int                 _width;
+    Complex**           _plane;
+    std::vector<uchar>  _rgb32;
+    std::mutex          _mutex;
 };
 
 #endif // IPLCOMPLEXIMAGE_H

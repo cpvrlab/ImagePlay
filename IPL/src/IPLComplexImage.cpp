@@ -4,7 +4,6 @@
 IPLComplexImage::IPLComplexImage() : IPLData()
 {
     _plane = NULL;
-    _rgb32 = NULL;
     _type = IPLData::IMAGE_COMPLEX;
 }
 
@@ -15,7 +14,7 @@ IPLComplexImage::IPLComplexImage(const IPLComplexImage &other)
         _height = other._height;
         _width = other._width;
         _type = other._type;
-        _rgb32 = other._rgb32;
+        _rgb32.resize(_height * _width * 4);
 
         newPlane();
 
@@ -31,7 +30,7 @@ IPLComplexImage::IPLComplexImage( int width, int height )
     _plane = NULL;
     _width = width;
     _height = height;
-    _rgb32 = NULL;
+    _rgb32.resize(_height * _width*4);
     _type = IPLData::IMAGE_COMPLEX;
     newPlane();
 }
@@ -48,9 +47,15 @@ void IPLComplexImage::newPlane(void)
     for(int y=0; y<_height; y++)
         _plane[y] = new Complex [_width];
 }
-
-unsigned char* IPLComplexImage::rgb32()
+/*!
+ * \brief IPLComplexImage::rgb32
+ * \param mode: 0 = REAL, 1 = IMAG
+ * \return
+ */
+unsigned char* IPLComplexImage::rgb32(int mode/* = 0*/)
 {
+    _mutex.lock();
+
     // scale from min to max
     float min = FLT_MAX;
     float max = FLT_MIN;
@@ -58,7 +63,12 @@ unsigned char* IPLComplexImage::rgb32()
     {
         for(int x=0; x < _width; x++)
         {
-            float value = abs(real(x,y));
+            float value;
+            if(mode == 0)
+                value = abs(real(x,y));
+            else
+                value = abs(imag(x,y));
+
             if(value < min)
                 min = value;
             if(value > max)
@@ -72,8 +82,6 @@ unsigned char* IPLComplexImage::rgb32()
     double scale = (max-min)? 255.0 / (max-min) : 1.0;
 
     // generate rgb32
-    delete _rgb32;
-    _rgb32 = new uchar[_height*_width*4];
     int i=0;
     for(int y=0; y < _height; y++)
     {
@@ -82,7 +90,11 @@ unsigned char* IPLComplexImage::rgb32()
             // move 0/0 to the center for better visualization
             int xx = ((x-_width/2) + _width) % _width;
             int yy = ((y-_height/2) + _height) % _height;
-            double c = abs(real(xx,yy) );
+            double c;
+            if(mode == 0)
+                c = abs(real(xx,yy));
+            else
+                c = abs(imag(xx,yy));
             double lgc = (c!=0.0)? log(delta+c) : logdelta;
             uchar val = ( (lgc-min)*scale );
             _rgb32[i++] = val;
@@ -91,7 +103,9 @@ unsigned char* IPLComplexImage::rgb32()
             _rgb32[i++] = 0xFF;
         }
     }
-    return _rgb32;
+    _mutex.unlock();
+
+    return _rgb32.data();
 }
 
 Complex& IPLComplexImage::c(int x, int y)

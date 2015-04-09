@@ -47,12 +47,8 @@ IPImageViewer::IPImageViewer(ImageViewerWindow* imageViewer, QWidget *parent) :
     setMouseTracking(true);
     _graphicsView->setMouseTracking(true);
 
-    //QObject::connect(&_imageLabel, &QWidget::resizeEvent, &this, &IPImageViewer::resizeLabel);
-
-    //connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::actionTriggered, this, &IPImageViewer::on_scrollBarChanged);
-    //connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::actionTriggered, this, &IPImageViewer::on_scrollBarChanged);
-    connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged, this, &IPImageViewer::on_horizontalScrollBarChanged);
-    connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::valueChanged, this, &IPImageViewer::on_verticalScrollBarChanged);
+    connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_horizontalScrollBarChanged);
+    connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_verticalScrollBarChanged);
 }
 
 IPImageViewer::~IPImageViewer()
@@ -199,37 +195,6 @@ void IPImageViewer::updateMousePosition(int x, int y)
     emit mousePositionChanged(x, y);
 }
 
-void IPImageViewer::on_scrollBarChanged(int action)
-{
-    // save scroll position
-    _horizontalScrollValue = _graphicsView->horizontalScrollBar()->value();
-    _verticalScrollValue = _graphicsView->verticalScrollBar()->value();
-
-//    ((ImageViewerWindow*)parent())->setScrollValues(_horizontalScrollValue, _verticalScrollValue);
-//    ((ImageViewerWindow*)parent())->zoomAllViewers(ImageViewerWindow::ZOOM_NONE);
-    emit scrollBarsChanged(_horizontalScrollValue, _verticalScrollValue);
-}
-
-void IPImageViewer::on_horizontalScrollBarChanged(int value)
-{
-    // save scroll position
-    _horizontalScrollValue = value;
-
-//    ((ImageViewerWindow*)parent())->setScrollValues(_horizontalScrollValue, _verticalScrollValue);
-//    ((ImageViewerWindow*)parent())->zoomAllViewers(ImageViewerWindow::ZOOM_NONE);
-    emit scrollBarsChanged(_horizontalScrollValue, _verticalScrollValue);
-}
-
-void IPImageViewer::on_verticalScrollBarChanged(int value)
-{
-    // save scroll position
-    _verticalScrollValue = value;
-
-//    ((ImageViewerWindow*)parent())->setScrollValues(_horizontalScrollValue, _verticalScrollValue);
-//    ((ImageViewerWindow*)parent())->zoomAllViewers(ImageViewerWindow::ZOOM_NONE);
-    emit scrollBarsChanged(_horizontalScrollValue, _verticalScrollValue);
-}
-
 void IPImageViewer::on_mouseClicked()
 {
     emit mouseClicked();
@@ -302,7 +267,7 @@ bool IPImageViewer::eventFilter(QObject *object, QEvent *event)
 
 void IPImageViewer::showEvent(QShowEvent *)
 {
-    updateImage();
+    //updateImage();
 
     if(_zoomFitMode)
     {
@@ -322,8 +287,6 @@ void IPImageViewer::resizeEvent(QResizeEvent *)
 
 void IPImageViewerGraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
-    ((IPImageViewer*) parent())->on_scrollBarChanged(0);
-
     ((IPImageViewer*) parent())->on_mouseClicked();
 
     QGraphicsView::mouseReleaseEvent(event);

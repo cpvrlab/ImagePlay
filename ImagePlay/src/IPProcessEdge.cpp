@@ -129,7 +129,6 @@ void IPProcessEdge::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QW
 
     // arrow at process item 2
     painter->drawPolygon(arrowPolygon);
-    //painter->drawEllipse(intersectPointTo, 6, 6);
 
     if(_mouseOver)
     {

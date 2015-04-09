@@ -139,7 +139,7 @@ bool IPLCanvasSize::processInputData(IPLImage* image , int, bool)
                 }
                 else
                 {
-                    newplane->p(x, y) = plane->cp(from_x, from_y);
+                    newplane->p(x, y) = plane->p(from_x, from_y);
                 }
             }
         }

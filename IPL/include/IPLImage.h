@@ -43,7 +43,7 @@ protected:
     int                         _width;
     int                         _height;
     int                         _nrOfPlanes;
-    unsigned char*              _rgb32;
+    std::vector<uchar>          _rgb32;
     static int                  _instanceCount;
     std::vector<IPLImagePlane*> _planes;
 };

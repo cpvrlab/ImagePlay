@@ -185,6 +185,8 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
  */
 void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 {
+    qDebug() << "execute";
+
     // if no processes yet, then exit
     if(_scene->steps()->size() < 1)
     {
@@ -202,13 +204,15 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _sequenceCount = 0;
     _currentUpdateID = _updateID;
 
+    qDebug() << "buildQueue";
+
     buildQueue();
 
     int totalDurationMs = 0;
 
     // execute the processes
     int counter = 0;
-    int limit = 100;
+    int limit = 10000;
 
     QListIterator<IPProcessStep *> it(_processList);
     while (it.hasNext() && counter < limit)
@@ -337,7 +341,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     }
 
     // find sequence processes
-    bool graphNeedsUpdate = false;
+    //bool graphNeedsUpdate = false;
     for(auto it = _scene->steps()->begin(); it < _scene->steps()->end(); ++it)
     {
         IPProcessStep* step = (IPProcessStep*) *it;
@@ -351,14 +355,14 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         }
     }
 
-    if(_updateID > _currentUpdateID)
-        _mainWindow->execute(false);
+    //if(_updateID > _currentUpdateID)
+    //    _mainWindow->execute(false);
 
     _updateID = _currentUpdateID;
 
     // only for testing the camera
-    if(graphNeedsUpdate)
-        _mainWindow->execute(false);
+    //if(graphNeedsUpdate)
+    //    _mainWindow->execute(false);
 }
 
 void IPProcessGrid::updateProgress(int progress)

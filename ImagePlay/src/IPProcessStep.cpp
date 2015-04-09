@@ -34,8 +34,6 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
     // try to create an IPL process
     _process = _mainWindow->factory()->getInstance(processID);
 
-    qDebug() << "Instance: " << _process;
-
     if(_process == NULL)
     {
         setName("INVALID PROCESS");
@@ -48,7 +46,6 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
 
     // try to find icon
     QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
-    qDebug() << iconFile.absoluteFilePath();
     if(iconFile.isFile())
     {
         setIcon(QIcon(iconFile.absoluteFilePath()));

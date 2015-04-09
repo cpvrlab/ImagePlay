@@ -20,8 +20,8 @@ void IPLFrequencyFilter::init()
 
     // properties
     addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "", 0, IPL_WIDGET_RADIOBUTTONS);
-    addProcessPropertyDouble("lowCutoff", "Low Cutoff", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyDouble("highCutoff", "High Cutoff", "", 0.0, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("lowCutoff", "Low Cutoff", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highCutoff", "High Cutoff", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyBool("keepDC", "Keep DC", "", false, IPL_WIDGET_CHECKBOXES);
 }
 
