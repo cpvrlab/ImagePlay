@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPixmap>
+#include <QNativeGestureEvent>
 
 #include <QDebug>
 
