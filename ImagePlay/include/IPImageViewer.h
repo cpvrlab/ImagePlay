@@ -11,9 +11,12 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPixmap>
-#include <QNativeGestureEvent>
 
 #include <QDebug>
+
+#ifdef Q_OS_MAC
+#include <QNativeGestureEvent>
+#endif
 
 #include "IPLProcess.h"
 #include "IPLImage.h"
@@ -36,6 +39,7 @@ public:
         setMouseTracking(true);
     }
 
+#ifdef Q_OS_MAC
     // catch OS X pinch to zoom events
     bool event(QEvent *event) {
         if (event->type() == QEvent::NativeGesture) {
@@ -57,6 +61,7 @@ public:
         }
         return QWidget::event(event);
     }
+#endif
 
 //    void wheelEvent(QWheelEvent* event)     { event->ignore(); }
     void mouseReleaseEvent(QMouseEvent*);
