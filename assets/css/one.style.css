@@ -100,6 +100,7 @@ a:hover {
 	line-height: 15px;
 	color: #fff !important;
 	font-family: 'Open Sans', sans-serif;
+    padding-top: 5px;
 }
 
 .one-page-header .navbar-brand span {
