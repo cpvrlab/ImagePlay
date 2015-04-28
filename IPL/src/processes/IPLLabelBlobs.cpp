@@ -12,6 +12,9 @@ void IPLLabelBlobs::init()
     setKeywords("objects");
     setDescription("Label blobs (connected components) of binary input image.");
 
+    // properties
+    addProcessPropertyInt("labelCount", "Number of Labels", "Only maximum of labels is counted. This determines the intensity increments of the output image.", 1024, IPL_WIDGET_SLIDER, 1, 4096);
+
     // inputs and outputs
     addInput("Binary Image", IPLData::IMAGE_BW);
     addOutput("Objects", IPLImage::IMAGE_GRAYSCALE);
@@ -38,7 +41,8 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
     IPLImagePlane* plane = image->plane(0);
     IPLImagePlane* newplane = _result->plane(0);
 
-    // label increment 0.01;
+    int labelCount = 1024;
+    float labelIncrement = 1.0f/labelCount;
     float label = 0.01f;
     for(int y=0; y<height; y++)
     {
@@ -46,8 +50,11 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
         notifyProgressEventHandler(100*progress++/maxProgress);
         for(int x=0; x<width; x++)
         {
-            if(plane->p(x,y))
-                labelBlob(plane, newplane, x, y, label += 0.01f);
+            // if the label exceeds 1 leave it white.
+            if(label + labelIncrement > 1.0f)
+                newplane->p(x, y) = 1.0;
+            else if(plane->p(x,y))
+                labelBlob(plane, newplane, x, y, label += labelIncrement);
         }
     }
     return true;
