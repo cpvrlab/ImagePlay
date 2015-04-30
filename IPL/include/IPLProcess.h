@@ -1,11 +1,5 @@
 //#############################################################################
 //
-//  File:      IPLProcess.h
-//  Author:    Kaspar Schmid
-//  Date:      November 2014
-//
-//#############################################################################
-//
 //  This file is part of ImagePlay.
 //
 //  ImagePlay is free software: you can redistribute it and/or modify
