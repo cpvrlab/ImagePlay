@@ -79,6 +79,7 @@ private:
     float                   _scale;                 //!< Scale for zooming
     MainWindow*             _mainWindow;            //!< MainWindow
     bool                    _isRunning;             //!< Is running
+    bool                    _updateNeeded;
     IPProcessStep*          _currentStep;           //!< Currently active step, settings shown on the left side
     QList<IPProcessStep*>   _processList;           //!< Ordered process list
     int                     _sequenceCount;         //!< Image sequence count
@@ -86,8 +87,8 @@ private:
     int                     _lastSequenceIndex;     //!< Last image sequence index
     bool                    _isSequenceRunning;     //!< Is sequence running
     bool                    _lastProcessSuccess;    //!< Last process was successful
-    long long               _currentUpdateID;       //!< Used to check if an update is needed
-    long long               _updateID;              //!<
+    long                    _currentUpdateID;       //!< Used to check if an update is needed
+    long                    _updateID;              //!<
     bool                    _stopExecution;         //!< Used to stop the execution early
 
     // QWidget interface

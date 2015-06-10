@@ -110,7 +110,7 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
         pen.setColor(QColor(211, 84, 0));
     }
 
-    if(process()->needsUpdate())
+    if(!process()->isResultReady())
     {
         pen.setStyle(Qt::DotLine);
     }
@@ -266,6 +266,22 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
         painter->setFont(fontSmallGray);
         painter->drawText(bounds, Qt::AlignCenter, "CV");
     }
+
+    QFont fontSmallGray(painter->font());
+    fontSmallGray.setBold(true);
+
+    QRect idBounds(5,5,44,10);
+    QBrush brushYellow(QColor(252,248,227));
+    QPen penYellow(QColor(138,109,59));
+    painter->setBrush(brushYellow);
+    painter->setPen(penYellow);
+    painter->fillRect(idBounds, brushYellow);
+    painter->drawRect(idBounds);
+
+    fontSmallGray.setPointSize(6);
+    painter->setFont(fontSmallGray);
+    QString update("%1/%2");
+    painter->drawText(idBounds, Qt::AlignCenter, update.arg(process()->updateID()).arg(process()->requestedUpdateID()));
 
 }
 

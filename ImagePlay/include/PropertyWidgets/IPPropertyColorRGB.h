@@ -37,7 +37,7 @@ class IPPropertyColorRGB : public IPPropertyWidget, public IPLColorPickHandler
 {
     Q_OBJECT
 public:
-    explicit IPPropertyColorRGB(IPLProcessPropertyColor* property, QWidget *parent) : IPPropertyWidget(parent)
+    explicit IPPropertyColorRGB(IPLProcessPropertyColor* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _layout = new QGridLayout;
         _layout->setMargin(0);

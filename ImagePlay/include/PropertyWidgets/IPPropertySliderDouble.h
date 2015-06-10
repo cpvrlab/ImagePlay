@@ -33,7 +33,7 @@ class IPPropertySliderDouble : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertySliderDouble(IPLProcessPropertyDouble* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertySliderDouble(IPLProcessPropertyDouble* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);

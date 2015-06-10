@@ -47,6 +47,11 @@ void IPLLoadImage::destroy()
     delete _result;
 }
 
+void IPLLoadImage::beforeProcessing()
+{
+    addInformation("beforeProcessing IPLLoadImage");
+}
+
 bool IPLLoadImage::processInputData(IPLImage*, int, bool)
 {
     // delete previous result
@@ -79,4 +84,9 @@ bool IPLLoadImage::processInputData(IPLImage*, int, bool)
 IPLImage *IPLLoadImage::getResultData(int)
 {
     return _result;
+}
+
+void IPLLoadImage::afterProcessing()
+{
+    addInformation("afterProcessing IPLLoadImage");
 }

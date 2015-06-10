@@ -34,7 +34,7 @@ class IPPropertyPoint : public IPPropertyWidget, public IPLCoordinatePickHandler
 {
     Q_OBJECT
 public:
-    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);

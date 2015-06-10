@@ -129,8 +129,10 @@ public:
     virtual IPLProcess*     clone                       () const = 0;
     virtual void            init                        () = 0;
     virtual void            destroy                     () = 0;
+    virtual void            beforeProcessing            () {}
     virtual bool            processInputData            (IPLImage* data, int inputIndex, bool useOpenCV) = 0;
     virtual IPLData*        getResultData               (int outputIndex ) = 0;
+    virtual void            afterProcessing             () {}
 
     void                    registerProgressEventHandler(IPLProgressEventHandler* handler);
     void                    notifyProgressEventHandler(int percent);
@@ -140,10 +142,12 @@ public:
     IPLProcessPropertyMap*  properties();
     IPLProcessProperty*     property(std::string key);
     void                    setProperty(std::string key, IPLProcessProperty* value);
-    bool                    isResultReady()                    { return _resultReady; }
-    void                    setResultReady(bool ready)         { _resultReady = ready; }
-    bool                    needsUpdate()                      { return _needsUpdate; }
-    void                    setNeedsUpdate(bool needsUpdate)   { _needsUpdate = needsUpdate; }
+    bool                    isResultReady()                     { return (_completedUpdateID >= _requestedUpdateID); }
+    void                    setResultReady()                    { _completedUpdateID = _requestedUpdateID; }
+    void                    requestUpdate();
+    void                    requestUpdate(long updateID);
+    long                    updateID()                          { return _completedUpdateID; }
+    long                    requestedUpdateID()                 { return _requestedUpdateID; }
 
     void                    resetMessages();
     void                    addMessage(IPLProcessMessage msg);
@@ -211,8 +215,6 @@ private:
 
     bool                            _isSource;
     bool                            _isSequence;
-    bool                            _resultReady;
-    bool                            _needsUpdate;
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     //std::mutex                    _propertyMutex;
@@ -228,6 +230,8 @@ private:
     IPLProcessPropertyMap           _properties;
     std::vector<IPLProcessMessage>  _messages;
     IPLOpenCVSupport                _openCVSupport;
+    long                            _requestedUpdateID;
+    long                            _completedUpdateID;
 
 };
 

@@ -32,7 +32,7 @@ class IPPropertySliderInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertySliderInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertySliderInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _lastValue = 0;
 

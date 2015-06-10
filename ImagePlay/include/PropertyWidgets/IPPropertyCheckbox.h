@@ -34,7 +34,7 @@ class IPPropertyCheckbox : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    explicit IPPropertyCheckbox(IPLProcessPropertyBool* property, QString title, QWidget *parent) : IPPropertyWidget(parent)
+    explicit IPPropertyCheckbox(IPLProcessPropertyBool* property, QString title, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _property = property;
 

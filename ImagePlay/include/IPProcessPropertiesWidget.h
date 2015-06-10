@@ -45,6 +45,7 @@
 #include "PropertyWidgets/IPPropertyString.h"
 #include "PropertyWidgets/IPPropertyFolder.h"
 #include "PropertyWidgets/IPPropertyCombobox.h"
+#include "PropertyWidgets/IPPropertyGroup.h"
 #include "PropertyWidgets/IPPropertyPoint.h"
 #include "MainWindow.h"
 
@@ -67,13 +68,16 @@ public:
     void                        closeSettings               ();
     void                        addPropertyWidget           (QString label, QString description, IPPropertyWidget *widget);
     void                        setMainWindow               (MainWindow* mainWindow)                                            { _mainWindow = mainWindow; }
-    MainWindow*                 mainWindow                  ()                                                                  { return _mainWindow; }
+    MainWindow*                 mainWindow                  ();
 
 private:
     static bool                 sortByPosition              (IPLProcessProperty* x, IPLProcessProperty* y);
     IPProcessStep*              _processStep;
     QList<IPPropertyWidget*>    _propertyWidgets;
     MainWindow*                 _mainWindow;
+
+public slots:
+    void                        showPropertyGroup           (QString);
 };
 
 #endif // IPPROCESSPROPERTIESWIDGET_H

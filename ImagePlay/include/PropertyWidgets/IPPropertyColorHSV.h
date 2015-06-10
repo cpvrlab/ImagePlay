@@ -36,7 +36,7 @@ class IPPropertyColorHSV : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    explicit IPPropertyColorHSV(IPLProcessPropertyColor* property, QWidget *parent) : IPPropertyWidget(parent)
+    explicit IPPropertyColorHSV(IPLProcessPropertyColor* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _layout = new QGridLayout;
         _layout->setMargin(0);

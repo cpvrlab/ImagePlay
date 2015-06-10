@@ -206,16 +206,17 @@ inline void deserializeProperty(IPLProcessProperty::SerializedData data, IPLProc
     deserializeValue(data.value,value);
 }
 
-IPLProcessProperty::IPLProcessProperty(int position, const char *name, const char *description, IPLProcess *process, IPLProcessWidgetType widget):
+IPLProcessProperty::IPLProcessProperty(int position, const char* name, const char *title, const char *description, IPLProcess *process, IPLProcessWidgetType widget):
     _position(position),
     _name(name),
+    _title(title),
     _description(description),
     _process(process),
     _widget(widget)
 {}
 
-IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, const char *name, const char *description, int value, IPLProcessWidgetType widget, int min, int max):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, int value, IPLProcessWidgetType widget, int min, int max):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
     _min(min),
     _max(max)
@@ -224,7 +225,7 @@ IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, 
 void IPLProcessPropertyInt::setValue(int value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -243,8 +244,8 @@ IPLProcessProperty *IPLProcessPropertyInt::clone() const
     return new IPLProcessPropertyInt(*this);
 }
 
-IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char *name, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
     _min(min),
     _max(max)
@@ -253,7 +254,7 @@ IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process
 void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -273,8 +274,8 @@ IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone() const
 }
 
 
-IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char *name, const char *description, double value, IPLProcessWidgetType widget, double min, double max):
-    IPLProcessProperty(position,name,description,process, widget),
+IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char* name, const char* title, const char *description, double value, IPLProcessWidgetType widget, double min, double max):
+    IPLProcessProperty(position,name,title,description,process, widget),
     _value(value),
     _min(min),
     _max(max)
@@ -283,7 +284,7 @@ IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int posi
 void IPLProcessPropertyDouble::setValue(double value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -303,8 +304,8 @@ IPLProcessProperty *IPLProcessPropertyDouble::clone() const
 }
 
 
-IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char *name, const char *description, float value, IPLProcessWidgetType widget, float min, float max):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char* name, const char* title, const char *description, float value, IPLProcessWidgetType widget, float min, float max):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
     _min(min),
     _max(max)
@@ -313,7 +314,7 @@ IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int positi
 void IPLProcessPropertyFloat::setValue(float value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -333,15 +334,15 @@ IPLProcessProperty *IPLProcessPropertyFloat::clone() const
 }
 
 
-IPLProcessPropertyBool::IPLProcessPropertyBool(IPLProcess *process, int position, const char *name, const char *description, bool value, IPLProcessWidgetType widget):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyBool::IPLProcessPropertyBool(IPLProcess *process, int position, const char* name, const char* title, const char *description, bool value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
 {}
 
 void IPLProcessPropertyBool::setValue(bool value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -361,22 +362,22 @@ IPLProcessProperty *IPLProcessPropertyBool::clone() const
 }
 
 
-IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char *name, const char *description, const std::string &value, IPLProcessWidgetType widget):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::string &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
 {}
 
 void IPLProcessPropertyString::setValue(const std::string &value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
 void IPLProcessPropertyString::setValue(std::string &&value)
 {
     _value = std::move(value);
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -396,22 +397,22 @@ IPLProcessProperty *IPLProcessPropertyString::clone() const
 }
 
 
-IPLProcessPropertyVectorInt::IPLProcessPropertyVectorInt(IPLProcess *process, int position, const char *name, const char *description, const std::vector<int> &value, IPLProcessWidgetType widget):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyVectorInt::IPLProcessPropertyVectorInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::vector<int> &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
 {}
 
 void IPLProcessPropertyVectorInt::setValue(const std::vector<int> &value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
 void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
 {
     _value = std::move(value);
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -431,22 +432,22 @@ IPLProcessProperty *IPLProcessPropertyVectorInt::clone() const
 }
 
 
-IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char *name, const char *description, const IPLColor &value, IPLProcessWidgetType widget):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char* name, const char* title, const char *description, const IPLColor &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
 {}
 
 void IPLProcessPropertyColor::setValue(const IPLColor &value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
 void IPLProcessPropertyColor::setValue(IPLColor &&value)
 {
     _value = std::move(value);
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -465,22 +466,22 @@ IPLProcessProperty *IPLProcessPropertyColor::clone() const
     return new IPLProcessPropertyColor(*this);
 }
 
-IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char *name, const char *description, const IPLPoint &value, IPLProcessWidgetType widget):
-    IPLProcessProperty(position,name,description,process,widget),
+IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char* name, const char* title, const char *description, const IPLPoint &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
 {}
 
 void IPLProcessPropertyPoint::setValue(const IPLPoint &value)
 {
     _value = value;
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 
 void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
 {
     _value = std::move(value);
-    _process->setNeedsUpdate(true);
+    _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
 }
 

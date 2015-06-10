@@ -23,14 +23,14 @@ IPLProcess::IPLProcess(void)
 {
     _isSource           = false;
     _isSequence         = false;
-    _resultReady        = false;
-    _needsUpdate        = true;
+    _requestedUpdateID  = 1;
+    _completedUpdateID  = 0;
     _openCVSupport      = IPLProcess::OPENCV_NONE;
     _progressHandler    = NULL;
     _propertyHandler    = NULL;
     _category           = IPLProcess::CATEGORY_UNDEFINED;
 
-    _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", _title, IPL_WIDGET_TITLE));
+    //_properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", _title, IPL_WIDGET_TITLE));
 }
 
 //! copy constructor
@@ -41,7 +41,8 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _propertyHandler    = other._propertyHandler;
     _isSource           = other._isSource;
     _isSequence         = other._isSequence;
-    _resultReady        = other._resultReady;
+    _requestedUpdateID  = other._requestedUpdateID;
+    _completedUpdateID  = other._completedUpdateID;
     _title              = other._title;
     _category           = other._category;
     _keywords           = other._keywords;
@@ -53,7 +54,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     for (auto &entry: other._properties)
         _properties[entry.first].reset(entry.second->clone());
 
-    _properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", _title, IPL_WIDGET_TITLE));
+    //_properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", _title, IPL_WIDGET_TITLE));
 }
 
 IPLProcess::IPLProcess(IPLProcess &&other):
@@ -62,7 +63,8 @@ IPLProcess::IPLProcess(IPLProcess &&other):
     _propertyHandler(std::move(other._propertyHandler)),
     _isSource(std::move(other._isSource)),
     _isSequence(std::move(other._isSequence)),
-    _resultReady(std::move(other._resultReady)),
+    _requestedUpdateID(std::move(other._requestedUpdateID)),
+    _completedUpdateID(std::move(other._completedUpdateID)),
     _title(std::move(other._title)),
     _category(std::move(other._category)),
     _keywords(std::move(other._keywords)),
@@ -118,47 +120,47 @@ void IPLProcess::addOutput(std::string name, IPLData::IPLDataType type)
 
 void IPLProcess::addProcessPropertyInt(const char *name, const char *title, const char *description, int value, IPLProcessWidgetType widget, int min, int max)
 {
-    _properties[name].reset(new IPLProcessPropertyInt(this, (int)_properties.size(), title, description, value, widget, min, max));
+    _properties[name].reset(new IPLProcessPropertyInt(this, (int)_properties.size(), name, title, description, value, widget, min, max));
 }
 
 void IPLProcess::addProcessPropertyUnsignedInt(const char *name, const char *title, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max)
 {
-    _properties[name].reset(new IPLProcessPropertyUnsignedInt(this, (int)_properties.size(), title, description, value, widget, min, max));
+    _properties[name].reset(new IPLProcessPropertyUnsignedInt(this, (int)_properties.size(), name, title, description, value, widget, min, max));
 }
 
 void IPLProcess::addProcessPropertyDouble(const char *name, const char *title, const char *description, double value, IPLProcessWidgetType widget, double min, double max)
 {
-    _properties[name].reset(new IPLProcessPropertyDouble(this, (int)_properties.size(), title, description, value, widget, min, max));
+    _properties[name].reset(new IPLProcessPropertyDouble(this, (int)_properties.size(), name, title, description, value, widget, min, max));
 }
 
 void IPLProcess::addProcessPropertyFloat(const char *name, const char *title, const char *description, float value, IPLProcessWidgetType widget, float min, float max)
 {
-    _properties[name].reset(new IPLProcessPropertyFloat(this, (int)_properties.size(), title, description, value, widget, min, max));
+    _properties[name].reset(new IPLProcessPropertyFloat(this, (int)_properties.size(), name, title, description, value, widget, min, max));
 }
 
 void IPLProcess::addProcessPropertyBool(const char *name, const char *title, const char *description, bool value, IPLProcessWidgetType widget)
 {
-    _properties[name].reset(new IPLProcessPropertyBool(this, (int)_properties.size(), title, description, value, widget));
+    _properties[name].reset(new IPLProcessPropertyBool(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
 void IPLProcess::addProcessPropertyString(const char *name, const char *title, const char *description, const std::string &value, IPLProcessWidgetType widget)
 {
-    _properties[name].reset(new IPLProcessPropertyString(this, (int)_properties.size(), title, description, value, widget));
+    _properties[name].reset(new IPLProcessPropertyString(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
 void IPLProcess::addProcessPropertyVectorInt(const char *name, const char *title, const char *description, const std::vector<int> &value, IPLProcessWidgetType widget)
 {
-    _properties[name].reset(new IPLProcessPropertyVectorInt(this, (int)_properties.size(), title, description, value, widget));
+    _properties[name].reset(new IPLProcessPropertyVectorInt(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
 void IPLProcess::addProcessPropertyColor(const char *name, const char *title, const char *description, const IPLColor &value, IPLProcessWidgetType widget)
 {
-    _properties[name].reset(new IPLProcessPropertyColor(this, (int)_properties.size(), title, description, value, widget));
+    _properties[name].reset(new IPLProcessPropertyColor(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
 void IPLProcess::addProcessPropertyPoint(const char *name, const char *title, const char *description, const IPLPoint &value, IPLProcessWidgetType widget)
 {
-    _properties[name].reset(new IPLProcessPropertyPoint(this, (int)_properties.size(), title, description, value, widget));
+    _properties[name].reset(new IPLProcessPropertyPoint(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
 int IPLProcess::getProcessPropertyInt(const char *name)
@@ -292,6 +294,16 @@ void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
     //_propertyMutex.lock();
     _properties[key].reset(value);
     //_propertyMutex.unlock();
+}
+
+void IPLProcess::requestUpdate()
+{
+    _requestedUpdateID++;
+}
+
+void IPLProcess::requestUpdate(long updateID)
+{
+    _requestedUpdateID = updateID;
 }
 
 void IPLProcess::resetMessages()

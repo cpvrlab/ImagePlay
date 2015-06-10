@@ -34,7 +34,7 @@ class IPPropertySpinner : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertySpinner(QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertySpinner(IPLProcessProperty* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
@@ -67,7 +67,7 @@ public:
     typedef decltype(std::declval<T>().value()) Value;
 
     IPPropertySpinnerImpl(Property* property, QWidget *parent) :
-        IPPropertySpinner(parent)
+        IPPropertySpinner(property, parent)
     {
         setMinimum(property->min());
         setMaximum(property->max());

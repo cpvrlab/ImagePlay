@@ -50,6 +50,8 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
 
     _lastProcessSuccess = false;
 
+    _updateNeeded = true;
+
     // add a dummy object to allow correct placement of new objects with drag&drop
     scene()->addItem(new QGraphicsRectItem(0,0,0,0));
 }
@@ -140,15 +142,13 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, in
     connect(&thread, &IPProcessThread::progressUpdated, this, &IPProcessGrid::updateProgress);
 
     _mainWindow->setThreadRunning(true);
-    process->setResultReady(false);
-    process->resetMessages();
 
     thread.start();
     while(!thread.isFinished())
     {
         QApplication::processEvents();
     }
-    process->setResultReady(thread.success());
+    process->setResultReady();
     _mainWindow->setThreadRunning(false);
 
     _lastProcessSuccess = thread.success();
@@ -169,8 +169,7 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
 
         if(tmpProcess == process)
         {
-            step->process()->setResultReady(false);
-            step->process()->setNeedsUpdate(true);
+            step->process()->requestUpdate();
 
             tmpQueue.enqueue(step);
             break;
@@ -191,7 +190,7 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
             IPProcessEdge* edge = (IPProcessEdge*) *it;
             IPProcessStep* nextStep = edge->to();
 
-            nextStep->process()->setNeedsUpdate(step->process()->needsUpdate());
+            nextStep->process()->requestUpdate(step->process()->requestedUpdateID());
 
             // add to queue and list
             tmpQueue.enqueue(nextStep);
@@ -213,7 +212,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     }
 
     // if already running or nothing has changed, exit
-    if(_isRunning || (_currentUpdateID == _updateID))
+    if(_isRunning || !_updateNeeded)
     {
         return;
     }
@@ -259,20 +258,18 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
             }
 
             // execute thread
-            if(step->process()->needsUpdate() || forcedUpdate)
+            if(!step->process()->isResultReady() || forcedUpdate)
             {
+                step->process()->resetMessages();
+                step->process()->beforeProcessing();
                 int durationMs = executeThread(step->process());
+                step->process()->afterProcessing();
 
                 totalDurationMs += durationMs;
                 step->setDuration(durationMs);
 
-                if(step->process()->isResultReady())
-                {
-                    step->process()->setNeedsUpdate(false);
-
-                    if(!step->process()->hasErrors())
-                        step->updateThumbnail();
-                }
+                if(!step->process()->hasErrors())
+                    step->updateThumbnail();
 
                 // update error messages
                 _mainWindow->updateProcessMessages();
@@ -287,7 +284,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         }
         else
         {
-            if(step->process()->needsUpdate() || forcedUpdate)
+            if(!step->process()->isResultReady() || forcedUpdate)
             {
                 // execute process once for every input
                 for(int i=0; i < step->edgesIn()->size(); i++)
@@ -309,15 +306,14 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                     }
 
                     // execute thread
+                    step->process()->resetMessages();
+                    step->process()->beforeProcessing();
                     int durationMs = executeThread(step->process(), result, indexTo, mainWindow()->useOpenCV());
+                    step->process()->afterProcessing();
                     totalDurationMs += durationMs;
                     step->setDuration(durationMs);
 
-                    if(step->process()->isResultReady())
-                    {
-                        step->process()->setNeedsUpdate(false);
-                        step->updateThumbnail();
-                    }
+                    step->updateThumbnail();
 
                     // update error messages
                     _mainWindow->updateProcessMessages();
@@ -368,7 +364,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 
         if(process->isSequence())
         {
-            process->setNeedsUpdate(true);
+            process->requestUpdate();
             propertyChanged(process);
             requestUpdate();
         }
@@ -382,6 +378,8 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     // only for testing the camera
     //if(graphNeedsUpdate)
     //    _mainWindow->execute(false);
+
+    _updateNeeded = false;
 }
 
 void IPProcessGrid::updateProgress(int progress)
@@ -514,6 +512,7 @@ void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
 void IPProcessGrid::propertyChanged(IPLProcess* process)
 {
     propagateNeedsUpdate(process);
+    _updateNeeded = true;
 }
 
 void IPProcessGrid::setSequenceIndex(int index)

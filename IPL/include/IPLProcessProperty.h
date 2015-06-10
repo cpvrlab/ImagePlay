@@ -51,6 +51,7 @@ public:
 
     int position() const                  { return _position; }
     const char* name() const              { return _name; }
+    const char* title() const             { return _title; }
     const char* description() const       { return _description; }
     IPLProcessWidgetType widget() const   { return _widget; }
     virtual const char* type() const = 0;
@@ -61,12 +62,14 @@ public:
 protected:
     IPLProcessProperty(int position,
                        const char *name,
+                       const char *title,
                        const char *description,
                        IPLProcess *process,
                        IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     int _position;                  //!< Position in GUI
-    const char* _name;              //!< Short name for GUI
+    const char* _name;              //!< ID for GUI
+    const char* _title;             //!< Short title for GUI
     const char* _description;       //!< Short help for GUI
     IPLProcess*  _process;
     IPLProcessWidgetType _widget;
@@ -79,7 +82,7 @@ protected:
 class IPLSHARED_EXPORT IPLProcessPropertyInt : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyInt(IPLProcess* process, int position, const char* name, const char* description, int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, int min=0, int max=0);
+    IPLProcessPropertyInt(IPLProcess* process, int position, const char* name, const char* title, const char* description, int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, int min=0, int max=0);
 
     int min() const                         { return _min; }
     int max() const                         { return _max; }
@@ -100,7 +103,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyUnsignedInt: public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyUnsignedInt(IPLProcess* process, int position, const char* name, const char* description, unsigned int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, unsigned int min=0, unsigned int max=0);
+    IPLProcessPropertyUnsignedInt(IPLProcess* process, int position, const char* name, const char* title, const char* description, unsigned int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, unsigned int min=0, unsigned int max=0);
 
     unsigned int min() const                         { return _min; }
     unsigned int max() const                         { return _max; }
@@ -121,7 +124,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyDouble : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyDouble(IPLProcess* process, int position, const char* name, const char* description, double value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, double min=0.0, double max=0.0);
+    IPLProcessPropertyDouble(IPLProcess* process, int position, const char* name, const char* title, const char* description, double value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, double min=0.0, double max=0.0);
 
     double min() const                         { return _min; }
     double max() const                         { return _max; }
@@ -142,7 +145,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyFloat : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyFloat(IPLProcess* process, int position, const char* name, const char* description, float value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT,  float min=0.0f, float max=0.0f);
+    IPLProcessPropertyFloat(IPLProcess* process, int position, const char* name, const char* title, const char* description, float value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT,  float min=0.0f, float max=0.0f);
 
     float min() const                         { return _min; }
     float max() const                         { return _max; }
@@ -165,7 +168,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyBool : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyBool(IPLProcess* process, int position, const char* name, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    IPLProcessPropertyBool(IPLProcess* process, int position, const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     bool value() const                       { return _value; }
     void setValue(bool value);
@@ -182,7 +185,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyString : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyString(IPLProcess* process, int position, const char* name, const char* description, const std::string &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    IPLProcessPropertyString(IPLProcess* process, int position, const char* name, const char* title, const char* description, const std::string &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     std::string value() const                       { return _value; }
     void setValue(const std::string &value);
@@ -201,7 +204,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyVectorInt : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyVectorInt(IPLProcess* process, int position, const char* name, const char* description, const std::vector<int> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    IPLProcessPropertyVectorInt(IPLProcess* process, int position, const char* name, const char* title, const char* description, const std::vector<int> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     const std::vector<int> &value() const                       { return _value; }
     void setValue(const std::vector<int> &value);
@@ -219,7 +222,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyColor : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyColor(IPLProcess* process, int position, const char* name, const char* description, const IPLColor &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    IPLProcessPropertyColor(IPLProcess* process, int position, const char* name, const char* title, const char* description, const IPLColor &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     const IPLColor &value() const                       { return _value; }
     void setValue(const IPLColor &value);
@@ -238,7 +241,7 @@ private:
 class IPLSHARED_EXPORT IPLProcessPropertyPoint : public IPLProcessProperty
 {
 public:
-    IPLProcessPropertyPoint(IPLProcess* process, int position, const char* name, const char* description, const IPLPoint &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    IPLProcessPropertyPoint(IPLProcess* process, int position, const char* name, const char* title, const char* description, const IPLPoint &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
     const IPLPoint &value() const                       { return _value; }
     void setValue(const IPLPoint &value);

@@ -35,8 +35,10 @@ public:
 
     void                init();
     virtual void        destroy();
+    virtual void        beforeProcessing();
     virtual bool        processInputData    (IPLImage* data, int index, bool useOpenCV);
     virtual IPLImage*   getResultData       (int outNr);
+    virtual void        afterProcessing();
 protected:
     IPLImage*           _result;
     std::string         _path;

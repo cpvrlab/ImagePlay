@@ -33,7 +33,7 @@ class IPPropertyFileOpen : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyFileOpen(IPLProcessPropertyString* property, QString defaultDirectory, QWidget* parent) : IPPropertyWidget(parent)
+    IPPropertyFileOpen(IPLProcessPropertyString* property, QString defaultDirectory, QWidget* parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);

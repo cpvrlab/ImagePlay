@@ -33,7 +33,7 @@ class IPPropertyFolder : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyFolder(IPLProcessPropertyString* property, QWidget* parent) : IPPropertyWidget(parent)
+    IPPropertyFolder(IPLProcessPropertyString* property, QWidget* parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);

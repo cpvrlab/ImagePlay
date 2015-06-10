@@ -36,11 +36,11 @@ void IPLAddNoise::init()
     addOutput("Image", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "", 0, IPL_WIDGET_COMBOBOX);
-    addProcessPropertyDouble("probability", "Probability", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 0.99);
-    addProcessPropertyDouble("amplitude", "Amplitude", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyDouble("stdDev", "Standard Deviation (Gauss)", "", 0.1, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyInt("gaussType", "Type(Gauss):Multiplicative|Additive", "", 0, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "impl|gauss", 0, IPL_WIDGET_GROUP);
+    addProcessPropertyDouble("impl_probability", "Probability", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 0.99);
+    addProcessPropertyDouble("impl_amplitude", "Amplitude", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("gauss_stdDev", "Standard Deviation", "", 0.1, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyInt("gauss_type", "Type:Multiplicative|Additive", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 
 void IPLAddNoise::destroy()
@@ -59,10 +59,10 @@ bool IPLAddNoise::processInputData(IPLImage* image , int, bool)
 
     // get properties
     int type = getProcessPropertyInt("type");
-    float probability = getProcessPropertyDouble("probability");
-    float amplitude = getProcessPropertyDouble("amplitude");
-    float stdDev = getProcessPropertyDouble("stdDev");
-    int gaussType = getProcessPropertyInt("gaussType");
+    float probability = getProcessPropertyDouble("impl_probability");
+    float amplitude = getProcessPropertyDouble("impl_amplitude");
+    float stdDev = getProcessPropertyDouble("gauss_stdDev");
+    int gaussType = getProcessPropertyInt("gauss_type");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

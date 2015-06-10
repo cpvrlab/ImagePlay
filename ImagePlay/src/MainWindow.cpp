@@ -584,7 +584,7 @@ void MainWindow::addEdge(IPProcessEdge *edge)
         showMessage("Connected", MainWindow::MESSAGE_SUCCESS);
 
         // update graphics
-        edge->to()->process()->setNeedsUpdate(true);
+        edge->to()->process()->requestUpdate();
         ui->graphicsView->propagateNeedsUpdate(edge->to()->process());
         setParamsHaveChanged();
         execute();

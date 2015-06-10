@@ -36,7 +36,7 @@ class IPPropertyKernelInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyKernelInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyKernelInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         // init presets
         int presetEmpty[]        = {0,0,0,0,0,0,0,0,0};

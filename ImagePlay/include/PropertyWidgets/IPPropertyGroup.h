@@ -17,24 +17,25 @@
 //
 //#############################################################################
 
-#ifndef IPPROPERTYCOMBOBOX_H
-#define IPPROPERTYCOMBOBOX_H
+#ifndef IPPROPERTYGROUP_H
+#define IPPROPERTYGROUP_H
 
 #include <QWidget>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QButtonGroup>
 #include <QComboBox>
+#include <QTimer>
 
 #include <QDebug>
 
 #include "IPPropertyWidget.h"
 
-class IPPropertyCombobox : public IPPropertyWidget
+class IPPropertyGroup : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyCombobox(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
+    IPPropertyGroup(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _property = property;
 
@@ -52,7 +53,14 @@ public:
         // check if structure is Title:Option1|Option2
         if(!(rawName.contains(":") && rawName.contains("|")))
         {
-            qWarning() << "IPPropertyRadioInt: Invalid title structure " << rawName;
+            qWarning() << "IPPropertyGroup: Invalid title structure " << rawName;
+            return;
+        }
+
+        QString rawDescription(property->description());
+        if(!(rawDescription.contains("|")))
+        {
+            qWarning() << "IPPropertyGroup: Invalid group structure " << rawDescription;
             return;
         }
 
@@ -60,11 +68,15 @@ public:
         QString rawOptions = rawName.split(":").at(1);
         QStringList options = rawOptions.split("|");
 
-        _combobox->addItems(options);
+        _groupPrefixes = rawDescription.split("|");
 
+        _combobox->addItems(options);
         _combobox->setCurrentIndex(value);
 
-        connect(_combobox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyCombobox::valueChanged);
+        connect(_combobox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyGroup::valueChanged);
+
+        // force GUI update
+        QTimer::singleShot(50, this, &IPPropertyGroup::indexChanged);
     }
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
@@ -72,7 +84,10 @@ public:
 
     void saveValue()        { _property->setValue(value()); }
 
+    QString currentGroup()  { return _groupPrefixes[value()]; }
+
 signals:
+    void groupChanged(QString);
 
 public slots:
     void valueChanged()
@@ -80,11 +95,18 @@ public slots:
         saveValue();
 
         emit changed();
+        emit groupChanged(currentGroup());
+    }
+
+    void indexChanged()
+    {
+        emit groupChanged(currentGroup());
     }
 
 private:
     IPLProcessPropertyInt*  _property;
     QComboBox*              _combobox;
+    QStringList             _groupPrefixes;
 };
 
-#endif // IPPROPERTYCOMBOBOX_H
+#endif // IPPROPERTYGROUP_H

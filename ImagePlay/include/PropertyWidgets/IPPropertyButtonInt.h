@@ -32,13 +32,13 @@ class IPPropertyButton : public IPPropertyWidget
     Q_OBJECT
 public:
     IPPropertyButton(IPLProcessProperty* property, QWidget *parent) :
-        IPPropertyWidget(parent),
+        IPPropertyWidget(property, parent),
         _button(new QPushButton(this))
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
-        _button->setText(property->name());
+        _button->setText(property->title());
         layout()->addWidget(_button);
 
         connect(_button, &QPushButton::clicked, this, &IPPropertyButton::onClick );

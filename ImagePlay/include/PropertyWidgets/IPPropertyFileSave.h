@@ -33,7 +33,7 @@ class IPPropertyFileSave : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyFileSave(IPLProcessPropertyString* property, QWidget* parent) : IPPropertyWidget(parent)
+    IPPropertyFileSave(IPLProcessPropertyString* property, QWidget* parent) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
@@ -42,7 +42,7 @@ public:
 
 
         // split the properties
-        QString rawName(property->name());
+        QString rawName(property->title());
         _filetypeString = rawName.split(":").at(1);
 
         _lineEdit = new QLineEdit(QString::fromStdString(value));

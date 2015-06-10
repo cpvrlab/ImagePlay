@@ -38,7 +38,7 @@ class IPPropertyGrayscaleMorphologyInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyGrayscaleMorphologyInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyGrayscaleMorphologyInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         // init presets
         int presetEmpty[]       = {0,0,0,0,0,0,0,0,0};

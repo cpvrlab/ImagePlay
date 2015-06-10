@@ -38,7 +38,7 @@ class IPPropertyBinaryMorphologyTristateInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyBinaryMorphologyTristateInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyBinaryMorphologyTristateInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _ignoreCombobox = true;
         _ignoreKernel = true;

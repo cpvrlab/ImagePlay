@@ -38,7 +38,7 @@ class IPPropertyBinaryMorphologyInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyBinaryMorphologyInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyBinaryMorphologyInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _ignoreCombobox = true;
         _ignoreKernel = true;

@@ -38,6 +38,7 @@ bool IPProcessPropertiesWidget::sortByPosition(IPLProcessProperty* x, IPLProcess
     return x->position() < y->position();
 }
 
+
 void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 {
     _processStep = processStep;
@@ -97,31 +98,42 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             case IPL_WIDGET_SLIDER:
                 widget = new IPPropertySliderInt(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_SLIDER_ODD:
                 widget = new IPPropertySliderIntOdd(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_SLIDER_EVEN:
                 widget = new IPPropertySliderIntEven(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_RADIOBUTTONS:
                 widget = new IPPropertyRadioInt(p, this);
-                rawName = property->name(); // name:value1|value2
+                rawName = property->title(); // name:value1|value2
                 name = rawName.split(":").at(0);
                 addPropertyWidget(name, property->description(), widget);
                 break;
 
             case IPL_WIDGET_COMBOBOX:
                 widget = new IPPropertyCombobox(p, this);
-                rawName = property->name(); // name:value1|value2
+                rawName = property->title(); // name:value1|value2
                 name = rawName.split(":").at(0);
                 addPropertyWidget(name, property->description(), widget);
+                break;
+
+            case IPL_WIDGET_GROUP:
+                widget = new IPPropertyGroup(p, this);
+                rawName = property->title(); // name:value1|value2
+                name = rawName.split(":").at(0);
+                addPropertyWidget(name, "", widget);
+
+                // connect widget events to grid execution
+                connect((IPPropertyGroup*)widget, &IPPropertyGroup::groupChanged, this, &IPProcessPropertiesWidget::showPropertyGroup);
+
                 break;
 
             case IPL_WIDGET_BUTTON:
@@ -131,7 +143,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 
             default: //IPL_WIDGET_SPINNER
                 IPPropertySpinnerInt* widget = new IPPropertySpinnerInt(p, this);
-                addPropertyWidget(property->name(),property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
         }
@@ -148,7 +160,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 
             case IPL_WIDGET_CHECKBOXES:
                 widget = new IPPropertyCheckboxInt(p, this);
-                rawName = property->name(); // name:value1|value2
+                rawName = property->title(); // name:value1|value2
                 name = rawName.split(":").at(0);
                 addPropertyWidget(name, property->description(), widget);
                 break;
@@ -160,7 +172,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 
             default: //IPL_WIDGET_SPINNER
                 IPPropertySpinnerUnsignedInt* widget = new IPPropertySpinnerUnsignedInt(p, this);
-                addPropertyWidget(property->name(),property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
         }
@@ -172,7 +184,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             default: //IPL_WIDGET_SLIDER
                 widget = new IPPropertySliderDouble(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
         }
@@ -186,25 +198,25 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             case IPL_WIDGET_FILE_OPEN:
                 widget = new IPPropertyFileOpen(p, defaultDirectory, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_FILE_SAVE:
                 widget = new IPPropertyFileSave(p, this);
                 // name:value1|value2
-                rawName = property->name();
+                rawName = property->title();
                 name = rawName.split(":").at(0);
                 addPropertyWidget(name, property->description(), widget);
                 break;
 
             case IPL_WIDGET_FOLDER:
                 widget = new IPPropertyFolder(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             default: //IPL_WIDGET_TEXTFIELD
                 widget = new IPPropertyString(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
         }
@@ -216,17 +228,17 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             case IPL_WIDGET_COLOR_HSL:
                 widget = new IPPropertyColorHSL(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_COLOR_HSV:
                 widget = new IPPropertyColorHSV(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             default: //IPL_WIDGET_COLOR_RGB
                 widget = new IPPropertyColorRGB(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
 
@@ -240,7 +252,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             switch(p->widget())
             {
             default: //IPL_WIDGET_CHECKBOXES
-                widget = new IPPropertyCheckbox(p, property->name(), this);
+                widget = new IPPropertyCheckbox(p, property->title(), this);
                 addPropertyWidget("", property->description(), widget);
                 break;
             }
@@ -253,22 +265,22 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             case IPL_WIDGET_BINARY_MORPHOLOGY:
                 widget = new IPPropertyBinaryMorphologyInt(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_BINARY_MORPHOLOGY_TRISTATE:
                 widget = new IPPropertyBinaryMorphologyTristateInt(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             case IPL_WIDGET_GRAYSCALE_MORPHOLOGY:
                 widget = new IPPropertyGrayscaleMorphologyInt(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
 
             default: //IPL_WIDGET_KERNEL
                 widget = new IPPropertyKernelInt(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
         }
@@ -280,7 +292,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             {
             default: //IPL_WIDGET_POINT
                 widget = new IPPropertyPoint(p, this);
-                addPropertyWidget(property->name(), property->description(), widget);
+                addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
 
@@ -321,5 +333,46 @@ void IPProcessPropertiesWidget::addPropertyWidget(QString label, QString descrip
     lblDescription->setWordWrap(true);
     lblDescription->setStyleSheet("color: #666; font-size: 10px");
     layout->addRow("", lblDescription);
-//    layout->addRow(new QLabel("")); // add a little space
+    //    layout->addRow(new QLabel("")); // add a little space
+}
+
+/*!
+ * \brief Iterates over all process property widgets and shows/hides
+ *        them based on group prefix
+ *
+ *        Example for 2 groups:
+ *        -gauss_gamma
+ *        -gauss_deviation
+ *        -impulse_deviation
+ *        -impulse_type
+ *
+ * \param prefix
+ */
+void IPProcessPropertiesWidget::showPropertyGroup(QString prefix)
+{
+    for (int i = 0; i < layout()->count(); ++i)
+    {
+        IPPropertyWidget* widget = dynamic_cast<IPPropertyWidget*>(layout()->itemAt(i)->widget());
+
+        if(!widget)
+            continue;
+
+        QString name(widget->processProperty()->name());
+
+        if(name.contains("_"))
+        {
+            QStringList nameParts = name.split("_");
+
+            // QFormLayout doesn't allow to show/hide rows,
+            // so it is easier to enable/disable the controls
+            if(nameParts[0] == prefix)
+            {
+                widget->setEnabled(true);
+            }
+            else
+            {
+                widget->setEnabled(false);
+            }
+        }
+    }
 }

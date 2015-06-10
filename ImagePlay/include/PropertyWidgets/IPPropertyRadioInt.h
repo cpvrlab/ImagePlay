@@ -34,7 +34,7 @@ class IPPropertyRadioInt : public IPPropertyWidget
 {
     Q_OBJECT
 public:
-    IPPropertyRadioInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(parent)
+    IPPropertyRadioInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
         _property = property;
 
@@ -46,7 +46,15 @@ public:
         _buttonGroup = new QButtonGroup(this);
 
         // split the properties
-        QString rawName(property->name());
+        QString rawName(property->title());
+
+        // check if structure is Title:Option1|Option2
+        if(!(rawName.contains(":") && rawName.contains("|")))
+        {
+            qWarning() << "IPPropertyRadioInt: Invalid title structure " << rawName;
+            return;
+        }
+
         QString name = rawName.split(":").at(0);
         QString rawOptions = rawName.split(":").at(1);
         QStringList options = rawOptions.split("|");

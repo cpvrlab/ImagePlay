@@ -51,12 +51,14 @@ class IPPropertyWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit IPPropertyWidget(QWidget* = 0) {}
+    explicit IPPropertyWidget(IPLProcessProperty* processProperty, QWidget* parent=0) { _processProperty = processProperty; }
     virtual void saveValue() = 0;
+    IPLProcessProperty* processProperty() { return _processProperty; }
 
 signals:
     void changed();
-public slots:
+private:
+    IPLProcessProperty* _processProperty;
 
 };
 
