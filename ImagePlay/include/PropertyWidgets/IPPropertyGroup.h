@@ -34,6 +34,19 @@
 class IPPropertyGroup : public IPPropertyWidget
 {
     Q_OBJECT
+public slots:
+    void valueChanged()
+    {
+        saveValue();
+
+        emit changed();
+        emit groupChanged(currentGroup());
+    }
+
+    void indexChanged()
+    {
+        emit groupChanged(currentGroup());
+    }
 public:
     IPPropertyGroup(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
@@ -88,20 +101,6 @@ public:
 
 signals:
     void groupChanged(QString);
-
-public slots:
-    void valueChanged()
-    {
-        saveValue();
-
-        emit changed();
-        emit groupChanged(currentGroup());
-    }
-
-    void indexChanged()
-    {
-        emit groupChanged(currentGroup());
-    }
 
 private:
     IPLProcessPropertyInt*  _property;
