@@ -159,6 +159,8 @@ private slots:
 
     void on_actionImageViewer_triggered(bool checked);
 
+    void on_btnCloseProcessSettings_clicked();
+
 private:
     Ui::MainWindow*         ui;
     IPProcessStep*          _activeProcessStep;

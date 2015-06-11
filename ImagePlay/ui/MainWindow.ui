@@ -272,7 +272,7 @@
    <property name="minimumSize">
     <size>
      <width>300</width>
-     <height>220</height>
+     <height>251</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -296,13 +296,58 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_4">
-       <property name="styleSheet">
-        <string notr="true">font-size:14px;font-weight:bold;color:#345</string>
-       </property>
-       <property name="text">
-        <string>Process Settings</string>
-       </property>
+      <widget class="QWidget" name="widget" native="true">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="btnCloseProcessSettings">
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton 			{border-image: url(:/back.png); }
+QPushButton:hover {border-image: url(:/back_over.png); }
+QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblProcessSettings">
+          <property name="styleSheet">
+           <string notr="true">font-size:14px;font-weight:bold;color:#345</string>
+          </property>
+          <property name="text">
+           <string>Process Settings</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -316,7 +361,7 @@
           <x>0</x>
           <y>0</y>
           <width>289</width>
-          <height>77</height>
+          <height>108</height>
          </rect>
         </property>
        </widget>

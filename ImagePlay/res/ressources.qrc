@@ -142,5 +142,8 @@
         <file>info.png</file>
         <file>question.png</file>
         <file>warning.png</file>
+        <file>back.png</file>
+        <file>back_over.png</file>
+        <file>back_pressed.png</file>
     </qresource>
 </RCC>

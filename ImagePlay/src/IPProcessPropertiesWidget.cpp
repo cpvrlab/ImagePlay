@@ -38,7 +38,6 @@ bool IPProcessPropertiesWidget::sortByPosition(IPLProcessProperty* x, IPLProcess
     return x->position() < y->position();
 }
 
-
 void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 {
     _processStep = processStep;

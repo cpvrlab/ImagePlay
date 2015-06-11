@@ -278,6 +278,10 @@ void MainWindow::showProcessSettings(IPProcessStep* processStep)
         ui->lblProcessDescription->setVisible(false);
     }
 
+    // change title
+    QString title = QString::fromStdString(processStep->process()->title());
+    ui->lblProcessSettings->setText(title);
+
     // hide help button because it is currently not used
     //ui->btnHelpPage->hide();
 
@@ -1198,4 +1202,9 @@ void MainWindow::on_actionImageViewer_triggered(bool checked)
 void MainWindow::on_actionImageViewer_hidden()
 {
     ui->actionImageViewer->setChecked(false);
+}
+
+void MainWindow::on_btnCloseProcessSettings_clicked()
+{
+    hideProcessSettings();
 }

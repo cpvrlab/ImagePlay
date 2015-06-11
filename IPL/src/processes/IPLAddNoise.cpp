@@ -39,7 +39,7 @@ void IPLAddNoise::init()
     addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "impl|gauss", 0, IPL_WIDGET_GROUP);
     addProcessPropertyDouble("impl_probability", "Probability", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 0.99);
     addProcessPropertyDouble("impl_amplitude", "Amplitude", "", 0.2, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyDouble("gauss_stdDev", "Standard Deviation", "", 0.1, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("gauss_stdDev", "Std. Deviation", "", 0.1, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyInt("gauss_type", "Type:Multiplicative|Additive", "", 0, IPL_WIDGET_RADIOBUTTONS);
 }
 

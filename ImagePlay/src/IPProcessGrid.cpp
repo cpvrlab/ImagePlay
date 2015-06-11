@@ -482,7 +482,7 @@ void IPProcessGrid::keyPressEvent(QKeyEvent *event)
         _mainWindow->setFilterFocus();
     }
 
-    if(event->key() == Qt::Key_Delete)
+    if(event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace)
     {
         _scene->deleteSelectedItems();
     }

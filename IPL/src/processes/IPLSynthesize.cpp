@@ -42,13 +42,13 @@ void IPLSynthesize::init()
     addOutput("Image", IPLData::IMAGE_GRAYSCALE);
 
     // all properties which can later be changed by gui
-    addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","", _type, IPL_WIDGET_RADIOBUTTONS);
+    addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","plane|radial", _type, IPL_WIDGET_GROUP);
     addProcessPropertyInt("width", "Width","", _width, IPL_WIDGET_SLIDER, 1, 1024);
     addProcessPropertyInt("height", "Height","", _height, IPL_WIDGET_SLIDER, 1, 1024);
     addProcessPropertyDouble("amplitude", "Amptlitude","", _amplitude, IPL_WIDGET_SLIDER, 0.0f, 1.0f);
     addProcessPropertyDouble("offset", "Offset","", _offset, IPL_WIDGET_SLIDER, 0.0f, 1.0f);
     addProcessPropertyInt("wavelength", "Wavelength","", _wavelength, IPL_WIDGET_SLIDER, 1, 1024);
-    addProcessPropertyInt("direction", "Direction","", _direction, IPL_WIDGET_SLIDER, 0, 360);
+    addProcessPropertyInt("plane_direction", "Direction","", _direction, IPL_WIDGET_SLIDER, 0, 360);
     addProcessPropertyInt("decay", "Decay","", _decay, IPL_WIDGET_SLIDER, 0, 1024);
 }
 
@@ -75,7 +75,7 @@ bool IPLSynthesize::processInputData(IPLImage*, int, bool)
     _amplitude  = getProcessPropertyDouble("amplitude");
     _offset     = getProcessPropertyDouble("offset");
     _wavelength = getProcessPropertyInt("wavelength");
-    _direction  = getProcessPropertyInt("direction");
+    _direction  = getProcessPropertyInt("plane_direction");
     _decay      = getProcessPropertyInt("decay");
 
     _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, _width, _height );
