@@ -34,19 +34,6 @@
 class IPPropertyGroup : public IPPropertyWidget
 {
     Q_OBJECT
-public slots:
-    void valueChanged()
-    {
-        saveValue();
-
-        emit changed();
-        emit groupChanged(currentGroup());
-    }
-
-    void indexChanged()
-    {
-        emit groupChanged(currentGroup());
-    }
 public:
     IPPropertyGroup(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
@@ -89,7 +76,7 @@ public:
         connect(_combobox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyGroup::valueChanged);
 
         // force GUI update
-        QTimer::singleShot(50, this, &IPPropertyGroup::indexChanged);
+        QTimer::singleShot(50, this, SLOT(indexChanged()));
     }
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
@@ -101,6 +88,20 @@ public:
 
 signals:
     void groupChanged(QString);
+
+public slots:
+    void valueChanged()
+    {
+        saveValue();
+
+        emit changed();
+        emit groupChanged(currentGroup());
+    }
+
+    void indexChanged()
+    {
+        emit groupChanged(currentGroup());
+    }
 
 private:
     IPLProcessPropertyInt*  _property;
