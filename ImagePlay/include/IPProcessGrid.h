@@ -90,6 +90,7 @@ private:
     long                    _currentUpdateID;       //!< Used to check if an update is needed
     long                    _updateID;              //!<
     bool                    _stopExecution;         //!< Used to stop the execution early
+    bool                    _longProcess;           //!< Unmeasurable processes must update GUI regularly
 
     // QWidget interface
 protected:

@@ -38,6 +38,8 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
     _progress = 0;
     _branchID = 0;
 
+    _progressFrame = 0;
+
     // set QGraphicItem properties
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable);
@@ -187,6 +189,32 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
             painter->setFont(fontSmallBlack);
             painter->drawText(textBounds2, Qt::AlignRight, QString("%1%").arg(_progress));
         }
+        else if(_progress < 0)
+        {
+            // draw rotating progress for unmeasurable operations
+            QBrush brushGreen(QColor(39, 174, 96));
+
+            QPolygon parallelogram;
+            parallelogram << QPoint(7,0) << QPoint(14,0) << QPoint(7,14) << QPoint(0,14);
+
+            // enable clipping
+            painter->setClipRect(9,41,46,14);
+
+            for(int i=0; i<8; i++)
+            {
+                QPainterPath path;
+                path.addPolygon(parallelogram);
+                path.translate(_progressFrame+i*14-10,42);
+                painter->fillPath(path, brushGreen);
+            }
+
+            // disable clipping
+            painter->setClipping(false);
+
+            // count 0-14
+            _progressFrame++;
+            _progressFrame = (_progressFrame > 14) ? 0 : _progressFrame;
+        }
         else
         {
             // footer text
@@ -267,6 +295,7 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
         painter->drawText(bounds, Qt::AlignCenter, "CV");
     }
 
+    // DEBUG
     QFont fontSmallGray(painter->font());
     fontSmallGray.setBold(true);
 
@@ -327,7 +356,7 @@ void IPProcessStep::updateThumbnail()
 
 void IPProcessStep::setProgress(int progress)
 {
-    _progress = progress > 100 ? 100 : (progress < 0 ? 0 : progress); // 0-100
+    _progress = progress > 100 ? 100 : progress;
 
     // redraw
     update(boundingRect());

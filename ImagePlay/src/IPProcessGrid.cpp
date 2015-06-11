@@ -146,6 +146,9 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, in
     thread.start();
     while(!thread.isFinished())
     {
+        if(_longProcess)
+            _currentStep->update();
+
         QApplication::processEvents();
     }
     process->setResultReady();
@@ -384,6 +387,9 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 
 void IPProcessGrid::updateProgress(int progress)
 {
+    // enable spinning progress for long operations
+    _longProcess = (progress < 0);
+
     if(_currentStep)
     {
         _currentStep->setProgress(progress);

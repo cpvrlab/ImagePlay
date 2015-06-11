@@ -99,6 +99,7 @@ private:
     int                     _treeDepth;
     int                     _branchID;
     int                     _progress;      //!< from 0 to 100%
+    int                     _progressFrame;
     QList<IPProcessEdge*>   _edgesIn;
     QList<IPProcessEdge*>   _edgesOut;
 
