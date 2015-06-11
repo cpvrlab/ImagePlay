@@ -68,7 +68,7 @@ public slots:
         if(_defaultDirectory.length() > 0 && _lineEdit->text().length() == 0)
             directory = _defaultDirectory;
 
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), directory, "Images (*.bmp *.gif *.hdr *.jpg *.png *.psd *.tif *.cr2 *.arw)");
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), directory, "Images (*.bmp *.gif *.hdr *.jpg *.jpeg *.png *.psd *.tif *.tiff *.tga *.webp *.wbmp *.xpm *.cr2 *.arw);;All Files(*.*)");
 
         if(fileName.length() > 0)
         {

@@ -67,7 +67,9 @@ bool IPLLoadImage::processInputData(IPLImage*, int, bool)
         return false;
     }
 
-    notifyProgressEventHandler(50);
+    // rotating progress indicator
+    notifyProgressEventHandler(-1);
+
     std::string information;
     bool success = IPLFileIO::loadFile(_path, this->_result, information);
     if(success)
