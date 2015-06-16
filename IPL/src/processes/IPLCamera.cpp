@@ -85,7 +85,7 @@ bool IPLCamera::processInputData(IPLImage*, int, bool)
     _camera->set(CV_CAP_PROP_CONTRAST, contrast);
     _camera->set(CV_CAP_PROP_EXPOSURE, exposure);*/
 
-    //notifyProgressEventHandler(99);
+    notifyProgressEventHandler(-1);
 
     //delete _camera;
     //_camera = NULL;
@@ -119,4 +119,9 @@ bool IPLCamera::processInputData(IPLImage*, int, bool)
 IPLImage *IPLCamera::getResultData(int)
 {
     return _result;
+}
+
+void IPLCamera::afterProcessing()
+{
+    requestUpdate();
 }

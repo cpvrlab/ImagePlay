@@ -146,20 +146,13 @@ private slots:
     void                    on_sequenceSlider_valueChanged  (int value);
     void                    on_btnSequenceForward_clicked   ();
     void                    on_btnSequenceBack_clicked      ();
-
-    void on_actionHelp_triggered();
-
-    void on_actionUseOpenCV_toggled(bool value);
-
-    void on_actionShowLog_triggered(bool checked);
-
-    void on_pushButton_clicked();
-
-    void on_actionGeneratePlugin_triggered();
-
-    void on_actionImageViewer_triggered(bool checked);
-
-    void on_btnCloseProcessSettings_clicked();
+    void                    on_actionHelp_triggered         ();
+    void                    on_actionUseOpenCV_toggled      (bool value);
+    void                    on_actionShowLog_triggered      (bool checked);
+    void                    on_pushButton_clicked           ();
+    void                    on_actionGeneratePlugin_triggered();
+    void                    on_actionImageViewer_triggered  (bool checked);
+    void                    on_btnCloseProcessSettings_clicked();
 
 private:
     Ui::MainWindow*         ui;

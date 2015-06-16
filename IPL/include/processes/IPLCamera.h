@@ -42,6 +42,7 @@ public:
     void                    destroy                 ();
     virtual bool            processInputData        (IPLImage* data, int inNr, bool useOpenCV);
     virtual IPLImage*       getResultData           (int outNr);
+    virtual void            afterProcessing         ();
 protected:
     IPLImage*               _result;
     bool                    _continuous;

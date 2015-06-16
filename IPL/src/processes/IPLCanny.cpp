@@ -190,6 +190,7 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
     //! @todo currently only the opencv implementation works
     if(useOpenCV || true)
     {
+        notifyProgressEventHandler(-1);
         cv::Mat input;
         cv::Mat output;
         cvtColor(image->toCvMat(), input, CV_BGR2GRAY);

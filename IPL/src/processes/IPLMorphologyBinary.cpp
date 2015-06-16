@@ -222,7 +222,7 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
     }
     else
     {
-        notifyProgressEventHandler(50);
+        notifyProgressEventHandler(-1);
 
         int kernelSize = (int)sqrt((float)_kernel.size());
         cv::Mat src = image->toCvMat();

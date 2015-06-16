@@ -977,7 +977,7 @@ void MainWindow::on_actionPlay_triggered()
     setParamsHaveChanged();
 
     //execute();
-    _timer->start(33); // 33ms = 30 fps
+    _timer->start(66); // 33ms = 30 fps
     _imageViewer->show();
     ui->actionImageViewer->setChecked(true);
 
@@ -1043,6 +1043,8 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::showEvent(QShowEvent*)
 {
+    // autostart
+    on_actionPlay_triggered();
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)

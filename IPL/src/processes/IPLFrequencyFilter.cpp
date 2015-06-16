@@ -38,9 +38,9 @@ void IPLFrequencyFilter::init()
     //addOutput("Filter", IPLImage::IMAGE_GRAYSCALE);
 
     // properties
-    addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "", 0, IPL_WIDGET_RADIOBUTTONS);
-    addProcessPropertyDouble("lowCutoff", "Low Cutoff", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyDouble("highCutoff", "High Cutoff", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "low|high|*|*", 0, IPL_WIDGET_GROUP);
+    addProcessPropertyDouble("low_cutoff", "Low Cutoff", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("high_cutoff", "High Cutoff", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyBool("keepDC", "Keep DC", "", false, IPL_WIDGET_CHECKBOXES);
 }
 
@@ -65,8 +65,8 @@ bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
 
     // get properties
     int maskType = getProcessPropertyInt("maskType");
-    double lowCutoff = getProcessPropertyDouble("lowCutoff");
-    double highCutoff = getProcessPropertyDouble("highCutoff");
+    double lowCutoff = getProcessPropertyDouble("low_cutoff");
+    double highCutoff = getProcessPropertyDouble("high_cutoff");
     bool keepDC = getProcessPropertyBool("keepDC");
 
     int halfSize = _result->width()/2;
@@ -88,7 +88,7 @@ bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
                 case 0: if( range > lowRange )
                             _result->c(X,Y) = c0;
                         break;
-                case 1: if( range < lowRange )
+                case 1: if( range < highRange )
                             _result->c(X,Y) = c0;
                         break;
                 case 2: if( range < lowRange || range > highRange )

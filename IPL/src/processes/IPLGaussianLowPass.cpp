@@ -159,6 +159,8 @@ bool IPLGaussianLowPass::processInputData(IPLImage* image , int, bool useOpenCV)
 
     if(useOpenCV)
     {
+        notifyProgressEventHandler(-1);
+
         cv::Mat result;
         cv::GaussianBlur(image->toCvMat(), result, cv::Size(window, window), sigma);
         delete _result;

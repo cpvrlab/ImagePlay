@@ -35,12 +35,12 @@ void IPLResize::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("mode", "Mode:Absolute|Factor", "Uses either height and width or factor x and factor y", 0, IPL_WIDGET_COMBOBOX, 0, 1);
-    addProcessPropertyInt("width", "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
-    addProcessPropertyInt("height", "Height", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyInt("mode", "Mode:Absolute|Factor", "absolute|factor", 0, IPL_WIDGET_GROUP, 0, 1);
+    addProcessPropertyInt("absolute_width", "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
+    addProcessPropertyInt("absolute_height", "Height", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
     addProcessPropertyDouble("factor_x", "Factor X", "", 1.0, IPL_WIDGET_SLIDER, 0.1, 10.0);
     addProcessPropertyDouble("factor_y", "Factor Y", "", 1.0, IPL_WIDGET_SLIDER, 0.1, 10.0);
-    addProcessPropertyInt("keep_aspect_ratio", "Keep Aspect Ratio:None|Based on width|Based on height", "", 0, IPL_WIDGET_COMBOBOX, 0, 1);
+    addProcessPropertyInt("keepaspectratio", "Keep Aspect Ratio:None|Based on width|Based on height", "", 0, IPL_WIDGET_COMBOBOX, 0, 1);
     addProcessPropertyInt("interpolation", "Interpolation:Nearest|Linear|Area|Cubic|Lanczos4", "", 0, IPL_WIDGET_COMBOBOX, 0, 4);
 }
 
@@ -53,8 +53,8 @@ bool IPLResize::processInputData(IPLImage* image , int, bool)
 {
     // get properties
     int mode = getProcessPropertyInt("mode");
-    int width = getProcessPropertyInt("width");
-    int height = getProcessPropertyInt("height");
+    int width = getProcessPropertyInt("absolute_width");
+    int height = getProcessPropertyInt("absolute_height");
     double factor_x = getProcessPropertyDouble("factor_x");
     double factor_y = getProcessPropertyDouble("factor_y");
     int interpolation = getProcessPropertyInt("interpolation");
@@ -87,6 +87,8 @@ bool IPLResize::processInputData(IPLImage* image , int, bool)
     s << "<b>Height</b>: " << height << "\n";
     s << "<b>Width</b>: " << width;
     addInformation(s.str());
+
+    notifyProgressEventHandler(-1);
 
     cv::Mat result;
     if(mode == 0)

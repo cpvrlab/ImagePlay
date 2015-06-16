@@ -109,7 +109,7 @@ bool IPLMedian::processInputData(IPLImage* image , int, bool useOpenCV)
     }
     else
     {
-        notifyProgressEventHandler(50*progress++/maxProgress);
+        notifyProgressEventHandler(-1);
 
         auto src = image->toCvMat();
         cv::Mat dst;

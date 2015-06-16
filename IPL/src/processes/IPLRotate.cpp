@@ -76,6 +76,8 @@ bool IPLRotate::processInputData(IPLImage* image , int, bool)
     // Get the rotation matrix with the specifications above
     cv::Mat rot_mat = getRotationMatrix2D(centerPoint, angle, scale);
 
+    notifyProgressEventHandler(-1);
+
     // Rotate the warped image
     cv::warpAffine(image->toCvMat(), result, rot_mat, result.size(), interpolation);
 

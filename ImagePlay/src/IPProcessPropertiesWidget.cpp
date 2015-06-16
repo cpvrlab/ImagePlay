@@ -345,6 +345,8 @@ void IPProcessPropertiesWidget::addPropertyWidget(QString label, QString descrip
  *        -impulse_deviation
  *        -impulse_type
  *
+ *        use * to show all groups
+ *
  * \param prefix
  */
 void IPProcessPropertiesWidget::showPropertyGroup(QString prefix)
@@ -364,7 +366,7 @@ void IPProcessPropertiesWidget::showPropertyGroup(QString prefix)
 
             // QFormLayout doesn't allow to show/hide rows,
             // so it is easier to enable/disable the controls
-            if(nameParts[0] == prefix)
+            if(nameParts[0] == prefix || prefix == "*")
             {
                 widget->setEnabled(true);
             }

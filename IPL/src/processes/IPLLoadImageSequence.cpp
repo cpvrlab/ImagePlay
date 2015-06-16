@@ -54,7 +54,7 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
     // get properties
     _folder = getProcessPropertyString("folder");
 
-    notifyProgressEventHandler(50);
+    notifyProgressEventHandler(-1);
 
     // list the files
     std::vector<std::string> fileList;

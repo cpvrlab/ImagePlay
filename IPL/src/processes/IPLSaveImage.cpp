@@ -137,9 +137,7 @@ bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
             flags = PNM_SAVE_ASCII;
     }
 
-
-
-    notifyProgressEventHandler(50);
+    notifyProgressEventHandler(-1);
 
     delete _result;
     _result = new IPLImage(image->type(), image->width(), image->height());
