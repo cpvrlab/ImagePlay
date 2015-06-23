@@ -382,6 +382,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLMaxMinMedian",        new IPLMaxMinMedian);
     _factory->registerProcess("IPLMedian",              new IPLMedian);
     _factory->registerProcess("IPLCanny",               new IPLCanny);
+    _factory->registerProcess("IPLHoughCircles",        new IPLHoughCircles);
+    _factory->registerProcess("IPLHarrisCorner",        new IPLHarrisCorner);
     _factory->registerProcess("IPLExtractLines",        new IPLExtractLines);
     _factory->registerProcess("IPLExtrema",             new IPLExtrema);
     _factory->registerProcess("IPLLaplaceOfGaussian",   new IPLLaplaceOfGaussian);

@@ -84,7 +84,7 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
     }
 
     // play from 0 to max
-    if(_sequenceIndex >= _sequenceCount)
+    if(_sequenceIndex >= _sequenceCount || _sequenceIndex < 0)
     {
         _sequenceIndex = 0;
     }
@@ -96,8 +96,6 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
 
     std::string information;
     bool success = IPLFileIO::loadFile(fileName, this->_result, information);
-
-    _sequenceIndex++;
 
     std::stringstream s;
     s << "File: ";
@@ -112,4 +110,13 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
 IPLImage *IPLLoadImageSequence::getResultData(int)
 {
     return _result;
+}
+
+void IPLLoadImageSequence::afterProcessing()
+{
+    if(_result)
+    {
+        _sequenceIndex++;
+        requestUpdate();
+    }
 }

@@ -56,6 +56,8 @@
 #include "IPLMaxMinMedian.h"
 #include "IPLMedian.h"
 #include "IPLCanny.h"
+#include "IPLHoughCircles.h"
+#include "IPLHarrisCorner.h"
 #include "IPLExtractLines.h"
 #include "IPLExtrema.h"
 #include "IPLLaplaceOfGaussian.h"

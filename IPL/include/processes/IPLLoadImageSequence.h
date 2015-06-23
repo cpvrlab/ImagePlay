@@ -51,6 +51,7 @@ public:
     int sequenceCount()                         { return _sequenceCount; }
     int sequenceIndex()                         { return _sequenceIndex; }
     void setSequenceIndex(int sequenceIndex)    { _sequenceIndex = sequenceIndex; }
+    void afterProcessing();
 protected:
     IPLImage*   _result;
     std::string _folder;

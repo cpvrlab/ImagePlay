@@ -382,7 +382,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     //if(graphNeedsUpdate)
     //    _mainWindow->execute(false);
 
-    _updateNeeded = false;
+    //_updateNeeded = false;
 }
 
 void IPProcessGrid::updateProgress(int progress)
@@ -517,6 +517,7 @@ void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
 
 void IPProcessGrid::propertyChanged(IPLProcess* process)
 {
+    process->requestUpdate();
     propagateNeedsUpdate(process);
     _updateNeeded = true;
 }
