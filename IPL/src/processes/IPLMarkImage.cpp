@@ -26,7 +26,7 @@ void IPLMarkImage::init()
 
     // basic settings
     setClassName("IPLMarkImage");
-    setTitle("Mark Image");
+    setTitle("Mark Range");
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
     setDescription("Mark a level range in the image histogram with a selected color. The background"
                    "may be cleared or it may retain the original image. The resulting"
@@ -39,8 +39,9 @@ void IPLMarkImage::init()
     // properties
     addProcessPropertyDouble("min", "Min", "", 0.4, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyDouble("max", "Max", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyInt("mode", "Mode:Show Background|Mask Only", "", 0, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyInt("mode", "Mode:Binary|Show Background|Mask Only", "", 0, IPL_WIDGET_GROUP);
     addProcessPropertyColor("color", "Color", "", IPLColor(1.0,0.0,0.0), IPL_WIDGET_COLOR_RGB);
+    addProcessPropertyBool("invert", "Invert Mask", "", false, IPL_WIDGET_CHECKBOXES);
 }
 
 void IPLMarkImage::destroy()
@@ -59,10 +60,11 @@ bool IPLMarkImage::processInputData(IPLImage* image , int, bool)
     _result = new IPLImage(IPLImage::IMAGE_COLOR, width, height );
 
     // get properties
-    float min = getProcessPropertyDouble("min");
-    float max = getProcessPropertyDouble("max");
-    IPLColor color = getProcessPropertyColor("color");
-    int mode = getProcessPropertyInt("mode");
+    float   min         = getProcessPropertyDouble("min");
+    float   max         = getProcessPropertyDouble("max");
+    IPLColor color      = getProcessPropertyColor("color");
+    int     mode        = getProcessPropertyInt("mode");
+    bool    invert      = getProcessPropertyBool("invert");
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

@@ -22,9 +22,8 @@
 void IPLHoughCircles::init()
 {
     // init
+    _overlay        = NULL;
     _result         = NULL;
-    _binaryImage    = NULL;
-    _orientedImage  = NULL;
 
     // basic settings
     setClassName("IPLHoughCircles");
@@ -35,8 +34,9 @@ void IPLHoughCircles::init()
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Circle Positions", IPLImage::POINT);
+    addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
     addOutput("Circle Overlay", IPLImage::IMAGE_COLOR);
+    addOutput("Circle Positions", IPLImage::POINT);
 
     // properties
     addProcessPropertyInt("thresholdCanny", "Threshold 1", "Upper threshold for the internal Canny edge detector", 200, IPL_WIDGET_SLIDER, 1, 200);
@@ -55,6 +55,8 @@ bool IPLHoughCircles::processInputData(IPLImage* image , int, bool useOpenCV)
     // delete previous result
     delete _result;
     _result = NULL;
+    delete _overlay;
+    _overlay = NULL;
 
     // get properties
     int thresholdCanny       = getProcessPropertyInt("thresholdCanny");
@@ -63,41 +65,54 @@ bool IPLHoughCircles::processInputData(IPLImage* image , int, bool useOpenCV)
     int maxRadius            = getProcessPropertyInt("maxRadius");
     int minDist              = getProcessPropertyInt("minDist");
 
-	notifyProgressEventHandler(-1);
-	cv::Mat input;
-    cv::Mat output = image->toCvMat();
+    notifyProgressEventHandler(-1);
+    cv::Mat input;
+    cv::Mat overlay = image->toCvMat();
+    cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
+    result = cv::Scalar(0);
     cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
 
     std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4);//, thresholdCanny, thresholdCenter, minRadius, maxRadius);
+    cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);
 
-    int size = circles.size();
-
-    if(size < 0)
-        return false;
+    // WARNING: cv::HoughCircles does not work in debug mode!!!
+    //          destroys the std::vector<cv::Vec3f> circles;
 
     std::stringstream s;
     s << "Circles found: ";
     s << circles.size();
     addInformation(s.str());
 
-    /*for(int i = 0; i < circles.size(); i++ )
+    for(int i = 0; i < circles.size(); i++ )
     {
        cv::Point center(round(circles[i][0]), round(circles[i][1]));
        int radius = cvRound(circles[i][2]);
        // circle center
-       cv::circle(output, center, 3, cv::Scalar(0,255,0), -1, 8, 0);
+       cv::circle(overlay, center, 3, cv::Scalar(0,255,0), -1, 8, 0);
        // circle outline
-       cv::circle(output, center, radius, cv::Scalar(0,0,255), 3, 1, 0);
-     }*/
+       cv::circle(overlay, center, radius, cv::Scalar(0,0,255), 3, 1, 0);
 
-	delete _result;
-    _result = new IPLImage(output);
+       // raw result
+       cv::circle(result, center, radius, cv::Scalar(255), -1);
+     }
+
+    _overlay = new IPLImage(overlay);
+    _result = new IPLImage(result);
 
 	return true;
 }
 
-IPLData* IPLHoughCircles::getResultData( int )
+/*!
+ * \brief IPLHoughCircles::getResultData
+ *        index == 0: "Hough Result", IPLImage::IMAGE_GRAYSCALE
+ *        index == 1: "Circle Overlay", IPLImage::IMAGE_COLOR
+ *        index == 2: "Circle Positions", IPLImage::IMAGE_POINT
+ * \return
+ */
+IPLData* IPLHoughCircles::getResultData(int index)
 {
-    return _result;
+    if(index == 0)
+        return _result;
+    else if(index == 1)
+        return _overlay;
 }

@@ -48,8 +48,7 @@ public:
 
 protected:
     IPLImage*               _result;
-    IPLImage*               _binaryImage;
-    IPLOrientedImage*       _orientedImage;
+    IPLImage*               _overlay;
 };
 
 #endif // IPLHOUGHCIRCLES_H

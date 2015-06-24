@@ -142,12 +142,10 @@ public:
     IPLProcessPropertyMap*  properties();
     IPLProcessProperty*     property(std::string key);
     void                    setProperty(std::string key, IPLProcessProperty* value);
-    bool                    isResultReady()                     { return (_completedUpdateID >= _requestedUpdateID); }
-    void                    setResultReady()                    { _completedUpdateID = _requestedUpdateID; }
+    bool                    isResultReady()                     { return _resultReady; }
+    void                    setResultReady(bool ready)          { _resultReady = ready; }
     void                    requestUpdate();
     void                    requestUpdate(long updateID);
-    long                    updateID()                          { return _completedUpdateID; }
-    long                    requestedUpdateID()                 { return _requestedUpdateID; }
 
     void                    resetMessages();
     void                    addMessage(IPLProcessMessage msg);
@@ -160,8 +158,8 @@ public:
     bool                    hasErrors();
     bool                    hasMessages();
 
-    std::vector<IPLProcessIO>* inputs                       ()     { return &_inputs; }
-    std::vector<IPLProcessIO>* outputs                      ()    { return &_outputs; }
+    std::vector<IPLProcessIO>* inputs                           ()                              { return &_inputs; }
+    std::vector<IPLProcessIO>* outputs                          ()                              { return &_outputs; }
 
     void                    setOutputName                       (int index, std::string name);
     void                    setIsSource                         (bool isSource)                 { _isSource = isSource;  }
@@ -215,6 +213,7 @@ private:
 
     bool                            _isSource;
     bool                            _isSequence;
+    bool                            _resultReady;
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     //std::mutex                    _propertyMutex;
@@ -230,8 +229,6 @@ private:
     IPLProcessPropertyMap           _properties;
     std::vector<IPLProcessMessage>  _messages;
     IPLOpenCVSupport                _openCVSupport;
-    long                            _requestedUpdateID;
-    long                            _completedUpdateID;
 
 };
 

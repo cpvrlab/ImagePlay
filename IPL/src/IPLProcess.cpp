@@ -23,8 +23,7 @@ IPLProcess::IPLProcess(void)
 {
     _isSource           = false;
     _isSequence         = false;
-    _requestedUpdateID  = 1;
-    _completedUpdateID  = 0;
+    _resultReady        = false;
     _openCVSupport      = IPLProcess::OPENCV_NONE;
     _progressHandler    = NULL;
     _propertyHandler    = NULL;
@@ -41,8 +40,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _propertyHandler    = other._propertyHandler;
     _isSource           = other._isSource;
     _isSequence         = other._isSequence;
-    _requestedUpdateID  = other._requestedUpdateID;
-    _completedUpdateID  = other._completedUpdateID;
+    _resultReady        = other._resultReady;
     _title              = other._title;
     _category           = other._category;
     _keywords           = other._keywords;
@@ -63,8 +61,7 @@ IPLProcess::IPLProcess(IPLProcess &&other):
     _propertyHandler(std::move(other._propertyHandler)),
     _isSource(std::move(other._isSource)),
     _isSequence(std::move(other._isSequence)),
-    _requestedUpdateID(std::move(other._requestedUpdateID)),
-    _completedUpdateID(std::move(other._completedUpdateID)),
+    _resultReady(std::move(other._resultReady)),
     _title(std::move(other._title)),
     _category(std::move(other._category)),
     _keywords(std::move(other._keywords)),
@@ -298,12 +295,7 @@ void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
 
 void IPLProcess::requestUpdate()
 {
-    _requestedUpdateID++;
-}
-
-void IPLProcess::requestUpdate(long updateID)
-{
-    _requestedUpdateID = updateID;
+    _resultReady = false;
 }
 
 void IPLProcess::resetMessages()

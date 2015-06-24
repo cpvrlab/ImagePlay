@@ -47,3 +47,4 @@ Makefile.Release
 intermediate/
 _doc/
 _bin/
+.settings/

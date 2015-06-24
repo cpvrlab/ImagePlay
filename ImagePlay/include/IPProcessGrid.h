@@ -87,8 +87,6 @@ private:
     int                     _lastSequenceIndex;     //!< Last image sequence index
     bool                    _isSequenceRunning;     //!< Is sequence running
     bool                    _lastProcessSuccess;    //!< Last process was successful
-    long                    _currentUpdateID;       //!< Used to check if an update is needed
-    long                    _updateID;              //!<
     bool                    _stopExecution;         //!< Used to stop the execution early
     bool                    _longProcess;           //!< Unmeasurable processes must update GUI regularly
 

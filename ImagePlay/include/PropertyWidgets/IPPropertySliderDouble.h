@@ -50,9 +50,6 @@ public:
         layout()->addWidget(_slider);
         layout()->addWidget(_spinner);
 
-        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderDouble::updateSpinner );
-        connect(_spinner, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertySliderDouble::updateSlider );
-
         _slider->setMinimum(min*100);
         _slider->setMaximum(max*100);
         _slider->setValue(value*100);
@@ -62,6 +59,9 @@ public:
         _spinner->setMaximum(max);
         _spinner->setValue(value);
         _spinner->setSingleStep(0.01);
+
+        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderDouble::updateSpinner );
+        connect(_spinner, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertySliderDouble::updateSlider );
     }
     void setMinimum(double v)  { _slider->setMinimum(v*100); }
     void setMaximum(double v)  { _slider->setMaximum(v*100); }

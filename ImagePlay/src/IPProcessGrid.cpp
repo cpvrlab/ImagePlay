@@ -34,8 +34,6 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
     setMouseTracking(true);
 
     _scale = 1.0;
-    _currentUpdateID = 0;
-    _updateID = 0;
 
     _isRunning = false;
     _isSequenceRunning = true;
@@ -142,6 +140,8 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, in
     connect(&thread, &IPProcessThread::progressUpdated, this, &IPProcessGrid::updateProgress);
 
     _mainWindow->setThreadRunning(true);
+    process->setResultReady(false);
+    process->resetMessages();
 
     thread.start();
     while(!thread.isFinished())
@@ -151,7 +151,7 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, in
 
         QApplication::processEvents();
     }
-    process->setResultReady();
+    process->setResultReady(thread.success());
     _mainWindow->setThreadRunning(false);
 
     _lastProcessSuccess = thread.success();
@@ -193,7 +193,7 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
             IPProcessEdge* edge = (IPProcessEdge*) *it;
             IPProcessStep* nextStep = edge->to();
 
-            nextStep->process()->requestUpdate(step->process()->requestedUpdateID());
+            nextStep->process()->requestUpdate();
 
             // add to queue and list
             tmpQueue.enqueue(nextStep);
@@ -223,7 +223,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _mainWindow->lockScene();
     _isRunning = true;
     _sequenceCount = 0;
-    _currentUpdateID = _updateID;
 
     qDebug() << "buildQueue";
 
@@ -376,13 +375,11 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     //if(_updateID > _currentUpdateID)
     //    _mainWindow->execute(false);
 
-    _updateID = _currentUpdateID;
-
     // only for testing the camera
     //if(graphNeedsUpdate)
     //    _mainWindow->execute(false);
 
-    //_updateNeeded = false;
+    _updateNeeded = false;
 }
 
 void IPProcessGrid::updateProgress(int progress)
@@ -530,5 +527,5 @@ void IPProcessGrid::setSequenceIndex(int index)
 
 void IPProcessGrid::requestUpdate()
 {
-    _updateID++;
+    _updateNeeded = true;
 }
