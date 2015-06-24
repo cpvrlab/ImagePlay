@@ -115,4 +115,6 @@ IPLData* IPLHoughCircles::getResultData(int index)
         return _result;
     else if(index == 1)
         return _overlay;
+    else
+        return _result;
 }

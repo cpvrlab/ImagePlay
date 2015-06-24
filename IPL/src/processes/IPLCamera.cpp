@@ -123,5 +123,5 @@ IPLImage *IPLCamera::getResultData(int)
 
 void IPLCamera::afterProcessing()
 {
-    requestUpdate();
+    notifyPropertyChangedEventHandler();
 }

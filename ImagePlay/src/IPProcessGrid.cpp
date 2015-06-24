@@ -130,7 +130,7 @@ void IPProcessGrid::buildQueue()
     _mainWindow->imageViewer()->sortTabs();
 }
 
-int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image = NULL, int inputIndex = 0, bool useOpenCV /*= false*/)
+int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/, int inputIndex /*= 0*/, bool useOpenCV /*= false*/)
 {
     QElapsedTimer timer;
     timer.start();
@@ -206,8 +206,6 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
  */
 void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 {
-    qDebug() << "execute";
-
     // if no processes yet, then exit
     if(_scene->steps()->size() < 1)
     {
@@ -233,6 +231,8 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     // execute the processes
     int counter = 0;
     int limit = 10000;
+
+    QList<IPProcessStep*> afterProcessingList;
 
     QListIterator<IPProcessStep *> it(_processList);
     while (it.hasNext() && counter < limit)
@@ -265,7 +265,10 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 step->process()->resetMessages();
                 step->process()->beforeProcessing();
                 int durationMs = executeThread(step->process());
-                step->process()->afterProcessing();
+                //step->process()->afterProcessing();
+
+                // afterProcessing will be called later
+                afterProcessingList.append(step);
 
                 totalDurationMs += durationMs;
                 step->setDuration(durationMs);
@@ -311,7 +314,11 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                     step->process()->resetMessages();
                     step->process()->beforeProcessing();
                     int durationMs = executeThread(step->process(), result, indexTo, mainWindow()->useOpenCV());
-                    step->process()->afterProcessing();
+                    //step->process()->afterProcessing();
+
+                    // afterProcessing will be called later
+                    afterProcessingList.append(step);
+
                     totalDurationMs += durationMs;
                     step->setDuration(durationMs);
 
@@ -345,7 +352,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _currentStep = NULL;
 
     // if sequence, then run execute next step
-    if(_sequenceCount > 0)
+    /*if(_sequenceCount > 0)
     {
         // notify GUI
         emit sequenceChanged(_sequenceIndex, _sequenceCount);
@@ -370,7 +377,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
             propertyChanged(process);
             requestUpdate();
         }
-    }
+    }*/
 
     //if(_updateID > _currentUpdateID)
     //    _mainWindow->execute(false);
@@ -380,6 +387,15 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     //    _mainWindow->execute(false);
 
     _updateNeeded = false;
+
+    // call afterProcessing of all steps which were executed this time
+    // processes like the camera might request another execution
+    QListIterator<IPProcessStep *> it2(_processList);
+    while (it2.hasNext())
+    {
+        IPProcessStep* step = it2.next();
+        step->process()->afterProcessing();
+    }
 }
 
 void IPProcessGrid::updateProgress(int progress)
@@ -514,7 +530,7 @@ void IPProcessGrid::keyReleaseEvent(QKeyEvent* event)
 
 void IPProcessGrid::propertyChanged(IPLProcess* process)
 {
-    process->requestUpdate();
+    //process->requestUpdate();
     propagateNeedsUpdate(process);
     _updateNeeded = true;
 }

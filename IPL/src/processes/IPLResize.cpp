@@ -58,7 +58,7 @@ bool IPLResize::processInputData(IPLImage* image , int, bool)
     double factor_x = getProcessPropertyDouble("factor_x");
     double factor_y = getProcessPropertyDouble("factor_y");
     int interpolation = getProcessPropertyInt("interpolation");
-    int keep_aspect_ratio = getProcessPropertyInt("keep_aspect_ratio");
+    int keep_aspect_ratio = getProcessPropertyInt("keepaspectratio");
 
     // calculate height/width based on aspect_ratio
     double aspectRatio = 1.0;

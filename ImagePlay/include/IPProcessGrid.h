@@ -56,7 +56,7 @@ public:
     void                    zoomTo                  (float scale);
     static bool             sortTreeDepthLessThan   (IPProcessStep* s1, IPProcessStep* s2);
     void                    buildQueue              ();
-    int                     executeThread           (IPLProcess* process, IPLImage *image, int inputIndex, bool useOpenCV = false);
+    int                     executeThread           (IPLProcess* process, IPLImage *image = NULL, int inputIndex = 0, bool useOpenCV = false);
     void                    propagateNeedsUpdate    (IPLProcess* process);
     void                    propertyChanged         (IPLProcess *);
     void                    setSequenceIndex        (int index);

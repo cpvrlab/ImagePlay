@@ -296,6 +296,7 @@ void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
 void IPLProcess::requestUpdate()
 {
     _resultReady = false;
+    //notifyPropertyChangedEventHandler();
 }
 
 void IPLProcess::resetMessages()
