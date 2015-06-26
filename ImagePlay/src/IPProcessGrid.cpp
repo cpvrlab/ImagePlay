@@ -222,8 +222,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _isRunning = true;
     _sequenceCount = 0;
 
-    qDebug() << "buildQueue";
-
     buildQueue();
 
     int totalDurationMs = 0;

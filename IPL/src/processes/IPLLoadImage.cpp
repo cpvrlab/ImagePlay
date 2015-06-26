@@ -90,5 +90,5 @@ IPLImage *IPLLoadImage::getResultData(int)
 
 void IPLLoadImage::afterProcessing()
 {
-    addInformation("afterProcessing IPLLoadImage");
+
 }

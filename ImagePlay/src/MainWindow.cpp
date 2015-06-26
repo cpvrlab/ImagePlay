@@ -349,7 +349,7 @@ void MainWindow::loadProcesses()
 
     // register all processes to the factory
     _factory->registerProcess("IPLConvertToGray",       new IPLConvertToGray);
-    _factory->registerProcess("IPLBinarize",       new IPLBinarize);
+    _factory->registerProcess("IPLBinarize",            new IPLBinarize);
     _factory->registerProcess("IPLLoadImage",           new IPLLoadImage);
     _factory->registerProcess("IPLCamera",              new IPLCamera);
     _factory->registerProcess("IPLLoadImageSequence",   new IPLLoadImageSequence);
@@ -416,6 +416,12 @@ void MainWindow::loadProcesses()
 
     _factory->registerProcess("IPLLabelBlobs",          new IPLLabelBlobs);
 
+    _factory->registerProcess("IPLFloodFill",           new IPLFloodFill);
+    _factory->registerProcess("IPLAccumulate",          new IPLAccumulate);
+    _factory->registerProcess("IPLHoughLines",          new IPLHoughLines);
+    _factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);
+    _factory->registerProcess("IPLGoodFeaturesToTrack", new IPLGoodFeaturesToTrack);
+
     _factory->registerProcess("IPProcessScript",        new IPProcessScript);
 }
 
@@ -463,7 +469,7 @@ void MainWindow::loadPlugins()
             QPluginLoader* loader = new QPluginLoader(tmpPluginsDir.absoluteFilePath(fileName));
             QObject *plugin = loader->instance();
 
-            qDebug() << "File: " << fileName;
+            qDebug() << "File: " << tmpPluginsDir.absoluteFilePath(fileName);
 
             if (plugin)
             {

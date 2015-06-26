@@ -121,6 +121,7 @@ bool PluginGenerator::generateFiles()
 {
     // create folder
     QDir dir(_basePath + _className);
+    qWarning() << "Creating directory: " << dir.absolutePath();
     if(dir.exists())
     {
         qWarning() << "Plugin folder with this name already exists.";

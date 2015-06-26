@@ -43,6 +43,7 @@ const char* const widgetNames[IPL_NUM_WIDGETS] = {
     "IPL_WIDGET_COLOR_HSL",
     "IPL_WIDGET_COLOR_HSV",
     "IPL_WIDGET_POINT",
+    "IPL_WIDGET_BUTTON",
     "IPL_WIDGET_GROUP"
 };
 
