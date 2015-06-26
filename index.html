@@ -126,7 +126,9 @@
                         <i class="icon-custom icon-md rounded-x icon-bg-u fa fa-bolt"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Extend</h2>
-                            <p>Build your own plugins for ImagePlay using the included C++ SDK.</p>
+                            <p>Build your own plugins for ImagePlay using the included C++ SDK.<br>
+							Read the <a href="https://github.com/cpvrlab/ImagePlay/wiki/Plugins:-01-Tutorial-(Windows)">tutorial</a> to learn more.
+							</p>
                         </div>
                     </div>
                 </div>
@@ -182,56 +184,57 @@
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Input/Output</h2>
 							<p>
-								IPLLoadImage<br />
-								IPLLoadImageSequence<br />
-								IPLSaveImage<br />
-								IPLCamera<br />
+								Load Image<br />
+								Load Image Sequence<br />
+								Save Image<br />
+								Camera<br />
+								Synthesize Image<br />
 							</p>
                         </div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_conversions"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Conversions</h2>
 							<p>
-								IPLConvertToGray<br />
-								IPLSplitPlanes<br />
-								IPLMergePlanes<br />
+								Convert To Gray<br />
+								Split Planes<br />
+								Merge Planes<br />
 							</p>
                         </div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_geometry"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Geometry</h2>
 							<p>
-								IPLCanvasSize<br />
-								IPLFlipImage<br />
-								IPLResize<br />
-								IPLRotate<br />
+								Canvas Size<br />
+								Flip Image<br />
+								Resize<br />
+								Rotate/Zoom Image<br />
 							</p>
                         </div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_arithmetic"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Arithmetic Operations</h2>
 							<p>
-								IPLArithmeticOperations<br />
-								IPLArithmeticOperationsConstant<br />
+								Arithmetic Operations <span style="font-size:0.8em">(ADD, SUB, MUL, DIV, MIN, MAX, AND, OR, XOR, NOT, ATAN2)</span><br/ >
+								Arithmetic Operations Constant <span style="font-size:0.8em">(ADD Constant, SUB Constant, MUL Constant, DIV Constant)</span><br/ >
 							</p>
                         </div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_pointoperations"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Point Operations</h2>
 							<p>
-								IPLBinarizeEntropy<br />
-								IPLBinarizeImage<br />
-								IPLBinarizeKMeans<br />
-								IPLBinarizeUnimodal<br />
-								IPLBlendImages<br />
-								IPLEqualizeHistogram<br />
-								IPLFalseColor<br />
-								IPLGammaCorrection<br />
-								IPLHysteresisThreshold<br />
-								IPLLocalThreshold<br />
-								IPLMarkImage<br />
-								IPLStretchContrast<br />
-								IPLTriangleSegmentation<br />
+								Binarize<br />
+								Binarize Entropy<br />
+								Binarize k-Means<br />
+								Binarize Unimodal<br />
+								Blend Images<br />
+								Equalize Histogram<br />
+								False Color<br />
+								Gamma Correction<br />
+								Hysteresis Threshold<br />
+								Local Threshold<br />
+								Mark Image<br />
+								Stretch Contrast<br />
+								Triangle Segmentation<br />
 							</p>
                         </div>
                     </div>
@@ -240,41 +243,41 @@
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Local Operations</h2>
 							<p>
-								IPAddNoise<br />
-								IPLAgglomerate<br />
-								IPLBinarizeOtsu<br />
-								IPLBinarizeSavola<br />
-								IPLCanny<br />
-								IPLCompassMask<br />
-								IPLConvolutionFilter<br />
-								IPLEnhanceMode<br />
-								IPLEquidensityLines<br />
-								IPLExtractLines<br />
-								IPLExtrema<br />
-								IPLFillConcavities<br />
-								IPLGabor<br />
-								IPLGaussianLowPass<br />
-								IPLInverseContrastRatioMapping<br />
-								IPLLablaceOfGaussian<br />
-								IPLMax<br />
-								IPLMaxMinMedian<br />
-								IPLMedian<br />
-								IPLMin<br />
-								IPLMorphologicalEdge<br />
-								IPLNegate<br />
-								IPLNormalizeIllumination<br />
-								IPLOnePixelEdge<br />
-								IPLRankTransform<br />
-								IPLUnsharpMasking<br />
+								2D Convolution Filter<br />
+								Add Noise<br />
+								Agglomerate<br />
+								Binarize Otsu<br />
+								Binarize Savola<br />
+								Canny Edge Detector<br />
+								Compass Mask<br />
+								Enhance Mode<br />
+								Equidensity Lines<br />
+								Extract Lines<br />
+								Extrema<br />
+								Fill Concavities<br />
+								Gabor<br />
+								Gaussian Low Pass<br />
+								Inverse Contrast Ratio Mapping<br />
+								Lablace Of Gaussian<br />
+								Max<br />
+								Max Min Median<br />
+								Median<br />
+								Min<br />
+								Morphological Edge<br />
+								Negate<br />
+								Normalize Illumination<br />
+								One Pixel Edge<br />
+								Rank Transform<br />
+								Unsharp Masking<br />
 							</p>
 						</div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_morphology"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Morphology</h2>
 							<p>
-								IPLMorphologyBinary<br />
-								IPLMorphologyGrayscale<br />
-								IPLMorphologyHitMiss<br />
+								Binary Morphology<br />
+								Grayscale Morphology<br />
+								Hit Miss Morphology<br />
 							</p>
 						</div>
                     </div>
@@ -297,22 +300,26 @@
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Gradients</h2>
 							<p>
-								IPLGradientOperator<br />
+								Gradient Operator<br />
 							</p>
 						</div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_fourier"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Fourier</h2>
 							<p>
-								<br />
+								FFT<br />
+								Frequency Filter<br />
+								Inverse FFT<br />
 							</p>
 						</div>
                         <i class="icon-custom rounded-x icon-bg-dark process_icon process_objects"></i>
                         <div class="content-boxes-in-v3">
                             <h2 class="heading-sm">Objects</h2>
 							<p>
-								IPLLabelBlobs<br />
-								IPLRandomPoint<br />
+								Circle Hough Transform<br />
+								Line Hough Transform<br />
+								Harris Corner Detector<br />
+								Label Blobs<br />
 							</p>
 						</div>
                     </div>
@@ -326,9 +333,9 @@
             <div class="title-v1">
                 <h2>Download &amp; Build</h2>
 				<div  class="margin-bottom-40">
-					<p>Download ImagePlay 6.0.0-beta.2:</p>
-					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta.2/ImagePlay.6.0.0-beta.2.zip" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Windows</a></p>
-					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta.2/ImagePlay.6.0.0-beta.2.dmg" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Mac OS X</a></p>
+					<p>Download ImagePlay 6.0.0-beta.3:</p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta.3/ImagePlay.6.0.0-beta.3.zip" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Windows</a></p>
+					<p><a href="https://github.com/cpvrlab/ImagePlay/releases/download/6.0.0-beta.3/ImagePlay.6.0.0-beta.3.dmg" class="btn btn-u-lg rounded btn-success" style="font-size:24px;width:230px;" type="button">Mac OS X</a></p>
 					<p><a href="https://github.com/cpvrlab/ImagePlay/blob/master/changelog.md">Changelog</a></p>
 				</div>
 				<div>

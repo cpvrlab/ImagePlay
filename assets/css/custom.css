@@ -11,5 +11,5 @@
 /*.process_histogram 			{background-image: url(../img/process_icons/.png) !important;}
 .process_edges 				{background-image: url(../img/process_icons/.png) !important;}*/
 .process_gradients 			{background-image: url(../img/process_icons/IPLGradientOperator.png) !important;}
-/*.process_fourier 			{background-image: url(../img/process_icons/.png) !important;}
-.process_objects 			{background-image: url(../img/process_icons/.png) !important;}*/
+.process_fourier 			{background-image: url(../img/process_icons/IPLFFT.png) !important;}
+.process_objects 			{background-image: url(../img/process_icons/IPLLabelBlobs.png) !important;}
