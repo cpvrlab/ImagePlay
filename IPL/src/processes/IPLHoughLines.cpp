@@ -27,23 +27,22 @@ void IPLHoughLines::init()
 
     // basic settings
     setClassName("IPLHoughLines");
-    setTitle("Circle Hough Transform");
+    setTitle("Hough Lines");
     setCategory(IPLProcess::CATEGORY_OBJECTS);
     setOpenCVSupport(IPLOpenCVSupport::OPENCV_ONLY);
-    setDescription("The circle Hough Transform (CHT) is a feature extraction technique for detecting circles.");
+    setDescription("Finds lines in a binary image using the standard Hough transform.");
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
     addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Circle Overlay", IPLImage::IMAGE_COLOR);
-    addOutput("Circle Positions", IPLImage::POINT);
+    addOutput("Line Overlay", IPLImage::IMAGE_COLOR);
 
     // properties
-    addProcessPropertyInt("thresholdCanny", "Threshold 1", "Upper threshold for the internal Canny edge detector", 200, IPL_WIDGET_SLIDER, 1, 200);
-    addProcessPropertyInt("thresholdCenter", "Threshold 2", "Threshold for center detection", 100, IPL_WIDGET_SLIDER, 1, 200);
-    addProcessPropertyInt("minRadius", "Min. Radius", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("maxRadius", "Max. Radius", "", 5, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("minDist", "Min. Distance", "", 100, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyDouble("rho", "Rho", "Distance resolution of the accumulator in pixels", 1, IPL_WIDGET_SLIDER, 0, 10);
+    addProcessPropertyDouble("theta", "Min. Radius", "Angle resolution of the accumulator in radians.", 0.01, IPL_WIDGET_SLIDER, 0, 5.14);
+    addProcessPropertyInt("threshold", "Threshold", "Accumulator threshold parameter.", 0, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyInt("minLenght", "Min. Length", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyInt("maxLineGap", "Max. Line Gap", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
 }
 
 void IPLHoughLines::destroy()
@@ -59,11 +58,11 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
     _overlay = NULL;
 
     // get properties
-    int thresholdCanny       = getProcessPropertyInt("thresholdCanny");
-    int thresholdCenter      = getProcessPropertyInt("thresholdCenter");
-    int minRadius            = getProcessPropertyInt("minRadius");
-    int maxRadius            = getProcessPropertyInt("maxRadius");
-    int minDist              = getProcessPropertyInt("minDist");
+    double rho              = getProcessPropertyDouble("rho");
+    double theta            = getProcessPropertyDouble("theta");
+    int threshold           = getProcessPropertyInt("threshold");
+    int minLength           = getProcessPropertyInt("minLenght");
+    int maxLineGap          = getProcessPropertyInt("maxLineGap");
 
     notifyProgressEventHandler(-1);
     cv::Mat input;
@@ -72,28 +71,21 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
     result = cv::Scalar(0);
     cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
 
-    std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);
-
-    // WARNING: cv::HoughCircles does not work in debug mode!!!
-    //          destroys the std::vector<cv::Vec3f> circles;
+    std::vector<cv::Vec4i> lines;
+    cv::HoughLinesP(input, lines, rho, theta, threshold, minLength, maxLineGap);
 
     std::stringstream s;
-    s << "Circles found: ";
-    s << circles.size();
+    s << "Lines found: ";
+    s << lines.size();
     addInformation(s.str());
 
-    for(int i = 0; i < circles.size(); i++ )
+    for(int i = 0; i < lines.size(); i++ )
     {
-       cv::Point center(round(circles[i][0]), round(circles[i][1]));
-       int radius = cvRound(circles[i][2]);
-       // circle center
-       cv::circle(overlay, center, 3, cv::Scalar(0,255,0), -1, 8, 0);
-       // circle outline
-       cv::circle(overlay, center, radius, cv::Scalar(0,0,255), 3, 1, 0);
+       cv::Vec4i l = lines[i];
+       cv::line(overlay, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0,0,255), 3, CV_AA);
 
        // raw result
-       cv::circle(result, center, radius, cv::Scalar(255), -1);
+       cv::line(result, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(255), 1, CV_AA);
      }
 
     _overlay = new IPLImage(overlay);
@@ -106,15 +98,12 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
  * \brief IPLHoughLines::getResultData
  *        index == 0: "Hough Result", IPLImage::IMAGE_GRAYSCALE
  *        index == 1: "Circle Overlay", IPLImage::IMAGE_COLOR
- *        index == 2: "Circle Positions", IPLImage::IMAGE_POINT
  * \return
  */
 IPLData* IPLHoughLines::getResultData(int index)
 {
     if(index == 0)
         return _result;
-    else if(index == 1)
-        return _overlay;
     else
-        return _result;
+        return _overlay;
 }

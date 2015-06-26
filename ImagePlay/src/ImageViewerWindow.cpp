@@ -82,6 +82,8 @@ ImageViewerWindow::ImageViewerWindow(MainWindow *mainWindow) :
     // remove titlebar
     ui->dockWidget->setTitleBarWidget(new QWidget(this));
 
+    ui->comboBoxHistogram->setVisible(false);
+
     QWidget* spacer = new QWidget(this);
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     ui->toolBar->insertWidget(ui->actionHideSidebar, spacer);
