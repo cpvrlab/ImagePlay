@@ -73,6 +73,7 @@ void IPProcessGrid::buildQueue()
 
         // attach property changed event handler
         process->registerPropertyChangedEventHandler(this);
+        process->registerOutputsChangedEventHandler(this);
 
         if(process->isSource())
         {
@@ -531,6 +532,11 @@ void IPProcessGrid::propertyChanged(IPLProcess* process)
     //process->requestUpdate();
     propagateNeedsUpdate(process);
     _updateNeeded = true;
+}
+
+void IPProcessGrid::outputsChanged(IPLProcess *)
+{
+    _mainWindow->imageViewer()->updateOutputs();
 }
 
 void IPProcessGrid::setSequenceIndex(int index)

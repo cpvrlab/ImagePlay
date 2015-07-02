@@ -469,17 +469,10 @@ void ImageViewerWindow::on_actionShowGrid_triggered(bool checked)
 /*!
 ImageViewerWindow::tabChanged
 */
-void ImageViewerWindow::tabChanged(int tabIndex)
+void ImageViewerWindow::updateOutputs()
 {
-    IPImageViewer* item = (IPImageViewer*) ui->tabWidget->widget(tabIndex);
+    IPImageViewer* item = (IPImageViewer*) ui->tabWidget->currentWidget();
 
-    // hightlight grid item
-    if(item && item->processStep() && _mainWindow->synchronizeViews())
-    {
-        _mainWindow->setActiveProcessStep(item->processStep());
-    }
-
-    // update result selector
     if(item && item->processStep())
     {
         ui->comboBoxResults->clear();
@@ -496,6 +489,20 @@ void ImageViewerWindow::tabChanged(int tabIndex)
         int index = item->resultIndex();
         ui->comboBoxResults->setCurrentIndex(index);
     }
+}
+
+void ImageViewerWindow::tabChanged(int tabIndex)
+{
+    IPImageViewer* item = (IPImageViewer*) ui->tabWidget->widget(tabIndex);
+
+    // hightlight grid item
+    if(item && item->processStep() && _mainWindow->synchronizeViews())
+    {
+        _mainWindow->setActiveProcessStep(item->processStep());
+    }
+
+    // update result selector
+    updateOutputs();
 
     updateImage();
 }

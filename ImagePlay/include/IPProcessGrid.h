@@ -45,7 +45,7 @@ class MainWindow;
  * All items are stored in IPProcessGridScene.
  * The graph traversation and process exectution is also handled here.
  */
-class IPProcessGrid : public QGraphicsView, public IPLPropertyChangedEventHandler
+class IPProcessGrid : public QGraphicsView, public IPLPropertyChangedEventHandler, public IPLOutputsChangedEventHandler
 {
     Q_OBJECT
 public:
@@ -59,6 +59,7 @@ public:
     int                     executeThread           (IPLProcess* process, IPLImage *image = NULL, int inputIndex = 0, bool useOpenCV = false);
     void                    propagateNeedsUpdate    (IPLProcess* process);
     void                    propertyChanged         (IPLProcess *);
+    void                    outputsChanged          (IPLProcess *);
     void                    setSequenceIndex        (int index);
     void                    setSequenceRunning      (bool status)                           { _isSequenceRunning = status; }
     void                    setMainWindow           (MainWindow* mainWindow)                { _mainWindow = mainWindow; }

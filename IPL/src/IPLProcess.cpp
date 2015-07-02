@@ -27,6 +27,7 @@ IPLProcess::IPLProcess(void)
     _openCVSupport      = IPLProcess::OPENCV_NONE;
     _progressHandler    = NULL;
     _propertyHandler    = NULL;
+    _outputsHandler     = NULL;
     _category           = IPLProcess::CATEGORY_UNDEFINED;
 
     //_properties["title"].reset(new IPLProcessPropertyString(this, -1, "Title", "", _title, IPL_WIDGET_TITLE));
@@ -38,6 +39,7 @@ IPLProcess::IPLProcess(const IPLProcess &other)
     _className          = other._className;
     _progressHandler    = other._progressHandler;
     _propertyHandler    = other._propertyHandler;
+    _outputsHandler     = other._outputsHandler;
     _isSource           = other._isSource;
     _isSequence         = other._isSequence;
     _resultReady        = other._resultReady;
@@ -59,6 +61,7 @@ IPLProcess::IPLProcess(IPLProcess &&other):
     _className(std::move(other._className)),
     _progressHandler(std::move(other._progressHandler)),
     _propertyHandler(std::move(other._propertyHandler)),
+    _outputsHandler(std::move(other._outputsHandler)),
     _isSource(std::move(other._isSource)),
     _isSequence(std::move(other._isSequence)),
     _resultReady(std::move(other._resultReady)),
@@ -219,6 +222,8 @@ IPLPoint IPLProcess::getProcessPropertyPoint(const char *name)
 void IPLProcess::setOutputName(int index, std::string name)
 {
     _outputs.at(index).name = name;
+
+    notifyOutputsChangedEventHandler();
 }
 
 std::string IPLProcess::toJson()
@@ -270,6 +275,19 @@ void IPLProcess::notifyPropertyChangedEventHandler()
     if(_propertyHandler != NULL)
     {
         _propertyHandler->propertyChanged(this);
+    }
+}
+
+void IPLProcess::registerOutputsChangedEventHandler(IPLOutputsChangedEventHandler *handler)
+{
+    _outputsHandler = handler;
+}
+
+void IPLProcess::notifyOutputsChangedEventHandler()
+{
+    if(_outputsHandler != NULL)
+    {
+        _outputsHandler->outputsChanged(this);
     }
 }
 

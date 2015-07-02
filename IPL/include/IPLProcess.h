@@ -26,6 +26,7 @@
 #include "IPLProcessProperty.h"
 #include "IPLProgressEventHandler.h"
 #include "IPLPropertyChangedEventHandler.h"
+#include "IPLOutputsChangedEventHandler.h"
 
 #include <string>
 #include <map>
@@ -138,6 +139,8 @@ public:
     void                    notifyProgressEventHandler(int percent);
     void                    registerPropertyChangedEventHandler(IPLPropertyChangedEventHandler* handler);
     void                    notifyPropertyChangedEventHandler();
+    void                    registerOutputsChangedEventHandler(IPLOutputsChangedEventHandler* handler);
+    void                    notifyOutputsChangedEventHandler();
 
     IPLProcessPropertyMap*  properties();
     IPLProcessProperty*     property(std::string key);
@@ -216,6 +219,7 @@ private:
     bool                            _resultReady;
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
+    IPLOutputsChangedEventHandler*  _outputsHandler;
     //std::mutex                    _propertyMutex;
     std::mutex                      _messageMutex;
     std::string                     _className;

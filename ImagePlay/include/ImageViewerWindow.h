@@ -105,6 +105,7 @@ public:
 
     void setIgnoreMouseEvents(bool state)           { _ignoreMouseEvents = state; }
 
+    void updateOutputs();
 public slots:
     void on_actionNextImage_triggered();
     void on_actionPrevImage_triggered();
