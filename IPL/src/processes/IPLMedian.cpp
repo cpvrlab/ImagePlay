@@ -27,7 +27,7 @@ void IPLMedian::init()
     // basic settings
     setClassName("IPLMedian");
     setTitle("Median Operator");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
     setOpenCVSupport(IPLProcess::OPENCV_OPTIONAL);
 
     // inputs and outputs

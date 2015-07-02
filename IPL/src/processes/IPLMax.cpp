@@ -27,7 +27,7 @@ void IPLMax::init()
     // basic settings
     setClassName("IPLMax");
     setTitle("Max Operator");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

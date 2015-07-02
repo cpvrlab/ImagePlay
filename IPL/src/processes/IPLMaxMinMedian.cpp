@@ -27,7 +27,7 @@ void IPLMaxMinMedian::init()
     // basic settings
     setClassName("IPLMaxMinMedian");
     setTitle("MaxMin Median Operator");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

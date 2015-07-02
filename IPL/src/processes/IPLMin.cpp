@@ -27,7 +27,7 @@ void IPLMin::init()
     // basic settings
     setClassName("IPLMin");
     setTitle("Min Operator");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

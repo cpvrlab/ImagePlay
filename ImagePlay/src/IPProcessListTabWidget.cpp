@@ -50,7 +50,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
     processCategories.append("Arithmetic Operations");  // CATEGORY_ARITHMETIC
     processCategories.append("Point Operations");       // CATEGORY_POINTOPERATIONS
     processCategories.append("Local Operations");       // CATEGORY_LOCALOPERATIONS
-    processCategories.append("Morphology");             // CATEGORY_MORPHOLOGY
+    processCategories.append("Morphology & Rank Order");// CATEGORY_MORPHOLOGY
     processCategories.append("Histogram");              // CATEGORY_HISTOGRAM
     processCategories.append("Edges");                  // CATEGORY_GRADIENTS
     processCategories.append("Gradients");              // CATEGORY_GRADIENTS

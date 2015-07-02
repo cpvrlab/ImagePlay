@@ -27,7 +27,7 @@ void IPLExtrema::init()
     // basic settings
     setClassName("IPLExtrema");
     setTitle("Extrema");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);

@@ -27,7 +27,7 @@ void IPLRankTransform::init()
     // basic settings
     setClassName("IPLRankTransform");
     setTitle("Rank Transform Operator");
-    setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
+    setCategory(IPLProcess::CATEGORY_MORPHOLOGY);
 
     // inputs and outputs
     addInput("Image", IPLData::IMAGE_COLOR);
