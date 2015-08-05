@@ -24,6 +24,31 @@
 #include "IPLPoint.h"
 #include "IPLMatrix.h"
 
+
+bool IPLData::isConvertibleTo(IPLDataType dataType)
+{
+    switch (dataType)
+    {
+    case IPLData::IMAGE_BW:
+    case IPLData::IMAGE_GRAYSCALE:
+    case IPLData::IMAGE_COLOR:
+        return toImage() != NULL;
+    case IPLData::IMAGE_COMPLEX:
+        return toComplexImage() != NULL;
+    case IPLData::POINT:
+        return toPoint() != NULL;
+    case IPLData::MATRIX:
+        return toMatrix() != NULL;
+    case IPLData::IMAGE_ORIENTED:
+    case IPLData::SHAPES:
+    case IPLData::UNDEFINED:
+    default:
+        throw std::logic_error("Unknown method for data type");
+        break;
+    }
+    return false;
+}
+
 IPLImage* IPLData::toImage()
 {
     return dynamic_cast<IPLImage*>(this);

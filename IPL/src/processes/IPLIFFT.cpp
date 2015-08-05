@@ -19,6 +19,7 @@
 
 #include "IPLIFFT.h"
 
+
 void IPLIFFT::init()
 {
     // init
@@ -46,7 +47,12 @@ void IPLIFFT::destroy()
 
 bool IPLIFFT::processInputData(IPLImage* data , int, bool)
 {
-    _complexImage = new IPLComplexImage(*data->toComplexImage());
+    IPLComplexImage* complexImageData = data->toComplexImage();
+    if (NULL == complexImageData) {
+        // TODO write an error message
+        return false;
+    }
+    _complexImage = new IPLComplexImage(*complexImageData);
 
     // delete previous result
     delete _result;
