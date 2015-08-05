@@ -39,7 +39,7 @@ void IPLScharr::init()
 
     // properties
     addProcessPropertyInt("threshold", "Threshold", "", 1, IPL_WIDGET_SLIDER, 1, 255);
-    addProcessPropertyDouble("highThreshold", "Hight Threshold", "Thresholds for the hysteresis procedure", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highThreshold", "High Threshold", "Thresholds for the hysteresis procedure", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLScharr::destroy()
