@@ -124,6 +124,10 @@ bool IPProcessGridScene::addEdge(IPProcessEdge* edge)
     if(output.type > input.type)
         return false;
 
+    IPLData* outputData = edge->from()->process()->getResultData(indexOut);
+    if (!outputData->isConvertibleTo(input.type))
+        return false;
+
     _edges.append(edge);
     addItem(edge);
 
