@@ -39,6 +39,7 @@ public:
     virtual             ~IPLData()                              {}
     IPLDataType         type            (void)                  { return _type; }
 
+    bool                isConvertibleTo(IPLDataType);
     IPLImage*           toImage();
     IPLComplexImage*    toComplexImage();
     IPLPoint*           toPoint();

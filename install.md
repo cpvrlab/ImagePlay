@@ -1,5 +1,10 @@
 # Build instructions
 
+[Windows](#windows)
+
+[OSX](#osx)
+
+[Linux](#linux)
 
 ## Windows
 ### Prerequisites
