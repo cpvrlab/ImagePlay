@@ -120,16 +120,12 @@ void PluginGenerator::on_btnCancel_clicked()
 bool PluginGenerator::generateFiles()
 {
     // create folder
-    QDir dir(_basePath + _className);
-    qWarning() << "Creating directory: " << dir.absolutePath();
-    if(dir.exists())
+    QDir dir(_basePath);
+    qWarning() << "Creating directory: " << dir.absoluteFilePath(_className);
+    if(!dir.mkdir(_className))
     {
-        qWarning() << "Plugin folder with this name already exists.";
+        qWarning() << "Couldn't create plugin folder.";
         return false;
-    }
-    else
-    {
-        dir.mkdir(".");
     }
 
     // copy files and replace placeholders
