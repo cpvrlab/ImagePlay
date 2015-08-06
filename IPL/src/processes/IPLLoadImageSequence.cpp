@@ -56,9 +56,9 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
 
     notifyProgressEventHandler(-1);
 
-    // list the files
-    std::vector<std::string> fileList;
+    _fileList.clear();
 
+    // list the files
     DIR *d;
     struct dirent *dir;
     int i=0;
@@ -70,28 +70,26 @@ bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
             i++;
             std::string name(dir->d_name);
             if(name != "." && name != "..")
-                fileList.push_back(name);
+                _fileList.push_back(name);
         }
 
         closedir(d);
     }
 
-    _sequenceCount = (int)fileList.size();
+    _sequenceCount = (int)_fileList.size();
 
     if(_sequenceCount < 1)
-    {
         return false;
-    }
 
     // play from 0 to max
-    if(_sequenceIndex >= _sequenceCount || _sequenceIndex < 0)
-    {
+    if(_sequenceIndex >= _sequenceCount)
         _sequenceIndex = 0;
-    }
+    if(_sequenceIndex < 0)
+        _sequenceIndex = _sequenceCount-1;
 
     // load current file
     std::stringstream ss;
-    ss << _folder << "/" << fileList[_sequenceIndex];
+    ss << _folder << "/" << _fileList[_sequenceIndex];
     std::string fileName = ss.str();
 
     std::string information;
@@ -117,6 +115,6 @@ void IPLLoadImageSequence::afterProcessing()
     if(_result)
     {
         _sequenceIndex++;
-        requestUpdate();
+        notifyPropertyChangedEventHandler();
     }
 }

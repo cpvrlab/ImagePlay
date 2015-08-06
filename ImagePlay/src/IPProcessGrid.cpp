@@ -249,14 +249,14 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         if(step->process()->isSource())
         {
             // check if is sequence
-            IPLLoadImageSequence* sequenceProcess = dynamic_cast<IPLLoadImageSequence*>(step->process());
+            //IPLLoadImageSequence* sequenceProcess = dynamic_cast<IPLLoadImageSequence*>(step->process());
 
             // update if index has changed
-            if(sequenceProcess && (_sequenceIndex != _lastSequenceIndex))
+            /*if(sequenceProcess && (_sequenceIndex != _lastSequenceIndex))
             {
                 sequenceProcess->setSequenceIndex(_sequenceIndex);
                 propagateNeedsUpdate(sequenceProcess);
-            }
+            }*/
 
             // execute thread
             if(!step->process()->isResultReady() || forcedUpdate)
@@ -279,12 +279,12 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 _mainWindow->updateProcessMessages();
             }
 
-            if(sequenceProcess)
+            /*if(sequenceProcess)
             {
                 int currentSequenceCount = sequenceProcess->sequenceCount();
                 _sequenceCount = std::max(_sequenceCount, currentSequenceCount);
                 emit sequenceChanged(_sequenceIndex, _sequenceCount);
-            }
+            }*/
         }
         else
         {

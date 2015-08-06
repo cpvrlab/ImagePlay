@@ -72,6 +72,9 @@ bool IPLAddNoise::processInputData(IPLImage* image , int, bool)
     generator.seed(time(0));
     std::normal_distribution<double> distribution(1.0, stdDev);
 
+    time_t t;
+    srand((unsigned) time(&t));
+
     #pragma omp parallel for
     for( int planeNr=0; planeNr < nrOfPlanes; planeNr++ )
     {

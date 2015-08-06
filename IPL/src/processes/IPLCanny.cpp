@@ -45,7 +45,7 @@ void IPLCanny::init()
     addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 7);
     addProcessPropertyDouble("sigma", "Sigma", "", 1.5, IPL_WIDGET_SLIDER, 0.5, 10);
     addProcessPropertyDouble("lowThreshold", "Low Threshold", "", 0.3, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyDouble("highThreshold", "Hight Threshold", "Thresholds for the hysteresis procedure", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
+    addProcessPropertyDouble("highThreshold", "High Threshold", "Thresholds for the hysteresis procedure", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
 }
 
 void IPLCanny::destroy()
