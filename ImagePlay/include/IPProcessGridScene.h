@@ -24,6 +24,8 @@
 #include <QMimeData>
 #include <QGraphicsSceneDragDropEvent>
 #include <QListWidgetItem>
+#include <QMimeDatabase>
+#include <QMimeType>
 
 #include <QDebug>
 
@@ -67,6 +69,9 @@ protected:
     void                    dragEnterEvent          (QGraphicsSceneDragDropEvent *event);
     void                    dragMoveEvent           (QGraphicsSceneDragDropEvent *event);
     void                    dropEvent               (QGraphicsSceneDragDropEvent *event);
+    bool                    isSupportedMimeType     (const QMimeData* mimeData);
+    IPProcessStep*          createProcessStep       (QString processID, QPointF scenePos);
+
 private:
     QList<IPProcessStep*>   _steps;                 //!< List of steps
     QList<IPProcessEdge*>   _edges;                 //!< List of connections

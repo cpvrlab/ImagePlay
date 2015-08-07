@@ -21,10 +21,6 @@
 
 #include "FreeImage.h"
 
-IPLFileIO::IPLFileIO()
-{
-}
-
 /*!
  * \brief IPLFileIO::loadFile
  * \param filename
@@ -291,4 +287,11 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
     FreeImage_Unload(dib);
 
     return success;
+}
+
+std::vector<std::string> IPLFileIO::supportedMimeTypes()
+{
+    std::string supportedMimeTypes[37] =  {"image/bmp", "image/x-windows-bmp", "image/x-icon", "image/jpeg",
+                                           "image/x-portable-bitmap"};
+    return std::vector<std::string> (supportedMimeTypes, supportedMimeTypes + sizeof(supportedMimeTypes) / sizeof(supportedMimeTypes[0]) );
 }

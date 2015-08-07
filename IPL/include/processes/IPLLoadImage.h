@@ -39,6 +39,7 @@ public:
     virtual bool        processInputData    (IPLImage* data, int index, bool useOpenCV);
     virtual IPLImage*   getResultData       (int outNr);
     virtual void        afterProcessing();
+    void                setPath(std::string path);
 protected:
     IPLImage*           _result;
     std::string         _path;

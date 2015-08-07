@@ -92,3 +92,11 @@ void IPLLoadImage::afterProcessing()
 {
 
 }
+
+void IPLLoadImage::setPath(std::string path)
+{
+    IPLProcessPropertyString* pathProperty = dynamic_cast<IPLProcessPropertyString*>(this->property("path"));
+
+    if(pathProperty)
+        pathProperty->setValue(path);
+}

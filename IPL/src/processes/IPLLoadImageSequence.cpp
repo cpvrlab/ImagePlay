@@ -118,3 +118,11 @@ void IPLLoadImageSequence::afterProcessing()
         notifyPropertyChangedEventHandler();
     }
 }
+
+void IPLLoadImageSequence::setFolder(std::string path)
+{
+    IPLProcessPropertyString* pathProperty = dynamic_cast<IPLProcessPropertyString*>(this->property("folder"));
+
+    if(pathProperty)
+        pathProperty->setValue(path);
+}

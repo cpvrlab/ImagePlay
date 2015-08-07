@@ -46,17 +46,18 @@ public:
 
     void init();
     void destroy();
-    virtual bool processInputData( IPLImage* data, int inNr, bool useOpenCV );
-    virtual IPLImage* getResultData( int outNr );
-    int sequenceCount()                         { return _sequenceCount; }
-    int sequenceIndex()                         { return _sequenceIndex; }
-    void afterProcessing();
+    virtual bool        processInputData            (IPLImage* data, int inNr, bool useOpenCV);
+    virtual IPLImage*   getResultData               (int outNr);
+    int                 sequenceCount               ()                         { return _sequenceCount; }
+    int                 sequenceIndex               ()                         { return _sequenceIndex; }
+    void                afterProcessing             ();
+    void                setFolder                   (std::string path);
 protected:
-    IPLImage*   _result;
-    std::string _folder;
+    IPLImage*           _result;
+    std::string         _folder;
     std::vector<std::string> _fileList;
-    int _sequenceCount;
-    int _sequenceIndex;
+    int                 _sequenceCount;
+    int                 _sequenceIndex;
 };
 
 #endif // IPLLOADIMAGESEQUENCE_H

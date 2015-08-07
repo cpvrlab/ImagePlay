@@ -155,8 +155,8 @@ void IPProcessGridScene::removeEdge(IPProcessEdge* edge)
 
 void IPProcessGridScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-    // only accept process steps
-    if(event->mimeData()->hasFormat("application/x-imageplay"))
+    // only accept process steps or files from the OS
+    if(event->mimeData()->hasFormat("application/x-imageplay") || event->mimeData()->hasUrls())
         event->setAccepted(true);
     else
         event->setAccepted(false);
@@ -168,9 +168,89 @@ void IPProcessGridScene::dragMoveEvent(QGraphicsSceneDragDropEvent*)
 
 void IPProcessGridScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+    const QMimeData* mimeData = event->mimeData();
     QString processID = event->mimeData()->data("application/x-imageplay");
+
+    // check for our needed mime type, here a file or a list of files
+    if (mimeData->hasUrls())
+    {
+        QList<QUrl> urlList = mimeData->urls();
+        QMimeDatabase db;
+
+        // extract the local paths of the files
+        QPointF offset;
+        for (int i = 0; i < urlList.size() && i < 32; i++)
+        {
+            QString filePath = urlList.at(i).toLocalFile();
+
+            QMimeType type = db.mimeTypeForFile(filePath);
+
+            // automatically add IPLLoadImage for image types
+            if(type.name().startsWith("image/"))
+            {
+                IPProcessStep* newStep = createProcessStep("IPLLoadImage", event->scenePos() + offset);
+                IPLLoadImage* stepLoadImage = dynamic_cast<IPLLoadImage*>(newStep->process());
+
+                if(stepLoadImage)
+                {
+                    stepLoadImage->setPath(filePath.toStdString());
+                }
+            }
+
+            qDebug() << type.name();
+
+            // automatically add IPLLoadImageSequence for folders
+            if(type.name() == "inode/directory")
+            {
+                IPProcessStep* newStep = createProcessStep("IPLLoadImageSequence", event->scenePos() + offset);
+                IPLLoadImageSequence* stepLoadImageSequence = dynamic_cast<IPLLoadImageSequence*>(newStep->process());
+
+                if(stepLoadImageSequence)
+                {
+                    stepLoadImageSequence->setFolder(filePath.toStdString());
+                }
+            }
+
+            offset += QPointF(0, 50);
+        }
+
+        // call a function to open the files
+        //openFiles(pathList);
+    }
+
+    createProcessStep(processID, event->scenePos());
+}
+
+bool IPProcessGridScene::isSupportedMimeType(const QMimeData* mimeData)
+{
+    // check for image/* mime types
+    foreach(QString type, mimeData->formats())
+    {
+        qDebug() << type;
+        if(type.startsWith("image/"))
+            return true;
+    }
+    /*std::vector<std::string> supportedMimeTypes = IPLFileIO::supportedMimeTypes();
+
+    // check for supported image file types
+    foreach(std::string type, supportedMimeTypes)
+    {
+        if(mimeData->hasFormat(QString::fromStdString(type)))
+            return true;
+    }*/
+
+    // check for imageplay process
+
+    if(mimeData->hasFormat("application/x-imageplay"))
+        return true;
+
+    return false;
+}
+
+IPProcessStep* IPProcessGridScene::createProcessStep(QString processID, QPointF scenePos)
+{
     if(processID.length() == 0)
-        return;
+        return NULL;
 
     MainWindow* mainWindow = ((IPProcessGrid*) parent())->mainWindow();
 
@@ -178,9 +258,11 @@ void IPProcessGridScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     IPProcessStep* newProcessStep = new IPProcessStep(mainWindow, processID); //(this);
 
     // calculate relative position
-    QPointF pos = event->scenePos() - QPointF(newProcessStep->boundingRect().width()/2, newProcessStep->boundingRect().height()/2);
+    QPointF pos = scenePos - QPointF(newProcessStep->boundingRect().width()/2, newProcessStep->boundingRect().height()/2);
     newProcessStep->setPos(pos);
     newProcessStep->snapToGrid();
 
     mainWindow->addStep(newProcessStep);
+
+    return newProcessStep;
 }
