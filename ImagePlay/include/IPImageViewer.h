@@ -54,7 +54,7 @@ public:
 
 #ifdef Q_OS_MAC
     // catch OS X pinch to zoom events
-    bool event(QEvent *event) {
+    /*bool event(QEvent *event) {
         if (event->type() == QEvent::NativeGesture) {
             QNativeGestureEvent *nge = static_cast<QNativeGestureEvent *>(event);
 
@@ -73,7 +73,7 @@ public:
             return true;
         }
         return QWidget::event(event);
-    }
+    }*/
 #endif
 
 //    void wheelEvent(QWheelEvent* event)     { event->ignore(); }
