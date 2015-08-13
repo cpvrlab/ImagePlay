@@ -1,11 +1,23 @@
 # Change Log
 
 ## 6.0.0-beta.4 - 2015-08-14
+### Added
+- You can now drag & drop files or folders from your desktop directly to ImagePlay.
+
 ### Fixed
 - Allow empty convolution kernel.
 - Crash while zooming empty viewer.
 - Mac OS X, gesture on viewer crash.
 - Typos ...
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- Histogram and Zoom might not update correctly.
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
 
 ## 6.0.0-beta.3 - 2015-06-26
 ### Added

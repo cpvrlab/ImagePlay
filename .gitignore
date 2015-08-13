@@ -12,6 +12,7 @@
 *.suo
 *.sdf
 *.opensdf
+*.pch
 
 # Qt-es
 *.pro.user
