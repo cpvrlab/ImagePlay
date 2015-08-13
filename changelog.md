@@ -1,5 +1,12 @@
 # Change Log
 
+## 6.0.0-beta.4 - 2015-08-14
+### Fixed
+- Allow empty convolution kernel.
+- Crash while zooming empty viewer.
+- Mac OS X, gesture on viewer crash.
+- Typos ...
+
 ## 6.0.0-beta.3 - 2015-06-26
 ### Added
 - New button to go back from process propeties [ < ]
