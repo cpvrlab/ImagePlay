@@ -82,12 +82,6 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
     _normalize  = getProcessPropertyBool("normalize");
     _borders    = getProcessPropertyInt("borders");
 
-    if (std::accumulate(_kernel.begin(),_kernel.end(),0) == 0)
-    {
-        addError("Empty Kernel.");
-        return false;
-    }
-
     if(_normalize)
     {
         int sum = 0;
@@ -96,6 +90,12 @@ bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenC
             sum += _kernel[i];
         }
         _divisor = (sum != 0 ? sum : 1);
+    }
+
+    if (_divisor == 0)
+    {
+        addError("Invalid divisor: 0");
+        return false;
     }
 
     float divFactor = 1.0f/_divisor;
