@@ -153,6 +153,7 @@ private:
     int                 _verticalScrollValue;
 
 public:
+    void zoomTo(float scale);
     void zoomIn();
     void zoomOut();
     void zoomFit();

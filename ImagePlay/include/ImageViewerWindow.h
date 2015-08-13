@@ -148,6 +148,8 @@ private:
     bool                        _ignoreZoomEvents;
     bool                        _ignoreScrollEvents;
     bool                        _ignoreMouseEvents;
+    ZoomAction                  _currentZoomMode;
+    double                      _currentZoomFactor;
 
 
     // QWidget interface

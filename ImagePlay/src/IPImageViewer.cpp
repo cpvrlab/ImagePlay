@@ -65,6 +65,8 @@ IPImageViewer::IPImageViewer(ImageViewerWindow* imageViewer, QWidget *parent) :
 
     setMouseTracking(true);
     _graphicsView->setMouseTracking(true);
+    //_graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    //_graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_horizontalScrollBarChanged);
     connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_verticalScrollBarChanged);
@@ -225,6 +227,20 @@ void IPImageViewer::on_mouseDoubleClicked()
     emit mouseDoubleClicked();
 }
 
+
+void IPImageViewer::zoomTo(float scale)
+{
+    _zoomFitMode = false;
+
+    if(_scale >= 9.0)
+        return;
+
+    _scale = scale;
+
+    QMatrix matrix;
+    matrix.scale(_scale, _scale);
+    _graphicsView->setMatrix(matrix);
+}
 
 
 void IPImageViewer::zoomIn()

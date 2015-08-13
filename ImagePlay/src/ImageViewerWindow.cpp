@@ -41,6 +41,9 @@ ImageViewerWindow::ImageViewerWindow(MainWindow *mainWindow) :
     _ignoreZoomEvents = false;
     _ignoreMouseEvents = false;
 
+    _currentZoomMode = ZOOM_NONE;
+    _currentZoomFactor = 1.0;
+
 //    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
     QPalette darkPalette;
@@ -150,6 +153,7 @@ ImageViewerWindow::removeProcessStep
 */
 void ImageViewerWindow::removeProcessStep(IPProcessStep *processStep)
 {
+    _ignoreZoomEvents = true;
     long stepID = processStep->stepID();
     delete _imageViewers1.value(stepID);
     _imageViewers1.remove(stepID);
@@ -162,6 +166,8 @@ void ImageViewerWindow::removeProcessStep(IPProcessStep *processStep)
     resetHistogramValue();
     resetStatistics();
     resetZoomWidget();
+
+    _ignoreZoomEvents = false;
 
 //    delete _imageViewers2.value(stepID);
 //    _imageViewers2.remove(stepID);
@@ -355,7 +361,9 @@ ImageViewerWindow::zoomAllViewers
 */
 void ImageViewerWindow::zoomAllViewers(ZoomAction action)
 {
-    if(_ignoreZoomEvents)
+    _currentZoomMode = action;
+
+    if(_ignoreZoomEvents || _imageViewers1.count() == 0)
         return;
 
     _ignoreZoomEvents = true;
@@ -493,6 +501,9 @@ void ImageViewerWindow::updateOutputs()
 
 void ImageViewerWindow::tabChanged(int tabIndex)
 {
+    if(tabIndex < 0)
+        return;
+
     IPImageViewer* item = (IPImageViewer*) ui->tabWidget->widget(tabIndex);
 
     // hightlight grid item
@@ -500,6 +511,12 @@ void ImageViewerWindow::tabChanged(int tabIndex)
     {
         _mainWindow->setActiveProcessStep(item->processStep());
     }
+
+    // apply global zoom modes
+    if(_currentZoomMode == ZOOM_FIT)
+        item->zoomFit();
+    else if(_currentZoomMode == ZOOM_RESET)
+        item->zoomReset();
 
     // update result selector
     updateOutputs();
@@ -648,6 +665,9 @@ void ImageViewerWindow::on_btnZoomReset_clicked()
 
 void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
 {
+    if(_ignoreZoomEvents)
+        return;
+
     // apply scroll position to all viewers
     QMapIterator<int, IPImageViewer*> it(_imageViewers1);
     while (it.hasNext())
@@ -664,6 +684,9 @@ void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
 
 void ImageViewerWindow::on_verticalScrollBarChanged(int value)
 {
+    if(_ignoreZoomEvents)
+        return;
+
     // apply scroll position to all viewers
     QMapIterator<int, IPImageViewer*> it(_imageViewers1);
     while (it.hasNext())

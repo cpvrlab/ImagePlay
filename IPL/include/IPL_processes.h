@@ -91,10 +91,10 @@
 #include "IPLLabelBlobs.h"
 
 
-#include "IPLFloodFill.h";
-#include "IPLAccumulate.h";
-#include "IPLHoughLines.h";
-#include "IPLMatchTemplate.h";
-#include "IPLGoodFeaturesToTrack.h";
+#include "IPLFloodFill.h"
+#include "IPLAccumulate.h"
+#include "IPLHoughLines.h"
+#include "IPLMatchTemplate.h"
+#include "IPLGoodFeaturesToTrack.h"
 
 #endif // IPL_H
