@@ -50,6 +50,9 @@ cd ImagePlay
 qmake -recursive
 make 
 ```
+__Note__
+Currently the build based on homebrews qt5.rb has some difficulties to find the correct libraries. You can use [Qt Creator (Version 5.5)](http://www.qt.io/download-open-source/) where you load the *Imageplay.pro* project with the *Desktop QT 5.5* profile.
+
 
 
 ## Linux
