@@ -201,6 +201,13 @@ void MainWindow::readSettings()
     ui->dockLog->setVisible(showLog);
     ui->actionShowLog->setChecked(showLog);
 
+    _synchronizeViews = _settings->value("synchronizeViews", true).toBool();
+    ui->actionSynchronizeViews->setChecked(_synchronizeViews);
+
+    bool showThumbnails = _settings->value("showThumbnails", false).toBool();
+    ui->actionShowThumbnails->setChecked(showThumbnails);
+    _scene->setShowThumbnails(showThumbnails);
+
     _settings->beginGroup("MainWindow");
     if(_settings->value("isMaximized", false).toBool())
     {
@@ -241,6 +248,10 @@ void MainWindow::writeSettings()
 
     bool showLog = ui->actionShowLog->isChecked();
     _settings->setValue("showLog", showLog);
+    bool synchronizeViews = ui->actionSynchronizeViews->isChecked();
+    _settings->setValue("synchronizeViews", synchronizeViews);
+    bool showThumbnails = ui->actionShowThumbnails->isChecked();
+    _settings->setValue("showThumbnails", showThumbnails);
 
     _settings->beginGroup("MainWindow");
     _settings->setValue("size",         size());
