@@ -378,7 +378,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLArithmeticOperationsConstant", new IPLArithmeticOperationsConstant);
     _factory->registerProcess("IPLSynthesize",          new IPLSynthesize);
     _factory->registerProcess("IPLFlipImage",           new IPLFlipImage);
-    _factory->registerProcess("IPLGradientOperator",    new IPLGradientOperator);
+//    _factory->registerProcess("IPLGradientOperator",    new IPLGradientOperator);
+//    TODO: Fix algorithm and add again.
     _factory->registerProcess("IPLRandomPoint",         new IPLRandomPoint);
     _factory->registerProcess("IPLCanvasSize",          new IPLCanvasSize);
     _factory->registerProcess("IPLResize",              new IPLResize);
