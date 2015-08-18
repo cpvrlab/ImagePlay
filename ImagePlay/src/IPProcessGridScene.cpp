@@ -124,9 +124,9 @@ bool IPProcessGridScene::addEdge(IPProcessEdge* edge)
     if(output.type > input.type)
         return false;
 
-    IPLData* outputData = edge->from()->process()->getResultData(indexOut);
+    /*IPLData* outputData = edge->from()->process()->getResultData(indexOut);
     if (!outputData->isConvertibleTo(input.type))
-        return false;
+        return false;*/
 
     _edges.append(edge);
     addItem(edge);
@@ -185,6 +185,18 @@ void IPProcessGridScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
             QMimeType type = db.mimeTypeForFile(filePath);
 
+            // automatically load IPJ files
+            if(type.name() == "text/plain" && filePath.endsWith(".ipj"))
+            {
+                MainWindow* mainWindow = ((IPProcessGrid*) parent())->mainWindow();
+                if(mainWindow)
+                {
+                    mainWindow->readProcessFile(filePath);
+                }
+
+                return;
+            }
+
             // automatically add IPLLoadImage for image types
             if(type.name().startsWith("image/"))
             {
@@ -196,8 +208,6 @@ void IPProcessGridScene::dropEvent(QGraphicsSceneDragDropEvent *event)
                     stepLoadImage->setPath(filePath.toStdString());
                 }
             }
-
-            qDebug() << type.name();
 
             // automatically add IPLLoadImageSequence for folders
             if(type.name() == "inode/directory")

@@ -109,6 +109,7 @@ public:
     void                    removeEdge                      (IPProcessEdge* edge);
     void                    clearScene                      ();
     bool                    readProcessFile                 ();
+    bool                    readProcessFile                 (QString file);
     bool                    writeProcessFile                ();
     void                    lockScene                       ();
     void                    unlockScene                     ();

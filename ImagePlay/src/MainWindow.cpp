@@ -777,6 +777,12 @@ bool MainWindow::readProcessFile()
     return true;
 }
 
+bool MainWindow::readProcessFile(QString file)
+{
+    _currentProcessFileName = file;
+    return readProcessFile();
+}
+
 bool MainWindow::writeProcessFile()
 {
     if(_currentProcessFileName.length() < 1)
