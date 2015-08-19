@@ -36,7 +36,7 @@ void IPLLaplaceOfGaussian::init()
 
     // properties
     addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
-    addProcessPropertyDouble("deviation", "Deviation", "", 1, IPL_WIDGET_SLIDER, 1, 10);
+    addProcessPropertyDouble("deviation", "Std. Deviation", "", 1, IPL_WIDGET_SLIDER, 1, 10);
     addProcessPropertyBool("zeroCrossing", "Zero Crossing", "", false, IPL_WIDGET_CHECKBOXES);
 }
 

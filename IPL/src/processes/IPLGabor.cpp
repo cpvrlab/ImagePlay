@@ -41,7 +41,7 @@ void IPLGabor::init()
     addProcessPropertyInt("window", "Window", "", 5, IPL_WIDGET_SLIDER_ODD, 3, 15);
     addProcessPropertyInt("wavelength", "Wavelength", "", 5, IPL_WIDGET_SLIDER, 1, 15);
     addProcessPropertyDouble("direction", "Direction", "", 0, IPL_WIDGET_SLIDER, 0, 2*PI);
-    addProcessPropertyDouble("deviation", "Deviation", "", 5, IPL_WIDGET_SLIDER, 1, 10);
+    addProcessPropertyDouble("deviation", "Std. Deviation", "", 5, IPL_WIDGET_SLIDER, 1, 10);
 }
 
 void IPLGabor::destroy()
