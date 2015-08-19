@@ -61,6 +61,10 @@ class MainWindow;
 class ImageViewerWindow;
 class IPProcessGridScene;
 
+
+// constants
+#define MAX_RECENT_PROJECTS 10
+
 //-----------------------------------------------------------------------------
 //!MainWindow
 /*!
@@ -156,6 +160,9 @@ private slots:
     void                    on_btnCloseProcessSettings_clicked();
 
 private:
+    void                    addRecentProcessFile(const QString&);
+    void                    updateRecentProcessesMenu();
+
     Ui::MainWindow*         ui;
     IPProcessStep*          _activeProcessStep;
     IPProcessStep*          _lastActiveProcessStep;
@@ -182,6 +189,7 @@ private:
     bool                    _useOpenCV;
     bool                    _logFileEnabled;
     bool                    _threadRunning;
+    QStringList             _recentProcessFiles;
 
     // QWidget interface
 protected:
