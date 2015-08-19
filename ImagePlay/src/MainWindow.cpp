@@ -237,6 +237,22 @@ void MainWindow::readSettings()
         // only show once
         _settings->setValue("IgnoreTutorial", 1);
     }
+
+    // recent projects
+    if (_settings->contains("recentProjects"))
+    {
+        QVariant storedRecentProjects = _settings->value("recentProjects");
+        if (storedRecentProjects.convert(QMetaType::QStringList))
+        {
+            _recentProcessFiles = storedRecentProjects.value<QStringList>();
+
+            updateRecentProcessesMenu();
+        }
+        else
+        {
+            _settings->remove("recentProjects");
+        }
+    }
 }
 
 void MainWindow::writeSettings()
@@ -269,6 +285,12 @@ void MainWindow::writeSettings()
         _settings->setValue("pos",  pos);
         _settings->setValue("zoomWidgetMode",  zoomWidgetMode);
         _settings->endGroup();
+    }
+
+    // recent projects
+    if (_recentProcessFiles.count() > 0 || _settings->contains("recentProjects"))
+    {
+        _settings->setValue("recentProjects", QVariant::fromValue<QStringList>(_recentProcessFiles));
     }
 }
 
@@ -1055,18 +1077,78 @@ void MainWindow::on_actionSave_triggered()
             _currentProcessFileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", "ImagePlay JSON File (*.ipj)");
 
     writeProcessFile();
+
+    addRecentProcessFile(_currentProcessFileName);
 }
 
 void MainWindow::on_actionSaveAs_triggered()
 {
     _currentProcessFileName.clear();
     on_actionSave_triggered();
+
+    addRecentProcessFile(_currentProcessFileName);
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
     _currentProcessFileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "ImagePlay JSON File (*.ipj)");
     readProcessFile();
+
+    addRecentProcessFile(_currentProcessFileName);
+}
+
+void MainWindow::addRecentProcessFile(const QString& recentFile)
+{
+    QString recentFilePath = recentFile.trimmed();
+
+    if (recentFilePath.length() && !_recentProcessFiles.contains(recentFilePath))
+    {
+        _recentProcessFiles.insert(0, recentFilePath);
+
+        if (_recentProcessFiles.count() > MAX_RECENT_PROJECTS)
+        {
+            _recentProcessFiles.erase(
+                _recentProcessFiles.begin() + MAX_RECENT_PROJECTS, _recentProcessFiles.end());
+        }
+
+        writeSettings();
+
+        updateRecentProcessesMenu();
+    }
+}
+
+void MainWindow::updateRecentProcessesMenu()
+{
+    ui->menuOpenRecent->clear();
+
+    for (int index = 0; index < _recentProcessFiles.count(); ++index)
+    {
+        QString processFile = _recentProcessFiles[index];
+        QAction* action = new QAction(processFile, ui->menuOpenRecent);
+        QObject::connect(action, &QAction::triggered, [this, index](bool checked){
+            if (index < _recentProcessFiles.count()) {
+                QString processFile = _recentProcessFiles[index];
+                QFileInfo processFileInfo(processFile);
+                if (processFileInfo.exists()) {
+                    _currentProcessFileName = processFile;
+                    readProcessFile();
+                }
+            }
+        });
+        ui->menuOpenRecent->addAction(action);
+    }
+
+    if (_recentProcessFiles.count() > 0)
+    {
+        ui->menuOpenRecent->addSeparator();
+        QAction* clearAction = new QAction(tr("Clear"), ui->menuOpenRecent);
+        QObject::connect(clearAction, &QAction::triggered, [=](bool checked){
+            _recentProcessFiles.clear();
+            writeSettings();
+            updateRecentProcessesMenu();
+        });
+        ui->menuOpenRecent->addAction(clearAction);
+    }
 }
 
 void MainWindow::showEvent(QShowEvent*)
