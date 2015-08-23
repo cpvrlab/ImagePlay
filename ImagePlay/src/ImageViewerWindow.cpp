@@ -130,6 +130,9 @@ void ImageViewerWindow::addProcessStep(IPProcessStep *processStep)
 
         // some styling
 //        imageViewer2->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+	
+	// zoom to match other windows
+	imageViewer1->zoomTo( _currentZoomFactor );
 
         QString tabName = QString::number(stepID).append(": ").append(QString::fromStdString(processStep->process()->title()));
 
@@ -183,8 +186,16 @@ void ImageViewerWindow::updateImage()
         // update the currently visible image
         IPImageViewer* imageViewer = ((IPImageViewer*) ui->tabWidget->currentWidget());
 
-        if(imageViewer)
+        if(imageViewer){
            imageViewer->updateImage();
+	   // set the scroll bars here if not already matching other viewers
+	   if ( imageViewer->horizontalScrollBar()->value() !=
+	      _horizontalScrollValue )
+	      imageViewer->horizontalScrollBar()->setValue( _horizontalScrollValue );
+	   if ( imageViewer->verticalScrollBar()->value() !=
+	      _verticalScrollValue )
+	      imageViewer->verticalScrollBar()->setValue( _verticalScrollValue );
+	}
     }
     else
     {
@@ -386,6 +397,9 @@ void ImageViewerWindow::zoomAllViewers(ZoomAction action)
 
         zoomFactor = it.value()->zoomFactor();
     }
+
+    // store the current zoom for new windows
+    _currentZoomFactor = static_cast< double >( zoomFactor ) / 100.0;
 
     on_horizontalScrollBarChanged(((IPImageViewer*)ui->tabWidget->currentWidget())->horizontalScrollBar()->value());
     on_verticalScrollBarChanged(((IPImageViewer*)ui->tabWidget->currentWidget())->verticalScrollBar()->value());
@@ -680,6 +694,9 @@ void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
 
         it.value()->horizontalScrollBar()->setValue(value);
     }
+
+    // store the value for new windows
+    _horizontalScrollValue = value;
 }
 
 void ImageViewerWindow::on_verticalScrollBarChanged(int value)
@@ -699,6 +716,9 @@ void ImageViewerWindow::on_verticalScrollBarChanged(int value)
 
         it.value()->verticalScrollBar()->setValue(value);
     }
+
+    // store value for new Image viewer
+    _verticalScrollValue = value;
 }
 
 //-----------------------------------------------------------------------------
