@@ -679,6 +679,9 @@ void ImageViewerWindow::on_btnZoomReset_clicked()
 
 void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
 {
+    // store the value for new windows
+    _horizontalScrollValue = value;
+
     if(_ignoreZoomEvents)
         return;
 
@@ -694,13 +697,13 @@ void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
 
         it.value()->horizontalScrollBar()->setValue(value);
     }
-
-    // store the value for new windows
-    _horizontalScrollValue = value;
 }
 
 void ImageViewerWindow::on_verticalScrollBarChanged(int value)
 {
+    // store value for new Image viewer
+    _verticalScrollValue = value;
+
     if(_ignoreZoomEvents)
         return;
 
@@ -716,9 +719,6 @@ void ImageViewerWindow::on_verticalScrollBarChanged(int value)
 
         it.value()->verticalScrollBar()->setValue(value);
     }
-
-    // store value for new Image viewer
-    _verticalScrollValue = value;
 }
 
 //-----------------------------------------------------------------------------
