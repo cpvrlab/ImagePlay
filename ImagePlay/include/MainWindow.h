@@ -97,6 +97,10 @@ public:
     bool                    synchronizeViews                ()                              { return _synchronizeViews; }
     void                    setDefaultImagePath             (QString path)                  { _defaultImagePath = path; }
     QString                 defaultImagePath                ()                              { return _defaultImagePath; }
+    void                    setPluginDevPath                (QString path)                  { _pluginDevPath = path; }
+    QString                 pluginDevPath                   ()                              { return _pluginDevPath; }
+    void                    setPluginPath                   (QString path)                  { _pluginPath = path; }
+    QString                 pluginPath                      ()                              { return _pluginPath; }
     void                    setAutosaveEnabled              (bool enabled)                  { _autosaveEnabled = enabled; }
     bool                    autosaveEnabled                 ()                              { return _autosaveEnabled; }
     void                    setLogFileEnabled               (bool enabled)                  { _logFileEnabled = enabled; }
@@ -182,6 +186,8 @@ private:
     QSettings*              _settings;
     QString                 _currentProcessFileName;
     QString                 _defaultImagePath;
+    QString                 _pluginDevPath;
+    QString                 _pluginPath;
     long                    _lastAutosaveTimestamp;
     int                     _autosaveInterval;
     bool                    _autosaveEnabled;

@@ -192,16 +192,18 @@ void MainWindow::readSettings()
     // properties
     _settings = new QSettings("BFH", "ImagePlay");
 
-    _useOpenCV = _settings->value("OpenCV", true).toBool();
-    _autosaveEnabled = _settings->value("AutoSave", true).toBool();
-    _defaultImagePath = _settings->value("DefaultImagePath", "").toString();
-    _logFileEnabled = _settings->value("LogFile", false).toBool();
+    _useOpenCV          = _settings->value("OpenCV", true).toBool();
+    _autosaveEnabled    = _settings->value("AutoSave", true).toBool();
+    _defaultImagePath   = _settings->value("DefaultImagePath", "").toString();
+    _pluginDevPath      = _settings->value("PluginDevPath", "../../plugin_development/").toString();
+    _pluginPath         = _settings->value("PluginPath", "../../plugins/").toString();
+    _logFileEnabled     = _settings->value("LogFile", false).toBool();
 
-    bool showLog = _settings->value("showLog", false).toBool();
+    bool showLog        = _settings->value("showLog", false).toBool();
     ui->dockLog->setVisible(showLog);
     ui->actionShowLog->setChecked(showLog);
 
-    _synchronizeViews = _settings->value("synchronizeViews", true).toBool();
+    _synchronizeViews   = _settings->value("synchronizeViews", true).toBool();
     ui->actionSynchronizeViews->setChecked(_synchronizeViews);
 
     bool showThumbnails = _settings->value("showThumbnails", false).toBool();
@@ -257,22 +259,24 @@ void MainWindow::readSettings()
 
 void MainWindow::writeSettings()
 {
-    _settings->setValue("OpenCV", _useOpenCV);
-    _settings->setValue("AutoSave", _autosaveEnabled);
+    _settings->setValue("OpenCV",           _useOpenCV);
+    _settings->setValue("AutoSave",         _autosaveEnabled);
     _settings->setValue("DefaultImagePath", _defaultImagePath);
-    _settings->setValue("LogFile", _logFileEnabled);
+    _settings->setValue("PluginDevPath",    _pluginDevPath);
+    _settings->setValue("PluginPath",       _pluginPath);
+    _settings->setValue("LogFile",          _logFileEnabled);
 
     bool showLog = ui->actionShowLog->isChecked();
-    _settings->setValue("showLog", showLog);
     bool synchronizeViews = ui->actionSynchronizeViews->isChecked();
-    _settings->setValue("synchronizeViews", synchronizeViews);
     bool showThumbnails = ui->actionShowThumbnails->isChecked();
-    _settings->setValue("showThumbnails", showThumbnails);
+    _settings->setValue("showLog",          showLog);
+    _settings->setValue("synchronizeViews", synchronizeViews);
+    _settings->setValue("showThumbnails",   showThumbnails);
 
     _settings->beginGroup("MainWindow");
-    _settings->setValue("size",         size());
-    _settings->setValue("pos",          pos());
-    _settings->setValue("isMaximized",  isMaximized());
+    _settings->setValue("size",             size());
+    _settings->setValue("pos",              pos());
+    _settings->setValue("isMaximized",      isMaximized());
     _settings->endGroup();
 
     QSize   size = _imageViewer->lastSize();
@@ -1302,7 +1306,20 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionGeneratePlugin_triggered()
 {
-    PluginGenerator* pluginGenerator = new PluginGenerator(this);
+    if(_pluginDevPath.length() == 0)
+    {
+        QMessageBox::warning(this, "Plugin Error", "Plugin Dev Path is not set.");
+        _settingsWindow->show();
+        return;
+    }
+    if(_pluginPath.length() == 0)
+    {
+        QMessageBox::warning(this, "Plugin Error", "Plugin Path is not set.");
+        _settingsWindow->show();
+        return;
+    }
+
+    PluginGenerator* pluginGenerator = new PluginGenerator(this, _pluginDevPath, _pluginPath, QCoreApplication::applicationDirPath());
     pluginGenerator->show();
 }
 

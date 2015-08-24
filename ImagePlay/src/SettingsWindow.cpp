@@ -40,6 +40,8 @@ void SettingsWindow::on_buttonBox_accepted()
 {
     // save the settings
     _mainWindow->setDefaultImagePath(ui->txtDefaultImagePath->text());
+    _mainWindow->setPluginDevPath(ui->txtPluginDevPath->text());
+    _mainWindow->setPluginPath(ui->txtPluginPath->text());
     _mainWindow->setLogFileEnabled(ui->chkLogFile->isChecked());
     _mainWindow->setUseOpenCV(ui->chkOpenCV->isChecked());
     _mainWindow->setAutosaveEnabled(ui->chkAutosave->isChecked());
@@ -59,21 +61,13 @@ void SettingsWindow::showEvent(QShowEvent *)
 {
     // display the current settings
     ui->txtDefaultImagePath->setText(_mainWindow->defaultImagePath());
+    ui->txtPluginDevPath->setText(_mainWindow->pluginDevPath());
+    ui->txtPluginPath->setText(_mainWindow->pluginPath());
     ui->chkAutosave->setChecked(_mainWindow->autosaveEnabled());
     ui->chkOpenCV->setChecked(_mainWindow->useOpenCV());
     ui->chkLogFile->setChecked(_mainWindow->logFileEnabled());
 
     updatePluginList();
-}
-
-void SettingsWindow::on_btnDefaultImagePath_clicked()
-{
-    QString folder = QFileDialog::getExistingDirectory(this, tr("Choose Folder"), "");
-
-    if(folder.length() > 0)
-    {
-        ui->txtDefaultImagePath->setText(folder);
-    }
 }
 
 void SettingsWindow::on_btnReloadPlugins_clicked()
@@ -103,4 +97,35 @@ void SettingsWindow::on_btnUnloadPlugins_clicked()
 {
     _mainWindow->unloadPlugins();
     updatePluginList();
+}
+
+void SettingsWindow::on_btnDefaultImagePath_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Choose Folder"), "");
+
+    if(folder.length() > 0)
+    {
+        ui->txtDefaultImagePath->setText(folder);
+    }
+}
+
+void SettingsWindow::on_btnDevPath_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Choose Folder"), "");
+
+    if(folder.length() > 0)
+    {
+        ui->txtPluginDevPath->setText(folder);
+    }
+}
+
+
+void SettingsWindow::on_btnPluginPath_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Choose Folder"), "");
+
+    if(folder.length() > 0)
+    {
+        ui->txtPluginPath->setText(folder);
+    }
 }

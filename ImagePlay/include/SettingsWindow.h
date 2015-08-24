@@ -47,6 +47,8 @@ private slots:
     void                on_btnDefaultImagePath_clicked  ();
     void                on_btnReloadPlugins_clicked     ();
     void                on_btnUnloadPlugins_clicked     ();
+    void                on_btnDevPath_clicked           ();
+    void                on_btnPluginPath_clicked        ();
 
 private:
     Ui::SettingsWindow* ui;

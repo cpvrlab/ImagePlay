@@ -22,11 +22,15 @@
 #include <QUrl>
 
 
-PluginGenerator::PluginGenerator(QWidget *parent) :
+PluginGenerator::PluginGenerator(QWidget *parent, QString pluginDevPath, QString pluginPath, QString rootPath) :
     QDialog(parent),
     ui(new Ui::PluginGenerator)
 {
     ui->setupUi(this);
+
+    _pluginDevPath = pluginDevPath;
+    _pluginPath = pluginPath;
+    _rootPath = rootPath;
 
     // only allow alphanumeric input
     ui->inputClassName->setValidator(new QRegExpValidator(QRegExp("[A-Za-z0-9]*")));
@@ -53,8 +57,6 @@ PluginGenerator::PluginGenerator(QWidget *parent) :
     openCVNames.push_back("OPENCV_OPTIONAL");
     openCVNames.push_back("OPENCV_ONLY");
     ui->comboBoxOpenCV->addItems(openCVNames);
-
-    _basePath = QDir::currentPath() + "/plugin_development/";
 }
 
 PluginGenerator::~PluginGenerator()
@@ -87,21 +89,20 @@ void PluginGenerator::on_btnGenerate_clicked()
     }
 
     // get values
-    _className = ui->inputClassName->text();
-    _title = ui->inputClassName->text();
-    _description = ui->inputDescription->text();
-    _keywords = ui->inputClassName->text();
-    _author = ui->inputClassName->text();
-    _category = ui->comboBoxCategory->currentText();
-    _openCV = ui->comboBoxOpenCV->currentText();
+    _className  = ui->inputClassName->text();
+    _title      = ui->inputTitle->text();
+    _description= ui->inputDescription->text();
+    _keywords   = ui->inputKeywords->text();
+    _author     = ui->inputAuthor->text();
+    _category   = ui->comboBoxCategory->currentText();
+    _openCV     = ui->comboBoxOpenCV->currentText();
 
     // generate files
     if(generateFiles())
     {
         QMessageBox::information(this, "Success", "Your plugin was created successfully.");
 
-        QUrl url = QUrl::fromLocalFile(_basePath);
-        qDebug() << url.toString();
+        QUrl url = QUrl::fromLocalFile(_pluginDevPath);
         QDesktopServices::openUrl(url);
 
         close();
@@ -120,7 +121,7 @@ void PluginGenerator::on_btnCancel_clicked()
 bool PluginGenerator::generateFiles()
 {
     // create folder
-    QDir dir(_basePath);
+    QDir dir(_pluginDevPath);
     qWarning() << "Creating directory: " << dir.absoluteFilePath(_className);
     if(!dir.mkdir(_className))
     {
@@ -139,14 +140,14 @@ bool PluginGenerator::generateFiles()
 
 bool PluginGenerator::generateFile(QString inputName, QString outputName, QString folder)
 {
-    QFile fileTemplate(_basePath + "_template/" + inputName);
+    QFile fileTemplate(_pluginDevPath + "/_template/" + inputName);
     if (!fileTemplate.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qWarning() << fileTemplate.fileName() << " not readable!";
         return false;
     }
 
-    QFile fileResult(_basePath + folder + "/" + outputName);
+    QFile fileResult(_pluginDevPath + "/" + folder + "/" + outputName);
     if (!fileResult.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         qWarning() << fileResult.fileName() << " not writable!";
@@ -164,6 +165,8 @@ bool PluginGenerator::generateFile(QString inputName, QString outputName, QStrin
         line = line.replace("%AUTHOR%", _author);
         line = line.replace("%CATEGORY%", _category);
         line = line.replace("%OPENCV%", _openCV);
+        line = line.replace("%PLUGINPATH%", _pluginPath);
+        line = line.replace("%ROOTPATH%", _rootPath);
 
         fileResult.write(line.append("\n").toLocal8Bit());
     }

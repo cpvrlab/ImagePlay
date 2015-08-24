@@ -8,5 +8,5 @@ SOURCES     += $$files(*.cpp,true)
 
 TARGET = %CLASSNAME%
 
-LIBS += -L$$PWD/../../ -lIPL
-DESTDIR       = ../../plugins
+LIBS += -L%ROOTPATH% -lIPL
+DESTDIR       = %PLUGINPATH%

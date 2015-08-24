@@ -38,7 +38,7 @@ class PluginGenerator : public QDialog
     Q_OBJECT
 
 public:
-    explicit PluginGenerator(QWidget *parent = 0);
+    explicit PluginGenerator(QWidget *parent, QString pluginDevPath, QString pluginPath, QString rootPath);
     ~PluginGenerator();
 
 private slots:
@@ -48,7 +48,9 @@ private slots:
 private:
     Ui::PluginGenerator *ui;
 
-    QString _basePath;
+    QString _pluginDevPath;
+    QString _pluginPath;
+    QString _rootPath;
     QString _className;
     QString _title;
     QString _description;
