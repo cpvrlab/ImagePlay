@@ -39,9 +39,9 @@ void IPLMergePlanes::init()
     addProcessPropertyInt("input_type", "Color Model:RGB|HSV|HSL", "", _inputType, IPL_WIDGET_RADIOBUTTONS);
 
     // inputs and outputs
-    addInput("Plane 1", IPLData::IMAGE_GRAYSCALE);
-    addInput("Plane 2", IPLData::IMAGE_GRAYSCALE);
-    addInput("Plane 3", IPLData::IMAGE_GRAYSCALE);
+    addInput("Plane 1", IPLData::IMAGE_COLOR);
+    addInput("Plane 2", IPLData::IMAGE_COLOR);
+    addInput("Plane 3", IPLData::IMAGE_COLOR);
     addOutput("Image",  IPLData::IMAGE_COLOR);
 
 }
@@ -73,7 +73,7 @@ bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool)
         _inputC = new IPLImage(*image);
     }
 
-    // only continue if we have 2 valid inputs
+    // only continue if we have 3 valid inputs
     if(!(_inputA && _inputB && _inputC))
     {
         return false;
