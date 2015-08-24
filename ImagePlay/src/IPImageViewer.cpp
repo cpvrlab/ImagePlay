@@ -74,6 +74,8 @@ IPImageViewer::IPImageViewer(ImageViewerWindow* imageViewer, QWidget *parent) :
 
 IPImageViewer::~IPImageViewer()
 {
+    disconnect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_horizontalScrollBarChanged);
+    disconnect(_graphicsView->verticalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_verticalScrollBarChanged);
     delete _image;
 }
 

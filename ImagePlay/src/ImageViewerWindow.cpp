@@ -682,13 +682,13 @@ void ImageViewerWindow::on_horizontalScrollBarChanged(int value)
     // store the value for new windows
     _horizontalScrollValue = value;
 
-    if(_ignoreZoomEvents)
-        return;
-
     // apply scroll position to all viewers
     QMapIterator<int, IPImageViewer*> it(_imageViewers1);
     while (it.hasNext())
     {
+        if(_ignoreZoomEvents)
+            return;
+
         it.next();
 
         // skip current tab
@@ -704,13 +704,13 @@ void ImageViewerWindow::on_verticalScrollBarChanged(int value)
     // store value for new Image viewer
     _verticalScrollValue = value;
 
-    if(_ignoreZoomEvents)
-        return;
-
     // apply scroll position to all viewers
     QMapIterator<int, IPImageViewer*> it(_imageViewers1);
     while (it.hasNext())
     {
+        if(_ignoreZoomEvents)
+            return;
+
         it.next();
 
         // skip current tab
