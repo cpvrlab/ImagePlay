@@ -40,7 +40,7 @@ void IPLHoughLines::init()
     // properties
     addProcessPropertyDouble("rho", "Rho", "Distance resolution of the accumulator in pixels", 1, IPL_WIDGET_SLIDER, 0, 10);
     addProcessPropertyDouble("theta", "Min. Radius", "Angle resolution of the accumulator in radians.", 0.01, IPL_WIDGET_SLIDER, 0, 5.14);
-    addProcessPropertyInt("threshold", "Threshold", "Accumulator threshold parameter.", 0, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyInt("threshold", "Threshold", "Accumulator threshold parameter.", 1, IPL_WIDGET_SLIDER, 1, 1000);
     addProcessPropertyInt("minLenght", "Min. Length", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
     addProcessPropertyInt("maxLineGap", "Max. Line Gap", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
 }
@@ -73,6 +73,9 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
 
     std::vector<cv::Vec4i> lines;
     cv::HoughLinesP(input, lines, rho, theta, threshold, minLength, maxLineGap);
+
+    // WARNING: cv::HoughLinesP does not work in debug mode!!!
+    //          destroys the std::vector<cv::Vec4i> lines;
 
     std::stringstream s;
     s << "Lines found: ";
