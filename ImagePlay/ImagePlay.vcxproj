@@ -80,8 +80,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Qt\5.5\msvc2013_64\lib\qtmain.lib;shell32.lib;C:/Qt/5.5/msvc2013_64/lib\Qt5Core.lib;D:\Projects\imageplay\ImagePlay\..\_bin\Release\x64\IPL.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Widgets.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Gui.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013_64\lib;C:/Qt/5.5/msvc2013_64/lib;D:\Projects\imageplay\ImagePlay\..\_bin\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Qt\5.5\msvc2013_64\lib\qtmain.lib;shell32.lib;C:/Qt/5.5/msvc2013_64/lib\Qt5Core.lib;..\_bin\Release\x64\IPL.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Widgets.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Gui.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013_64\lib;C:/Qt/5.5/msvc2013_64/lib;..\_bin\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -128,8 +128,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Qt\5.5\msvc2013_64\lib\qtmaind.lib;shell32.lib;C:/Qt/5.5/msvc2013_64/lib\Qt5Cored.lib;D:\Projects\imageplay\ImagePlay\..\_bin\Debug\x64\IPL.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Widgetsd.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Guid.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013_64\lib;C:/Qt/5.5/msvc2013_64/lib;D:\Projects\imageplay\ImagePlay\..\_bin\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Qt\5.5\msvc2013_64\lib\qtmaind.lib;shell32.lib;C:/Qt/5.5/msvc2013_64/lib\Qt5Cored.lib;..\_bin\Debug\x64\IPL.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Widgetsd.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Guid.lib;C:\Qt\5.5\msvc2013_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013_64\lib;C:/Qt/5.5/msvc2013_64/lib;..\_bin\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>

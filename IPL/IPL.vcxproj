@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;D:/Projects/imageplay/IPL/lib/;..\_lib\freeimage;include;include\processes;include\opencv;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\_lib\freeimage;include;include\processes;include\opencv;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\intermediate\IPL\Release\x64\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -75,8 +75,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>D:\Projects\imageplay\IPL\..\_lib\freeimage\\FreeImage.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Projects\imageplay\IPL\..\_lib\freeimage\;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\_lib\freeimage\\FreeImage.lib;..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\_lib\freeimage\;..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-openmp %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;D:/Projects/imageplay/IPL/lib/;..\_lib\freeimage;include;include\processes;include\opencv;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\_lib\freeimage;include;include\processes;include\opencv;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\intermediate\IPL\Debug\x64\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -117,8 +117,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>D:\Projects\imageplay\IPL\..\_lib\freeimage\\FreeImage.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Projects\imageplay\IPL\..\_lib\freeimage\;D:\Projects\imageplay\IPL\..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\_lib\freeimage\\FreeImage.lib;..\_lib\opencv\x64\vc12\lib\\opencv_core2410.lib;..\_lib\opencv\x64\vc12\lib\\opencv_imgproc2410.lib;..\_lib\opencv\x64\vc12\lib\\opencv_highgui2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\_lib\freeimage\;..\_lib\opencv\x64\vc12\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-openmp %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
