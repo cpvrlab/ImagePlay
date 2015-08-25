@@ -467,11 +467,12 @@ void IPProcessGrid::wheelEvent(QWheelEvent* event)
 /*!
  * \brief IPProcessGrid::showEvent
  */
-void IPProcessGrid::showEvent(QShowEvent *)
+void IPProcessGrid::showEvent(QShowEvent *e)
 {
-    // add a big object to make sure the coordinate system starts top left
-    //QPen invisiblePen(QColor(0,0,0));
-    //_scene->addRect(0,0,width()-5,height()-5,invisiblePen);
+    //set the scene rect to allow more space when zooming
+    if ( !e->spontaneous() ){
+       setSceneRect(0,0,width()*2,height()*2);
+    }
 }
 
 /*!
@@ -479,6 +480,7 @@ void IPProcessGrid::showEvent(QShowEvent *)
  */
 void IPProcessGrid::resizeEvent(QResizeEvent *)
 {
+   setSceneRect(0,0,width()*2,height()*2);
 }
 
 /*!

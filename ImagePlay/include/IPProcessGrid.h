@@ -94,10 +94,10 @@ private:
     // QWidget interface
 protected:
     void                    wheelEvent              (QWheelEvent *);
-    void                    showEvent               (QShowEvent *);
-    void                    resizeEvent             (QResizeEvent *);
+    virtual void            resizeEvent             (QResizeEvent *)                        override;
     void                    keyPressEvent           (QKeyEvent *);
     void                    keyReleaseEvent         (QKeyEvent *);
+    virtual void            showEvent               (QShowEvent *)                          override;
 };
 
 #endif // IPPROCESSGRID_H
