@@ -77,8 +77,8 @@ public:
 #endif
 
 //    void wheelEvent(QWheelEvent* event)     { event->ignore(); }
-    void mouseReleaseEvent(QMouseEvent*);
-    void mouseDoubleClickEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent*) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent *) override;
 };
 
 //-----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ public:
 
     // QGraphicsItem interface
 protected:
-    void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
+    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 private:
     IPImageViewer* _imageViewer;
 };
@@ -166,8 +166,8 @@ public:
 
     // QWidget interface
 protected:
-    void showEvent(QShowEvent *);
-    void resizeEvent(QResizeEvent *);
+    virtual void showEvent(QShowEvent *) override;
+    virtual void resizeEvent(QResizeEvent *) override;
 };
 
 #endif // IPIMAGEVIEWER_H
