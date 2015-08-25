@@ -854,6 +854,17 @@ void ImageViewerWindow::on_mouseClick()
 
     if(_coordinatePickHandler)
         _coordinatePickHandler->pickCoordinates(_currentPosition.x(), _currentPosition.y());
+
+    // update the scroll bars when they are moved by a drag
+    IPImageViewer* viewer = dynamic_cast<IPImageViewer*>( ui->tabWidget->currentWidget() );
+    if (viewer && viewer->image()){
+       int horiz = viewer->horizontalScrollBar()->value();
+       int vert = viewer->verticalScrollBar()->value();
+       if ( horiz != _horizontalScrollValue )
+          on_horizontalScrollBarChanged( horiz );
+       if ( vert != _verticalScrollValue )
+          on_verticalScrollBarChanged( vert );
+    }
 }
 //-----------------------------------------------------------------------------
 /*!

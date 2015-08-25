@@ -68,8 +68,8 @@ IPImageViewer::IPImageViewer(ImageViewerWindow* imageViewer, QWidget *parent) :
     //_graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     //_graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-    connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_horizontalScrollBarChanged);
-    connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::valueChanged, _imageViewerWindow, &ImageViewerWindow::on_verticalScrollBarChanged);
+    connect(_graphicsView->horizontalScrollBar(), &QAbstractSlider::sliderMoved, _imageViewerWindow, &ImageViewerWindow::on_horizontalScrollBarChanged);
+    connect(_graphicsView->verticalScrollBar(), &QAbstractSlider::sliderMoved, _imageViewerWindow, &ImageViewerWindow::on_verticalScrollBarChanged);
 }
 
 IPImageViewer::~IPImageViewer()
