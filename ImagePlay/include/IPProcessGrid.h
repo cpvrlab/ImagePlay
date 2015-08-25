@@ -76,6 +76,8 @@ public slots:
     void                    updateProgress          (int);
 
 private:
+    void                    fitLargeSceneRect();
+
     IPProcessGridScene*     _scene;                 //!< Scene
     float                   _scale;                 //!< Scale for zooming
     MainWindow*             _mainWindow;            //!< MainWindow

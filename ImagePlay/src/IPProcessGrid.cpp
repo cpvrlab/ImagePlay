@@ -471,7 +471,7 @@ void IPProcessGrid::showEvent(QShowEvent *e)
 {
     //set the scene rect to allow more space when zooming
     if ( !e->spontaneous() ){
-       setSceneRect(0,0,width()*2,height()*2);
+       fitLargeSceneRect();
     }
 }
 
@@ -480,7 +480,22 @@ void IPProcessGrid::showEvent(QShowEvent *e)
  */
 void IPProcessGrid::resizeEvent(QResizeEvent *)
 {
-   setSceneRect(0,0,width()*2,height()*2);
+   fitLargeSceneRect();
+}
+
+/*!
+ * \brief IPProcessGrid::fitLargeSceneRect
+ */
+void IPProcessGrid::fitLargeSceneRect()
+{
+    qreal width = this->width()*2;
+    qreal height = this->height()*2;
+    if ( scene()->sceneRect().width() > width )
+        width = scene()->sceneRect().width();
+    if ( scene()->sceneRect().height() > height )
+        height = scene()->sceneRect().height();
+
+    setSceneRect(0,0,width,height);
 }
 
 /*!
