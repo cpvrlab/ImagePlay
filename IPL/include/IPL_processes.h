@@ -24,6 +24,7 @@
 
 // include all processes for easier library usage
 #include "IPLLoadImage.h"
+//#include "IPLLoadVideo.h"
 #include "IPLCamera.h"
 #include "IPLLoadImageSequence.h"
 #include "IPLSynthesize.h"
