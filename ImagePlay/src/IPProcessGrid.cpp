@@ -52,6 +52,8 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
 
     // add a dummy object to allow correct placement of new objects with drag&drop
     scene()->addItem(new QGraphicsRectItem(0,0,0,0));
+
+    connect(_scene, &QGraphicsScene::sceneRectChanged, this, &IPProcessGrid::sceneRectChanged);
 }
 
 bool IPProcessGrid::sortTreeDepthLessThan(IPProcessStep* s1, IPProcessStep* s2)
@@ -408,6 +410,12 @@ void IPProcessGrid::updateProgress(int progress)
     }
 }
 
+
+void IPProcessGrid::sceneRectChanged(const QRectF &rect)
+{
+    fitLargeSceneRect();
+}
+
 /*!
  * \brief IPProcessGrid::zoomIn
  */
@@ -490,12 +498,18 @@ void IPProcessGrid::fitLargeSceneRect()
 {
     qreal width = this->width()*2;
     qreal height = this->height()*2;
+    qreal x = 0;
+    qreal y = 0;
     if ( scene()->sceneRect().width() > width )
         width = scene()->sceneRect().width();
     if ( scene()->sceneRect().height() > height )
         height = scene()->sceneRect().height();
+    if ( scene()->sceneRect().x() < x )
+        x = scene()->sceneRect().x();
+    if ( scene()->sceneRect().y() < y )
+        y = scene()->sceneRect().y();
 
-    setSceneRect(0,0,width,height);
+    setSceneRect(x,y,width,height);
 }
 
 /*!

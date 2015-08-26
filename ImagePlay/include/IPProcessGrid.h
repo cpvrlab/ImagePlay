@@ -74,6 +74,7 @@ signals:
 public slots:
     void                    execute                 (bool forcedUpdate = false);
     void                    updateProgress          (int);
+    void                    sceneRectChanged        (const QRectF & rect);
 
 private:
     void                    fitLargeSceneRect();
