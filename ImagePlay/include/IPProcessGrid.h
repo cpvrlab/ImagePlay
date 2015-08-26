@@ -74,8 +74,11 @@ signals:
 public slots:
     void                    execute                 (bool forcedUpdate = false);
     void                    updateProgress          (int);
+    void                    sceneRectChanged        (const QRectF & rect);
 
 private:
+    void                    fitLargeSceneRect();
+
     IPProcessGridScene*     _scene;                 //!< Scene
     float                   _scale;                 //!< Scale for zooming
     MainWindow*             _mainWindow;            //!< MainWindow
@@ -94,10 +97,10 @@ private:
     // QWidget interface
 protected:
     void                    wheelEvent              (QWheelEvent *);
-    void                    showEvent               (QShowEvent *);
-    void                    resizeEvent             (QResizeEvent *);
+    virtual void            resizeEvent             (QResizeEvent *)                        override;
     void                    keyPressEvent           (QKeyEvent *);
     void                    keyReleaseEvent         (QKeyEvent *);
+    virtual void            showEvent               (QShowEvent *)                          override;
 };
 
 #endif // IPPROCESSGRID_H
