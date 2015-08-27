@@ -191,6 +191,7 @@
     <ClCompile Include="src\processes\IPLLaplacian.cpp" />
     <ClCompile Include="src\processes\IPLLoadImage.cpp" />
     <ClCompile Include="src\processes\IPLLoadImageSequence.cpp" />
+    <ClCompile Include="src\processes\IPLLoadVideo.cpp" />
     <ClCompile Include="src\processes\IPLLocalThreshold.cpp" />
     <ClCompile Include="src\processes\IPLMarkImage.cpp" />
     <ClCompile Include="src\processes\IPLMatchTemplate.cpp" />
@@ -222,7 +223,9 @@
     <ClCompile Include="src\processes\IPLStretchContrast.cpp" />
     <ClCompile Include="src\processes\IPLSynthesize.cpp" />
     <ClCompile Include="src\processes\IPLTriangleSegmentation.cpp" />
+    <ClCompile Include="src\processes\IPLUndistort.cpp" />
     <ClCompile Include="src\processes\IPLUnsharpMasking.cpp" />
+    <ClCompile Include="src\IPLVideoIO.cpp" />
     <ClCompile Include="src\IPL_global.cpp" />
     <ClCompile Include="include\dirent\dirent.c" />
   </ItemGroup>
@@ -283,6 +286,7 @@
     <ClInclude Include="include\processes\IPLLaplacian.h" />
     <ClInclude Include="include\processes\IPLLoadImage.h" />
     <ClInclude Include="include\processes\IPLLoadImageSequence.h" />
+    <ClInclude Include="include\processes\IPLLoadVideo.h" />
     <ClInclude Include="include\processes\IPLLocalThreshold.h" />
     <ClInclude Include="include\processes\IPLMarkImage.h" />
     <ClInclude Include="include\processes\IPLMatchTemplate.h" />
@@ -317,7 +321,9 @@
     <ClInclude Include="include\processes\IPLStretchContrast.h" />
     <ClInclude Include="include\processes\IPLSynthesize.h" />
     <ClInclude Include="include\processes\IPLTriangleSegmentation.h" />
+    <ClInclude Include="include\processes\IPLUndistort.h" />
     <ClInclude Include="include\processes\IPLUnsharpMasking.h" />
+    <ClInclude Include="include\IPLVideoIO.h" />
     <ClInclude Include="include\IPL_global.h" />
     <ClInclude Include="include\IPL_plugininterface.h" />
     <ClInclude Include="include\IPL_processes.h" />
