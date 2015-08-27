@@ -113,6 +113,8 @@ enum IPLProcessWidgetType
 
     IPL_WIDGET_GROUP,
 
+    IPL_WIDGET_MATRIX,
+
     //Add additional widget types here
     //...
 

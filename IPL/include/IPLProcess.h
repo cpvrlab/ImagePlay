@@ -195,6 +195,7 @@ public:
     void                    addProcessPropertyBool              (const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyString            (const char* name, const char* title, const char* description, const std::string &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyVectorInt         (const char* name, const char* title, const char* description, const std::vector<int> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyVectorDouble      (const char* name, const char* title, const char* description, const std::vector<double> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyColor             (const char* name, const char* title, const char* description, const IPLColor &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyPoint             (const char* name, const char* title, const char* description, const IPLPoint &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     int                     getProcessPropertyInt               (const char* name);
@@ -204,6 +205,7 @@ public:
     bool                    getProcessPropertyBool              (const char* name);
     std::string             getProcessPropertyString            (const char* name);
     std::vector<int>        getProcessPropertyVectorInt         (const char* name);
+    std::vector<double>     getProcessPropertyVectorDouble      (const char* name);
     IPLColor                getProcessPropertyColor             (const char* name);
     IPLPoint                getProcessPropertyPoint             (const char* name);
 

@@ -37,6 +37,8 @@ void IPLUndistort::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     // properties
+    addProcessPropertyInt("f", "f", "Focal Length", 1000, IPL_WIDGET_SLIDER, 0, 10000.0);
+
     addProcessPropertyDouble("p1", "p1", "", 0.0, IPL_WIDGET_SLIDER, -10.0, 10.0);
     addProcessPropertyDouble("p2", "p2", "Tangential Distortion", 0.0, IPL_WIDGET_SLIDER, -10.0, 10.0);
     addProcessPropertyDouble("k1", "k1", "", 0.0, IPL_WIDGET_SLIDER, -100.0, 100.0);
@@ -58,9 +60,12 @@ bool IPLUndistort::processInputData(IPLImage* image, int, bool)
     float p1 = getProcessPropertyDouble("p1");
     float p2 = getProcessPropertyDouble("p2");
 
+    float c1 = getProcessPropertyInt("f");
+    float c2 = c1;
+
     notifyProgressEventHandler(-1);
 
-    cv::Mat cameraMatrix = (cv::Mat_<double>(3,3) << 1000, 0, image->width()*0.5, 0, 1000, image->height()*0.5, 0, 0, 1);
+    cv::Mat cameraMatrix = (cv::Mat_<double>(3,3) << c1, 0, image->width()*0.5, 0, c2, image->height()*0.5, 0, 0, 1);
 
 
     cv::Mat distCoeffs(5, 1, CV_32FC1);

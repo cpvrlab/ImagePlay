@@ -47,6 +47,7 @@
 #include "PropertyWidgets/IPPropertyCombobox.h"
 #include "PropertyWidgets/IPPropertyGroup.h"
 #include "PropertyWidgets/IPPropertyPoint.h"
+#include "PropertyWidgets/IPPropertyMatrixDouble.h"
 #include "MainWindow.h"
 
 #include <QDebug>

@@ -284,6 +284,28 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             }
         }
 
+        else if (auto p = dynamic_cast<IPLProcessPropertyVectorDouble*>(property))
+        {
+            IPPropertyWidget *widget = NULL;
+            QString rawName, name;
+            switch(p->widget())
+            {
+            case IPL_WIDGET_MATRIX:
+                widget = new IPPropertyMatrixDouble(p, this);
+                rawName = property->title(); // name:rows|cols
+                name = rawName.split(":").at(0);
+                addPropertyWidget(name, property->description(), widget);
+                break;
+
+            default: //IPL_WIDGET_MATRIX
+                widget = new IPPropertyMatrixDouble(p, this);
+                rawName = property->title(); // name:rows|cols
+                name = rawName.split(":").at(0);
+                addPropertyWidget(name, property->description(), widget);
+                break;
+            }
+        }
+
         else if (auto p = dynamic_cast<IPLProcessPropertyPoint*>(property))
         {
             IPPropertyWidget *widget = NULL;

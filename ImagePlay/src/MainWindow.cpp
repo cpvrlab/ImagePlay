@@ -459,6 +459,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLHoughLines",          new IPLHoughLines);
 
     _factory->registerProcess("IPLUndistort",           new IPLUndistort);
+    _factory->registerProcess("IPLWarpAffine",          new IPLWarpAffine);
+    _factory->registerProcess("IPLWarpPerspective",     new IPLWarpPerspective);
 
     // not ready:
     /*_factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);

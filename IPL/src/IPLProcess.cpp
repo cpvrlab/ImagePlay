@@ -153,6 +153,11 @@ void IPLProcess::addProcessPropertyVectorInt(const char *name, const char *title
     _properties[name].reset(new IPLProcessPropertyVectorInt(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
+void IPLProcess::addProcessPropertyVectorDouble(const char *name, const char *title, const char *description, const std::vector<double> &value, IPLProcessWidgetType widget)
+{
+    _properties[name].reset(new IPLProcessPropertyVectorDouble(this, (int)_properties.size(), name, title, description, value, widget));
+}
+
 void IPLProcess::addProcessPropertyColor(const char *name, const char *title, const char *description, const IPLColor &value, IPLProcessWidgetType widget)
 {
     _properties[name].reset(new IPLProcessPropertyColor(this, (int)_properties.size(), name, title, description, value, widget));
@@ -203,6 +208,12 @@ std::vector<int> IPLProcess::getProcessPropertyVectorInt(const char *name)
 {
     checkPropertyKey(name);
     return ((IPLProcessPropertyVectorInt*) _properties[name].get())->value();
+}
+
+std::vector<double> IPLProcess::getProcessPropertyVectorDouble(const char *name)
+{
+    checkPropertyKey(name);
+    return ((IPLProcessPropertyVectorDouble*) _properties[name].get())->value();
 }
 
 IPLColor IPLProcess::getProcessPropertyColor(const char *name)

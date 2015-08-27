@@ -99,5 +99,7 @@
 #include "IPLGoodFeaturesToTrack.h"
 
 #include "IPLUndistort.h"
+#include "IPLWarpAffine.h"
+#include "IPLWarpPerspective.h"
 
 #endif // IPL_H

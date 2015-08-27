@@ -51,6 +51,17 @@ inline std::string serializeValue<std::vector<int>>(const std::vector<int> &valu
 }
 
 template<>
+inline std::string serializeValue<std::vector<double>>(const std::vector<double> &value)
+{
+    std::ostringstream buffer;
+    buffer << "[";
+    if (value.size() > 0) buffer << value[0];
+    for (int i = 1; i < value.size(); ++i) buffer << "," << value[i];
+    buffer << "]";
+    return buffer.str();
+}
+
+template<>
 inline std::string serializeValue<IPLColor>(const IPLColor &value)
 {
     std::ostringstream buffer;
@@ -144,6 +155,25 @@ inline void deserializeValue(const std::string &data, std::vector<int> &value)
         int charsParsed = 0;
         int element = 0;
         if (sscanf(&(*pos),"%d%n",&element,&charsParsed) > 0)
+            result.push_back(element);
+
+        pos += charsParsed;
+    }
+    value.swap(result);
+}
+
+inline void deserializeValue(const std::string &data, std::vector<double> &value)
+{
+    std::vector<double> result;
+    std::smatch match;
+    auto pos = data.begin();
+    while(std::regex_search(pos,data.end(),match,std::regex("[0-9]|-")))
+    {
+        pos += match.position();
+
+        int charsParsed = 0;
+        double element = 0;
+        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
             result.push_back(element);
 
         pos += charsParsed;
@@ -429,6 +459,42 @@ void IPLProcessPropertyVectorInt::deserialize(const SerializedData &data)
 IPLProcessProperty *IPLProcessPropertyVectorInt::clone() const
 {
     return new IPLProcessPropertyVectorInt(*this);
+}
+
+
+
+IPLProcessPropertyVectorDouble::IPLProcessPropertyVectorDouble(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::vector<double> &value, IPLProcessWidgetType widget):
+    IPLProcessProperty(position,name,title,description,process,widget),
+    _value(value)
+{}
+
+void IPLProcessPropertyVectorDouble::setValue(const std::vector<double> &value)
+{
+    _value = value;
+    _process->requestUpdate();
+    _process->notifyPropertyChangedEventHandler();
+}
+
+void IPLProcessPropertyVectorDouble::setValue(std::vector<double> &&value)
+{
+    _value = std::move(value);
+    _process->requestUpdate();
+    _process->notifyPropertyChangedEventHandler();
+}
+
+IPLProcessProperty::SerializedData IPLProcessPropertyVectorDouble::serialize() const
+{
+    return serializeProperty(type(),_widget,_value);
+}
+
+void IPLProcessPropertyVectorDouble::deserialize(const SerializedData &data)
+{
+    deserializeProperty(data,_widget,_value);
+}
+
+IPLProcessProperty *IPLProcessPropertyVectorDouble::clone() const
+{
+    return new IPLProcessPropertyVectorDouble(*this);
 }
 
 

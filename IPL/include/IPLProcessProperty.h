@@ -218,6 +218,24 @@ private:
     std::vector<int> _value;                       //!< default and also current value
 };
 
+// VECTOR<DOUBLE>
+class IPLSHARED_EXPORT IPLProcessPropertyVectorDouble : public IPLProcessProperty
+{
+public:
+    IPLProcessPropertyVectorDouble(IPLProcess* process, int position, const char* name, const char* title, const char* description, const std::vector<double> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+
+    const std::vector<double> &value() const                       { return _value; }
+    void setValue(const std::vector<double> &value);
+    void setValue(std::vector<double> &&value);
+    virtual const char *type() const                            { return "vector<double>"; }
+    virtual SerializedData serialize() const;
+    virtual void deserialize(const SerializedData &data);
+    IPLProcessProperty *clone() const;
+
+private:
+    std::vector<double> _value;                       //!< default and also current value
+};
+
 // COLOR
 class IPLSHARED_EXPORT IPLProcessPropertyColor : public IPLProcessProperty
 {
