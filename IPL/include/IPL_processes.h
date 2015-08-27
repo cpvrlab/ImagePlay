@@ -98,4 +98,6 @@
 #include "IPLMatchTemplate.h"
 #include "IPLGoodFeaturesToTrack.h"
 
+#include "IPLUndistort.h"
+
 #endif // IPL_H

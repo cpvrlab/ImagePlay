@@ -458,6 +458,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLAccumulate",          new IPLAccumulate);
     _factory->registerProcess("IPLHoughLines",          new IPLHoughLines);
 
+    _factory->registerProcess("IPLUndistort",           new IPLUndistort);
+
     // not ready:
     /*_factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);
     _factory->registerProcess("IPLGoodFeaturesToTrack", new IPLGoodFeaturesToTrack);
