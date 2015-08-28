@@ -67,8 +67,6 @@ MainWindow::MainWindow(QWidget *parent) :
     loadPlugins();
 
     _imageViewer = new ImageViewerWindow(this);
-    //_imageViewer->setWindowFlags(Qt::Tool);
-    //_imageViewer->show();
 
     _settingsWindow = new SettingsWindow(this);
 
@@ -1353,13 +1351,11 @@ void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)
 {
     if(checked)
     {
-        _imageViewer->setParent(this);
-        _imageViewer->setWindowFlags(Qt::Tool);
+        _imageViewer->setParent(this, Qt::Dialog | Qt::WindowStaysOnTopHint);
     }
     else
     {
-        _imageViewer->setParent(NULL);
-        _imageViewer->setWindowFlags(Qt::Window);
+        _imageViewer->setParent(NULL, Qt::Window);
     }
 
     _imageViewer->show();
