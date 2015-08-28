@@ -163,6 +163,8 @@ private slots:
     void                    on_actionImageViewer_triggered  (bool checked);
     void                    on_btnCloseProcessSettings_clicked();
 
+    void on_actionImage_Viewer_always_on_top_triggered(bool checked);
+
 private:
     void                    addRecentProcessFile(const QString&);
     void                    updateRecentProcessesMenu();

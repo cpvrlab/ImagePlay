@@ -14,8 +14,8 @@
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/process_icons/process_icons/Load.png</normaloff>:/process_icons/process_icons/Load.png</iconset>
+   <iconset resource="../res/ressources.qrc">
+    <normaloff>:/ImagePlay.png</normaloff>:/ImagePlay.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -660,6 +660,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../res/ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

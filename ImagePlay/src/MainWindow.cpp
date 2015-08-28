@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     loadPlugins();
 
     _imageViewer = new ImageViewerWindow(this);
-    _imageViewer->setWindowFlags(Qt::Tool);
+    //_imageViewer->setWindowFlags(Qt::Tool);
     //_imageViewer->show();
 
     _settingsWindow = new SettingsWindow(this);
@@ -203,6 +203,10 @@ void MainWindow::readSettings()
     ui->dockLog->setVisible(showLog);
     ui->actionShowLog->setChecked(showLog);
 
+    bool alwaysOnTop    = _settings->value("alwaysOnTop", true).toBool();
+    ui->actionImage_Viewer_always_on_top->setChecked(alwaysOnTop);
+    on_actionImage_Viewer_always_on_top_triggered(alwaysOnTop);
+
     _synchronizeViews   = _settings->value("synchronizeViews", true).toBool();
     ui->actionSynchronizeViews->setChecked(_synchronizeViews);
 
@@ -269,7 +273,9 @@ void MainWindow::writeSettings()
     bool showLog = ui->actionShowLog->isChecked();
     bool synchronizeViews = ui->actionSynchronizeViews->isChecked();
     bool showThumbnails = ui->actionShowThumbnails->isChecked();
+    bool alwaysOnTop = ui->actionImage_Viewer_always_on_top->isChecked();
     _settings->setValue("showLog",          showLog);
+    _settings->setValue("alwaysOnTop",      alwaysOnTop);
     _settings->setValue("synchronizeViews", synchronizeViews);
     _settings->setValue("showThumbnails",   showThumbnails);
 
@@ -1341,4 +1347,21 @@ void MainWindow::on_actionImageViewer_hidden()
 void MainWindow::on_btnCloseProcessSettings_clicked()
 {
     hideProcessSettings();
+}
+
+void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)
+{
+    if(checked)
+    {
+        _imageViewer->setParent(this);
+        _imageViewer->setWindowFlags(Qt::Tool);
+    }
+    else
+    {
+        _imageViewer->setParent(NULL);
+        _imageViewer->setWindowFlags(Qt::Window);
+    }
+
+    _imageViewer->show();
+
 }
