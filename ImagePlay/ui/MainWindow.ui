@@ -20,7 +20,7 @@
    <string>ImagePlay</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/ressources.qrc">
     <normaloff>:/ImagePlay.png</normaloff>:/ImagePlay.png</iconset>
   </property>
   <property name="dockOptions">
@@ -632,7 +632,13 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Image Viewer always on top</string>
+    <string>Show Image Viewer always on top</string>
+   </property>
+   <property name="iconText">
+    <string>Show Image Viewer always on top</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Image Viewer always on top</string>
    </property>
   </action>
  </widget>

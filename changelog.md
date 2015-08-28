@@ -1,5 +1,35 @@
 # Change Log
 
+## 6.0.0-beta.5 - 2015-08-28
+### Added
+- Added an "open recent" menu.
+- Drag & drop for loading .ipj files directly.
+- Added a setting which specifies where the /plugin_development/ folder is located.
+- Scrollable space in the main window now automatically grows.
+- New option to always show the ImageViewer on top
+- New property type IPL_WIDGET_MATRIX
+- New algorithms
+ - Undistort
+ - Warp Affine
+ - Warp Perspective
+- We now provide a nightly build for Windows at https://ci.appveyor.com/project/cpvrlab/imageplay/build/artifacts
+
+### Fixed
+- ImageViewer now zooms all images to the same level.
+- Drifting scrollbars in ImageViewer
+- Crash when using IPLCamera and closing the app
+- Default value for hough transform
+- Allow any input for IPLMergePlanes
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- Histogram and Zoom might not update correctly.
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
 ## 6.0.0-beta.4 - 2015-08-14
 ### Added
 - You can now drag & drop files or folders from your desktop directly to ImagePlay.
