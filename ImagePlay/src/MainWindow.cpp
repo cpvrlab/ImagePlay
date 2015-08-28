@@ -1351,7 +1351,11 @@ void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)
 {
     if(checked)
     {
+#ifdef Q_OS_WIN
+        _imageViewer->setParent(this, Qt::Dialog);
+#else
         _imageViewer->setParent(this, Qt::Dialog | Qt::WindowStaysOnTopHint);
+#endif
     }
     else
     {
