@@ -226,8 +226,7 @@ bool IPLGradientOperator::cubicSpline(IPLImage* image, bool useOpenCV)
   notifyProgressEventHandler(-1);
 
   if ( useOpenCV ){
-    cv::Mat input;
-    cvtColor(image->toCvMat(),input,CV_BGR2GRAY);
+    cv::Mat input = image->toCvMat();
     cv::Mat coeff = cv::Mat::zeros(4,4,CV_32FC1);
 
     float dx,dy,x3,x2,y3,y2,xf,yf;
@@ -239,7 +238,7 @@ bool IPLGradientOperator::cubicSpline(IPLImage* image, bool useOpenCV)
 
          for (int i=0;i<4;i++)
            for (int j=0;j<4;j++)
-             coeff.at<cv::Vec<float,1>>(i,j)[0] = static_cast<float>(input.at<cv::Vec<unsigned char,1>>(y-1+i,x-1+j).val[0]) * FACTOR_TO_FLOAT ;
+             coeff.at<cv::Vec<float,1>>(i,j)[0] = static_cast<float>(input.at<cv::Vec<unsigned char,4>>(y-1+i,x-1+j).val[0]) * FACTOR_TO_FLOAT ;
 
          coeff = k1*coeff;
          coeff = coeff*k2;
@@ -261,7 +260,7 @@ bool IPLGradientOperator::cubicSpline(IPLImage* image, bool useOpenCV)
          cv::Mat dyMat(4,4,CV_32FC1,dyMatf);
          dx = coeff.dot(dxMat);
          dy = coeff.dot(dyMat);
-         //std::cout << x << "," << y << ":"<< dx <<","<<dy<<std::endl;
+
          double phase = (dx!=0.0 || dy!=0.0 )? atan2( -dy, dx ) : 0.0;
 
           while( phase > 2.0 * PI ) phase -= 2.0 * PI;
