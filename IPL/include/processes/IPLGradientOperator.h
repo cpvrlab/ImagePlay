@@ -45,6 +45,12 @@ public:
 
 protected:
     IPLOrientedImage*   _result;
+
+private:
+    bool fastGradient(IPLImage* data);
+    bool roberts(IPLImage* data, bool useOpenCV);
+    bool sobel(IPLImage* data, bool useOpenCV);
+    bool cubicSpline(IPLImage* data, bool useOpenCV);
 };
 
 #endif // IPLGRADIENTOPERATOR_H
