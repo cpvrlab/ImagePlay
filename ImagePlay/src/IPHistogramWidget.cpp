@@ -58,7 +58,7 @@ void IPHistogramWidget::updateHistogram(IPLImage *image)
         {
             _histogram.reset(new IPLHistogram(image->plane(0), 2, 100));
         }
-        else if(_type == IPLData::IMAGE_GRAYSCALE)
+        else if(_type == IPLData::IMAGE_GRAYSCALE || _type == IPLData::IMAGE_ORIENTED )
         {
             _histogram.reset(new IPLHistogram(image->plane(0), 256, 100));
         }
@@ -141,7 +141,7 @@ void IPHistogramWidget::paintEvent(QPaintEvent* e)
             painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         }
     }
-    else if(_type == IPLData::IMAGE_GRAYSCALE)
+    else if(_type == IPLData::IMAGE_GRAYSCALE || _type == IPLData::IMAGE_ORIENTED ) 
     {
         std::vector<int> values = _logarithmic ? _histogram->logarithmic() : _histogram->linear();
 
@@ -198,7 +198,7 @@ void IPHistogramWidget::mouseMoveEvent(QMouseEvent* event)
 
         emit highlightChangedColor(_hightlightPosition, valueR, valueG, valueB, percentageR, percentageG, percentageB);
     }
-    else if(_type == IPLData::IMAGE_GRAYSCALE)
+    else if(_type == IPLData::IMAGE_GRAYSCALE || _type == IPLData::IMAGE_ORIENTED )
     {
         int value = _histogram->rawValueAt(_hightlightPosition);
         float percentage = _histogram->percentageAt(_hightlightPosition);
