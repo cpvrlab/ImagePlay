@@ -136,8 +136,6 @@ ConnectionDialog::ConnectionDialog(IPProcessStep *from, IPProcessStep *to, IPPro
 
 void ConnectionDialog::on_accept()
 {
-    hide();
-
     int indexFrom = _groupFrom->checkedId();
     int indexTo = _groupTo->checkedId();
 
