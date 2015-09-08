@@ -272,7 +272,7 @@ uchar* IPLImage::rgb32()
             for(int x=0; x < _width; x++)
             {
                 ipl_basetype phase = fmod(plane(1)->p(x,y), 1.0);
-                ipl_basetype magnitude = fmod(plane(0)->p(x,y) / maxMag, 0.9);
+                ipl_basetype magnitude = plane(0)->p(x,y) / maxMag;
 
                 if(phase < 0)
                     phase = 0;

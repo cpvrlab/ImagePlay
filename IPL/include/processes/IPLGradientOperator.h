@@ -40,11 +40,17 @@ public:
     void                    init();
     virtual void        destroy();
 
-    virtual bool            processInputData            (IPLImage* data, int inNr, bool useOpenCV);
+    virtual bool            processInputData            (IPLImage* data, int inNr, bool) override;
     virtual IPLImage*       getResultData               (int outNr);
 
 protected:
     IPLOrientedImage*   _result;
+
+private:
+    bool fastGradient(IPLImage* data);
+    bool roberts(IPLImage* data);
+    bool sobel(IPLImage* data);
+    bool cubicSpline(IPLImage* data);
 };
 
 #endif // IPLGRADIENTOPERATOR_H
