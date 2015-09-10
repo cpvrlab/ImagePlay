@@ -25,6 +25,8 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 /**
  * @brief The IPLFileIO class
@@ -37,7 +39,8 @@ public:
     static bool loadFile(const std::string filename, IPLImage*& image, std::string& information);
     static bool loadMemory(void* hmem, IPLImage*& image);
     static bool saveFile(const std::string path, IPLImage* image, int format, int flags, IPLImage* result = 0, bool preview = false);
-    static std::vector<std::string> supportedMimeTypes();
+
+    static bool loadRAWFile(const std::string filename, IPLImage*& image, int width, int height, int format, std::string& information);
 };
 
 #endif // IPLFILEIO_H

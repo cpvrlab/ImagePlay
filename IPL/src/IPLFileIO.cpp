@@ -289,9 +289,141 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
     return success;
 }
 
-std::vector<std::string> IPLFileIO::supportedMimeTypes()
+/*!
+ * \brief IPLFileIO::loadRAWFile
+ * \param filename
+ * \param image pass by pointer reference, because we need to change the pointer
+ * \param width
+ * \param height
+ * \param format: 8 bit (Grayscale)|24 bit (RGB)|24 bit (BGR)|32 bit (RGBA)|32 bit (ABGR)
+ * \param mode: Interleaved|Planar
+ * \param information
+ * \return
+ */
+bool IPLFileIO::loadRAWFile(const std::string filename, IPLImage *&image, int width, int height, int format, std::string &information)
 {
-    std::string supportedMimeTypes[37] =  {"image/bmp", "image/x-windows-bmp", "image/x-icon", "image/jpeg",
-                                           "image/x-portable-bitmap"};
-    return std::vector<std::string> (supportedMimeTypes, supportedMimeTypes + sizeof(supportedMimeTypes) / sizeof(supportedMimeTypes[0]) );
+    std::ifstream  file(filename, std::ios::binary);
+
+    if(!file.is_open())
+    {
+        information.append("Could not open file");
+        image = NULL;
+        return false;
+    }
+
+    // clear old image
+    delete image;
+    // create IPLImage
+    if(format == 0)
+        image = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+    else
+        image = new IPLImage(IPLData::IMAGE_COLOR, width, height);
+
+    // read file
+    switch (format) {
+    case 0: // 8 bit (Grayscale)
+    {
+        char buffer;
+        int x=0;
+        int y=0;
+        while(file.good())
+        {
+           file.read(&buffer, 1);
+
+           ipl_basetype value = buffer * FACTOR_TO_FLOAT;
+           image->plane(0)->cp(x, y) = value;
+
+           x++;
+           if(x%width == 0)
+           {
+               x = 0;
+               y++;
+           }
+        }
+        return true;
+        break;
+    }
+    case 1: // 24 bit (RGB)
+    case 2: // 24 bit (BGR)
+    {
+        char buffer[3];
+        int x=0;
+        int y=0;
+        while(file.good())
+        {
+           file.read(buffer, 3);
+
+           ipl_basetype r,g,b;
+           if(format == 1)
+           {
+               r = buffer[0] * FACTOR_TO_FLOAT;
+               g = buffer[1] * FACTOR_TO_FLOAT;
+               b = buffer[2] * FACTOR_TO_FLOAT;
+           }
+           else
+           {
+               b = buffer[0] * FACTOR_TO_FLOAT;
+               g = buffer[1] * FACTOR_TO_FLOAT;
+               r = buffer[2] * FACTOR_TO_FLOAT;
+           }
+
+           image->plane(0)->cp(x, y) = r;
+           image->plane(1)->cp(x, y) = g;
+           image->plane(2)->cp(x, y) = b;
+
+           x++;
+           if(x%width == 0)
+           {
+               x = 0;
+               y++;
+           }
+        }
+        return true;
+        break;
+    }
+    case 3: // 32 bit (RGBA)
+    case 4: // 32 bit (ABGR)
+    {
+        char buffer[4];
+        int x=0;
+        int y=0;
+        while(file.good())
+        {
+           file.read(buffer, 4);
+
+           ipl_basetype r,g,b,a;
+           if(format == 1)
+           {
+               r = buffer[0] * FACTOR_TO_FLOAT;
+               g = buffer[1] * FACTOR_TO_FLOAT;
+               b = buffer[2] * FACTOR_TO_FLOAT;
+               a = buffer[3] * FACTOR_TO_FLOAT;
+           }
+           else
+           {
+               a = buffer[0] * FACTOR_TO_FLOAT;
+               b = buffer[1] * FACTOR_TO_FLOAT;
+               g = buffer[2] * FACTOR_TO_FLOAT;
+               r = buffer[3] * FACTOR_TO_FLOAT;
+           }
+
+           image->plane(0)->cp(x, y) = r;
+           image->plane(1)->cp(x, y) = g;
+           image->plane(2)->cp(x, y) = b;
+
+           x++;
+           if(x%width == 0)
+           {
+               x = 0;
+               y++;
+           }
+        }
+        return true;
+        break;
+    }
+    default:
+        break;
+    }
+
+    return false;
 }
