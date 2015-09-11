@@ -43,8 +43,10 @@ void IPLLoadImage::init()
     addProcessPropertyInt("mode", "Mode:Normal|RAW", "normal|raw", 0, IPL_WIDGET_GROUP);
     addProcessPropertyInt("raw_width", "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
     addProcessPropertyInt("raw_height", "Height", "", 512, IPL_WIDGET_SLIDER, 1, 4096);
-    addProcessPropertyInt("raw_format", "Pixel format:8 bit (Grayscale)|24 bit (RGB)|24 bit (BGR)|32 bit (RGBA)|32 bit (ABGR)",
-                          "If you know your files's dimensions and byte order, you can load it as RAW data.", 0, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyInt("raw_format", "Pixel format:8 bit (Grayscale)|24 bit (RGB)|24 bit (BGR)|32 bit (RGBA)|32 bit (ABGR)", "", 0, IPL_WIDGET_COMBOBOX);
+    addProcessPropertyInt("raw_interleaved", "Byte Order:Interleaved|Planar",
+                          "If you know your files's dimensions and byte order, you can load it as RAW data.",
+                          0, IPL_WIDGET_COMBOBOX);
 }
 
 void IPLLoadImage::destroy()
@@ -69,6 +71,9 @@ bool IPLLoadImage::processInputData(IPLImage*, int, bool)
     int raw_width   = getProcessPropertyInt("raw_width");
     int raw_height  = getProcessPropertyInt("raw_height");
     int raw_format  = getProcessPropertyInt("raw_format");
+    int raw_interleaved  = getProcessPropertyInt("raw_interleaved");
+
+    bool interleaved = (raw_interleaved == 0);
 
     if(_path.length() == 0)
     {
@@ -87,7 +92,7 @@ bool IPLLoadImage::processInputData(IPLImage*, int, bool)
     if(mode == 0)
         success = IPLFileIO::loadFile(_path, this->_result, information);
     else
-        success = IPLFileIO::loadRAWFile(_path, this->_result, raw_width, raw_height, raw_format, information);
+        success = IPLFileIO::loadRawFile(_path, this->_result, raw_width, raw_height, (IPLRawImageType) raw_format, interleaved, information);
 
     if(success)
     {

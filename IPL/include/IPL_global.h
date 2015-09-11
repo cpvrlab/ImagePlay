@@ -123,4 +123,14 @@ enum IPLProcessWidgetType
 
 const char *widgetName(IPLProcessWidgetType type);
 
+
+enum IPLRawImageType
+{
+    IPL_RAW_8BIT = 0,
+    IPL_RAW_24BIT_RGB,
+    IPL_RAW_24BIT_BGR,
+    IPL_RAW_32BIT_RGB,
+    IPL_RAW_32BIT_BGR
+};
+
 #endif // IPL_GLOBAL_H

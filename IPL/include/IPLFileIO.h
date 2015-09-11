@@ -40,7 +40,12 @@ public:
     static bool loadMemory(void* hmem, IPLImage*& image);
     static bool saveFile(const std::string path, IPLImage* image, int format, int flags, IPLImage* result = 0, bool preview = false);
 
-    static bool loadRAWFile(const std::string filename, IPLImage*& image, int width, int height, int format, std::string& information);
+    static bool loadRawFile(const std::string filename, IPLImage*& image, int width, int height, IPLRawImageType format, bool interleaved, std::string& information);
+    static bool readRaw8bit(int stride, IPLImage *&image, std::ifstream &file);
+    static bool readRaw24BitInterleaved(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
+    static bool readRaw32BitInterleaved(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
+    static bool readRaw24BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
+    static bool readRaw32BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
 };
 
 #endif // IPLFILEIO_H

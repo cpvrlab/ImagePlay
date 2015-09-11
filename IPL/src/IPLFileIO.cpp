@@ -289,6 +289,202 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
     return success;
 }
 
+bool IPLFileIO::readRaw8bit(int stride, IPLImage *&image, std::ifstream &file)
+{
+    char buffer;
+    int x=0;
+    int y=0;
+    while(file.good())
+    {
+       file.read(&buffer, 1);
+
+       ipl_basetype value = buffer * FACTOR_TO_FLOAT;
+       image->plane(0)->cp(x, y) = value;
+
+       x++;
+       if(x % stride == 0)
+       {
+           x = 0;
+           y++;
+       }
+    }
+    return true;
+}
+
+bool IPLFileIO::readRaw24BitInterleaved(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file)
+{
+    char buffer[3];
+    int x=0;
+    int y=0;
+    while(file.good())
+    {
+       file.read(buffer, 3);
+
+       ipl_basetype r,g,b;
+       if(format == 1)
+       {
+           r = buffer[0] * FACTOR_TO_FLOAT;
+           g = buffer[1] * FACTOR_TO_FLOAT;
+           b = buffer[2] * FACTOR_TO_FLOAT;
+       }
+       else
+       {
+           b = buffer[0] * FACTOR_TO_FLOAT;
+           g = buffer[1] * FACTOR_TO_FLOAT;
+           r = buffer[2] * FACTOR_TO_FLOAT;
+       }
+
+       image->plane(0)->cp(x, y) = r;
+       image->plane(1)->cp(x, y) = g;
+       image->plane(2)->cp(x, y) = b;
+
+       x++;
+       if(x % stride == 0)
+       {
+           x = 0;
+           y++;
+       }
+    }
+    return true;
+}
+
+bool IPLFileIO::readRaw32BitInterleaved(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file)
+{
+    char buffer[4];
+    int x=0;
+    int y=0;
+    while(file.good())
+    {
+       file.read(buffer, 4);
+
+       ipl_basetype r,g,b,a;
+       if(format == 1)
+       {
+           r = buffer[0] * FACTOR_TO_FLOAT;
+           g = buffer[1] * FACTOR_TO_FLOAT;
+           b = buffer[2] * FACTOR_TO_FLOAT;
+           a = buffer[3] * FACTOR_TO_FLOAT;
+       }
+       else
+       {
+           a = buffer[0] * FACTOR_TO_FLOAT;
+           b = buffer[1] * FACTOR_TO_FLOAT;
+           g = buffer[2] * FACTOR_TO_FLOAT;
+           r = buffer[3] * FACTOR_TO_FLOAT;
+       }
+
+       image->plane(0)->cp(x, y) = r;
+       image->plane(1)->cp(x, y) = g;
+       image->plane(2)->cp(x, y) = b;
+
+       x++;
+       if(x % stride == 0)
+       {
+           x = 0;
+           y++;
+       }
+    }
+    return true;
+}
+
+bool IPLFileIO::readRaw24BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file)
+{
+    char buffer;
+    int x=0;
+    int y=0;
+
+    // RRRGGGBBB
+    int currentPlane = 0;
+
+    // BBBGGGRRR
+    if(format == IPL_RAW_24BIT_BGR)
+        currentPlane = 2;
+
+    // get length of file:
+    file.seekg (0, file.end);
+    int length = file.tellg();
+    int planeLength = length/3;
+    file.seekg (0, file.beg);
+
+    while(file.good())
+    {
+       file.read(&buffer, 1);
+
+       image->plane(currentPlane)->cp(x, y) = buffer * FACTOR_TO_FLOAT;
+
+       x++;
+       if(x % stride == 0)
+       {
+           x = 0;
+           y++;
+       }
+
+       if(((int) file.tellg()+1) % planeLength == 0)
+       {
+           if(format == IPL_RAW_24BIT_RGB)
+               currentPlane++;
+           else
+               currentPlane--;
+
+           x = 0;
+           y = 0;
+
+           if(currentPlane >= image->getNumberOfPlanes() || currentPlane < 0)
+               return true;
+       }
+    }
+    return true;
+}
+
+bool IPLFileIO::readRaw32BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file)
+{
+    char buffer;
+    int x=0;
+    int y=0;
+
+    // RRRGGGBBB
+    int currentPlane = 0;
+
+    // BBBGGGRRR
+    if(format == IPL_RAW_32BIT_BGR)
+        currentPlane = 2;
+
+    // get length of file:
+    file.seekg (0, file.end);
+    int length = file.tellg();
+    int planeLength = length/4;
+    file.seekg (0, file.beg);
+
+    while(file.good())
+    {
+       file.read(&buffer, 1);
+
+       image->plane(currentPlane)->cp(x, y) = buffer * FACTOR_TO_FLOAT;
+
+       x++;
+       if(x % stride == 0)
+       {
+           x = 0;
+           y++;
+       }
+
+       if(((int) file.tellg()+1) % planeLength == 0)
+       {
+           if(format == IPL_RAW_32BIT_RGB)
+               currentPlane++;
+           else
+               currentPlane--;
+
+           x = 0;
+           y = 0;
+
+           if(currentPlane >= image->getNumberOfPlanes() || currentPlane < 0)
+               return true;
+       }
+    }
+    return true;
+}
+
 /*!
  * \brief IPLFileIO::loadRAWFile
  * \param filename
@@ -296,11 +492,11 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
  * \param width
  * \param height
  * \param format: 8 bit (Grayscale)|24 bit (RGB)|24 bit (BGR)|32 bit (RGBA)|32 bit (ABGR)
- * \param mode: Interleaved|Planar
+ * \param interleaved: Interleaved|Planar
  * \param information
  * \return
  */
-bool IPLFileIO::loadRAWFile(const std::string filename, IPLImage *&image, int width, int height, int format, std::string &information)
+bool IPLFileIO::loadRawFile(const std::string filename, IPLImage *&image, int width, int height, IPLRawImageType format, bool interleaved, std::string &information)
 {
     std::ifstream  file(filename, std::ios::binary);
 
@@ -314,7 +510,7 @@ bool IPLFileIO::loadRAWFile(const std::string filename, IPLImage *&image, int wi
     // clear old image
     delete image;
     // create IPLImage
-    if(format == 0)
+    if(format == IPL_RAW_8BIT)
         image = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
     else
         image = new IPLImage(IPLData::IMAGE_COLOR, width, height);
@@ -323,102 +519,25 @@ bool IPLFileIO::loadRAWFile(const std::string filename, IPLImage *&image, int wi
     switch (format) {
     case 0: // 8 bit (Grayscale)
     {
-        char buffer;
-        int x=0;
-        int y=0;
-        while(file.good())
-        {
-           file.read(&buffer, 1);
-
-           ipl_basetype value = buffer * FACTOR_TO_FLOAT;
-           image->plane(0)->cp(x, y) = value;
-
-           x++;
-           if(x%width == 0)
-           {
-               x = 0;
-               y++;
-           }
-        }
-        return true;
+        return readRaw8bit(width, image, file);
         break;
     }
-    case 1: // 24 bit (RGB)
-    case 2: // 24 bit (BGR)
+    case IPL_RAW_24BIT_RGB: // 24 bit (RGB)
+    case IPL_RAW_24BIT_BGR: // 24 bit (BGR)
     {
-        char buffer[3];
-        int x=0;
-        int y=0;
-        while(file.good())
-        {
-           file.read(buffer, 3);
-
-           ipl_basetype r,g,b;
-           if(format == 1)
-           {
-               r = buffer[0] * FACTOR_TO_FLOAT;
-               g = buffer[1] * FACTOR_TO_FLOAT;
-               b = buffer[2] * FACTOR_TO_FLOAT;
-           }
-           else
-           {
-               b = buffer[0] * FACTOR_TO_FLOAT;
-               g = buffer[1] * FACTOR_TO_FLOAT;
-               r = buffer[2] * FACTOR_TO_FLOAT;
-           }
-
-           image->plane(0)->cp(x, y) = r;
-           image->plane(1)->cp(x, y) = g;
-           image->plane(2)->cp(x, y) = b;
-
-           x++;
-           if(x%width == 0)
-           {
-               x = 0;
-               y++;
-           }
-        }
-        return true;
+        if(interleaved)
+            return readRaw24BitInterleaved(width, format, image, file);
+        else
+            return readRaw24BitPlanar(width, format, image, file);
         break;
     }
-    case 3: // 32 bit (RGBA)
-    case 4: // 32 bit (ABGR)
+    case IPL_RAW_32BIT_RGB: // 32 bit (RGBA)
+    case IPL_RAW_32BIT_BGR: // 32 bit (ABGR)
     {
-        char buffer[4];
-        int x=0;
-        int y=0;
-        while(file.good())
-        {
-           file.read(buffer, 4);
-
-           ipl_basetype r,g,b,a;
-           if(format == 1)
-           {
-               r = buffer[0] * FACTOR_TO_FLOAT;
-               g = buffer[1] * FACTOR_TO_FLOAT;
-               b = buffer[2] * FACTOR_TO_FLOAT;
-               a = buffer[3] * FACTOR_TO_FLOAT;
-           }
-           else
-           {
-               a = buffer[0] * FACTOR_TO_FLOAT;
-               b = buffer[1] * FACTOR_TO_FLOAT;
-               g = buffer[2] * FACTOR_TO_FLOAT;
-               r = buffer[3] * FACTOR_TO_FLOAT;
-           }
-
-           image->plane(0)->cp(x, y) = r;
-           image->plane(1)->cp(x, y) = g;
-           image->plane(2)->cp(x, y) = b;
-
-           x++;
-           if(x%width == 0)
-           {
-               x = 0;
-               y++;
-           }
-        }
-        return true;
+        if(interleaved)
+            return readRaw32BitInterleaved(width, format, image, file);
+        else
+            return readRaw32BitPlanar(width, format, image, file);
         break;
     }
     default:
