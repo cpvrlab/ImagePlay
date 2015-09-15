@@ -80,6 +80,8 @@ bool IPLNormalizeIllumination::processInputData(IPLImage* image , int, bool)
     cv::Mat result;
     cv::Size sqCycles(_cycles,_cycles);
 
+
+
     switch (meanSel){
        case 0:
          blur(*lMat,mu,sqCycles);
@@ -98,6 +100,8 @@ bool IPLNormalizeIllumination::processInputData(IPLImage* image , int, bool)
          }
          break;
        case 3:
+         if(_cycles > 15)
+            addWarning("Large filter sizes can lead to long processing time.");
          bilateralFilter(*lMat,mu,_cycles,30.0,30.0);
          break;
     }
