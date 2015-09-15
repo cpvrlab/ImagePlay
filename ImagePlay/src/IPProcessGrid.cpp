@@ -232,6 +232,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     // execute the processes
     int counter = 0;
     int limit = 10000;
+    bool blockFailLoop = false;
 
     QList<IPProcessStep*> afterProcessingList;
 
@@ -266,6 +267,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 step->process()->resetMessages();
                 step->process()->beforeProcessing();
                 int durationMs = executeThread(step->process());
+                if ( _lastProcessSuccess ) blockFailLoop = true;
                 //step->process()->afterProcessing();
 
                 // afterProcessing will be called later
@@ -315,6 +317,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                     step->process()->resetMessages();
                     step->process()->beforeProcessing();
                     int durationMs = executeThread(step->process(), result, indexTo, mainWindow()->useOpenCV());
+                    if ( !_lastProcessSuccess ) blockFailLoop = true;
                     //step->process()->afterProcessing();
 
                     // afterProcessing will be called later
@@ -388,6 +391,24 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     //    _mainWindow->execute(false);
 
     _updateNeeded = false;
+
+    // check to see if any of these items changed while running,
+    // set _updateNeeded to true if any still need it
+    // this can happen if a slider is still being dragged after
+    // a process is started
+    // blockFailLoop prevents an infinite loop if a process is failing
+    if ( !blockFailLoop ){
+       QListIterator<IPProcessStep *> itp(_processList);
+       while (itp.hasNext())
+       {
+           IPProcessStep* step = itp.next();
+           if (step->process()->isResultReady() ){
+              _updateNeeded = true;
+              break;
+           }
+       }
+    }
+    
 
     // call afterProcessing of all steps which were executed this time
     // processes like the camera might request another execution
