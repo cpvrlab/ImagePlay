@@ -70,7 +70,7 @@ class IPProcessGridScene;
 #endif
 
 #ifndef IMAGEPLAY_BUILDTIME
-#define IMAGEPLAY_BUILDTIME "UNKNOWN"
+#define IMAGEPLAY_BUILDTIME ""
 #endif
 
 #define MAX_RECENT_PROJECTS 10
