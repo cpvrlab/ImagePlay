@@ -1,5 +1,25 @@
 # Change Log
 
+## 6.0.0-rc.0 - 2015-09-18
+### Added
+- New mode for loading RAW image files when dimensions and byte order are known
+- New algorithms
+ - Gradient Operator
+ - Normalize Illumination
+
+### Fixed
+- Improved plugin generator and plugin loading stability
+- Improved reliability of the process grid recomputation
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- Histogram and Zoom might not update correctly.
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
 ## 6.0.0-beta.5 - 2015-08-28
 ### Added
 - Added an "open recent" menu.
