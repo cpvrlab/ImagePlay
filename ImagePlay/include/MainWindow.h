@@ -50,9 +50,6 @@
 
 #include "IPL_plugininterface.h"
 
-#define IMAGEPLAY_VERSION "6.0.0-beta.5"
-#define IMAGEPLAY_BUILDNUMBER "20150828"
-
 namespace Ui {
 class MainWindow;
 }
@@ -63,6 +60,19 @@ class IPProcessGridScene;
 
 
 // constants
+
+#ifndef IMAGEPLAY_VERSION
+#define IMAGEPLAY_VERSION "6.0.0"
+#endif
+
+#ifndef IMAGEPLAY_BUILDDATE
+#define IMAGEPLAY_BUILDDATE "UNKNOWN"
+#endif
+
+#ifndef IMAGEPLAY_BUILDTIME
+#define IMAGEPLAY_BUILDTIME "UNKNOWN"
+#endif
+
 #define MAX_RECENT_PROJECTS 10
 
 //-----------------------------------------------------------------------------
@@ -100,7 +110,7 @@ public:
     void                    setPluginDevPath                (QString path)                  { _pluginDevPath = path; }
     QString                 pluginDevPath                   ()                              { return _pluginDevPath; }
     void                    setPluginPath                   (QString path)                  { _pluginPath = path; }
-    QString                 pluginPath                      ()                              { return _pluginPath; }
+    QString                 pluginPath                      ();
     void                    setAutosaveEnabled              (bool enabled)                  { _autosaveEnabled = enabled; }
     bool                    autosaveEnabled                 ()                              { return _autosaveEnabled; }
     void                    setLogFileEnabled               (bool enabled)                  { _logFileEnabled = enabled; }

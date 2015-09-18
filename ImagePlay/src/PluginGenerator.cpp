@@ -133,7 +133,7 @@ bool PluginGenerator::generateFiles()
     bool success = true;
     success &= generateFile("NAME.h", _className + ".h", _className);
     success &= generateFile("NAME.pro", _className + ".pro", _className);
-    success &= generateFile("NAME.vcxproj", _className + ".vcxproj", _className);
+    //success &= generateFile("NAME.vcxproj", _className + ".vcxproj", _className);
 
     return success;
 }

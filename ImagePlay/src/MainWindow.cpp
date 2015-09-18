@@ -484,8 +484,8 @@ void MainWindow::loadPlugins()
 
     ui->processTabWidget->clear();
 
-    QDir pluginsDir(qApp->applicationDirPath() + "/plugins");
-    QDir tmpPluginsDir(qApp->applicationDirPath() + "/plugins/tmp");
+    QDir pluginsDir(pluginPath());
+    QDir tmpPluginsDir(pluginPath() + "/tmp");
 
     // delete old tmp directory
     if(tmpPluginsDir.exists())
@@ -545,7 +545,7 @@ void MainWindow::unloadPlugins()
 {
     for(int i=0; i<_loadedPlugins.count(); i++)
     {
-        // undload instance
+        // unload instance
         PluginInterface* plugin = _loadedPlugins.at(i);
         _factory->unregisterProcess(plugin->name());
     }
@@ -575,6 +575,14 @@ void MainWindow::setFilterFocus()
 {
     ui->txtFilter->setFocus();
     ui->txtFilter->setSelection(0, ui->txtFilter->text().length());
+}
+
+QString MainWindow::pluginPath()
+{
+    if(_pluginPath.length() < 1)
+        return QCoreApplication::applicationDirPath() + "/plugins/";
+    else
+        return _pluginPath;
 }
 
 void MainWindow::showMessage(QString msg, MessageType status)

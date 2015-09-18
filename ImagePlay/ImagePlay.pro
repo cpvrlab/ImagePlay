@@ -18,11 +18,19 @@ TARGET = ImagePlay
 TEMPLATE = app
 #TEMPLATE = vcapp
 
-#VERSION = "6.0.0 beta"
+VERSION = "6.0.0-rc.0"
 QMAKE_TARGET_COMPANY = "BFH"
 QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
 QMAKE_TARGET_COPYRIGHT = ""
+
+win32 {
+    BUILD_DATE = $$system("date /T")
+    BUILD_TIME = $$system("time /T")
+} else {
+    BUILD_DATE = $$system("date")
+    BUILD_TIME = $$system("time")
+}
 
 DEFINES += \
 APP_VERSION=\"\\\"$$VERSION\\\"\" \
@@ -30,8 +38,12 @@ APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
 APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
 APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
 APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
-APP_NAME=\\\"$$TARGET\\\"
+APP_NAME=\\\"$$TARGET\\\" \
+IMAGEPLAY_BUILDDATE=\\\"$$BUILD_DATE\\\" \
+IMAGEPLAY_BUILDTIME=\\\"$$BUILD_TIME\\\" \
+IMAGEPLAY_VERSION=\\\"$$VERSION\\\"
 
+message($$DEFINES)
 
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}

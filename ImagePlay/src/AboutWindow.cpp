@@ -28,9 +28,9 @@ AboutWindow::AboutWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString version("<b>Version: </b> %1, <b>Build: </b> %2");
+    QString version("<b>Version: </b> %1, <b>Build Date: </b> %2 %3");
 
-    ui->labelVersion->setText(version.arg(IMAGEPLAY_VERSION).arg(IMAGEPLAY_BUILDNUMBER));
+    ui->labelVersion->setText(version.arg(IMAGEPLAY_VERSION).arg(IMAGEPLAY_BUILDDATE).arg(IMAGEPLAY_BUILDTIME));
 }
 
 AboutWindow::~AboutWindow()
