@@ -62,15 +62,15 @@ class IPProcessGridScene;
 // constants
 
 #ifndef IMAGEPLAY_VERSION
-#define IMAGEPLAY_VERSION "6.0.0"
+#define IMAGEPLAY_VERSION "6.0.0-rc.0"
 #endif
 
 #ifndef IMAGEPLAY_BUILDDATE
-#define IMAGEPLAY_BUILDDATE "UNKNOWN"
+#define IMAGEPLAY_BUILDDATE __DATE__
 #endif
 
 #ifndef IMAGEPLAY_BUILDTIME
-#define IMAGEPLAY_BUILDTIME ""
+#define IMAGEPLAY_BUILDTIME __TIME__
 #endif
 
 #define MAX_RECENT_PROJECTS 10

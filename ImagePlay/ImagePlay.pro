@@ -24,18 +24,6 @@ QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
 QMAKE_TARGET_COPYRIGHT = ""
 
-# this is hell, different locals and operating systems handle
-# date and time differently
-#win32 {
-#    BUILD_DATE = $$system("date /T")
-#    BUILD_TIME = $$system("time /T")
-#} else {
-#    BUILD_DATE = $$system("date")
-#    BUILD_TIME = $$system("time")
-#}
-
-BUILD_DATE = "18.09.2015"
-
 DEFINES += \
 APP_VERSION=\"\\\"$$VERSION\\\"\" \
 APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
@@ -43,8 +31,6 @@ APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
 APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
 APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
 APP_NAME=\\\"$$TARGET\\\" \
-#IMAGEPLAY_BUILDDATE=\"\\\"$$BUILD_DATE\\\"\" \
-#IMAGEPLAY_VERSION=\\\"$$VERSION\\\"
 
 message($$DEFINES)
 
