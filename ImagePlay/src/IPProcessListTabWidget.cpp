@@ -28,6 +28,8 @@ IPProcessListTabWidget::IPProcessListTabWidget(QWidget *parent) :
 
 void IPProcessListTabWidget::init(MainWindow *mainWindow)
 {
+    _mainWindow = mainWindow;
+
     // items
     QStringList categoryIcons;
     categoryIcons.append(":/icons/16.png");
@@ -80,7 +82,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
     processLibrary.append(plugins);
 
     // all processes tab
-    _allProcessesList = new IPProcessList;
+    _allProcessesList = new IPProcessList(mainWindow);
 
     QWidget* tabAll = new QWidget(this);
     tabAll->setLayout(new QVBoxLayout);
@@ -104,7 +106,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
         tab->setLayout(new QVBoxLayout);
         QLabel* label = new QLabel(processCategories[i], tab);
         label->setStyleSheet("font-size: 12px; font-weight: bold;");
-        IPProcessList* list = new IPProcessList;
+        IPProcessList* list = new IPProcessList(mainWindow, this);
 
         QPixmap categoryIcon;
 
@@ -129,7 +131,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
                 // use icon of first process for the category tab
                 if(categoryIcon.width() == 0)
                 {
-                    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
+                    QFileInfo iconFile(_mainWindow->processIconPath(processID));
 
                     if(iconFile.exists())
                     {

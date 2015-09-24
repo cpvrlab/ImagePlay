@@ -110,6 +110,9 @@ public:
     void                    setPluginDevPath                (QString path)                  { _pluginDevPath = path; }
     QString                 pluginDevPath                   ()                              { return _pluginDevPath; }
     void                    setPluginPath                   (QString path)                  { _pluginPath = path; }
+    QString                 processIconPath                 ()                              { return _processIconPath; }
+    QString                 processIconPath                 (QString processID);
+    void                    setProcessIconPath              (QString path)                  { _processIconPath = path; }
     QString                 pluginPath                      ();
     void                    setAutosaveEnabled              (bool enabled)                  { _autosaveEnabled = enabled; }
     bool                    autosaveEnabled                 ()                              { return _autosaveEnabled; }
@@ -189,7 +192,6 @@ private:
     ImageViewerWindow*      _imageViewer;
     SettingsWindow*         _settingsWindow;
     IPProcessGridScene*     _scene;
-    QLabel*                 _progressLabel;
     QTimer*                 _timer;
     QTimer*                 _messageLabelTimer;
     QTimer*                 _autosaveTimer;
@@ -200,6 +202,7 @@ private:
     QString                 _defaultImagePath;
     QString                 _pluginDevPath;
     QString                 _pluginPath;
+    QString                 _processIconPath;
     long                    _lastAutosaveTimestamp;
     int                     _autosaveInterval;
     bool                    _autosaveEnabled;

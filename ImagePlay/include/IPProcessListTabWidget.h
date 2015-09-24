@@ -42,6 +42,7 @@ public:
 
 private:
     IPProcessList*  _allProcessesList;
+    MainWindow*     _mainWindow;
 };
 
 #endif // IPPROCESSLISTTABWIDGET_H

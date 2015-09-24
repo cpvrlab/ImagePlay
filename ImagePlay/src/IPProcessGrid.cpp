@@ -262,7 +262,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
             }*/
 
             // execute thread
-            if(!step->process()->isResultReady() || forcedUpdate)
+            if(step->process()->updateNeeded() || forcedUpdate)
             {
                 step->process()->resetMessages();
                 step->process()->beforeProcessing();
@@ -292,7 +292,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         }
         else
         {
-            if(!step->process()->isResultReady() || forcedUpdate)
+            if(step->process()->updateNeeded() || forcedUpdate)
             {
                 // execute process once for every input
                 for(int i=0; i < step->edgesIn()->size(); i++)
@@ -318,7 +318,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                     step->process()->beforeProcessing();
                     int durationMs = executeThread(step->process(), result, indexTo, mainWindow()->useOpenCV());
                     if ( !_lastProcessSuccess ) blockFailLoop = true;
-                    //step->process()->afterProcessing();
 
                     // afterProcessing will be called later
                     afterProcessingList.append(step);
@@ -355,41 +354,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     _isRunning = false;
     _currentStep = NULL;
 
-    // if sequence, then run execute next step
-    /*if(_sequenceCount > 0)
-    {
-        // notify GUI
-        emit sequenceChanged(_sequenceIndex, _sequenceCount);
-
-        if(_isSequenceRunning)
-        {
-            //setParamsHaveChanged();
-            _mainWindow->execute(true);
-        }
-    }
-
-    // find sequence processes
-    //bool graphNeedsUpdate = false;
-    for(auto it = _scene->steps()->begin(); it < _scene->steps()->end(); ++it)
-    {
-        IPProcessStep* step = (IPProcessStep*) *it;
-        IPLProcess* process = step->process();
-
-        if(process->isSequence())
-        {
-            process->requestUpdate();
-            propertyChanged(process);
-            requestUpdate();
-        }
-    }*/
-
-    //if(_updateID > _currentUpdateID)
-    //    _mainWindow->execute(false);
-
-    // only for testing the camera
-    //if(graphNeedsUpdate)
-    //    _mainWindow->execute(false);
-
     _updateNeeded = false;
 
     // check to see if any of these items changed while running,
@@ -402,7 +366,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
        while (itp.hasNext())
        {
            IPProcessStep* step = itp.next();
-           if (step->process()->isResultReady() ){
+           if (step->process()->updateNeeded() ){
               _updateNeeded = true;
               break;
            }
@@ -417,6 +381,8 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     {
         IPProcessStep* step = it2.next();
         step->process()->afterProcessing();
+
+        step->process()->setUpdateNeeded(false);
     }
 }
 

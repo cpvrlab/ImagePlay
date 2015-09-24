@@ -129,6 +129,29 @@ linux: {
                         $${QMAKE_COPY_DIR} ../IPL/include ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib/include \
 }
 
+unix : !macx : !isEqual(QMAKE_WIN32,1){
+        isEmpty(PREFIX): PREFIX = /usr
+        !isEqual(AUTOTYPE,0){
+                DEFINES += AUTOTYPE
+                !isEqual(GLOBAL_AUTOTYPE,0){
+                        DEFINES += GLOBAL_AUTOTYPE
+                }
+        }
+        TARGET = imageplay
+        target.path = $${PREFIX}/bin
+        images.files = ../_bin/$$CONFIGURATION/$$PLATFORM/images/*
+        images.path = $${PREFIX}/share/imageplay/images
+        process_icons.files = ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/*.png
+        process_icons.path = $${PREFIX}/share/imageplay/process_icons
+        plugin_development.files = ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/*
+        plugin_development.path = $${PREFIX}/share/imageplay/plugin_development
+
+        INSTALLS += images process_icons plugin_development
+        INSTALLS += target
+
+        DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX\\\"\"
+}
+
 msvc {
     #QMAKE_CXXFLAGS_RELEASE -= -O1
     #QMAKE_CXXFLAGS_RELEASE -= -O2

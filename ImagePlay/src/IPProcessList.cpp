@@ -19,26 +19,15 @@
 
 #include "IPProcessList.h"
 
-IPProcessList::IPProcessList(QWidget *parent) :
+IPProcessList::IPProcessList(MainWindow* mainWindow, QWidget *parent) :
     QListWidget(parent)
 {
     setDragEnabled(true);
     setIconSize(QSize(32, 32));
 
+    _mainWindow = mainWindow;
+
     // define category colors
-    /*_categoryColors.push_back(QColor(255, 255, 255));       // CATEGORY_UNDEFINED
-    _categoryColors.push_back(QColor(0, 182, 189));         // CATEGORY_IO
-    _categoryColors.push_back(QColor(27, 117, 188));       // CATEGORY_CONVERSIONS
-    _categoryColors.push_back(QColor(69, 79, 161));        // CATEGORY_ARITHMETIC
-    _categoryColors.push_back(QColor(116, 72, 157));         // CATEGORY_GEOMETRY
-    _categoryColors.push_back(QColor(170, 85, 161));        // CATEGORY_POINTOPERATIONS
-    _categoryColors.push_back(QColor(240, 78, 77));        // CATEGORY_LOCALOPERATIONS
-    _categoryColors.push_back(QColor(243, 113, 90));         // CATEGORY_MORPHOLOGY
-    _categoryColors.push_back(QColor(247, 148, 72));        // CATEGORY_HISTOGRAM
-    _categoryColors.push_back(QColor(253, 185, 77));        // CATEGORY_EDGES
-    _categoryColors.push_back(QColor(255, 244, 80));         // CATEGORY_GRADIENTS
-    _categoryColors.push_back(QColor(137, 199, 101));        // CATEGORY_FOURIER
-    _categoryColors.push_back(QColor(0, 178, 116));         // CATEGORY_OBJECTS*/
     _categoryColors.push_back(QColor(255, 255, 255));       // CATEGORY_UNDEFINED
     _categoryColors.push_back(QColor(173,213,138));         // CATEGORY_IO
     _categoryColors.push_back(QColor(101,194,149));         // CATEGORY_CONVERSIONS
@@ -76,11 +65,11 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
 {
     // load icon from png file and add background color based on the process category
 
-    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
+    QFileInfo iconFile(_mainWindow->processIconPath(processID));
 
     if(!iconFile.exists())
     {
-        iconFile = QFileInfo(QCoreApplication::applicationDirPath() + QString("/process_icons/Plugin.png"));
+        iconFile = QFileInfo(_mainWindow->processIconPath("Plugin"));
     }
 
     QPixmap transparentIcon(iconFile.absoluteFilePath());

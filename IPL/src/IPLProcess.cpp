@@ -24,6 +24,7 @@ IPLProcess::IPLProcess(void)
     _isSource           = false;
     _isSequence         = false;
     _resultReady        = false;
+    _updateNeeded       = true;
     _openCVSupport      = IPLProcess::OPENCV_NONE;
     _progressHandler    = NULL;
     _propertyHandler    = NULL;
@@ -324,7 +325,7 @@ void IPLProcess::setProperty(std::string key, IPLProcessProperty *value)
 
 void IPLProcess::requestUpdate()
 {
-    _resultReady = false;
+    setUpdateNeeded(true);
     //notifyPropertyChangedEventHandler();
 }
 

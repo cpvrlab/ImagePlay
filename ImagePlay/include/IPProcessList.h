@@ -28,6 +28,7 @@
 #include <QPainter>
 
 #include "IPLProcess.h"
+#include "MainWindow.h"
 
 //-----------------------------------------------------------------------------
 //!Custom process list
@@ -39,12 +40,13 @@ class IPProcessList : public QListWidget
 {
     Q_OBJECT
 public:
-    explicit            IPProcessList   (QWidget *parent = 0);
+    explicit            IPProcessList   (MainWindow* mainWindow, QWidget *parent = 0);
     void                filter          (QString text);
     void                addProcessItem  (QString processID, QString text, QString keywords, IPLProcess::IPLProcessCategory category);
 
 private:
     std::vector<QColor> _categoryColors;
+    MainWindow*         _mainWindow;
 
     // QAbstractItemView interface
 protected:

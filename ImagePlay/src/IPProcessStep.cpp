@@ -66,7 +66,7 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
 
 
     // try to find icon
-    QFileInfo iconFile(QCoreApplication::applicationDirPath() + QString("/process_icons/") + processID + QString(".png"));
+    QFileInfo iconFile(_mainWindow->processIconPath(processID));
     if(iconFile.isFile())
     {
         setIcon(QIcon(iconFile.absoluteFilePath()));
@@ -111,7 +111,6 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
     {
         pen.setColor(QColor(211, 84, 0));
     }
-
     if(!process()->isResultReady())
     {
         pen.setStyle(Qt::DotLine);

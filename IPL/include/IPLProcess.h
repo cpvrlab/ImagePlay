@@ -147,6 +147,8 @@ public:
     void                    setProperty(std::string key, IPLProcessProperty* value);
     bool                    isResultReady()                     { return _resultReady; }
     void                    setResultReady(bool ready)          { _resultReady = ready; }
+    bool                    updateNeeded()                      { return _updateNeeded; }
+    void                    setUpdateNeeded(bool update)        { _updateNeeded = update; }
     void                    requestUpdate();
     void                    requestUpdate(long updateID);
 
@@ -219,6 +221,7 @@ private:
     bool                            _isSource;
     bool                            _isSequence;
     bool                            _resultReady;
+    bool                            _updateNeeded;
     IPLProgressEventHandler*        _progressHandler;
     IPLPropertyChangedEventHandler* _propertyHandler;
     IPLOutputsChangedEventHandler*  _outputsHandler;

@@ -40,47 +40,10 @@ MainWindow::MainWindow(QWidget *parent) :
     _useOpenCV = true;
     _threadRunning = false;
 
-    ui->actionSynchronizeViews->setChecked(_synchronizeViews);
-
-    // add version number to title
-    setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
-
-    // connect to MainWindow
-    ui->graphicsView->setMainWindow(this);
-    ui->processPropertiesWidget->setMainWindow(this);
-
-    tabifyDockWidget(ui->dockProcesses, ui->dockSettings);
-    ui->dockProcesses->raise();
-    ui->dockSettings->setVisible(false);
-
-    // remove default titlebar
-    ui->dockProcesses->setTitleBarWidget(new QWidget);
-    ui->dockSettings->setTitleBarWidget(new QWidget);
-    ui->dockLog->setTitleBarWidget(new QWidget);
-
-    // hide pause button
-    ui->actionPause->setVisible(false);
-
-    // load built-in processes
-    loadProcesses();
-    // load plugin processes
-    loadPlugins();
-
     _imageViewer = new ImageViewerWindow(this);
-
     _settingsWindow = new SettingsWindow(this);
 
     _scene = ui->graphicsView->scene();
-
-    // progress indicator
-    QMovie* movie = new QMovie(":/loader.gif");
-    _progressLabel = new QLabel(this);
-    _progressLabel->setMovie(movie);
-    movie->start();
-    movie->stop();
-    _progressLabel->setVisible(false);
-
-    ui->toolBar->addWidget(_progressLabel);
 
     // timer
     _timer = new QTimer(this);
@@ -107,6 +70,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // read and apply settings
     readSettings();
+
+    ui->actionSynchronizeViews->setChecked(_synchronizeViews);
+
+    // add version number to title
+    setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
+
+    // connect to MainWindow
+    ui->graphicsView->setMainWindow(this);
+    ui->processPropertiesWidget->setMainWindow(this);
+
+    tabifyDockWidget(ui->dockProcesses, ui->dockSettings);
+    ui->dockProcesses->raise();
+    ui->dockSettings->setVisible(false);
+
+    // remove default titlebar
+    ui->dockProcesses->setTitleBarWidget(new QWidget);
+    ui->dockSettings->setTitleBarWidget(new QWidget);
+    ui->dockLog->setTitleBarWidget(new QWidget);
+
+    // load built-in processes
+    loadProcesses();
+
+    // load plugin processes
+    loadPlugins();
 
 #ifdef Q_OS_MAC
     // set the right placeholder text for OS X
@@ -193,9 +180,17 @@ void MainWindow::readSettings()
     _useOpenCV          = _settings->value("OpenCV", true).toBool();
     _autosaveEnabled    = _settings->value("AutoSave", true).toBool();
     _defaultImagePath   = _settings->value("DefaultImagePath", "").toString();
-    _pluginDevPath      = _settings->value("PluginDevPath", "../../plugin_development/").toString();
-    _pluginPath         = _settings->value("PluginPath", "../../plugins/").toString();
     _logFileEnabled     = _settings->value("LogFile", false).toBool();
+
+#ifdef Q_OS_LINUX
+    _processIconPath    = _settings->value("ProcessIconPath",   "LINUX_PATH_PREFIX/process_icons/").toString();
+    _pluginPath         = _settings->value("PluginPath",        "LINUX_PATH_PREFIX/plugins/").toString();
+    _pluginDevPath      = _settings->value("PluginDevPath",     "LINUX_PATH_PREFIX/plugins_development/").toString();
+#else
+    _processIconPath    = _settings->value("ProcessIconPath",   QCoreApplication::applicationDirPath() + QString("/process_icons/")).toString();
+    _pluginPath         = _settings->value("PluginPath",        QCoreApplication::applicationDirPath() + QString("/plugins/")).toString();
+    _pluginDevPath      = _settings->value("PluginDevPath",     QCoreApplication::applicationDirPath() + QString("/plugins_development/")).toString();
+#endif
 
     bool showLog        = _settings->value("showLog", false).toBool();
     ui->dockLog->setVisible(showLog);
@@ -575,6 +570,11 @@ void MainWindow::setFilterFocus()
 {
     ui->txtFilter->setFocus();
     ui->txtFilter->setSelection(0, ui->txtFilter->text().length());
+}
+
+QString MainWindow::processIconPath(QString processID)
+{
+    return processIconPath() + processID + QString(".png");
 }
 
 QString MainWindow::pluginPath()
@@ -1057,10 +1057,6 @@ void MainWindow::on_actionPlay_triggered()
     _imageViewer->resize(_settings->value("size", QSize(1080, 700)).toSize());
     _imageViewer->move(_settings->value("pos", QPoint(100, 100)).toPoint());
     _settings->endGroup();*/
-
-    // show progress label
-    _progressLabel->movie()->start();
-    _progressLabel->setVisible(true);
 }
 
 void MainWindow::on_actionPause_triggered()
@@ -1072,10 +1068,6 @@ void MainWindow::on_actionPause_triggered()
     ui->actionPlay->setVisible(true);
 
     _timer->stop();
-
-    // hide progress label
-    _progressLabel->movie()->stop();
-    _progressLabel->setVisible(false);
 }
 
 
