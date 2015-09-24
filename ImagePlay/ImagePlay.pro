@@ -32,8 +32,6 @@ APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
 APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
 APP_NAME=\\\"$$TARGET\\\" \
 
-message($$DEFINES)
-
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}
 macx {PLATFORM = macx}
@@ -149,7 +147,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         INSTALLS += images process_icons plugin_development
         INSTALLS += target
 
-        DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX\\\"\"
+        DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX/share/imageplay/\\\"\"
 }
 
 msvc {

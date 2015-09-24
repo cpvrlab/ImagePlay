@@ -183,9 +183,9 @@ void MainWindow::readSettings()
     _logFileEnabled     = _settings->value("LogFile", false).toBool();
 
 #ifdef Q_OS_LINUX
-    _processIconPath    = _settings->value("ProcessIconPath",   "LINUX_PATH_PREFIX/process_icons/").toString();
-    _pluginPath         = _settings->value("PluginPath",        "LINUX_PATH_PREFIX/plugins/").toString();
-    _pluginDevPath      = _settings->value("PluginDevPath",     "LINUX_PATH_PREFIX/plugins_development/").toString();
+    _processIconPath    = _settings->value("ProcessIconPath",   QString(LINUX_PATH_PREFIX) + "process_icons/").toString();
+    _pluginPath         = _settings->value("PluginPath",        QString(LINUX_PATH_PREFIX) + "plugins/").toString();
+    _pluginDevPath      = _settings->value("PluginDevPath",     QString(LINUX_PATH_PREFIX) + "plugins_development/").toString();
 #else
     _processIconPath    = _settings->value("ProcessIconPath",   QCoreApplication::applicationDirPath() + QString("/process_icons/")).toString();
     _pluginPath         = _settings->value("PluginPath",        QCoreApplication::applicationDirPath() + QString("/plugins/")).toString();
