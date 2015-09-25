@@ -71,3 +71,11 @@ cd ImagePlay
 qmake -recursive
 make 
 ```
+
+### Install
+```sh
+sudo make install
+```
+The following files are installed:
+- `/usr/bin/imageplay`
+- `/usr/share/imageplay/*`
