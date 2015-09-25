@@ -35,7 +35,6 @@ IPLImage::IPLImage(const IPLImage& other)
     _type = other._type;
     _width = other._width;
     _height = other._height;
-    _rgb32.resize(_height * _width * 4);
 
     if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
@@ -49,7 +48,6 @@ IPLImage::IPLImage( IPLData::IPLDataType t, int width, int height )
     _type = t;
     _width = width;
     _height = height;
-    _rgb32.resize(_height * _width * 4);
 
     if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
@@ -64,7 +62,6 @@ IPLImage::IPLImage(cv::Mat &cvMat)
     // _type = other._type;
     _width  = cvMat.cols;
     _height = cvMat.rows;
-    _rgb32.resize(_height * _width * 4);
     _type   = IMAGE_COLOR;
     _nrOfPlanes = cvMat.channels();
     if(_nrOfPlanes > 1)
@@ -211,6 +208,7 @@ cv::Mat IPLImage::toCvMat()
 
 uchar* IPLImage::rgb32()
 {
+    _rgb32.resize(_height * _width * 4);
     if(_type == IMAGE_BW)
     {
         int i=0;
@@ -293,4 +291,11 @@ uchar* IPLImage::rgb32()
     }
 
     return _rgb32.data();
+}
+
+void IPLImage::rgb32CleanupHandler(void *info)
+{
+    /*IPLImage* image = static_cast<IPLImage*>(info);
+    if(image)
+        image->_rgb32.resize(0);*/
 }

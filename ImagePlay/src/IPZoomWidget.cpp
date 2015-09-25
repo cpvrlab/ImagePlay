@@ -26,20 +26,20 @@ IPZoomWidget::IPZoomWidget(QWidget *parent) :
     _y = 0;
     _columnOffset = 1;
     _positionLocked = false;
-    _image.reset(NULL);
+    _image = NULL;
 }
 
-void IPZoomWidget::setImage(IPLImage *image)
+void IPZoomWidget::setImage(IPLData *data)
 {
-    if(image)
+    _image = dynamic_cast<IPLImage*>(data);
+
+    if(_image)
     {
-        _image.reset(new IPLImage(*image));
         setVisible(true);
         update();
     }
     else
     {
-        _image.reset(NULL);
         setVisible(false);
     }
 }
@@ -86,6 +86,9 @@ void IPZoomWidget::setPositionLocked(bool locked)
 
 void IPZoomWidget::paintEvent(QPaintEvent*)
 {
+    //if(!_image)
+    //    return;
+
     if(!_image)
         return;
 
@@ -113,14 +116,14 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
 
                 highlightColor = QColor(255-r, 255-g, 255-b);
             }
-            else if(_image->type() == IPLData::IMAGE_GRAYSCALE || _image->type() == IPLImage::IMAGE_BW)
+            else if( _image->type() == IPLData::IMAGE_GRAYSCALE || _image->type() == IPLImage::IMAGE_BW )
             {
                 r = g = b = _image->plane(0)->cp(_x+offsetX, _y+offsetY) * FACTOR_TO_UCHAR;
 
                 highlightColor = QColor(255, 0, 0);
             }
 
-            else if(_image->type() == IPLData::IMAGE_ORIENTED)
+            else if( _image->type() == IPLData::IMAGE_ORIENTED )
             {
                 r = g = b = _image->plane(0)->cp(_x+offsetX, _y+offsetY) * FACTOR_TO_UCHAR;
 

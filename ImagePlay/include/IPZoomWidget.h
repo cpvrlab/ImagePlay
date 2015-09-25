@@ -26,6 +26,7 @@
 #include <QDebug>
 
 #include "IPL_processes.h"
+#include "IPImageViewer.h"
 
 //-----------------------------------------------------------------------------
 //!IPZoomWidget renders a small zoom window of a IPImageViewer
@@ -37,7 +38,7 @@ class IPZoomWidget : public QWidget
     Q_OBJECT
 public:
     explicit    IPZoomWidget            (QWidget *parent = 0);
-    void        setImage                (IPLImage* image);
+    void        setImage                (IPLData* data);
     void        setPosition             (int x, int y);
     void        setColumnOffset         (int offset);
     int         columnOffset            ();
@@ -46,11 +47,11 @@ public:
     void        setPositionLocked       (bool locked);
 
 private:
-    QScopedPointer<IPLImage> _image;
-    int                      _x;
-    int                      _y;
-    int                      _columnOffset;
-    bool                     _positionLocked;
+    IPLImage*   _image;
+    int         _x;
+    int         _y;
+    int         _columnOffset;
+    bool        _positionLocked;
 
 
     // QWidget interface

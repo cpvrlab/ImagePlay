@@ -97,6 +97,9 @@ void IPImageViewer::updateImage()
         if(!_rawData)
         {
             setVisible(false);
+            _imageViewerWindow->updateHistogram(NULL);
+            _imageViewerWindow->updateStatistics(NULL);
+            _imageViewerWindow->updateZoomwidget(NULL);
             return;
         }
         else
@@ -210,6 +213,13 @@ void IPImageViewer::updateImage()
             QString title = QString::fromStdString(property->value());
             ((QTabWidget*) parent())->setTabText(_tabIndex, title);
         }*/
+    }
+    else
+    {
+        _imageViewerWindow->updateHistogram(NULL);
+        _imageViewerWindow->updateStatistics(NULL);
+        _imageViewerWindow->updateZoomwidget(NULL);
+        setVisible(false);
     }
 }
 

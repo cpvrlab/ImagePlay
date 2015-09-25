@@ -251,16 +251,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
         // source processes don't have inputs
         if(step->process()->isSource())
         {
-            // check if is sequence
-            //IPLLoadImageSequence* sequenceProcess = dynamic_cast<IPLLoadImageSequence*>(step->process());
-
-            // update if index has changed
-            /*if(sequenceProcess && (_sequenceIndex != _lastSequenceIndex))
-            {
-                sequenceProcess->setSequenceIndex(_sequenceIndex);
-                propagateNeedsUpdate(sequenceProcess);
-            }*/
-
             // execute thread
             if(step->process()->updateNeeded() || forcedUpdate)
             {
@@ -268,7 +258,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 step->process()->beforeProcessing();
                 int durationMs = executeThread(step->process());
                 if ( _lastProcessSuccess ) blockFailLoop = true;
-                //step->process()->afterProcessing();
 
                 // afterProcessing will be called later
                 afterProcessingList.append(step);

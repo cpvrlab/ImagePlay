@@ -50,7 +50,8 @@ public:
     int width(void)                 { return _width; }
     int height(void)                { return _height; }
 
-    unsigned char* rgb32 (void);
+    uchar* rgb32 (void);
+    static void rgb32CleanupHandler(void *info);
     IPLImagePlane* plane(int planeNr);
     void fillColor( ipl_basetype color );
 

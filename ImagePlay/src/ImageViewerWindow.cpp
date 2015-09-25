@@ -188,14 +188,13 @@ void ImageViewerWindow::updateImage()
 
         if(imageViewer){
            imageViewer->updateImage();
-	   // set the scroll bars here if not already matching other viewers
-	   if ( imageViewer->horizontalScrollBar()->value() !=
-	      _horizontalScrollValue )
-	      imageViewer->horizontalScrollBar()->setValue( _horizontalScrollValue );
-	   if ( imageViewer->verticalScrollBar()->value() !=
-	      _verticalScrollValue )
-	      imageViewer->verticalScrollBar()->setValue( _verticalScrollValue );
-	}
+
+            // set the scroll bars here if not already matching other viewers
+            if ( imageViewer->horizontalScrollBar()->value() != _horizontalScrollValue )
+                imageViewer->horizontalScrollBar()->setValue( _horizontalScrollValue );
+            if ( imageViewer->verticalScrollBar()->value() != _verticalScrollValue )
+                 imageViewer->verticalScrollBar()->setValue( _verticalScrollValue );
+        }
     }
     else
     {
@@ -259,7 +258,10 @@ ImageViewerWindow::updateStatistics
 void ImageViewerWindow::updateStatistics(IPLImage* image)
 {
     if(!image)
+    {
+        ui->statisticsLabel->setText("-");
         return;
+    }
 
     // only update if panel is not hidden
     if(ui->statisticsLabel->isVisible())
