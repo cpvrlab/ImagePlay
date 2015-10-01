@@ -103,6 +103,7 @@ ImageViewerWindow::~ImageViewerWindow()
 {
     delete ui;
 }
+
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::addProcessStep
@@ -356,17 +357,70 @@ ImageViewerWindow::sortTabs
 */
 void ImageViewerWindow::sortTabs()
 {
-    // sort tabs according to their process order
-    // attention: moving tabs causes a tabchanged event which
-    // messes with our processproperties...
+    // sort tabs according to their depth
+   int moveTo = 0;
+   int currentDepth = 0;
+   bool found = false;
+   bool sorted = false;
+   bool anyMoved = false;
 
-    /*for(int i=0; i<ui->tabWidget->tabBar()->count()-1; i++)
-    {
-        ui->tabWidget->tabBar()->moveTab(i, (i+1));
-        //ui->tabWidget->tabBar()->setTabData(i, 123);
-        //QVariant data = ui->tabWidget->tabBar()->tabData(i);
-        //qDebug() << "TAB: " << data;
-    }*/
+   // get the tab bar that we can use to move tabs
+   QList< QTabBar* > tabBars = ui->tabWidget->findChildren<QTabBar*>();
+   if ( tabBars.empty() ) return;
+   QTabBar* tabBar = tabBars.at(0);
+
+   // disable gui updates so we don't make tabs go crazy
+   ui->tabWidget->setUpdatesEnabled(false);
+
+   do{
+      found = false;
+
+      // shift move to forward to minimize moving tabs around
+      for ( int i=moveTo; i < ui->tabWidget->count();i++){
+         IPImageViewer* tab = dynamic_cast<IPImageViewer*>( ui->tabWidget->widget(i) );
+         if ( !tab ) continue;
+         if ( tab->processStep()->treeDepth() == currentDepth ){
+            moveTo++;
+            found = true;
+         }else{
+            break;
+         }
+      }
+
+      // scan from back to front to see if any other items at this depth and need to be shifted up
+      sorted = true;
+      int lastDepth = -1;
+      for ( int i=ui->tabWidget->count()-1; i > moveTo; i--){
+         IPImageViewer* tab = dynamic_cast<IPImageViewer*>( ui->tabWidget->widget(i) );
+         if ( !tab ) continue;
+         // if the depth behind this one is less than this depth, we're not sorted
+         // otherwise, if this stays true we can break out of the process early
+         if ( sorted && lastDepth != -1 && lastDepth < tab->processStep()->treeDepth() )
+            sorted = false;
+         lastDepth = tab->processStep()->treeDepth();
+         if ( tab->processStep()->treeDepth() == currentDepth ){
+            anyMoved = true;
+            tabBar->moveTab(i,moveTo);
+            moveTo++;
+            found = true;
+         }
+      }
+      currentDepth++;
+   } while ( !sorted && found && moveTo != ui->tabWidget->count() );
+
+
+   // update the tab names
+   if ( anyMoved ){
+      for ( int i=0; i < ui->tabWidget->count(); i++){
+        IPImageViewer* tab = dynamic_cast<IPImageViewer*>( ui->tabWidget->widget(i) );
+        if ( !tab ) continue;
+        QString tabName = QString::number(i+1).append(": ").append(QString::fromStdString(tab->processStep()->process()->title()));
+        ui->tabWidget->setTabText(i,tabName);
+      }
+   }
+
+   // turn the gui updates back on
+   ui->tabWidget->setUpdatesEnabled(true);
 }
 //-----------------------------------------------------------------------------
 /*!
