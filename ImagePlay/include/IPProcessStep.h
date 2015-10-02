@@ -74,7 +74,7 @@ public:
     void                    setErrorMessage (QString error)         { _errorMessage = error; }
     QString                 errorMessage    ()                      { return _errorMessage; }
     void                    addEdgeIn       (IPProcessEdge* edge)   { _edgesIn.append(edge); }
-    void                    removeEdgeIn    (IPProcessEdge* edge)   { _edgesIn.removeAll(edge); }
+    void                    removeEdgeIn    (IPProcessEdge* edge);
     void                    addEdgeOut      (IPProcessEdge* edge)   { _edgesOut.append(edge); }
     void                    removeEdgeOut   (IPProcessEdge* edge)   { _edgesOut.removeAll(edge); }
     void                    updateThumbnail ();

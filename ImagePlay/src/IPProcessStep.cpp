@@ -37,6 +37,7 @@ IPProcessStep::IPProcessStep(MainWindow* mainWindow, QString processID)
     _durationMs = 0;
     _progress = 0;
     _branchID = 0;
+    _treeDepth = 0;
 
     _progressFrame = 0;
 
@@ -319,6 +320,13 @@ void IPProcessStep::snapToGrid()
     {
         edge->updatePosition();
     }
+}
+
+void IPProcessStep::removeEdgeIn(IPProcessEdge *edge)
+{
+    _edgesIn.removeAll(edge);
+    _mainWindow->propagateResultReady(this->process(), false);
+    setTreeDepth(-1);
 }
 
 void IPProcessStep::updateThumbnail()

@@ -128,6 +128,7 @@ public:
     void                    removeStep                      (IPProcessStep* step);
     void                    addEdge                         (IPProcessEdge* edge);
     void                    removeEdge                      (IPProcessEdge* edge);
+    void                    propagateResultReady            (IPLProcess* process, bool resultReady);
     void                    clearScene                      ();
     bool                    readProcessFile                 ();
     bool                    readProcessFile                 (QString file);

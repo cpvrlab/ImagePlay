@@ -61,13 +61,10 @@ void IPMorphologyCheckbox::paintEvent(QPaintEvent*)
 // enhance weird click behaviour
 void IPMorphologyCheckbox::mousePressEvent(QMouseEvent *)
 {
-    qDebug() << "mousePressEvent";
     click();
 }
 
 void IPMorphologyCheckbox::enterEvent(QEvent*)
 {
-//    qDebug() << "enterEvent";
-//    click();
 }
 

@@ -670,9 +670,16 @@ void MainWindow::removeEdge(IPProcessEdge *edge)
     // remove from scene
     _scene->removeEdge(edge);
 
+    propagateResultReady(edge->to()->process(), false);
+
     // update graphics
     setParamsHaveChanged();
     execute();
+}
+
+void MainWindow::propagateResultReady(IPLProcess *process, bool resultReady)
+{
+    ui->graphicsView->propagateResultReady(process, resultReady);
 }
 
 void MainWindow::clearScene()

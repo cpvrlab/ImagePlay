@@ -26,6 +26,7 @@
 #include <QHBoxLayout>
 #include <QButtonGroup>
 #include <QToolButton>
+#include <QTabBar>
 #include <QColor>
 
 #include "IPL_processes.h"
