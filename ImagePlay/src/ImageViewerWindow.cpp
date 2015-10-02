@@ -403,6 +403,9 @@ void ImageViewerWindow::sortTabs()
             tabBar->moveTab(i,moveTo);
             moveTo++;
             found = true;
+            // moving the tab pushed back a different tab into this spot, shift
+            // i so we check it in the next loop
+            i++;
          }
       }
       currentDepth++;
