@@ -390,7 +390,7 @@ void ImageViewerWindow::sortTabs()
       // scan from back to front to see if any other items at this depth and need to be shifted up
       sorted = true;
       int lastDepth = -1;
-      for ( int i=ui->tabWidget->count()-1; i > moveTo; i--){
+      for ( int i=ui->tabWidget->count()-1; i >= moveTo; i--){
          IPImageViewer* tab = dynamic_cast<IPImageViewer*>( ui->tabWidget->widget(i) );
          if ( !tab ) continue;
          // if the depth behind this one is less than this depth, we're not sorted
@@ -398,6 +398,8 @@ void ImageViewerWindow::sortTabs()
          if ( sorted && lastDepth != -1 && lastDepth < tab->processStep()->treeDepth() )
             sorted = false;
          lastDepth = tab->processStep()->treeDepth();
+         // just checking moveTo spot to see if it's in order
+         if ( i== moveTo) break;
          if ( tab->processStep()->treeDepth() == currentDepth ){
             anyMoved = true;
             tabBar->moveTab(i,moveTo);

@@ -99,8 +99,7 @@ void IPProcessGrid::buildQueue()
             IPProcessStep* nextStep = edge->to();
 
             // set depth
-            int depth = std::max(nextStep->treeDepth(), step->treeDepth()+1);
-            nextStep->setTreeDepth(depth);
+            nextStep->setTreeDepth(step->treeDepth()+1);
 
             // set branch ID
             nextStep->setBranchID(step->branchID());
