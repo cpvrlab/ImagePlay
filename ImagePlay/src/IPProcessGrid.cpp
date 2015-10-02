@@ -204,6 +204,47 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
     }
 }
 
+void IPProcessGrid::propagateResultReady(IPLProcess* process, bool resultReady)
+{
+    QQueue<IPProcessStep*> tmpQueue;
+
+    // find step from process
+    for(auto it = _scene->steps()->begin(); it < _scene->steps()->end(); ++it)
+    {
+        IPProcessStep* step = (IPProcessStep*) *it;
+        IPLProcess* tmpProcess = step->process();
+
+        if(tmpProcess == process)
+        {
+            step->process()->setResultReady(resultReady);
+
+            tmpQueue.enqueue(step);
+            break;
+        }
+    }
+
+
+    // add all following processes via BFS
+    int counter = 0;
+    int limit   = 100;
+    while(!tmpQueue.isEmpty() && counter < limit)
+    {
+        // set status
+        IPProcessStep* step = tmpQueue.dequeue();
+
+        for(auto it = step->edgesOut()->begin(); it < step->edgesOut()->end(); ++it)
+        {
+            IPProcessEdge* edge = (IPProcessEdge*) *it;
+            IPProcessStep* nextStep = edge->to();
+
+            nextStep->process()->setResultReady(resultReady);
+
+            // add to queue and list
+            tmpQueue.enqueue(nextStep);
+        }
+    }
+}
+
 /*!
  * \brief IPProcessGrid::execute
  */
