@@ -322,6 +322,13 @@ void IPProcessStep::snapToGrid()
     }
 }
 
+void IPProcessStep::removeEdgeIn(IPProcessEdge *edge)
+{
+    _edgesIn.removeAll(edge);
+    _mainWindow->propagateResultReady(this->process(), false);
+    setTreeDepth(-1);
+}
+
 void IPProcessStep::updateThumbnail()
 {
     if(process()->isResultReady())

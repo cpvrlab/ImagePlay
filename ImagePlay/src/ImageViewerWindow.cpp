@@ -415,11 +415,11 @@ void ImageViewerWindow::sortTabs()
 
 
    // update the tab names
-   if ( anyMoved ){
+   if ( true ){
       for ( int i=0; i < ui->tabWidget->count(); i++){
         IPImageViewer* tab = dynamic_cast<IPImageViewer*>( ui->tabWidget->widget(i) );
         if ( !tab ) continue;
-        QString tabName = QString::number(i+1).append(": ").append(QString::fromStdString(tab->processStep()->process()->title()));
+        QString tabName = QString::number(tab->processStep()->treeDepth()+1).append(": ").append(QString::fromStdString(tab->processStep()->process()->title()));
         ui->tabWidget->setTabText(i,tabName);
       }
    }

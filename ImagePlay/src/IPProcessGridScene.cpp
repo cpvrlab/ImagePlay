@@ -148,6 +148,7 @@ void IPProcessGridScene::removeEdge(IPProcessEdge* edge)
 
     edge->from()->removeEdgeOut(edge);
     edge->to()->removeEdgeIn(edge);
+
     _edges.removeAll(edge);
     delete edge;
 }

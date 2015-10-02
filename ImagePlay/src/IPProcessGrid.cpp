@@ -242,6 +242,8 @@ void IPProcessGrid::propagateResultReady(IPLProcess* process, bool resultReady)
             tmpQueue.enqueue(nextStep);
         }
     }
+
+    _mainWindow->imageViewer()->updateImage();
 }
 
 /*!
