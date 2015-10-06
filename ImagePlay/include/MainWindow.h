@@ -97,10 +97,11 @@ public:
     void                    setActiveProcessStep            (IPProcessStep* step);
     void                    showMessage                     (QString msg, MessageType status);
     void                    updateGraphicsView              ();
-    void                    updateProcessMessages             ();
+    void                    updateProcessMessages           ();
     void                    loadPlugins                     ();
     void                    unloadPlugins                   ();
     void                    reloadPlugins                   ();
+    bool                    removeDir                       (const QString &dirName);
     void                    setFilterFocus                  ();
     // disable right click toolbar menu
     QMenu*                  createPopupMenu                 ()                              { return NULL; }
@@ -203,6 +204,7 @@ private:
     QString                 _defaultImagePath;
     QString                 _pluginDevPath;
     QString                 _pluginPath;
+    QString                 _pluginTmpPath;
     QString                 _processIconPath;
     long                    _lastAutosaveTimestamp;
     int                     _autosaveInterval;

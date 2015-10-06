@@ -51,7 +51,15 @@ class IPPropertyWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit IPPropertyWidget(IPLProcessProperty* processProperty, QWidget* parent=0) { _processProperty = processProperty; }
+    explicit IPPropertyWidget(IPLProcessProperty* processProperty, QWidget* parent=0) : QWidget(parent)
+    {
+        _processProperty = processProperty;
+    }
+    ~IPPropertyWidget()
+    {
+        _processProperty = NULL;
+    }
+
     virtual void saveValue() = 0;
     IPLProcessProperty* processProperty() { return _processProperty; }
 

@@ -16,7 +16,7 @@ class %CLASSNAME%Plugin : public QObject, PluginInterface
     Q_PLUGIN_METADATA(IID "ch.bfh.cpvrlab.ImagePlay.PluginInterface/1.0")
     Q_INTERFACES(PluginInterface)
 public:
-    QString name()      { return QString("%CLASSNAME%");}
+    QString name()      { return QString("%CLASSNAME%Plugin::%CLASSNAME%");}
     QString author()    { return QString("%AUTHOR%");}
     QString version()   { return QString("1.0");}
     IPLProcess* getProcess()

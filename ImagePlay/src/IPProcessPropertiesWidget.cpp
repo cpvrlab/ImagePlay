@@ -33,6 +33,11 @@ IPProcessPropertiesWidget::IPProcessPropertiesWidget(QWidget *parent) :
     setBackgroundRole(QPalette::Midlight);
 }
 
+IPProcessPropertiesWidget::~IPProcessPropertiesWidget()
+{
+
+}
+
 bool IPProcessPropertiesWidget::sortByPosition(IPLProcessProperty* x, IPLProcessProperty* y)
 {
     return x->position() < y->position();
@@ -325,6 +330,14 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
 
 void IPProcessPropertiesWidget::closeSettings()
 {
+    // remove groupChanged events
+    for(IPPropertyWidget* widget : _propertyWidgets)
+    {
+        IPPropertyGroup* groupWidget = dynamic_cast<IPPropertyGroup*>(widget);
+        if(groupWidget)
+            disconnect(widget, 0, 0, 0);
+    }
+
     _propertyWidgets.clear();
 
     _mainWindow->imageViewer()->clearColorPickHandler();
@@ -377,7 +390,7 @@ void IPProcessPropertiesWidget::showPropertyGroup(QString prefix)
     {
         IPPropertyWidget* widget = dynamic_cast<IPPropertyWidget*>(layout()->itemAt(i)->widget());
 
-        if(!widget)
+        if(!widget || !widget->processProperty())
             continue;
 
         QString name(widget->processProperty()->name());

@@ -20,7 +20,6 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -355,6 +354,7 @@ void MainWindow::setActiveProcessStep(IPProcessStep* step)
 
         if(_lastActiveProcessStep)
         {
+            hideProcessSettings();
             _lastActiveProcessStep->setEditing(false);
         }
 
@@ -480,22 +480,14 @@ void MainWindow::loadPlugins()
     ui->processTabWidget->clear();
 
     QDir pluginsDir(pluginPath());
-    QDir tmpPluginsDir(pluginPath() + "/tmp");
 
-    // delete old tmp directory
-    if(tmpPluginsDir.exists())
-    {
-        foreach (QString fileName, tmpPluginsDir.entryList(QDir::Files))
-        {
-            QFile file(fileName);
-            file.remove();
-        }
-
-        tmpPluginsDir.rmdir(".");
-    }
+    QDateTime now = QDateTime::currentDateTime();
+    _pluginTmpPath = pluginPath() + "/tmp/" + now.toString("yyyyMMddhhmmss");
+    QDir tmpPluginsDir(_pluginTmpPath);
 
     // create new directory, copy dlls
-    tmpPluginsDir.mkpath(".");
+    if(!tmpPluginsDir.exists())
+        tmpPluginsDir.mkpath(".");
 
     pluginsDir.setNameFilters(pluginFilter);
     foreach (QString fileName, pluginsDir.entryList(QDir::Files))
@@ -513,15 +505,13 @@ void MainWindow::loadPlugins()
             QPluginLoader* loader = new QPluginLoader(tmpPluginsDir.absoluteFilePath(fileName));
             QObject *plugin = loader->instance();
 
-            qDebug() << "File: " << tmpPluginsDir.absoluteFilePath(fileName);
-
             if (plugin)
             {
                 PluginInterface* loadedPlugin = qobject_cast<PluginInterface *>(plugin);
-                qDebug() << "New Plugin found: " << loadedPlugin->name();
-                qDebug() << typeid(*loadedPlugin->getProcess()).name();
+                QString className(typeid(*loadedPlugin->getProcess()).name());
+                className = className.split(" ").at(1);
 
-                _factory->registerProcess(loadedPlugin->name(), loadedPlugin->getProcess());
+                _factory->registerProcess(className, loadedPlugin->getProcess());
 
                 _loadedPlugins.push_back(loadedPlugin);
                 _loaders.push_back(loader);
@@ -551,19 +541,56 @@ void MainWindow::unloadPlugins()
         QPluginLoader* loader = _loaders.at(i);
 
         qDebug() << "Unloading: " << loader->fileName();
-        qDebug() << "Unload Status: " << loader->unload();
     }
+
+    // delete old tmp directories
+    removeDir(pluginPath() + "/tmp/");
 
     _loadedPlugins.clear();
 }
 
 void MainWindow::reloadPlugins()
 {
+    // don't try to reload while running
+    if(ui->graphicsView->isRunning())
+        return;
+
+    setActiveProcessStep(NULL);
+    _allowChangeActiveProcessStep = false;
+    writeProcessFile();
+    clearScene();
     unloadPlugins();
     loadPlugins();
+    readProcessFile();
 
     // activate plugin tab
     ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
+
+    _allowChangeActiveProcessStep = true;
+}
+
+bool MainWindow::removeDir(const QString &dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if (dir.exists(dirName)) {
+        Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            if (info.isDir()) {
+                result = removeDir(info.absoluteFilePath());
+            }
+            else {
+                result = QFile::remove(info.absoluteFilePath());
+            }
+
+            if (!result) {
+                return result;
+            }
+        }
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
 }
 
 void MainWindow::setFilterFocus()
@@ -667,10 +694,12 @@ void MainWindow::addEdge(IPProcessEdge *edge)
 
 void MainWindow::removeEdge(IPProcessEdge *edge)
 {
+    if(edge->to()->process())
+        propagateResultReady(edge->to()->process(), false);
+
     // remove from scene
     _scene->removeEdge(edge);
 
-    propagateResultReady(edge->to()->process(), false);
 
     // update graphics
     setParamsHaveChanged();
@@ -698,8 +727,15 @@ bool MainWindow::readProcessFile()
 {
     QString errorString;
 
+    QString fileName = _currentProcessFileName;
+
+    if(fileName.length() < 1)
+    {
+        fileName = _pluginPath + "/_autosave.ipj";
+    }
+
     // read json file
-    QFile file(_currentProcessFileName);
+    QFile file(fileName);
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return false;
@@ -836,8 +872,12 @@ bool MainWindow::readProcessFile(QString file)
 
 bool MainWindow::writeProcessFile()
 {
-    if(_currentProcessFileName.length() < 1)
-        return false;
+    QString fileName = _currentProcessFileName;
+
+    if(fileName.length() < 1)
+    {
+        fileName = _pluginPath + "/_autosave.ipj";
+    }
 
     QJsonDocument document;
     QJsonObject root;
@@ -914,7 +954,7 @@ bool MainWindow::writeProcessFile()
     document.setObject(root);
 
     // write json to the file
-    QFile file(_currentProcessFileName);
+    QFile file(fileName);
 
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {

@@ -65,6 +65,7 @@ class IPProcessPropertiesWidget : public QWidget
     Q_OBJECT
 public:
     explicit                    IPProcessPropertiesWidget   (QWidget *parent = 0);
+                                ~IPProcessPropertiesWidget  ();
     void                        init                        (IPProcessStep* process);
     void                        closeSettings               ();
     void                        addPropertyWidget           (QString label, QString description, IPPropertyWidget *widget);
