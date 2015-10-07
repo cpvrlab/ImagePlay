@@ -41,6 +41,7 @@
 #include "IPLArithmeticOperations.h"
 #include "IPLArithmeticOperationsConstant.h"
 #include "IPLConvertToGray.h"
+#include "IPLConvertToColor.h"
 #include "IPLBlendImages.h"
 #include "IPLFlipImage.h"
 #include "IPLGradientOperator.h"
@@ -95,6 +96,7 @@
 #include "IPLFloodFill.h"
 #include "IPLAccumulate.h"
 #include "IPLHoughLines.h"
+#include "IPLHoughLineSegments.h"
 #include "IPLMatchTemplate.h"
 #include "IPLGoodFeaturesToTrack.h"
 

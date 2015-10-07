@@ -33,6 +33,7 @@
 #include <QSettings>
 #include <QMutableListIterator>
 #include <QPluginLoader>
+#include <QFileSystemWatcher>
 
 #include "IPProcessStep.h"
 #include "IPProcessFactory.h"
@@ -177,6 +178,7 @@ private slots:
     void                    on_actionGeneratePlugin_triggered();
     void                    on_actionImageViewer_triggered  (bool checked);
     void                    on_btnCloseProcessSettings_clicked();
+    void                    on_pluginDirectoryChanged       (const QString & path);
 
     void on_actionImage_Viewer_always_on_top_triggered(bool checked);
 
@@ -214,6 +216,9 @@ private:
     bool                    _logFileEnabled;
     bool                    _threadRunning;
     QStringList             _recentProcessFiles;
+    QFileSystemWatcher*     _pluginFileSystemWatcher;
+    int                     _pluginFileSytemLastCount;
+    QTimer*                 _pluginFileSystemTimer;
 
     // QWidget interface
 protected:

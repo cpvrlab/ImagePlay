@@ -33,7 +33,7 @@ void IPLHoughCircles::init()
     setDescription("The circle Hough Transform (CHT) is a feature extraction technique for detecting circles.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPLData::IMAGE_BW);
     addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
     addOutput("Circle Overlay", IPLImage::IMAGE_COLOR);
     addOutput("Circle Positions", IPLImage::POINT);
@@ -71,6 +71,7 @@ bool IPLHoughCircles::processInputData(IPLImage* image , int, bool useOpenCV)
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
     cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    overlay.convertTo(overlay, CV_8UC3);
 
     std::vector<cv::Vec3f> circles;
     cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);

@@ -33,16 +33,16 @@ void IPLHoughLines::init()
     setDescription("Finds lines in a binary image using the standard Hough transform.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPLData::IMAGE_GRAYSCALE);
     addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
     addOutput("Line Overlay", IPLImage::IMAGE_COLOR);
 
     // properties
     addProcessPropertyDouble("rho", "Rho", "Distance resolution of the accumulator in pixels", 1, IPL_WIDGET_SLIDER, 0, 10);
-    addProcessPropertyDouble("theta", "Min. Radius", "Angle resolution of the accumulator in radians.", 0.01, IPL_WIDGET_SLIDER, 0, 5.14);
+    addProcessPropertyDouble("theta", "Theta", "Angle resolution of the accumulator in radians.", 0.01, IPL_WIDGET_SLIDER, 0, 5.14);
     addProcessPropertyInt("threshold", "Threshold", "Accumulator threshold parameter.", 1, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("minLenght", "Min. Length", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("maxLineGap", "Max. Line Gap", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
+    //addProcessPropertyInt("minLenght", "Min. Length", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
+    //addProcessPropertyInt("maxLineGap", "Max. Line Gap", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
 }
 
 void IPLHoughLines::destroy()
@@ -57,12 +57,19 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
     delete _overlay;
     _overlay = NULL;
 
+    // WARNING: cv::HoughLines does not work in debug mode!!!
+    //          destroys the std::vector<cv::Vec4i> lines;
+#ifdef _DEBUG
+    addError("cv::HoughLines does not work in debug mode");
+    return false;
+#endif
+
     // get properties
     double rho              = getProcessPropertyDouble("rho");
     double theta            = getProcessPropertyDouble("theta");
     int threshold           = getProcessPropertyInt("threshold");
-    int minLength           = getProcessPropertyInt("minLenght");
-    int maxLineGap          = getProcessPropertyInt("maxLineGap");
+    //int minLength           = getProcessPropertyInt("minLenght");
+    //int maxLineGap          = getProcessPropertyInt("maxLineGap");
 
     notifyProgressEventHandler(-1);
     cv::Mat input;
@@ -70,12 +77,11 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
     cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    overlay.convertTo(overlay, CV_8UC3);
 
-    std::vector<cv::Vec4i> lines;
-    cv::HoughLinesP(input, lines, rho, theta, threshold, minLength, maxLineGap);
+    std::vector<cv::Vec2f> lines;
+    cv::HoughLines(input, lines, rho, theta, threshold);
 
-    // WARNING: cv::HoughLinesP does not work in debug mode!!!
-    //          destroys the std::vector<cv::Vec4i> lines;
 
     std::stringstream s;
     s << "Lines found: ";
@@ -84,11 +90,18 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
 
     for(int i = 0; i < lines.size(); i++ )
     {
-       cv::Vec4i l = lines[i];
-       cv::line(overlay, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0,0,255), 3, CV_AA);
+        float rho = lines[i][0], theta = lines[i][1];
+        cv::Point pt1, pt2;
+        double a = cos(theta), b = sin(theta);
+        double x0 = a*rho, y0 = b*rho;
+        pt1.x = cvRound(x0 + 1000*(-b));
+        pt1.y = cvRound(y0 + 1000*(a));
+        pt2.x = cvRound(x0 - 1000*(-b));
+        pt2.y = cvRound(y0 - 1000*(a));
+       cv::line(overlay, pt1, pt2, cv::Scalar(0,0,255), 2, CV_AA);
 
        // raw result
-       cv::line(result, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(255), 1, CV_AA);
+       cv::line(result, pt1, pt2, cv::Scalar(255), 1, CV_AA);
      }
 
     _overlay = new IPLImage(overlay);

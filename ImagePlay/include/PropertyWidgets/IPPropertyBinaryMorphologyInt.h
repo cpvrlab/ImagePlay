@@ -229,10 +229,12 @@ public slots:
             }
         }
 
-        if(_property)
+        if(_property && !_ignoreCombobox && !_ignoreKernel)
+        {
             saveValue();
+            emit changed();
+        }
 
-        emit changed();
     }
 
     void enableDisableKernelEditor()

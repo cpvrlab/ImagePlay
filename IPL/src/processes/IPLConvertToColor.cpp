@@ -25,9 +25,10 @@ void IPLConvertToColor::init()
     _result     = NULL;
 
     // basic settings
-    setClassName("IPLConvertToGray");
-    setTitle("Convert to Gray");
+    setClassName("IPLConvertToColor");
+    setTitle("Convert to Color");
     setKeywords("grayscale");
+    setCategory(IPLProcess::CATEGORY_CONVERSIONS);
 
     // inputs and outputs
     addInput("Gray Image", IPLData::IMAGE_GRAYSCALE);

@@ -68,6 +68,7 @@ public:
     MainWindow*             mainWindow              ()                                      { return _mainWindow; }
     IPProcessGridScene*     scene                   ()                                      { return _scene; }
     void                    stopExecution           ()                                      { _stopExecution = true; }
+    bool                    isRunning               ()                                      { return _isRunning; }
 
 signals:
     void                    sequenceChanged         (int index, int count);

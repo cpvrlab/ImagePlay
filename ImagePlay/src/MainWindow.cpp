@@ -65,7 +65,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sequenceControlWidget->setEnabled(false);
     ui->sequenceControlWidget->hide();
 
+    _pluginFileSystemWatcher = new QFileSystemWatcher(this);
+    _pluginFileSytemLastCount = 0;
+
+    _pluginFileSystemTimer = NULL;
+
     connect(ui->graphicsView, &IPProcessGrid::sequenceChanged, this, &MainWindow::on_sequenceChanged);
+    connect(_pluginFileSystemWatcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::on_pluginDirectoryChanged);
+    connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
 
     // read and apply settings
     readSettings();
@@ -385,6 +392,7 @@ void MainWindow::loadProcesses()
 
     // register all processes to the factory
     _factory->registerProcess("IPLConvertToGray",       new IPLConvertToGray);
+    _factory->registerProcess("IPLConvertToColor",      new IPLConvertToColor);
     _factory->registerProcess("IPLBinarize",            new IPLBinarize);
     _factory->registerProcess("IPLLoadImage",           new IPLLoadImage);
     _factory->registerProcess("IPLCamera",              new IPLCamera);
@@ -456,6 +464,7 @@ void MainWindow::loadProcesses()
 
     _factory->registerProcess("IPLAccumulate",          new IPLAccumulate);
     _factory->registerProcess("IPLHoughLines",          new IPLHoughLines);
+    _factory->registerProcess("IPLHoughLineSegments",          new IPLHoughLineSegments);
 
     _factory->registerProcess("IPLUndistort",           new IPLUndistort);
     _factory->registerProcess("IPLWarpAffine",          new IPLWarpAffine);
@@ -480,6 +489,9 @@ void MainWindow::loadPlugins()
     ui->processTabWidget->clear();
 
     QDir pluginsDir(pluginPath());
+
+    // watch the original dll for changes
+    // _pluginFileSystemWatcher->addPath(pluginPath());
 
     QDateTime now = QDateTime::currentDateTime();
     _pluginTmpPath = pluginPath() + "/tmp/" + now.toString("yyyyMMddhhmmss");
@@ -513,6 +525,9 @@ void MainWindow::loadPlugins()
 
                 _factory->registerProcess(className, loadedPlugin->getProcess());
 
+                qDebug() << pluginPath() + "/" + fileName;
+                _pluginFileSystemWatcher->addPath(pluginPath() + "/" + fileName);
+
                 _loadedPlugins.push_back(loadedPlugin);
                 _loaders.push_back(loader);
             }
@@ -539,8 +554,7 @@ void MainWindow::unloadPlugins()
     {
         // unload DLL
         QPluginLoader* loader = _loaders.at(i);
-
-        qDebug() << "Unloading: " << loader->fileName();
+        loader->unload();
     }
 
     // delete old tmp directories
@@ -551,6 +565,10 @@ void MainWindow::unloadPlugins()
 
 void MainWindow::reloadPlugins()
 {
+    delete _pluginFileSystemTimer;
+    qDebug() << "stop";
+
+    qDebug() << "reloadPlugins";
     // don't try to reload while running
     if(ui->graphicsView->isRunning())
         return;
@@ -859,6 +877,8 @@ bool MainWindow::readProcessFile()
     {
         QMessageBox::warning(this, "File Errors", errorString);
     }
+
+    ui->graphicsView->execute(true);
 
     _allowChangeActiveProcessStep = true;
     return true;
@@ -1392,6 +1412,32 @@ void MainWindow::on_actionImageViewer_hidden()
 void MainWindow::on_btnCloseProcessSettings_clicked()
 {
     hideProcessSettings();
+}
+
+void MainWindow::on_pluginDirectoryChanged(const QString & path)
+{
+    // problem: when compiling a plugin, the file is changed multiple times,
+    // we don't know when the final edit has hapened...
+    // it is not possible to watch the DLL only, because when it is deleted by
+    // the compiler, the filesystem watcher stops automatically.
+    // hmmmm.
+
+    //qDebug() << "Changed: " << path;
+    QDir pluginDirectory(path);
+
+    // only reload if files have been added
+    //if(pluginDirectory.count() > _pluginFileSytemLastCount)
+    //    reloadPlugins();
+
+    delete _pluginFileSystemTimer;
+    _pluginFileSystemTimer = new QTimer(this);
+    _pluginFileSystemTimer->setSingleShot(true);
+    _pluginFileSystemTimer->start(3000);
+    connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
+    qDebug() << "start";
+
+    _pluginFileSytemLastCount = pluginDirectory.count();
+    //qDebug() << _pluginFileSytemLastCount;
 }
 
 void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)

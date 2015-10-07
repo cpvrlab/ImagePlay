@@ -104,6 +104,8 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
             uchar r = 0;
             uchar g = 0;
             uchar b = 0;
+
+            int nrOfPlanes = _image->getNumberOfPlanes();
             if( _image->type() == IPLData::IMAGE_COLOR)
             {
                 //uchar test = *_image->rgb32() + (_x+offsetX)*_image->height() + (_y+offsetY);
