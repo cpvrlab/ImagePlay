@@ -82,6 +82,7 @@ win32: {
 }
 
 macx: {
+    QMAKE_MAC_SDK = macosx10.11
     LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
 
     mylib.path = Contents/Frameworks

@@ -65,6 +65,7 @@ win32 {
 }
 
 macx {
+    QMAKE_MAC_SDK = macosx10.11
     LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
 
     INCLUDEPATH += $$PWD/../_lib/freeimage
