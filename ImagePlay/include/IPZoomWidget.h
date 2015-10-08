@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QRect>
 #include <QDebug>
+#include <QMutex>
 
 #include "IPL_processes.h"
 #include "IPImageViewer.h"
@@ -45,6 +46,7 @@ public:
     bool        isPositionLocked        ();
     void        togglePositionLocked    ();
     void        setPositionLocked       (bool locked);
+    QMutex*     zoomUpdateMutex         () { return _zoomUpdateMutex; }
 
 private:
     IPLImage*   _image;
@@ -52,6 +54,7 @@ private:
     int         _y;
     int         _columnOffset;
     bool        _positionLocked;
+    QMutex*     _zoomUpdateMutex;
 
 
     // QWidget interface

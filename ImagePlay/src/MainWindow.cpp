@@ -566,9 +566,7 @@ void MainWindow::unloadPlugins()
 void MainWindow::reloadPlugins()
 {
     delete _pluginFileSystemTimer;
-    qDebug() << "stop";
 
-    qDebug() << "reloadPlugins";
     // don't try to reload while running
     if(ui->graphicsView->isRunning())
         return;
@@ -743,6 +741,9 @@ void MainWindow::clearScene()
 
 bool MainWindow::readProcessFile()
 {
+    _isPlaying = false;
+    _timer->stop();
+
     QString errorString;
 
     QString fileName = _currentProcessFileName;
@@ -881,6 +882,13 @@ bool MainWindow::readProcessFile()
     ui->graphicsView->execute(true);
 
     _allowChangeActiveProcessStep = true;
+
+    // restart if the user has not paused
+    if(ui->actionPause->isVisible())
+    {
+        _isPlaying = true;
+        _timer->start(66); // 33ms = 30 fps
+    }
     return true;
 }
 

@@ -33,6 +33,7 @@
 #include "IPProcessStep.h"
 #include "IPProcessGridScene.h"
 #include "IPProcessThread.h"
+#include "IPZoomWidget.h"
 
 class IPProcessGridScene;
 class MainWindow;

@@ -58,6 +58,4 @@ void IPLCameraIO::release()
 {
     if(_camera)
         _camera->release();
-    //delete _camera;
-    //_camera = NULL;
 }

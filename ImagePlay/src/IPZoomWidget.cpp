@@ -27,6 +27,8 @@ IPZoomWidget::IPZoomWidget(QWidget *parent) :
     _columnOffset = 1;
     _positionLocked = false;
     _image = NULL;
+
+    _zoomUpdateMutex = new QMutex;
 }
 
 void IPZoomWidget::setImage(IPLData *data)
@@ -89,6 +91,9 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
     if(!_image)
         return;
 
+    if(!_zoomUpdateMutex->tryLock())
+        return;
+
     QPainter painter(this);
     QBrush brush(Qt::black);
     QColor highlightColor(Qt::red);
@@ -144,4 +149,5 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
         rectX = 0;
         rectY += cellWidth;
     }
+    _zoomUpdateMutex->unlock();
 }

@@ -43,6 +43,7 @@ class ImageViewerWindow;
 class IPProcessStep;
 class IPImageViewer;
 class MainWindow;
+class IPZoomWidget;
 
 //-----------------------------------------------------------------------------
 //!ImageViewerWindow provides a window for viewing all process results
@@ -107,6 +108,8 @@ public:
     void setIgnoreMouseEvents(bool state)           { _ignoreMouseEvents = state; }
 
     void updateOutputs();
+    IPZoomWidget *zoomWidget();
+
 public slots:
     void on_actionNextImage_triggered();
     void on_actionPrevImage_triggered();

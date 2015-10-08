@@ -267,7 +267,6 @@
    <addaction name="actionImageViewer"/>
    <addaction name="actionSynchronizeViews"/>
    <addaction name="actionShowThumbnails"/>
-   <addaction name="actionReloadPlugins"/>
    <addaction name="separator"/>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
@@ -591,15 +590,6 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
-   </property>
-  </action>
-  <action name="actionReloadPlugins">
-   <property name="icon">
-    <iconset resource="../res/ressources.qrc">
-     <normaloff>:/icons/refresh1.png</normaloff>:/icons/refresh1.png</iconset>
-   </property>
-   <property name="text">
-    <string>Reload Plugins</string>
    </property>
   </action>
   <action name="actionUseOpenCV">

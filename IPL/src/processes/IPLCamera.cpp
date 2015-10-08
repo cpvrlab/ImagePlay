@@ -37,7 +37,7 @@ void IPLCamera::init()
     addOutput("Image", IPLData::IMAGE_COLOR);
 
     addProcessPropertyUnsignedInt("trigger", "Trigger Image", "", 0, IPL_WIDGET_BUTTON);
-    addProcessPropertyBool("continuous", "Run continuously", "", true);
+    addProcessPropertyBool("continuous", "Run continuously", "", false);
 
     // all properties which can later be changed by gui
     addProcessPropertyInt("width", "Width", "", 640, IPL_WIDGET_SLIDER, 640, 1920);
@@ -61,14 +61,16 @@ bool IPLCamera::processInputData(IPLImage*, int, bool)
     delete _result;
     _result = NULL;
 
-    if (_continuous = getProcessPropertyBool("continuous"))
+    _continuous = getProcessPropertyBool("continuous");
+
+    /*if (_continuous = getProcessPropertyBool("continuous"))
     {
         setIsSequence(true);
     }
     else
     {
         setIsSequence(false);
-    }
+    }*/
 
 
     // get properties
@@ -123,5 +125,8 @@ IPLImage *IPLCamera::getResultData(int)
 
 void IPLCamera::afterProcessing()
 {
-    notifyPropertyChangedEventHandler();
+    if(_continuous)
+    {
+        notifyPropertyChangedEventHandler();
+    }
 }

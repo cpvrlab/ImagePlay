@@ -574,6 +574,11 @@ void ImageViewerWindow::updateOutputs()
     }
 }
 
+IPZoomWidget *ImageViewerWindow::zoomWidget()
+{
+    return ui->zoomWidget;
+}
+
 void ImageViewerWindow::tabChanged(int tabIndex)
 {
     if(tabIndex < 0)

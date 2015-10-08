@@ -118,15 +118,7 @@ void IPProcessGrid::buildQueue()
     // sort by depth
     qSort(_processList.begin(), _processList.end(), IPProcessGrid::sortTreeDepthLessThan);
 
-
     // et voila, we have the execution order
-    /*qDebug() << "Process List:";
-    QListIterator<IPProcessStep *> i(_processList);
-    while (i.hasNext())
-    {
-        IPProcessStep* step = i.next();
-        qDebug() << step->name() << "\tID: " << step->stepID() << "\tDepth: " << step->treeDepth();
-    }*/
 
     // move the tabs in the right order
     _mainWindow->imageViewer()->sortTabs();
@@ -142,6 +134,7 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/
     connect(&thread, &IPProcessThread::progressUpdated, this, &IPProcessGrid::updateProgress);
 
     _mainWindow->setThreadRunning(true);
+    _mainWindow->imageViewer()->zoomWidget()->zoomUpdateMutex()->lock();
     process->setResultReady(false);
     process->resetMessages();
 
@@ -155,6 +148,7 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/
     }
     process->setResultReady(thread.success());
     _mainWindow->setThreadRunning(false);
+    _mainWindow->imageViewer()->zoomWidget()->zoomUpdateMutex()->unlock();
 
     _lastProcessSuccess = thread.success();
 
@@ -299,7 +293,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 step->process()->resetMessages();
                 step->process()->beforeProcessing();
                 int durationMs = executeThread(step->process());
-                if ( _lastProcessSuccess ) blockFailLoop = true;
+                if ( !_lastProcessSuccess ) blockFailLoop = true;
 
                 // afterProcessing will be called later
                 afterProcessingList.append(step);
@@ -313,13 +307,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 // update error messages
                 _mainWindow->updateProcessMessages();
             }
-
-            /*if(sequenceProcess)
-            {
-                int currentSequenceCount = sequenceProcess->sequenceCount();
-                _sequenceCount = std::max(_sequenceCount, currentSequenceCount);
-                emit sequenceChanged(_sequenceIndex, _sequenceCount);
-            }*/
         }
         else
         {
@@ -373,17 +360,20 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     if(_stopExecution)
         return;
 
-    // update images
-    _mainWindow->imageViewer()->updateImage();
-    _mainWindow->imageViewer()->showProcessDuration(totalDurationMs);
-
-
-    // update process graph
-    _mainWindow->updateGraphicsView();
-    _mainWindow->unlockScene();
-
-    _isRunning = false;
-    _currentStep = NULL;
+    // call afterProcessing of all steps which were executed this time
+    // processes like the camera might request another execution
+    QListIterator<IPProcessStep *> it2(_processList);
+    while (it2.hasNext())
+    {
+        IPProcessStep* step = it2.next();
+        step->process()->setUpdateNeeded(false);
+    }
+    QListIterator<IPProcessStep *> it3(_processList);
+    while (it3.hasNext())
+    {
+        IPProcessStep* step = it3.next();
+        step->process()->afterProcessing();
+    }
 
     _updateNeeded = false;
 
@@ -393,28 +383,28 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     // a process is started
     // blockFailLoop prevents an infinite loop if a process is failing
     if ( !blockFailLoop ){
-       QListIterator<IPProcessStep *> itp(_processList);
-       while (itp.hasNext())
-       {
-           IPProcessStep* step = itp.next();
-           if (step->process()->updateNeeded() ){
-              _updateNeeded = true;
-              break;
-           }
-       }
+        QListIterator<IPProcessStep *> itp(_processList);
+        while (itp.hasNext())
+        {
+            IPProcessStep* step = itp.next();
+            if (step->process()->updateNeeded() )
+            {
+                _updateNeeded = true;
+                break;
+            }
+        }
     }
-    
 
-    // call afterProcessing of all steps which were executed this time
-    // processes like the camera might request another execution
-    QListIterator<IPProcessStep *> it2(_processList);
-    while (it2.hasNext())
-    {
-        IPProcessStep* step = it2.next();
-        step->process()->afterProcessing();
+    // update images
+    _mainWindow->imageViewer()->updateImage();
+    _mainWindow->imageViewer()->showProcessDuration(totalDurationMs);
 
-        step->process()->setUpdateNeeded(false);
-    }
+    // update process graph
+    _mainWindow->updateGraphicsView();
+    _mainWindow->unlockScene();
+
+    _isRunning = false;
+    _currentStep = NULL;
 }
 
 void IPProcessGrid::updateProgress(int progress)
