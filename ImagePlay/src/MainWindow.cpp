@@ -65,13 +65,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sequenceControlWidget->setEnabled(false);
     ui->sequenceControlWidget->hide();
 
-    _pluginFileSystemWatcher = new QFileSystemWatcher(this);
+    //_pluginFileSystemWatcher = new QFileSystemWatcher(this);
     _pluginFileSytemLastCount = 0;
 
     _pluginFileSystemTimer = NULL;
 
     connect(ui->graphicsView, &IPProcessGrid::sequenceChanged, this, &MainWindow::on_sequenceChanged);
-    connect(_pluginFileSystemWatcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::on_pluginDirectoryChanged);
+    //connect(_pluginFileSystemWatcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::on_pluginDirectoryChanged);
     connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
 
     // read and apply settings
@@ -525,8 +525,8 @@ void MainWindow::loadPlugins()
 
                 _factory->registerProcess(className, loadedPlugin->getProcess());
 
-                qDebug() << pluginPath() + "/" + fileName;
-                _pluginFileSystemWatcher->addPath(pluginPath() + "/" + fileName);
+                //qDebug() << pluginPath() + "/" + fileName;
+                //_pluginFileSystemWatcher->addPath(pluginPath() + "/" + fileName);
 
                 _loadedPlugins.push_back(loadedPlugin);
                 _loaders.push_back(loader);
