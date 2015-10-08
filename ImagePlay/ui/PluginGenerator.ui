@@ -27,7 +27,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the following information in order to generate all necessary files for developing an ImagePlay plugin.&lt;/p&gt;&lt;p&gt;The files can be found in the /plugin_development/ folder and are prepared for QtCreator or Visual Studio.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Generated files:&lt;/span&gt;&lt;br/&gt;- PluginName.h&lt;br/&gt;- PluginName.pro&lt;br/&gt;- PluginName.vcxproj&lt;/p&gt;&lt;p&gt;The following properties can be changed later directly in the source code.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the following information in order to generate all necessary files for developing an ImagePlay plugin.&lt;/p&gt;&lt;p&gt;The files can be found in the /plugin_development/ folder and are prepared for QtCreator.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Generated files:&lt;/span&gt;&lt;br/&gt;- PluginName.h&lt;br/&gt;- PluginName.pro&lt;/p&gt;&lt;p&gt;The following properties can be changed later directly in the source code.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

@@ -191,11 +191,11 @@ void MainWindow::readSettings()
 #ifdef Q_OS_LINUX
     _processIconPath    = _settings->value("ProcessIconPath",   QString(LINUX_PATH_PREFIX) + "process_icons/").toString();
     _pluginPath         = _settings->value("PluginPath",        QString(LINUX_PATH_PREFIX) + "plugins/").toString();
-    _pluginDevPath      = _settings->value("PluginDevPath",     QString(LINUX_PATH_PREFIX) + "plugins_development/").toString();
+    _pluginDevPath      = _settings->value("PluginDevPath",     QString(LINUX_PATH_PREFIX) + "plugin_development/").toString();
 #else
     _processIconPath    = _settings->value("ProcessIconPath",   QCoreApplication::applicationDirPath() + QString("/process_icons/")).toString();
     _pluginPath         = _settings->value("PluginPath",        QCoreApplication::applicationDirPath() + QString("/plugins/")).toString();
-    _pluginDevPath      = _settings->value("PluginDevPath",     QCoreApplication::applicationDirPath() + QString("/plugins_development/")).toString();
+    _pluginDevPath      = _settings->value("PluginDevPath",     QCoreApplication::applicationDirPath() + QString("/plugin_development/")).toString();
 #endif
 
     bool showLog        = _settings->value("showLog", false).toBool();
