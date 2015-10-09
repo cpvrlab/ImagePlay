@@ -1,5 +1,25 @@
 # Change Log
 
+## 6.0.0-rc.1 - 2015-10-09
+### Added
+- Tabs in the image viewer are now automatically sorted by their execution order
+- Compatibility for building under OS X 10.11, see QMAKE_MAC_SDK = macosx10.11
+
+### Fixed
+- Improved live reloading of plugins
+- Improved IPLCamera, stability of .ipj loading, zoom widget
+- Graph state gets updated when removing edges, invalidating following results
+- Decreased memory usage of ImageViewer, improved behaviour ouf ZoomVie…
+
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
 ## 6.0.0-rc.0 - 2015-09-18
 ### Added
 - New mode for loading RAW image files when dimensions and byte order are known
