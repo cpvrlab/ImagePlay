@@ -261,7 +261,7 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
         success = FreeImage_SaveToMemory((FREE_IMAGE_FORMAT)format, dib, hmem, flags) != 0;
 
         // write to result
-        if(result)
+        if(success && result)
         {
             loadMemory((void*)hmem, result);
         }
@@ -275,10 +275,10 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
         success = FreeImage_Save((FREE_IMAGE_FORMAT)format, dib, path.c_str(), flags) != 0;
 
         // write to result
-        if(result)
+        if(success && result)
         {
             std::string information;
-            loadFile(path, result, information);
+            success = loadFile(path, result, information);
         }
     }
 

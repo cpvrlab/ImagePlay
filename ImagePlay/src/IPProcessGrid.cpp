@@ -301,9 +301,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                 totalDurationMs += durationMs;
                 step->setDuration(durationMs);
 
-                if(!step->process()->hasErrors())
-                    step->updateThumbnail();
-
                 // update error messages
                 _mainWindow->updateProcessMessages();
             }
@@ -343,8 +340,6 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
                     totalDurationMs += durationMs;
                     step->setDuration(durationMs);
 
-                    step->updateThumbnail();
-
                     // update error messages
                     _mainWindow->updateProcessMessages();
                 }
@@ -372,6 +367,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
     while (it3.hasNext())
     {
         IPProcessStep* step = it3.next();
+        step->updateThumbnail();
         step->process()->afterProcessing();
     }
 

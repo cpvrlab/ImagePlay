@@ -42,7 +42,7 @@ void IPLSynthesize::init()
     addOutput("Image", IPLData::IMAGE_GRAYSCALE);
 
     // all properties which can later be changed by gui
-    addProcessPropertyInt("type", "Type:Plane Wave|Center Wave","plane|radial", _type, IPL_WIDGET_GROUP);
+    addProcessPropertyInt("type", "Type:Flat|Plane Wave|Center Wave","flat|plane|radial", _type, IPL_WIDGET_GROUP);
     addProcessPropertyInt("width", "Width","", _width, IPL_WIDGET_SLIDER, 1, 1024);
     addProcessPropertyInt("height", "Height","", _height, IPL_WIDGET_SLIDER, 1, 1024);
     addProcessPropertyDouble("amplitude", "Amptlitude","", _amplitude, IPL_WIDGET_SLIDER, 0.0f, 1.0f);
@@ -50,6 +50,7 @@ void IPLSynthesize::init()
     addProcessPropertyInt("wavelength", "Wavelength","", _wavelength, IPL_WIDGET_SLIDER, 1, 1024);
     addProcessPropertyInt("plane_direction", "Direction","", _direction, IPL_WIDGET_SLIDER, 0, 360);
     addProcessPropertyInt("decay", "Decay","", _decay, IPL_WIDGET_SLIDER, 0, 1024);
+    addProcessPropertyColor("flat_color", "Color","", IPLColor(0,0,0), IPL_WIDGET_COLOR_RGB);
 }
 
 void IPLSynthesize::destroy()
@@ -78,7 +79,12 @@ bool IPLSynthesize::processInputData(IPLImage*, int, bool)
     _direction  = getProcessPropertyInt("plane_direction");
     _decay      = getProcessPropertyInt("decay");
 
-    _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, _width, _height );
+    IPLColor color = getProcessPropertyColor("flat_color");
+
+    if( _type == 0 )
+        _result = new IPLImage( IPLData::IMAGE_COLOR, _width, _height );
+    else
+        _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, _width, _height );
 
     double dx = (double)_width / 2.0;
     double dy = (double)_height / 2.0;
@@ -91,7 +97,19 @@ bool IPLSynthesize::processInputData(IPLImage*, int, bool)
 
     switch( _type )
     {
-    case 0: // plane wave
+    case 0: // flat plane
+        for( int y=0; y<_height; y++ )
+        {
+            notifyProgressEventHandler(100*progress++/maxProgress);
+            for( int x=0; x<_width; x++ )
+            {
+                _result->plane(0)->p(x,y) = color.red();
+                _result->plane(1)->p(x,y) = color.green();
+                _result->plane(2)->p(x,y) = color.blue();
+            }
+        }
+        break;
+    case 1: // plane wave
         for( int y=0; y<_height; y++ )
         {
             notifyProgressEventHandler(100*progress++/maxProgress);
@@ -104,7 +122,7 @@ bool IPLSynthesize::processInputData(IPLImage*, int, bool)
             }
         }
         break;
-    case 1:// center wave
+    case 2:// center wave
         for( int y=0; y<_height; y++ )
         {
             notifyProgressEventHandler(100*progress++/maxProgress);

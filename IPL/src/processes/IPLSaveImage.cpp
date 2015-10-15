@@ -140,10 +140,8 @@ bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
     notifyProgressEventHandler(-1);
 
     delete _result;
-    _result = new IPLImage(image->type(), image->width(), image->height());
-    bool success = IPLFileIO::saveFile(_path, image, format, flags, _result, _preview);
-
-    //delete colorImage;
+    _result = new IPLImage(*image);
+    bool success = IPLFileIO::saveFile(_path, image, format, flags, NULL, _preview);
 
     return success;
 }
