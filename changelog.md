@@ -1,5 +1,21 @@
 # Change Log
 
+## 6.0.0-rc.2 - 2015-10-16
+### Added
+- New button which allows to reset all process properties to their defaults
+
+### Fixed
+- Fixed a crash in IPLSaveImage
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
+
 ## 6.0.0-rc.1 - 2015-10-09
 ### Added
 - Tabs in the image viewer are now automatically sorted by their execution order
