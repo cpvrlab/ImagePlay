@@ -38,18 +38,28 @@ public:
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
-        std::string value = ((IPLProcessPropertyString*) property)->value();
+        _property = property;
 
-        _lineEdit = new QLineEdit(QString::fromStdString(value));
-
+        _lineEdit = new QLineEdit(this);
         layout()->addWidget(_lineEdit);
+
+        init();
 
         connect(_lineEdit, &QLineEdit::editingFinished, this, &IPPropertyString::onEditingFinished);
 
-        _property = property;
     }
+
+    void init()
+    {
+
+        std::string value = _property->value();
+
+        _lineEdit->setText(QString::fromStdString(value));
+    }
+
     QString value()         { return _lineEdit->text(); }
     void saveValue()        { _property->setValue(value().toStdString()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

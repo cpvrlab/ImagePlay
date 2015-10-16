@@ -58,6 +58,7 @@ public:
     virtual SerializedData serialize() const = 0;
     virtual void deserialize(const SerializedData &data) = 0;
     virtual IPLProcessProperty *clone() const = 0;
+    virtual void resetValue() = 0;
 
 protected:
     IPLProcessProperty(int position,
@@ -88,6 +89,7 @@ public:
     int max() const                         { return _max; }
     int value() const                       { return _value; }
     void setValue(int value);
+    void resetValue()                       { setValue(_default); }
     virtual const char *type() const        { return "int"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
@@ -96,7 +98,8 @@ public:
 private:
     int _min;                         //!< min value, may be used in GUI
     int _max;                         //!< max value, may be used in GUI
-    int _value;                       //!< default and also current value
+    int _default;                     //!< default value
+    int _value;                       //!< current value
 };
 
 // UNSIGNED INT
@@ -109,6 +112,7 @@ public:
     unsigned int max() const                         { return _max; }
     unsigned int value() const                       { return _value; }
     void setValue(unsigned int value);
+    void resetValue()                                { setValue(_default); }
     virtual const char *type() const                 { return "uint"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
@@ -117,7 +121,8 @@ public:
 private:
     unsigned int _min;                         //!< min value, may be used in GUI
     unsigned int _max;                         //!< max value, may be used in GUI
-    unsigned int _value;                       //!< default and also current value
+    unsigned int _default;                     //!< default value
+    unsigned int _value;                       //!< current value
 };
 
 // DOUBLE
@@ -130,6 +135,7 @@ public:
     double max() const                         { return _max; }
     double value() const                       { return _value; }
     void setValue(double value);
+    void resetValue()                          { setValue(_default); }
     virtual const char *type() const           { return "double"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
@@ -138,7 +144,8 @@ public:
 private:
     double _min;                         //!< min value, may be used in GUI
     double _max;                         //!< max value, may be used in GUI
-    double _value;                       //!< default and also current value
+    double _default;                     //!< default value
+    double _value;                       //!< current value
 };
 
 // DOUBLE
@@ -151,6 +158,7 @@ public:
     float max() const                         { return _max; }
     float value() const                       { return _value; }
     void setValue(float value);
+    void resetValue()                         { setValue(_default); }
     virtual const char *type() const          { return "float"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
@@ -159,7 +167,8 @@ public:
 private:
     float _min;                         //!< min value, may be used in GUI
     float _max;                         //!< max value, may be used in GUI
-    float _value;                       //!< default and also current value
+    float _default;                     //!< default value
+    float _value;                       //!< current value
 };
 
 
@@ -172,13 +181,15 @@ public:
 
     bool value() const                       { return _value; }
     void setValue(bool value);
+    void resetValue()                        { setValue(_default); }
     virtual const char *type() const         { return "bool"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    bool _value;                       //!< default and also current value
+    bool _default;                     //!< default value
+    bool _value;                       //!< current value
 };
 
 // STRING
@@ -190,13 +201,15 @@ public:
     std::string value() const                       { return _value; }
     void setValue(const std::string &value);
     void setValue(std::string &&value);
+    void resetValue()                               { setValue(_default); }
     virtual const char *type() const                { return "string"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    std::string _value;                       //!< default and also current value
+    std::string _default;                     //!< default value
+    std::string _value;                       //!< current value
 };
 
 
@@ -209,13 +222,15 @@ public:
     const std::vector<int> &value() const                       { return _value; }
     void setValue(const std::vector<int> &value);
     void setValue(std::vector<int> &&value);
+    void resetValue()                                           { setValue(_default); }
     virtual const char *type() const                            { return "vector<int>"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    std::vector<int> _value;                       //!< default and also current value
+    std::vector<int> _default;                     //!< default value
+    std::vector<int> _value;                       //!< current value
 };
 
 // VECTOR<DOUBLE>
@@ -224,16 +239,18 @@ class IPLSHARED_EXPORT IPLProcessPropertyVectorDouble : public IPLProcessPropert
 public:
     IPLProcessPropertyVectorDouble(IPLProcess* process, int position, const char* name, const char* title, const char* description, const std::vector<double> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
 
-    const std::vector<double> &value() const                       { return _value; }
+    const std::vector<double> &value() const                    { return _value; }
     void setValue(const std::vector<double> &value);
     void setValue(std::vector<double> &&value);
+    void resetValue()                                           { setValue(_default); }
     virtual const char *type() const                            { return "vector<double>"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    std::vector<double> _value;                       //!< default and also current value
+    std::vector<double> _default;                     //!< default value
+    std::vector<double> _value;                       //!< current value
 };
 
 // COLOR
@@ -245,13 +262,15 @@ public:
     const IPLColor &value() const                       { return _value; }
     void setValue(const IPLColor &value);
     void setValue(IPLColor &&value);
+    void resetValue()                                   { setValue(_default); }
     virtual const char *type() const                    { return "color"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    IPLColor _value;                       //!< default and also current value
+    IPLColor _default;                     //!< default value
+    IPLColor _value;                       //!< current value
 };
 
 
@@ -264,13 +283,15 @@ public:
     const IPLPoint &value() const                       { return _value; }
     void setValue(const IPLPoint &value);
     void setValue(IPLPoint &&value);
+    void resetValue()                                   { setValue(_default); }
     virtual const char *type() const                    { return "point"; }
     virtual SerializedData serialize() const;
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
 private:
-    IPLPoint _value;                       //!< default and also current value
+    IPLPoint _default;                     //!< default value
+    IPLPoint _value;                       //!< current value
 };
 
 //! IPLProcessPropertyMap

@@ -38,14 +38,13 @@ public:
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
-        std::string value = ((IPLProcessPropertyString*) property)->value();
-
+        _property = property;
 
         // split the properties
         QString rawName(property->title());
         _filetypeString = rawName.split(":").at(1);
 
-        _lineEdit = new QLineEdit(QString::fromStdString(value));
+        _lineEdit = new QLineEdit(this);
         _lineEdit->setReadOnly(true);
 
         _button = new QPushButton("...");
@@ -57,10 +56,19 @@ public:
         connect(_button, &QPushButton::pressed,
                 this, &IPPropertyFileSave::onPressButton );
 
-        _property = property;
+        init();
     }
+
+    void init()
+    {
+        std::string value = _property->value();
+
+        _lineEdit->setText(QString::fromStdString(value));
+    }
+
     QString value()         { return _lineEdit->text(); }
     void saveValue()        { _property->setValue(value().toStdString()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

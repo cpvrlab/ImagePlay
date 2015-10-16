@@ -61,6 +61,7 @@ public:
     }
 
     virtual void saveValue() = 0;
+    virtual void resetValue() = 0;
     IPLProcessProperty* processProperty() { return _processProperty; }
 
 signals:

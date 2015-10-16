@@ -40,15 +40,24 @@ public:
 
         _property = property;
 
-        double min   = ((IPLProcessPropertyDouble*) property)->min();
-        double max   = ((IPLProcessPropertyDouble*) property)->max();
-        double value = ((IPLProcessPropertyDouble*) property)->value();
-
         _slider = new QSlider(Qt::Horizontal, this);
         _spinner = new QDoubleSpinBox(this);
 
         layout()->addWidget(_slider);
         layout()->addWidget(_spinner);
+
+        init();
+
+        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderDouble::updateSpinner );
+        connect(_spinner, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertySliderDouble::updateSlider );
+
+    }
+
+    void init()
+    {
+        double min   = _property->min();
+        double max   = _property->max();
+        double value = _property->value();
 
         _slider->setMinimum(min*100);
         _slider->setMaximum(max*100);
@@ -59,15 +68,18 @@ public:
         _spinner->setMaximum(max);
         _spinner->setValue(value);
         _spinner->setSingleStep(0.01);
-
-        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderDouble::updateSpinner );
-        connect(_spinner, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertySliderDouble::updateSlider );
     }
+
     void setMinimum(double v)  { _slider->setMinimum(v*100); }
     void setMaximum(double v)  { _slider->setMaximum(v*100); }
     double value()             { return _slider->value()/100.0; }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()
+    {
+        _property->resetValue();
+        init();
+    }
 
 signals:
 

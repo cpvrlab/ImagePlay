@@ -71,6 +71,7 @@ public:
 
     Value value() const { return _value; }
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); }
 
     void click()
     {

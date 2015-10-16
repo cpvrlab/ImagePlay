@@ -76,6 +76,7 @@ public:
     }
 
     void saveValue()        { _property->setValue(value<Value>()); }
+    void resetValue()       { _property->resetValue(); }
 
 private:
     Property* _property;

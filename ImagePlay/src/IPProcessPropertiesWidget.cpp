@@ -351,6 +351,14 @@ void IPProcessPropertiesWidget::closeSettings()
     }
 }
 
+void IPProcessPropertiesWidget::resetSettings()
+{
+    for(IPPropertyWidget* widget : _propertyWidgets)
+    {
+        widget->resetValue();
+    }
+}
+
 void IPProcessPropertiesWidget::addPropertyWidget(QString label, QString description, IPPropertyWidget *widget)
 {
     QFormLayout* layout = (QFormLayout*) this->layout();

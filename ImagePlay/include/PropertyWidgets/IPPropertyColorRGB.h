@@ -45,9 +45,9 @@ public:
 
         _dialog = NULL;
 
-        _colorPickCursor = new QCursor(QPixmap(":/colorpicker_cursor.png"), 9, 21);
+        _property = property;
 
-        IPLColor value = ((IPLProcessPropertyColor*) property)->value();
+        _colorPickCursor = new QCursor(QPixmap(":/colorpicker_cursor.png"), 9, 21);
 
         _sliderR = new QSlider(Qt::Horizontal);
         _sliderG = new QSlider(Qt::Horizontal);
@@ -76,25 +76,17 @@ public:
 
         _spinR->setMinimum(0);
         _spinR->setMaximum(255);
-        _spinR->setValue(value.red() * 255);
         _spinG->setMinimum(0);
         _spinG->setMaximum(255);
-        _spinG->setValue(value.green() * 255);
         _spinB->setMinimum(0);
         _spinB->setMaximum(255);
-        _spinB->setValue(value.green() * 255);
 
         _sliderR->setMinimum(0);
         _sliderR->setMaximum(255);
-        _sliderR->setValue(value.red() * 255);
         _sliderG->setMinimum(0);
         _sliderG->setMaximum(255);
-        _sliderG->setValue(value.green() * 255);
         _sliderB->setMinimum(0);
         _sliderB->setMaximum(255);
-        _sliderB->setValue(value.blue() * 255);
-
-        _property = property;
 
         _btnColorPicker = new QPushButton(this);
         _btnColorPicker->setCheckable(true);
@@ -113,6 +105,8 @@ public:
         _layout->addWidget(_sliderB, 3, 1);
         _layout->addWidget(_spinB, 3, 2);
 
+        init();
+
         // connect signals and slots
         connect(_sliderR, &QSlider::valueChanged, _spinR, &QSpinBox::setValue );
         connect(_sliderG, &QSlider::valueChanged, _spinG, &QSpinBox::setValue );
@@ -122,16 +116,29 @@ public:
         connect(_sliderB, &QSlider::valueChanged, this, &IPPropertyColorRGB::updateValue );
 
         connect(_btnColorPicker, &QPushButton::toggled, this, &IPPropertyColorRGB::btnColorPickerTriggered);
-
         connect(_colorLabel, &QPushButton::clicked, this, &IPPropertyColorRGB::showColorpicker );
+
 
         // update everything
         updateValue();
     }
 
+    void init()
+    {
+        IPLColor value = _property->value();
+
+        _spinR->setValue(value.red() * 255);
+        _spinG->setValue(value.green() * 255);
+        _spinB->setValue(value.green() * 255);
+        _sliderR->setValue(value.red() * 255);
+        _sliderG->setValue(value.green() * 255);
+        _sliderB->setValue(value.blue() * 255);
+    }
+
     IPLColor value()     { return IPLColor(_sliderR->value()/255.0, _sliderG->value()/255.0, _sliderB->value()/255.0); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
     void pickColor(IPLColor color)
     {

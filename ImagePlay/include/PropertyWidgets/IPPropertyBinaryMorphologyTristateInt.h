@@ -40,6 +40,7 @@ class IPPropertyBinaryMorphologyTristateInt : public IPPropertyWidget
 public:
     IPPropertyBinaryMorphologyTristateInt(IPLProcessPropertyVectorInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
+        _ignoreUpdates = true;
         _ignoreCombobox = true;
         _ignoreKernel = true;
 
@@ -63,20 +64,6 @@ public:
         _property = property;
         _kernel = ((IPLProcessPropertyVectorInt*) property)->value();
 
-        _kernelType = 0;        // 3x3
-        if(_kernel.size() == 25)
-        {
-            _kernelType = 1;    // 5x5
-        }
-        else if(_kernel.size() == 49)
-        {
-            _kernelType = 2;    // 7x7
-        }
-        else if(_kernel.size() == 81)
-        {
-            _kernelType = 3;    // 9x9
-        }
-
         setLayout(new QVBoxLayout(this));
         _gridLayout = new QGridLayout;
         _gridLayout->setSpacing(2);
@@ -90,7 +77,6 @@ public:
         _kernelSizeComboBox->addItem("5x5");
         _kernelSizeComboBox->addItem("7x7");
         _kernelSizeComboBox->addItem("9x9");
-        _kernelSizeComboBox->setCurrentIndex(_kernelType);
         connect(_kernelSizeComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyBinaryMorphologyTristateInt::enableDisableKernelEditor);
 
         layout()->addWidget(_kernelSizeComboBox);
@@ -113,21 +99,6 @@ public:
 
             input->setTristate(true);
 
-            if(column >= offset && row >= offset && column < 9-offset && row < 9-offset)
-            {
-                int state = _kernel[j++];
-                if(state == -1)
-                    input->setCheckState(Qt::PartiallyChecked);
-                else if(state == 1)
-                    input->setCheckState(Qt::Checked);
-                else
-                    input->setCheckState(Qt::Unchecked);
-            }
-            else
-            {
-                input->setChecked(false);
-            }
-
             _gridLayout->addWidget(input, i/9, i%9);
             _inputs.push_back(input);
 
@@ -146,23 +117,77 @@ public:
 
         connect(_presetsComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyBinaryMorphologyTristateInt::setKernelPreset);
 
+        init();
+
         _ignoreCombobox = false;
         _ignoreKernel = false;
+        _ignoreUpdates = false;
     }
 
-//    void
+    void init()
+    {
+        _ignoreUpdates = true;
+         _kernel = _property->value();
+
+         _kernelType = 0;        // 3x3
+         if(_kernel.size() == 25)
+         {
+             _kernelType = 1;    // 5x5
+         }
+         else if(_kernel.size() == 49)
+         {
+             _kernelType = 2;    // 7x7
+         }
+         else if(_kernel.size() == 81)
+         {
+             _kernelType = 3;    // 9x9
+         }
+         _kernelSizeComboBox->setCurrentIndex(_kernelType);
+
+         int offset = 4-((int)sqrt((float)_kernel.size()) / 2);
+         int j=0;
+         for(int i=0; i<81; i++)
+         {
+             QCheckBox* input = _inputs[i];
+             int column = i%9;
+             int row    = i/9;
+
+             if(column >= offset && row >= offset && column < 9-offset && row < 9-offset)
+             {
+                 if(j >= _kernel.size())
+                     continue;
+
+                 int state = _kernel[j++];
+                 if(state == -1)
+                     input->setCheckState(Qt::PartiallyChecked);
+                 else if(state == 1)
+                     input->setCheckState(Qt::Checked);
+                 else
+                     input->setCheckState(Qt::Unchecked);
+             }
+             else
+             {
+                 input->setChecked(false);
+             }
+         }
+         _ignoreUpdates = false;
+    }
 
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     std::vector<int> value()             { return _kernel; }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 
 public slots:
     void updateValue()
     {
+        if(_ignoreUpdates)
+            return;
+
         // any change should change the preset box to "Custom"
         if(!_ignoreCombobox)
             _presetsComboBox->setCurrentIndex(0);
@@ -308,6 +333,7 @@ private:
     QWidget*                    _kernelWidget;
     bool                        _ignoreCombobox;
     bool                        _ignoreKernel;
+    bool                        _ignoreUpdates;
     std::vector<IPKernelPreset> _presets;
 };
 

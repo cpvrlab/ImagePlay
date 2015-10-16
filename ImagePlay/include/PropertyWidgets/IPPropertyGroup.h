@@ -39,8 +39,6 @@ public:
     {
         _property = property;
 
-        int value = property->value();
-
         setLayout(new QVBoxLayout(this));
 
         _combobox = new QComboBox(this);
@@ -71,18 +69,28 @@ public:
         _groupPrefixes = rawDescription.split("|");
 
         _combobox->addItems(options);
-        _combobox->setCurrentIndex(value);
+
+        init();
 
         connect(_combobox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyGroup::valueChanged);
 
         // force GUI update
         QTimer::singleShot(50, this, SLOT(indexChanged()));
     }
+
+    void init()
+    {
+        int value = _property->value();
+
+        _combobox->setCurrentIndex(value);
+    }
+
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     int value()             { return _combobox->currentIndex(); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
     QString currentGroup()  { return _groupPrefixes[value()]; }
 

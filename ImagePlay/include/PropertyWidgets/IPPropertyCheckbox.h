@@ -42,22 +42,30 @@ public:
         _layout->setMargin(0);
         setLayout(_layout);
 
-        bool value = ((IPLProcessPropertyBool*) property)->value();
-
         _checkbox = new QCheckBox(title, this);
-        _checkbox->setChecked(value);
 
         // set up layout
         _layout->addWidget(_checkbox);
 
+        init();
+
         // connect signals and slots
         connect(_checkbox, &QCheckBox::stateChanged, this, &IPPropertyCheckbox::updateValue );
+
     }
+
+    void init()
+    {
+        bool value = ((IPLProcessPropertyBool*) _property)->value();
+        _checkbox->setChecked(value);
+    }
+
     void setMinimum(int)    {  }
     void setMaximum(int)    {  }
     bool value()            { return _checkbox->isChecked(); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

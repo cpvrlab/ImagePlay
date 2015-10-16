@@ -40,8 +40,6 @@ public:
         _layout->setMargin(0);
         setLayout(_layout);
 
-        IPLColor value = ((IPLProcessPropertyColor*) property)->value();
-
         _sliderH = new QSlider(Qt::Horizontal);
         _sliderS = new QSlider(Qt::Horizontal);
         _sliderL = new QSlider(Qt::Horizontal);
@@ -69,23 +67,17 @@ public:
 
         _spinH->setMinimum(0);
         _spinH->setMaximum(359);
-        _spinH->setValue(value.hue() * 359);
         _spinS->setMinimum(0);
         _spinS->setMaximum(255);
-        _spinS->setValue(value.saturation() * 255);
         _spinL->setMinimum(0);
         _spinL->setMaximum(255);
-        _spinL->setValue(value.lightness() * 255);
 
         _sliderH->setMinimum(0);
         _sliderH->setMaximum(359);
-        _sliderH->setValue(value.hue() * 359);
         _sliderS->setMinimum(0);
         _sliderS->setMaximum(255);
-        _sliderS->setValue(value.saturation() * 255);
         _sliderL->setMinimum(0);
         _sliderL->setMaximum(255);
-        _sliderL->setValue(value.lightness() * 255);
 
         _property = property;
 
@@ -101,6 +93,8 @@ public:
         _layout->addWidget(_sliderL, 3, 1);
         _layout->addWidget(_spinL, 3, 2);
 
+        init();
+
         // connect signals and slots
         connect(_sliderH, &QSlider::valueChanged, _spinH, &QSpinBox::setValue );
         connect(_sliderS, &QSlider::valueChanged, _spinS, &QSpinBox::setValue );
@@ -112,11 +106,25 @@ public:
         // update everything
         updateValue();
     }
+
+    void init()
+    {
+        IPLColor value = _property->value();
+
+        _spinH->setValue(value.hue() * 359);
+        _spinS->setValue(value.saturation() * 255);
+        _spinL->setValue(value.lightness() * 255);
+        _sliderH->setValue(value.hue() * 359);
+        _sliderS->setValue(value.saturation() * 255);
+        _sliderL->setValue(value.lightness() * 255);
+    }
+
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     IPLColor value()     { return IPLColor(_sliderH->value()/359, _sliderS->value()/255, _sliderL->value()/255); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

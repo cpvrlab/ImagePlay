@@ -42,15 +42,28 @@ public:
 
         _property = property;
 
-        int min   = property->min();
-        int max   = property->max();
-        int value = property->value();
-
         _slider = new QSlider(Qt::Horizontal, this);
         _spinner = new QSpinBox(this);
 
         layout()->addWidget(_slider);
         layout()->addWidget(_spinner);
+
+        init();
+
+        //connect(_slider, &QSlider::sliderReleased, this, &IPPropertySliderIntEven::updateValue );
+        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderIntEven::onSliderChanged );
+        connect(_spinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertySliderIntEven::onSpinnerChanged );
+
+        _ignoreEvents = false;
+    }
+
+    void init()
+    {
+        _ignoreEvents = true;
+
+        int min   = _property->min();
+        int max   = _property->max();
+        int value = _property->value();
 
         // slider scale is 0 - (max-min/2), step is 1
         _slider->setMinimum(0);
@@ -62,17 +75,15 @@ public:
         _spinner->setMaximum(max);
         _spinner->setValue(value);
 
-        //connect(_slider, &QSlider::sliderReleased, this, &IPPropertySliderIntEven::updateValue );
-        connect(_slider, &QSlider::valueChanged, this, &IPPropertySliderIntEven::onSliderChanged );
-        connect(_spinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertySliderIntEven::onSpinnerChanged );
-
         _ignoreEvents = false;
     }
+
     void setMinimum(int v)  { _slider->setMinimum(v);  _spinner->setMinimum(v); }
     void setMaximum(int v)  { _slider->setMaximum(v);  _spinner->setMaximum(v); }
-    int value()             { return _spinner->value(); }
+    int value()             { return _spinner->value(); init(); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); }
 
 signals:
 

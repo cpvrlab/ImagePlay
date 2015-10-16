@@ -68,6 +68,7 @@ public:
                                 ~IPProcessPropertiesWidget  ();
     void                        init                        (IPProcessStep* process);
     void                        closeSettings               ();
+    void                        resetSettings               ();
     void                        addPropertyWidget           (QString label, QString description, IPPropertyWidget *widget);
     void                        setMainWindow               (MainWindow* mainWindow)                                            { _mainWindow = mainWindow; }
     MainWindow*                 mainWindow                  ();

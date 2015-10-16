@@ -63,7 +63,7 @@ class IPProcessGridScene;
 // constants
 
 #ifndef IMAGEPLAY_VERSION
-#define IMAGEPLAY_VERSION "6.0.0-rc.1"
+#define IMAGEPLAY_VERSION "6.0.0-rc.2"
 #endif
 
 #ifndef IMAGEPLAY_BUILDDATE
@@ -178,6 +178,7 @@ private slots:
     void                    on_actionGeneratePlugin_triggered();
     void                    on_actionImageViewer_triggered  (bool checked);
     void                    on_btnCloseProcessSettings_clicked();
+    void                    on_btnResetProcessSettings_clicked();
     void                    on_pluginDirectoryChanged       (const QString & path);
 
     void on_actionImage_Viewer_always_on_top_triggered(bool checked);

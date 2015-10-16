@@ -1422,6 +1422,11 @@ void MainWindow::on_btnCloseProcessSettings_clicked()
     hideProcessSettings();
 }
 
+void MainWindow::on_btnResetProcessSettings_clicked()
+{
+    ui->processPropertiesWidget->resetSettings();
+}
+
 void MainWindow::on_pluginDirectoryChanged(const QString & path)
 {
     // problem: when compiling a plugin, the file is changed multiple times,

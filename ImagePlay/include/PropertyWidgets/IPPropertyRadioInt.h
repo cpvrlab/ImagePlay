@@ -36,12 +36,12 @@ class IPPropertyRadioInt : public IPPropertyWidget
 public:
     IPPropertyRadioInt(IPLProcessPropertyInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
+        _ignoreEvents = true;
+
         _property = property;
 
         setLayout(new QVBoxLayout);
         layout()->setMargin(0);
-
-        int value = property->value();
 
         _buttonGroup = new QButtonGroup(this);
 
@@ -62,34 +62,57 @@ public:
         for(int i=0; i<options.size(); i++)
         {
             QRadioButton* btn = new QRadioButton(options[i], this);
-            btn->setChecked(i==value);
             _buttonGroup->addButton(btn, i);
             layout()->addWidget(btn);
 
+            _inputs.push_back(btn);
 
             connect(btn, &QRadioButton::clicked, this, &IPPropertyRadioInt::valueChanged);
         }
 
+        init();
+
+
+        _ignoreEvents = false;
     }
+
+    void init()
+    {
+        int value = _property->value();
+
+        int i=0;
+        for(QRadioButton* btn : _inputs)
+        {
+            btn->setChecked(i==value);
+            i++;
+        }
+    }
+
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     int value()             { return _buttonGroup->checkedId(); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 
 public slots:
     void valueChanged()
     {
+        if(_ignoreEvents)
+            return;
+
         saveValue();
 
         emit changed();
     }
 
 private:
-    IPLProcessPropertyInt*    _property;
+    IPLProcessPropertyInt*      _property;
     QButtonGroup*               _buttonGroup;
+    QList<QRadioButton*>        _inputs;
+    bool                        _ignoreEvents;
 };
 
 #endif // IPPROPERTYRADIOINT_H

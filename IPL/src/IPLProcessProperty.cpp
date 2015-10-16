@@ -248,6 +248,7 @@ IPLProcessProperty::IPLProcessProperty(int position, const char* name, const cha
 IPLProcessPropertyInt::IPLProcessPropertyInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, int value, IPLProcessWidgetType widget, int min, int max):
     IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
+    _default(value),
     _min(min),
     _max(max)
 {}
@@ -277,6 +278,7 @@ IPLProcessProperty *IPLProcessPropertyInt::clone() const
 IPLProcessPropertyUnsignedInt::IPLProcessPropertyUnsignedInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, unsigned int value, IPLProcessWidgetType widget, unsigned int min, unsigned int max):
     IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
+    _default(value),
     _min(min),
     _max(max)
 {}
@@ -307,6 +309,7 @@ IPLProcessProperty *IPLProcessPropertyUnsignedInt::clone() const
 IPLProcessPropertyDouble::IPLProcessPropertyDouble(IPLProcess *process, int position, const char* name, const char* title, const char *description, double value, IPLProcessWidgetType widget, double min, double max):
     IPLProcessProperty(position,name,title,description,process, widget),
     _value(value),
+    _default(value),
     _min(min),
     _max(max)
 {}
@@ -337,6 +340,7 @@ IPLProcessProperty *IPLProcessPropertyDouble::clone() const
 IPLProcessPropertyFloat::IPLProcessPropertyFloat(IPLProcess *process, int position, const char* name, const char* title, const char *description, float value, IPLProcessWidgetType widget, float min, float max):
     IPLProcessProperty(position,name,title,description,process,widget),
     _value(value),
+    _default(value),
     _min(min),
     _max(max)
 {}
@@ -366,7 +370,8 @@ IPLProcessProperty *IPLProcessPropertyFloat::clone() const
 
 IPLProcessPropertyBool::IPLProcessPropertyBool(IPLProcess *process, int position, const char* name, const char* title, const char *description, bool value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
-    _value(value)
+    _value(value),
+    _default(value)
 {}
 
 void IPLProcessPropertyBool::setValue(bool value)
@@ -394,7 +399,8 @@ IPLProcessProperty *IPLProcessPropertyBool::clone() const
 
 IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::string &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
-    _value(value)
+    _value(value),
+    _default(value)
 {}
 
 void IPLProcessPropertyString::setValue(const std::string &value)
@@ -430,7 +436,9 @@ IPLProcessProperty *IPLProcessPropertyString::clone() const
 IPLProcessPropertyVectorInt::IPLProcessPropertyVectorInt(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::vector<int> &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
     _value(value)
-{}
+{
+    _default = value;
+}
 
 void IPLProcessPropertyVectorInt::setValue(const std::vector<int> &value)
 {
@@ -465,7 +473,8 @@ IPLProcessProperty *IPLProcessPropertyVectorInt::clone() const
 
 IPLProcessPropertyVectorDouble::IPLProcessPropertyVectorDouble(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::vector<double> &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
-    _value(value)
+    _value(value),
+    _default(value)
 {}
 
 void IPLProcessPropertyVectorDouble::setValue(const std::vector<double> &value)
@@ -500,7 +509,8 @@ IPLProcessProperty *IPLProcessPropertyVectorDouble::clone() const
 
 IPLProcessPropertyColor::IPLProcessPropertyColor(IPLProcess *process, int position, const char* name, const char* title, const char *description, const IPLColor &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
-    _value(value)
+    _value(value),
+    _default(value)
 {}
 
 void IPLProcessPropertyColor::setValue(const IPLColor &value)
@@ -534,7 +544,8 @@ IPLProcessProperty *IPLProcessPropertyColor::clone() const
 
 IPLProcessPropertyPoint::IPLProcessPropertyPoint(IPLProcess *process, int position, const char* name, const char* title, const char *description, const IPLPoint &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
-    _value(value)
+    _value(value),
+    _default(value)
 {}
 
 void IPLProcessPropertyPoint::setValue(const IPLPoint &value)

@@ -146,5 +146,8 @@
         <file>back_over.png</file>
         <file>back_pressed.png</file>
         <file>ImagePlay.png</file>
+        <file>reset.png</file>
+        <file>reset_over.png</file>
+        <file>reset_pressed.png</file>
     </qresource>
 </RCC>

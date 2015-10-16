@@ -72,8 +72,6 @@ public:
         _matrixWidget->setLayout(_gridLayout);
         layout()->addWidget(_matrixWidget );
 
-        // compute offset
-        int j = 0;
         for(int i=0; i<_matrix.size(); i++)
         {
             int column = i%_cols;
@@ -90,24 +88,36 @@ public:
             input->setSingleStep(0.5);
             input->setDecimals(3);
 
-            input->setValue(_matrix[j++]);
-
             _gridLayout->addWidget(input, row, column);
             _inputs.push_back(input);
 
             connect(input, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &IPPropertyMatrixDouble::updateValue);
         }
+        init();
+
 
         _ignoreUpdates = false;
     }
 
-//    void
+    void init()
+    {
+        _ignoreUpdates = true;
+        _matrix = _property->value();
+
+        int i = 0;
+        for(QDoubleSpinBox* input : _inputs)
+        {
+            input->setValue(_matrix[i++]);
+        }
+        _ignoreUpdates = false;
+    }
 
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     std::vector<double> value()             { return _matrix; }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

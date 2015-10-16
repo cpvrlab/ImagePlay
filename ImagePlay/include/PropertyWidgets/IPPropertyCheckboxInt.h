@@ -35,12 +35,12 @@ class IPPropertyCheckboxInt : public IPPropertyWidget
 public:
     IPPropertyCheckboxInt(IPLProcessPropertyUnsignedInt* property, QWidget *parent) : IPPropertyWidget(property, parent)
     {
+        _ignoreUpdates = true;
+
         _property = property;
 
         setLayout(new QVBoxLayout);
         layout()->setMargin(0);
-
-        unsigned int value = property->value();
 
         // split the properties
         QString rawName(property->title());
@@ -59,8 +59,6 @@ public:
         for(int i=0; i<options.length(); i++)
         {
             QCheckBox* btn = new QCheckBox(options[i], this);
-            bool checked = isOptionTrue(value, i);
-            btn->setChecked(checked);
             layout()->addWidget(btn);
 
             _buttonList.push_back(btn);
@@ -68,7 +66,23 @@ public:
             connect(btn, &QCheckBox::clicked, this, &IPPropertyCheckboxInt::valueChanged);
         }
 
+        init();
+
+        _ignoreUpdates = false;
     }
+
+    void init()
+    {
+        unsigned int value = _property->value();
+
+        int i = 0;
+        for(QCheckBox* btn : _buttonList)
+        {
+            bool checked = isOptionTrue(value, i++);
+            btn->setChecked(checked);
+        }
+    }
+
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
 
@@ -115,20 +129,25 @@ public:
     }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 
 public slots:
     void valueChanged()
     {
+        if(_ignoreUpdates)
+            return;
+
         saveValue();
 
         emit changed();
     }
 
 private:
-    IPLProcessPropertyUnsignedInt*    _property;
-    QList<QCheckBox*>           _buttonList;
+    IPLProcessPropertyUnsignedInt*      _property;
+    QList<QCheckBox*>                   _buttonList;
+    bool                                _ignoreUpdates;
 };
 
 #endif // IPPROPERTYCHECKBOXINT_H

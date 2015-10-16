@@ -84,23 +84,8 @@ public:
 
         // get property values
         _property = property;
-        _kernel = ((IPLProcessPropertyVectorInt*) property)->value();
 
         _ignoreCombobox = false;
-
-        _kernelType = 0;        // 3x3
-        if(_kernel.size() == 25)
-        {
-            _kernelType = 1;    // 5x5
-        }
-        else if(_kernel.size() == 49)
-        {
-            _kernelType = 2;    // 7x7
-        }
-        else if(_kernel.size() == 81)
-        {
-            _kernelType = 3;    // 9x9
-        }
 
         setLayout(new QVBoxLayout(this));
         _gridLayout = new QGridLayout;
@@ -115,7 +100,6 @@ public:
         _kernelSizeComboBox->addItem("5x5");
         _kernelSizeComboBox->addItem("7x7");
         _kernelSizeComboBox->addItem("9x9");
-        _kernelSizeComboBox->setCurrentIndex(_kernelType);
         connect(_kernelSizeComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyGrayscaleMorphologyInt::enableDisableKernelEditor);
 
         layout()->addWidget(_kernelSizeComboBox);
@@ -137,15 +121,6 @@ public:
             input->setMinimum(-9);
             input->setMaximum(9);
 
-            if(column >= offset && row >= offset && column < 9-offset && row < 9-offset)
-            {
-                input->setValue(_kernel[j++]);
-            }
-            else
-            {
-                input->setValue(0);
-            }
-
             _gridLayout->addWidget(input, i/9, i%9);
             _inputs.push_back(input);
 
@@ -160,17 +135,55 @@ public:
         connect(_presetsComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &IPPropertyGrayscaleMorphologyInt::setKernelPreset);
         layout()->addWidget(_presetsComboBox);
 
+        init();
+
         enableDisableKernelEditor();
         setKernelPreset();
     }
 
-//    void
+    void init()
+    {
+         _kernel = _property->value();
+
+         _kernelType = 0;        // 3x3
+         if(_kernel.size() == 25)
+         {
+             _kernelType = 1;    // 5x5
+         }
+         else if(_kernel.size() == 49)
+         {
+             _kernelType = 2;    // 7x7
+         }
+         else if(_kernel.size() == 81)
+         {
+             _kernelType = 3;    // 9x9
+         }
+         _kernelSizeComboBox->setCurrentIndex(_kernelType);
+
+         int i = 0;
+         int offset = 3-((int)sqrt((float)_kernel.size()) / 2);
+         for(QSpinBox* input : _inputs)
+         {
+             int column = i%7;
+             int row    = i/7;
+
+             if(column >= offset && row >= offset && column < 7-offset && row < 7-offset)
+             {
+                 input->setValue(_kernel[i++]);
+             }
+             else
+             {
+                 input->setValue(0);
+             }
+         }
+    }
 
     void setMinimum(int)  {  }
     void setMaximum(int)  {  }
     std::vector<int> value()             { return _kernel; }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
 signals:
 

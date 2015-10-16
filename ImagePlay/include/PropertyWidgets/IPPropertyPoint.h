@@ -51,7 +51,7 @@ public:
 
         //IPLPoint min   = property->min();
         //IPLPoint max   = property->max();
-        IPLPoint value = property->value();
+
 
         _spinnerX = new QSpinBox(this);
         _spinnerY = new QSpinBox(this);
@@ -63,20 +63,31 @@ public:
 
         _spinnerX->setMinimum(0);
         _spinnerX->setMaximum(1000);
-        _spinnerX->setValue(value.x());
 
         _spinnerY->setMinimum(0);
         _spinnerY->setMaximum(1000);
-        _spinnerY->setValue(value.y());
+
+        init();
 
         connect(_spinnerX, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertyPoint::updateValue );
         connect(_spinnerY, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &IPPropertyPoint::updateValue );
 
         connect(_btnPositionPicker, &QPushButton::toggled, this, &IPPropertyPoint::btnPickerTriggered);
+
     }
+
+    void init()
+    {
+        IPLPoint value = _property->value();
+
+        _spinnerX->setValue(value.x());
+        _spinnerY->setValue(value.y());
+    }
+
     IPLPoint value()             { return IPLPoint(_spinnerX->value(), _spinnerY->value()); }
 
     void saveValue()        { _property->setValue(value()); }
+    void resetValue()       { _property->resetValue(); init(); }
 
     void pickCoordinates(int x, int y)
     {

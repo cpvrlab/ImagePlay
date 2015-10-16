@@ -47,7 +47,7 @@ void IPLSaveImage::init()
                              "Bitmap (*.bmp); OpenEXR (*.exr); JPEG (*.jpg); PNG (*.png); Portable BitMap (*.pbm); Portable GrayMap (*.pgm); Portable PixMap (*.ppm)",
                              _path, IPL_WIDGET_FILE_SAVE);
     addProcessPropertyInt("jpeg_quality", "JPEG Quality", "0-100", _jpeg_quality, IPL_WIDGET_SLIDER, 1, 100);
-    addProcessPropertyInt("jpeg_progressive", "JPEG Progressive", "", _jpeg_progressive, IPL_WIDGET_CHECKBOXES);
+    addProcessPropertyBool("jpeg_progressive", "JPEG Progressive", "", _jpeg_progressive, IPL_WIDGET_CHECKBOXES);
 
     addProcessPropertyInt("bmp_type", "BMP Type:DEFAULT|RLE", "", _bmp_type, IPL_WIDGET_RADIOBUTTONS);
     addProcessPropertyInt("png_type", "PNG Type:DEFAULT|INTERLACED", "", _png_type, IPL_WIDGET_RADIOBUTTONS);
@@ -72,7 +72,7 @@ bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
     // get properties
     _path           = getProcessPropertyString("path");
     _jpeg_quality   = getProcessPropertyInt("jpeg_quality");
-    _jpeg_progressive=(getProcessPropertyInt("jpeg_progressive") == 1);
+    _jpeg_progressive=getProcessPropertyBool("jpeg_progressive");
     _bmp_type       = getProcessPropertyInt("bmp_type");
     _png_type       = getProcessPropertyInt("png_type");
     _pnm_type       = getProcessPropertyInt("pnm_type");
