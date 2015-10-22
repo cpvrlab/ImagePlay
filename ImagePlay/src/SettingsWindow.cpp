@@ -80,16 +80,16 @@ void SettingsWindow::updatePluginList()
 {
     ui->listWidget->clear();
 
-    if (_mainWindow->loadedPlugins()->count() > 0)
+    /*if (_mainWindow->loadedPlugins()->count() > 0)
     {
         for (int i = 0; i < _mainWindow->loadedPlugins()->count(); i++)
         {
             PluginInterface* plugin = _mainWindow->loadedPlugins()->at(i);
             QString pluginInfo("%1\tVersion: %2\tAuthor : %3");
-            ui->listWidget->addItem(pluginInfo.arg(plugin->name()).arg(plugin->version()).arg(plugin->author()));
+            //ui->listWidget->addItem(pluginInfo.arg(plugin->name()).arg(plugin->version()).arg(plugin->author()));
         }
     }
-    else
+    else*/
         ui->listWidget->addItem("No plugins loaded");
 }
 

@@ -77,7 +77,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
     QStringList plugins;
     for(int i=0; i<mainWindow->loadedPlugins()->size(); i++)
     {
-        plugins.append(mainWindow->loadedPlugins()->at(i)->name());
+        //plugins.append(mainWindow->loadedPlugins()->at(i));
     }
     processLibrary.append(plugins);
 

@@ -32,8 +32,8 @@
 #include <QSpinBox>
 #include <QSettings>
 #include <QMutableListIterator>
-#include <QPluginLoader>
 #include <QFileSystemWatcher>
+#include <QDebug>
 
 #include "IPProcessStep.h"
 #include "IPProcessFactory.h"
@@ -49,7 +49,7 @@
 #include <map>
 #include <string>
 
-#include "IPL_plugininterface.h"
+#include <pugg/Kernel.h>
 
 namespace Ui {
 class MainWindow;
@@ -125,7 +125,7 @@ public:
     IPProcessFactory*       factory                         ()                              { return _factory; }
     ImageViewerWindow*      imageViewer                     ()                              { return _imageViewer; }
     void                    setAllowChangeActiveProcessStep (bool allow)                    { _allowChangeActiveProcessStep = allow; }
-    QList<PluginInterface*>* loadedPlugins                  ()                              { return &_loadedPlugins; }
+    QList<QString>*         loadedPlugins                   ()                              { return &_loadedPlugins; }
     void                    addStep                         (IPProcessStep* step);
     void                    removeStep                      (IPProcessStep* step);
     void                    addEdge                         (IPProcessEdge* edge);
@@ -200,7 +200,7 @@ private:
     QTimer*                 _timer;
     QTimer*                 _messageLabelTimer;
     QTimer*                 _autosaveTimer;
-    QList<PluginInterface*> _loadedPlugins;
+    QList<QString>          _loadedPlugins;
     QList<QPluginLoader*>   _loaders;
     QSettings*              _settings;
     QString                 _currentProcessFileName;

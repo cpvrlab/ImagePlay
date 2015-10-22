@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include "IPL_plugininterface.h"
 #include "IPL_global.h"
 #include "IPLProcess.h"
 

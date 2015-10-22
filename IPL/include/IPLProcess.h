@@ -34,6 +34,8 @@
 #include <mutex>
 #include <memory>
 
+#include "pugg/Driver.h"
+
 class IPLProcessProperty;
 class IPLProgressEventHandler;
 class IPLPropertyChangedEventHandler;
@@ -239,6 +241,10 @@ private:
     std::vector<IPLProcessMessage>  _messages;
     IPLOpenCVSupport                _openCVSupport;
 
+public:
+    // needed for plugins
+    static const int version = 1;
+    static const std::string server_name() {return "IPLProcessServer";}
 };
 
 
@@ -254,6 +260,17 @@ public:
     {
         return new Derived(static_cast<const Derived&>(*this)); // call the copy ctor.
     }
+};
+
+class IPLProcessDriver : public pugg::Driver
+{
+public:
+    IPLProcessDriver(std::string name, int version) : pugg::Driver(IPLProcess::server_name(),name,version) {}
+    virtual IPLProcess* create() = 0;
+    virtual std::string className() = 0;
+    virtual std::string author() = 0;
+    virtual int         version() = 0;
+
 };
 
 #endif // IPLPROCESS_H

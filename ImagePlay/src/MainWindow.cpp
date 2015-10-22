@@ -514,9 +514,38 @@ void MainWindow::loadPlugins()
 
         foreach (QString fileName, tmpPluginsDir.entryList(QDir::Files))
         {
-            QPluginLoader* loader = new QPluginLoader(tmpPluginsDir.absoluteFilePath(fileName));
-            QObject *plugin = loader->instance();
+            QString pluginFilePath = pluginPath() + "/" + fileName;
+            pugg::Kernel kernel;
+            kernel.add_server(IPLProcess::server_name(), IPLProcess::version);
+            kernel.load_plugin(pluginFilePath.toStdString());
 
+            // we can load all drivers from a specific server
+            std::vector<IPLProcessDriver*> drivers = kernel.get_all_drivers<IPLProcessDriver>(IPLProcess::server_name());
+
+            qDebug() << pluginFilePath;
+            qDebug() << "server_name: " << QString::fromStdString(IPLProcess::server_name());
+            // to load a specific driver
+            // AnimalDriver* animal_driver = kernel.get_driver<AnimalDriver>(Animal::server_name, "CatDriver");
+            for (std::vector<IPLProcessDriver*>::iterator iter = drivers.begin(); iter != drivers.end(); ++iter) {
+                IPLProcessDriver& driver = *(*iter);
+
+                qDebug() << "classname: " << QString::fromStdString(driver.className());
+                qDebug() << "author: " << QString::fromStdString(driver.author());
+                qDebug() << "version: " << driver.version();
+
+                IPLProcess* pluginInstance = driver.create();
+                _factory->registerProcess("PuggTest", pluginInstance);
+                _loadedPlugins.push_back("PuggTest");
+
+                IPLImage* testImage = new IPLImage(IPLData::IMAGE_GRAYSCALE, 512, 512);
+                pluginInstance->init();
+                pluginInstance->processInputData(testImage, 0, false);
+                IPLData* result = pluginInstance->getResultData(0);
+
+                qDebug() << "result: " << result->toImage()->height();
+            }
+
+            /*
             if (plugin)
             {
                 PluginInterface* loadedPlugin = qobject_cast<PluginInterface *>(plugin);
@@ -534,7 +563,7 @@ void MainWindow::loadPlugins()
             else
             {
                 QMessageBox::warning(this, "Plugin Error", loader->errorString());
-            }
+            }*/
         }
     }
 
@@ -543,11 +572,11 @@ void MainWindow::loadPlugins()
 
 void MainWindow::unloadPlugins()
 {
-    for(int i=0; i<_loadedPlugins.count(); i++)
+    /*for(int i=0; i<_loadedPlugins.count(); i++)
     {
         // unload instance
         PluginInterface* plugin = _loadedPlugins.at(i);
-        _factory->unregisterProcess(plugin->name());
+        _factory->unregisterProcess(QString::fromStdString(plugin->name()));
     }
 
     for(int i=0; i<_loaders.count(); i++)
@@ -560,7 +589,7 @@ void MainWindow::unloadPlugins()
     // delete old tmp directories
     removeDir(pluginPath() + "/tmp/");
 
-    _loadedPlugins.clear();
+    _loadedPlugins.clear();*/
 }
 
 void MainWindow::reloadPlugins()
