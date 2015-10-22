@@ -201,7 +201,7 @@ private:
     QTimer*                 _messageLabelTimer;
     QTimer*                 _autosaveTimer;
     QList<QString>          _loadedPlugins;
-    QList<QPluginLoader*>   _loaders;
+    //QList<QPluginLoader*>   _loaders;
     QSettings*              _settings;
     QString                 _currentProcessFileName;
     QString                 _defaultImagePath;
