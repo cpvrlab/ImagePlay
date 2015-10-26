@@ -95,7 +95,7 @@ void SettingsWindow::updatePluginList()
 
 void SettingsWindow::on_btnUnloadPlugins_clicked()
 {
-    _mainWindow->unloadPlugins();
+    //_mainWindow->unloadPlugins();
     updatePluginList();
 }
 

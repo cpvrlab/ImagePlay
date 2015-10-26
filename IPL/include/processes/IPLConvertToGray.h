@@ -34,7 +34,7 @@ public:
     IPLConvertToGray() : IPLClonableProcess() { init(); }
     ~IPLConvertToGray()  { destroy(); }
     void                    init();
-    virtual void        destroy();
+    virtual void            destroy();
     virtual bool            processInputData        (IPLImage* data, int inNr, bool useOpenCV);
     virtual IPLImage*       getResultData           (int outNr);
 protected:

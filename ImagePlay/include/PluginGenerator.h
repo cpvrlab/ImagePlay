@@ -26,6 +26,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDesktopServices>
+#include <QUuid>
 
 #include <QDebug>
 
@@ -58,6 +59,7 @@ private:
     QString _category;
     QString _openCV;
     QString _author;
+    QString _guid;
 
     bool generateFiles();
     bool generateFile(QString inputName, QString outputName, QString folder);

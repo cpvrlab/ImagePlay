@@ -24,6 +24,7 @@
 #include <QVector>
 #include <QMap>
 #include <QStringList>
+#include <QDebug>
 
 #include "IPLProcess.h"
 
