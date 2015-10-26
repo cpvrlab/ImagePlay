@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _imageViewer = new ImageViewerWindow(this);
     _settingsWindow = new SettingsWindow(this);
 
+    _pluginManager = new IPPluginManager();
+
     _scene = ui->graphicsView->scene();
 
     // timer
@@ -65,14 +67,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sequenceControlWidget->setEnabled(false);
     ui->sequenceControlWidget->hide();
 
-    //_pluginFileSystemWatcher = new QFileSystemWatcher(this);
-    _pluginFileSytemLastCount = 0;
-
-    _pluginFileSystemTimer = NULL;
-
     connect(ui->graphicsView, &IPProcessGrid::sequenceChanged, this, &MainWindow::on_sequenceChanged);
     //connect(_pluginFileSystemWatcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::on_pluginDirectoryChanged);
-    connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
+    //connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
 
     // read and apply settings
     readSettings();
@@ -99,7 +96,9 @@ MainWindow::MainWindow(QWidget *parent) :
     loadProcesses();
 
     // load plugin processes
-    loadPlugins();
+    //_pluginManager->loadPlugins(_pluginPath, _factory);
+
+    ui->processTabWidget->init(this);
 
 #ifdef Q_OS_MAC
     // set the right placeholder text for OS X
@@ -478,124 +477,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPProcessScript",        new IPProcessScript);*/
 }
 
-void MainWindow::loadPlugins()
-{
-#if defined(_WIN32)
-    static const auto pluginFilter = QStringList() << "*.dll";
-#else
-    static const auto pluginFilter = QStringList() << "*.so";
-#endif
-
-    ui->processTabWidget->clear();
-
-    QDir pluginsDir(pluginPath());
-
-    // watch the original dll for changes
-    // _pluginFileSystemWatcher->addPath(pluginPath());
-
-    QDateTime now = QDateTime::currentDateTime();
-    _pluginTmpPath = pluginPath() + "/tmp/" + now.toString("yyyyMMddhhmmss");
-    QDir tmpPluginsDir(_pluginTmpPath);
-
-    // create new directory, copy dlls
-    if(!tmpPluginsDir.exists())
-        tmpPluginsDir.mkpath(".");
-
-    pluginsDir.setNameFilters(pluginFilter);
-    foreach (QString fileName, pluginsDir.entryList(QDir::Files))
-    {
-        QFile file(pluginsDir.filePath(fileName));
-        file.copy(tmpPluginsDir.filePath(fileName));
-    }
-
-    if(tmpPluginsDir.exists())
-    {
-        tmpPluginsDir.setNameFilters(pluginFilter);
-
-        foreach (QString fileName, tmpPluginsDir.entryList(QDir::Files))
-        {
-            QString pluginFilePath = pluginPath() + "/" + fileName;
-            pugg::Kernel kernel;
-            kernel.add_server(IPLProcess::server_name(), IPLProcess::version);
-            kernel.load_plugin(pluginFilePath.toStdString());
-
-            // we can load all drivers from a specific server
-            std::vector<IPLProcessDriver*> drivers = kernel.get_all_drivers<IPLProcessDriver>(IPLProcess::server_name());
-
-            qDebug() << pluginFilePath;
-            qDebug() << "server_name: " << QString::fromStdString(IPLProcess::server_name());
-            // to load a specific driver
-            // AnimalDriver* animal_driver = kernel.get_driver<AnimalDriver>(Animal::server_name, "CatDriver");
-            for (std::vector<IPLProcessDriver*>::iterator iter = drivers.begin(); iter != drivers.end(); ++iter) {
-                IPLProcessDriver& driver = *(*iter);
-
-                qDebug() << "classname: " << QString::fromStdString(driver.className());
-                qDebug() << "author: " << QString::fromStdString(driver.author());
-                qDebug() << "version: " << driver.version();
-
-                IPLProcess* pluginInstance = driver.create();
-                _factory->registerProcess("PuggTest", pluginInstance);
-                _loadedPlugins.push_back("PuggTest");
-
-                IPLImage* testImage = new IPLImage(IPLData::IMAGE_GRAYSCALE, 512, 512);
-                pluginInstance->init();
-                pluginInstance->processInputData(testImage, 0, false);
-                IPLData* result = pluginInstance->getResultData(0);
-
-                qDebug() << "result: " << result->toImage()->height();
-            }
-
-            /*
-            if (plugin)
-            {
-                PluginInterface* loadedPlugin = qobject_cast<PluginInterface *>(plugin);
-                QString className(typeid(*loadedPlugin->getProcess()).name());
-                className = className.split(" ").at(1);
-
-                _factory->registerProcess(className, loadedPlugin->getProcess());
-
-                //qDebug() << pluginPath() + "/" + fileName;
-                //_pluginFileSystemWatcher->addPath(pluginPath() + "/" + fileName);
-
-                _loadedPlugins.push_back(loadedPlugin);
-                _loaders.push_back(loader);
-            }
-            else
-            {
-                QMessageBox::warning(this, "Plugin Error", loader->errorString());
-            }*/
-        }
-    }
-
-    ui->processTabWidget->init(this);
-}
-
-void MainWindow::unloadPlugins()
-{
-    /*for(int i=0; i<_loadedPlugins.count(); i++)
-    {
-        // unload instance
-        PluginInterface* plugin = _loadedPlugins.at(i);
-        _factory->unregisterProcess(QString::fromStdString(plugin->name()));
-    }
-
-    for(int i=0; i<_loaders.count(); i++)
-    {
-        // unload DLL
-        QPluginLoader* loader = _loaders.at(i);
-        loader->unload();
-    }
-
-    // delete old tmp directories
-    removeDir(pluginPath() + "/tmp/");
-
-    _loadedPlugins.clear();*/
-}
-
 void MainWindow::reloadPlugins()
 {
-    delete _pluginFileSystemTimer;
-
     // don't try to reload while running
     if(ui->graphicsView->isRunning())
         return;
@@ -604,12 +487,15 @@ void MainWindow::reloadPlugins()
     _allowChangeActiveProcessStep = false;
     writeProcessFile();
     clearScene();
-    unloadPlugins();
-    loadPlugins();
+    _pluginManager->unloadPlugins();
+    _pluginManager->loadPlugins(_pluginPath, _factory);
     readProcessFile();
 
     // activate plugin tab
     ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
+
+    // refresh process library
+    ui->processTabWidget->init(this);
 
     _allowChangeActiveProcessStep = true;
 }
@@ -1454,32 +1340,6 @@ void MainWindow::on_btnCloseProcessSettings_clicked()
 void MainWindow::on_btnResetProcessSettings_clicked()
 {
     ui->processPropertiesWidget->resetSettings();
-}
-
-void MainWindow::on_pluginDirectoryChanged(const QString & path)
-{
-    // problem: when compiling a plugin, the file is changed multiple times,
-    // we don't know when the final edit has hapened...
-    // it is not possible to watch the DLL only, because when it is deleted by
-    // the compiler, the filesystem watcher stops automatically.
-    // hmmmm.
-
-    //qDebug() << "Changed: " << path;
-    QDir pluginDirectory(path);
-
-    // only reload if files have been added
-    //if(pluginDirectory.count() > _pluginFileSytemLastCount)
-    //    reloadPlugins();
-
-    delete _pluginFileSystemTimer;
-    _pluginFileSystemTimer = new QTimer(this);
-    _pluginFileSystemTimer->setSingleShot(true);
-    _pluginFileSystemTimer->start(3000);
-    connect(_pluginFileSystemTimer, &QTimer::timeout, this, &MainWindow::reloadPlugins);
-    qDebug() << "start";
-
-    _pluginFileSytemLastCount = pluginDirectory.count();
-    //qDebug() << _pluginFileSytemLastCount;
 }
 
 void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)

@@ -30,6 +30,8 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
 {
     _mainWindow = mainWindow;
 
+    clear();
+
     // items
     QStringList categoryIcons;
     categoryIcons.append(":/icons/16.png");
@@ -75,9 +77,9 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
     processLibrary.append(mainWindow->factory()->getProcessNamesByCategory(IPLProcess::CATEGORY_OBJECTS));
 
     QStringList plugins;
-    for(int i=0; i<mainWindow->loadedPlugins()->size(); i++)
+    for(int i=0; i<mainWindow->pluginManager()->loadedPlugins()->size(); i++)
     {
-        //plugins.append(mainWindow->loadedPlugins()->at(i));
+        plugins.append(mainWindow->pluginManager()->loadedPlugins()->at(i));
     }
     processLibrary.append(plugins);
 

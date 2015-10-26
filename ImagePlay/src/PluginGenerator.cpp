@@ -96,6 +96,7 @@ void PluginGenerator::on_btnGenerate_clicked()
     _author     = ui->inputAuthor->text();
     _category   = ui->comboBoxCategory->currentText();
     _openCV     = ui->comboBoxOpenCV->currentText();
+    _guid       = QUuid::createUuid().toString();
 
     // generate files
     if(generateFiles())
@@ -131,9 +132,11 @@ bool PluginGenerator::generateFiles()
 
     // copy files and replace placeholders
     bool success = true;
+    success &= generateFile("plugin.cpp", "plugin.cpp", _className);
     success &= generateFile("NAME.h", _className + ".h", _className);
+    success &= generateFile("NAME.cpp", _className + ".cpp", _className);
     success &= generateFile("NAME.pro", _className + ".pro", _className);
-    //success &= generateFile("NAME.vcxproj", _className + ".vcxproj", _className);
+    success &= generateFile("NAME.vcxproj", _className + ".vcxproj", _className);
 
     return success;
 }
@@ -167,6 +170,7 @@ bool PluginGenerator::generateFile(QString inputName, QString outputName, QStrin
         line = line.replace("%OPENCV%", _openCV);
         line = line.replace("%PLUGINPATH%", _pluginPath);
         line = line.replace("%ROOTPATH%", _rootPath);
+        line = line.replace("%GUID%", _guid);
 
         fileResult.write(line.append("\n").toLocal8Bit());
     }

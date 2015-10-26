@@ -63,6 +63,8 @@ OTHER_FILES += $$files(*,true)
 
 # exclude plugin templates
 HEADERS     -= media/plugin_development/_template/NAME.h
+SOURCES     -= media/plugin_development/_template/NAME.cpp
+SOURCES     -= media/plugin_development/_template/plugin.cpp
 
 RC_FILE = res/icon.rc
 

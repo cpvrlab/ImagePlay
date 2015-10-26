@@ -45,6 +45,7 @@
 #include "IPProcessGridScene.h"
 #include "TutorialDialog.h"
 #include "PluginGenerator.h"
+#include "IPPluginManager.h"
 
 #include <map>
 #include <string>
@@ -99,8 +100,6 @@ public:
     void                    showMessage                     (QString msg, MessageType status);
     void                    updateGraphicsView              ();
     void                    updateProcessMessages           ();
-    void                    loadPlugins                     ();
-    void                    unloadPlugins                   ();
     void                    reloadPlugins                   ();
     bool                    removeDir                       (const QString &dirName);
     void                    setFilterFocus                  ();
@@ -112,10 +111,10 @@ public:
     void                    setPluginDevPath                (QString path)                  { _pluginDevPath = path; }
     QString                 pluginDevPath                   ()                              { return _pluginDevPath; }
     void                    setPluginPath                   (QString path)                  { _pluginPath = path; }
+    QString                 pluginPath                      ();
     QString                 processIconPath                 ()                              { return _processIconPath; }
     QString                 processIconPath                 (QString processID);
     void                    setProcessIconPath              (QString path)                  { _processIconPath = path; }
-    QString                 pluginPath                      ();
     void                    setAutosaveEnabled              (bool enabled)                  { _autosaveEnabled = enabled; }
     bool                    autosaveEnabled                 ()                              { return _autosaveEnabled; }
     void                    setLogFileEnabled               (bool enabled)                  { _logFileEnabled = enabled; }
@@ -125,7 +124,6 @@ public:
     IPProcessFactory*       factory                         ()                              { return _factory; }
     ImageViewerWindow*      imageViewer                     ()                              { return _imageViewer; }
     void                    setAllowChangeActiveProcessStep (bool allow)                    { _allowChangeActiveProcessStep = allow; }
-    QList<QString>*         loadedPlugins                   ()                              { return &_loadedPlugins; }
     void                    addStep                         (IPProcessStep* step);
     void                    removeStep                      (IPProcessStep* step);
     void                    addEdge                         (IPProcessEdge* edge);
@@ -140,6 +138,7 @@ public:
     void                    loadProcesses                   ();
     void                    setThreadRunning                (bool status)                   { _threadRunning = status; }
     bool                    threadRunning                   ()                              { return _threadRunning; }
+    IPPluginManager*        pluginManager                   ()                              { return _pluginManager; }
 
 public slots:
     void                    execute                         (bool forcedUpdate = false);
@@ -179,9 +178,7 @@ private slots:
     void                    on_actionImageViewer_triggered  (bool checked);
     void                    on_btnCloseProcessSettings_clicked();
     void                    on_btnResetProcessSettings_clicked();
-    void                    on_pluginDirectoryChanged       (const QString & path);
-
-    void on_actionImage_Viewer_always_on_top_triggered(bool checked);
+    void                    on_actionImage_Viewer_always_on_top_triggered(bool checked);
 
 private:
     void                    addRecentProcessFile(const QString&);
@@ -200,14 +197,11 @@ private:
     QTimer*                 _timer;
     QTimer*                 _messageLabelTimer;
     QTimer*                 _autosaveTimer;
-    QList<QString>          _loadedPlugins;
-    //QList<QPluginLoader*>   _loaders;
     QSettings*              _settings;
     QString                 _currentProcessFileName;
     QString                 _defaultImagePath;
     QString                 _pluginDevPath;
     QString                 _pluginPath;
-    QString                 _pluginTmpPath;
     QString                 _processIconPath;
     long                    _lastAutosaveTimestamp;
     int                     _autosaveInterval;
@@ -217,9 +211,7 @@ private:
     bool                    _logFileEnabled;
     bool                    _threadRunning;
     QStringList             _recentProcessFiles;
-    QFileSystemWatcher*     _pluginFileSystemWatcher;
-    int                     _pluginFileSytemLastCount;
-    QTimer*                 _pluginFileSystemTimer;
+    IPPluginManager*        _pluginManager;
 
     // QWidget interface
 protected:
