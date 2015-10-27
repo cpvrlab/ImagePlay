@@ -38,3 +38,17 @@ INCLUDEPATH += $$PWD/../IPL/include/
 INCLUDEPATH += $$PWD/../IPL/include/processes/
 INCLUDEPATH += $$PWD/../IPL/include/opencv/
 DEPENDPATH += $$PWD/../IPL/include/
+
+
+clang {
+    CONFIG +=c++11
+    QMAKE_CXXFLAGS += -openmp
+    QMAKE_LFLAGS   += -openmp
+}
+
+gcc:!clang {
+    CONFIG +=c++11
+    QMAKE_CXXFLAGS += -fopenmp
+    QMAKE_LFLAGS   += -fopenmp
+    LIBS += -lgomp
+}
