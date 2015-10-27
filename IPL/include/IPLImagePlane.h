@@ -30,8 +30,8 @@ class IPLSHARED_EXPORT IPLImagePlane
 public:
     IPLImagePlane();
     IPLImagePlane( int width, int height );
-    IPLImagePlane( const IPLImagePlane& i );
-    IPLImagePlane( IPLImagePlane&& i );
+    IPLImagePlane( const IPLImagePlane &other );
+    IPLImagePlane( IPLImagePlane &&other );
     IPLImagePlane &operator=(const IPLImagePlane &other);
     IPLImagePlane &operator=(IPLImagePlane &&other);
     ~IPLImagePlane();
