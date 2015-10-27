@@ -96,7 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     loadProcesses();
 
     // load plugin processes
-    //_pluginManager->loadPlugins(_pluginPath, _factory);
+    _pluginManager->loadPlugins(_pluginPath, _factory);
 
     ui->processTabWidget->init(this);
 
@@ -463,7 +463,7 @@ void MainWindow::loadProcesses()
 
     _factory->registerProcess("IPLAccumulate",          new IPLAccumulate);
     _factory->registerProcess("IPLHoughLines",          new IPLHoughLines);
-    _factory->registerProcess("IPLHoughLineSegments",          new IPLHoughLineSegments);
+    _factory->registerProcess("IPLHoughLineSegments",   new IPLHoughLineSegments);
 
     _factory->registerProcess("IPLUndistort",           new IPLUndistort);
     _factory->registerProcess("IPLWarpAffine",          new IPLWarpAffine);
@@ -497,31 +497,35 @@ void MainWindow::reloadPlugins()
     // refresh process library
     ui->processTabWidget->init(this);
 
+    // switch to last tab again
+    ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
+
     _allowChangeActiveProcessStep = true;
 }
 
-bool MainWindow::removeDir(const QString &dirName)
+void MainWindow::unloadPlugins()
 {
-    bool result = true;
-    QDir dir(dirName);
+    // don't try to reload while running
+    if(ui->graphicsView->isRunning())
+        return;
 
-    if (dir.exists(dirName)) {
-        Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
-            if (info.isDir()) {
-                result = removeDir(info.absoluteFilePath());
-            }
-            else {
-                result = QFile::remove(info.absoluteFilePath());
-            }
+    setActiveProcessStep(NULL);
+    _allowChangeActiveProcessStep = false;
+    writeProcessFile();
+    clearScene();
+    _pluginManager->unloadPlugins();
+    readProcessFile();
 
-            if (!result) {
-                return result;
-            }
-        }
-        result = dir.rmdir(dirName);
-    }
+    // activate plugin tab
+    ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
 
-    return result;
+    // refresh process library
+    ui->processTabWidget->init(this);
+
+    // switch to last tab again
+    ui->processTabWidget->setCurrentIndex(ui->processTabWidget->count()-1);
+
+    _allowChangeActiveProcessStep = true;
 }
 
 void MainWindow::setFilterFocus()
@@ -598,6 +602,8 @@ void MainWindow::removeStep(IPProcessStep *step)
     // remove from scene
     _scene->removeStep(step);
 
+    delete step;
+
     setParamsHaveChanged();
 //    execute();
 }
@@ -631,6 +637,7 @@ void MainWindow::removeEdge(IPProcessEdge *edge)
     // remove from scene
     _scene->removeEdge(edge);
 
+    delete edge;
 
     // update graphics
     setParamsHaveChanged();
@@ -1168,15 +1175,16 @@ void MainWindow::closeEvent(QCloseEvent* e)
     int reply = question.exec();
     if (reply == QMessageBox::Yes)
     {
-
         writeSettings();
+
+        ui->graphicsView->stopExecution();
+        ui->graphicsView->terminate();
+        //_pluginManager->unloadPlugins();
 
         //TODO: Application crashed here (update calls after the deallocation). Further investigation might be necessary.
 //        delete _imageViewer;
-        _imageViewer->deleteLater();
-        _imageViewer = NULL;
-
-        ui->graphicsView->stopExecution();
+//        _imageViewer->deleteLater();
+//        _imageViewer = NULL;
 
         // try closing any videocapture items
         IPLCameraIO::release();

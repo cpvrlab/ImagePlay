@@ -80,22 +80,26 @@ void SettingsWindow::updatePluginList()
 {
     ui->listWidget->clear();
 
-    /*if (_mainWindow->loadedPlugins()->count() > 0)
+    std::vector<IPLProcessDriver*>* drivers = _mainWindow->pluginManager()->loadedDrivers();
+
+    if (drivers->size() > 0)
     {
-        for (int i = 0; i < _mainWindow->loadedPlugins()->count(); i++)
+        for (int i = 0; i < drivers->size(); i++)
         {
-            PluginInterface* plugin = _mainWindow->loadedPlugins()->at(i);
+            IPLProcessDriver* driver = drivers->at(i);
             QString pluginInfo("%1\tVersion: %2\tAuthor : %3");
-            //ui->listWidget->addItem(pluginInfo.arg(plugin->name()).arg(plugin->version()).arg(plugin->author()));
+            ui->listWidget->addItem(pluginInfo.arg(QString::fromStdString(driver->className()))
+                                              .arg(driver->version())
+                                              .arg(QString::fromStdString(driver->author())));
         }
     }
-    else*/
+    else
         ui->listWidget->addItem("No plugins loaded");
 }
 
 void SettingsWindow::on_btnUnloadPlugins_clicked()
 {
-    //_mainWindow->unloadPlugins();
+    _mainWindow->unloadPlugins();
     updatePluginList();
 }
 

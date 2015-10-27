@@ -37,22 +37,26 @@ class IPPluginManager
 public:
     IPPluginManager();
 
-    void                    loadPlugins(QString pluginPath, IPProcessFactory* factory);
-    void                    unloadPlugins();
-    void                    reloadPlugins();
-    QList<QString>*         loadedPlugins() { return &_loadedPlugins; }
+    void                           loadPlugins(QString pluginPath, IPProcessFactory* factory);
+    void                           unloadPlugins();
+    void                           reloadPlugins();
+    QList<QString>*                loadedPlugins() { return &_loadedPlugins; }
+    std::vector<IPLProcessDriver*>* loadedDrivers() { return &_drivers; }
+    bool                           removeDir(const QString &dirName);
 
 private slots:
-    void                    on_pluginDirectoryChanged       (const QString & path);
+    void                           on_pluginDirectoryChanged       (const QString & path);
 
 private:
-    QList<QString>          _loadedPlugins;
-    QString                 _pluginPath;
-    QString                 _pluginTmpPath;
-    QFileSystemWatcher*     _pluginFileSystemWatcher;
-    int                     _pluginFileSytemLastCount;
-    QTimer*                 _pluginFileSystemTimer;
-    IPProcessFactory*       _factory;
+    QList<QString>                 _loadedPlugins;
+    QString                        _pluginPath;
+    QString                        _pluginTmpPath;
+    QFileSystemWatcher*            _pluginFileSystemWatcher;
+    int                            _pluginFileSytemLastCount;
+    QTimer*                        _pluginFileSystemTimer;
+    IPProcessFactory*              _factory;
+    QList<pugg::Kernel*>           _kernels;
+    std::vector<IPLProcessDriver*> _drivers;
 };
 
 #endif // IPPLUGINMANAGER_H

@@ -101,7 +101,7 @@ public:
     void                    updateGraphicsView              ();
     void                    updateProcessMessages           ();
     void                    reloadPlugins                   ();
-    bool                    removeDir                       (const QString &dirName);
+    void                    unloadPlugins                   ();
     void                    setFilterFocus                  ();
     // disable right click toolbar menu
     QMenu*                  createPopupMenu                 ()                              { return NULL; }

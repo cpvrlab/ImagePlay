@@ -26,6 +26,9 @@ IPProcessThread::IPProcessThread(IPLProcess *process, IPLImage *image, int input
     _inputIndex = inputIndex;
     _success    = false;
     _useOpenCV  = useOpenCV;
+
+    // allow immediate termination
+    QThread::setTerminationEnabled(true);
 }
 
 IPProcessThread::~IPProcessThread()

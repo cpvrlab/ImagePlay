@@ -76,6 +76,7 @@ signals:
 
 public slots:
     void                    execute                 (bool forcedUpdate = false);
+    void                    terminate               ();
     void                    updateProgress          (int);
     void                    sceneRectChanged        (const QRectF & rect);
 
@@ -96,6 +97,7 @@ private:
     bool                    _lastProcessSuccess;    //!< Last process was successful
     bool                    _stopExecution;         //!< Used to stop the execution early
     bool                    _longProcess;           //!< Unmeasurable processes must update GUI regularly
+    IPProcessThread*        _thread;                //!< Reference to the current thread
 
     // QWidget interface
 protected:

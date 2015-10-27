@@ -26,6 +26,11 @@ IPPluginManager::IPPluginManager()
 
 void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
 {
+    // plugin loading doesn't work in debug mode
+#ifdef QT_DEBUG
+    return;
+#endif
+
 #if defined(_WIN32)
     static const auto pluginFilter = QStringList() << "*.dll";
 #else
@@ -42,7 +47,7 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
     // _pluginFileSystemWatcher->addPath(pluginPath());
 
     QDateTime now = QDateTime::currentDateTime();
-    _pluginTmpPath = _pluginPath + "/tmp/" + now.toString("yyyyMMddhhmmss");
+    _pluginTmpPath = _pluginPath + "/tmp/"; // + now.toString("yyyyMMddhhmmss");
     QDir tmpPluginsDir(_pluginTmpPath);
 
     // create new directory, copy dlls
@@ -62,84 +67,52 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
 
         foreach (QString fileName, tmpPluginsDir.entryList(QDir::Files))
         {
-            QString pluginFilePath = _pluginPath + "/" + fileName;
-            pugg::Kernel kernel;
-            kernel.add_server(IPLProcess::server_name(), IPLProcess::version);
-            kernel.load_plugin(pluginFilePath.toStdString());
+            QString pluginFilePath = _pluginTmpPath + "/" + fileName;
+            pugg::Kernel* kernel = new pugg::Kernel;
+            _kernels.push_back(kernel);
+            kernel->add_server(IPLProcess::server_name(), IPLProcess::version);
+            kernel->load_plugin(pluginFilePath.toStdString());
 
             // we can load all drivers from a specific server
-            std::vector<IPLProcessDriver*> drivers = kernel.get_all_drivers<IPLProcessDriver>(IPLProcess::server_name());
+            _drivers = kernel->get_all_drivers<IPLProcessDriver>(IPLProcess::server_name());
 
-            qDebug() << pluginFilePath;
-            qDebug() << "server_name: " << QString::fromStdString(IPLProcess::server_name());
-            for (std::vector<IPLProcessDriver*>::iterator iter = drivers.begin(); iter != drivers.end(); ++iter) {
+            for (std::vector<IPLProcessDriver*>::iterator iter = _drivers.begin(); iter != _drivers.end(); ++iter) {
                 IPLProcessDriver& driver = *(*iter);
 
                 QString className = QString::fromStdString(driver.className());
                 QString author = QString::fromStdString(driver.author());
                 int version = driver.version();
 
-                qDebug() << "classname: " << className;
-                qDebug() << "author: " << author;
-                qDebug() << "version: " << version;
-
                 IPLProcess* pluginInstance = driver.create();
-                _factory->registerProcess(className, pluginInstance->clone());
+                _factory->registerProcess(className, pluginInstance);
                 _loadedPlugins.push_back(className);
-
-                IPLImage* testImage = new IPLImage(IPLData::IMAGE_GRAYSCALE, 512, 512);
-                pluginInstance->init();
-                pluginInstance->processInputData(testImage, 0, false);
-                IPLData* result = pluginInstance->getResultData(0);
-
-                qDebug() << "result: " << result->toImage()->height();
             }
-
-            /*
-            if (plugin)
-            {
-                PluginInterface* loadedPlugin = qobject_cast<PluginInterface *>(plugin);
-                QString className(typeid(*loadedPlugin->getProcess()).name());
-                className = className.split(" ").at(1);
-
-                _factory->registerProcess(className, loadedPlugin->getProcess());
-
-                //qDebug() << pluginPath() + "/" + fileName;
-                //_pluginFileSystemWatcher->addPath(pluginPath() + "/" + fileName);
-
-                _loadedPlugins.push_back(loadedPlugin);
-                _loaders.push_back(loader);
-            }
-            else
-            {
-                QMessageBox::warning(this, "Plugin Error", loader->errorString());
-            }*/
         }
     }
-
-    //ui->processTabWidget->init(this);
 }
 
 void IPPluginManager::unloadPlugins()
 {
+    // unregister process
     for(int i=0; i<_loadedPlugins.count(); i++)
     {
-        // unload instance
         QString plugin = _loadedPlugins.at(i);
+        qDebug() << "unregisterProcess: " << plugin;
         _factory->unregisterProcess(plugin);
     }
+    _loadedPlugins.clear();
 
-    /*for(int i=0; i<_loaders.count(); i++)
+    // unload DLL
+    for(int i=0; i<_kernels.count(); i++)
     {
-        // unload DLL
-        QPluginLoader* loader = _loaders.at(i);
-        loader->unload();
-    }*/
+        pugg::Kernel* kernel = _kernels.at(i);
+        kernel->clear();
+    }
+    _kernels.clear();
+    _drivers.clear();
 
     // delete old tmp directories
-    //removeDir(pluginPath() + "/tmp/");
-
-    _loadedPlugins.clear();
+    removeDir(_pluginTmpPath);
 }
 
 void IPPluginManager::on_pluginDirectoryChanged(const QString & path)
@@ -166,4 +139,30 @@ void IPPluginManager::on_pluginDirectoryChanged(const QString & path)
 
     _pluginFileSytemLastCount = pluginDirectory.count();*/
     //qDebug() << _pluginFileSytemLastCount;
+}
+
+
+
+bool IPPluginManager::removeDir(const QString &dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if (dir.exists(dirName)) {
+        Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            if (info.isDir()) {
+                result = removeDir(info.absoluteFilePath());
+            }
+            else {
+                result = QFile::remove(info.absoluteFilePath());
+            }
+
+            if (!result) {
+                return result;
+            }
+        }
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
 }

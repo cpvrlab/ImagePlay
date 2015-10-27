@@ -52,8 +52,6 @@ void IPProcessFactory::unregisterProcess(QString name)
 
 IPLProcess* IPProcessFactory::getInstance(QString name)
 {
-    qDebug() << "getInstance: " << name;
-    return NULL;
     if(_map.contains(name))
     {
         // return a fresh copy of the template process

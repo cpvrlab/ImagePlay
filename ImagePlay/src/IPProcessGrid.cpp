@@ -50,6 +50,8 @@ IPProcessGrid::IPProcessGrid(QWidget *parent) : QGraphicsView(parent)
 
     _updateNeeded = true;
 
+    _thread = NULL;
+
     // add a dummy object to allow correct placement of new objects with drag&drop
     scene()->addItem(new QGraphicsRectItem(0,0,0,0));
 
@@ -130,27 +132,31 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/
     timer.start();
 
     // create new thread
-    IPProcessThread thread(process, image, inputIndex, useOpenCV);
-    connect(&thread, &IPProcessThread::progressUpdated, this, &IPProcessGrid::updateProgress);
+    _thread = new IPProcessThread(process, image, inputIndex, useOpenCV);
+
+    connect(_thread, &IPProcessThread::progressUpdated, this, &IPProcessGrid::updateProgress);
 
     _mainWindow->setThreadRunning(true);
     _mainWindow->imageViewer()->zoomWidget()->zoomUpdateMutex()->lock();
     process->setResultReady(false);
     process->resetMessages();
 
-    thread.start();
-    while(!thread.isFinished())
+    _thread->start();
+    while(!_thread->isFinished())
     {
         if(_longProcess)
             _currentStep->update();
 
         QApplication::processEvents();
     }
-    process->setResultReady(thread.success());
+    process->setResultReady(_thread->success());
     _mainWindow->setThreadRunning(false);
     _mainWindow->imageViewer()->zoomWidget()->zoomUpdateMutex()->unlock();
 
-    _lastProcessSuccess = thread.success();
+    _lastProcessSuccess = _thread->success();
+
+    delete _thread;
+    _thread = NULL;
 
     // return duration
     return timer.elapsed();
@@ -401,6 +407,13 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 
     _isRunning = false;
     _currentStep = NULL;
+}
+
+void IPProcessGrid::terminate()
+{
+    qDebug() << "terminate";
+    if(_thread)
+        _thread->terminate();
 }
 
 void IPProcessGrid::updateProgress(int progress)
