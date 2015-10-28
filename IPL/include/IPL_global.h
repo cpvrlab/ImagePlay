@@ -64,6 +64,26 @@ typedef float           ipl_basetype;
 
 #define PI 3.14159265359
 
+
+enum IPLDataType
+{
+    IPL_IMAGE_BW = 0,
+    IPL_IMAGE_GRAYSCALE,
+    IPL_IMAGE_COLOR,
+    IPL_IMAGE_ORIENTED,
+    IPL_IMAGE_COMPLEX,
+    IPL_POINT,
+    IPL_MATRIX,
+    IPL_SHAPES,
+    IPL_UNDEFINED,
+
+    //Add additional data types here
+    //...
+
+    IPL_NUM_DATATYPES
+};
+const char *dataTypeName(IPLDataType type);
+
 enum IPLProcessWidgetType
 {
     IPL_WIDGET_DEFAULT = 0,
@@ -120,9 +140,7 @@ enum IPLProcessWidgetType
 
     IPL_NUM_WIDGETS
 };
-
 const char *widgetName(IPLProcessWidgetType type);
-
 
 enum IPLRawImageType
 {

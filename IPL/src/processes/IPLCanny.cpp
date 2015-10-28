@@ -36,10 +36,10 @@ void IPLCanny::init()
                    "is used for both, smoothing and derivation operation.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Magnitude", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Edge", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Gradient", IPLImage::IMAGE_GRAYSCALE);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Magnitude", IPL_IMAGE_GRAYSCALE);
+    addOutput("Edge", IPL_IMAGE_GRAYSCALE);
+    addOutput("Gradient", IPL_IMAGE_GRAYSCALE);
 
     // properties
     addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 7);
@@ -174,7 +174,7 @@ bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
     int height = image->height();
 
     _result = new IPLImage( image->type(), width, height );
-    _binaryImage = new IPLImage( IPLData::IMAGE_BW, width, height );
+    _binaryImage = new IPLImage( IPL_IMAGE_BW, width, height );
 
     // get properties
     int window              = getProcessPropertyInt("window");

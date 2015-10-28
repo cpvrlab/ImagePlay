@@ -34,9 +34,9 @@ void IPLGaussianLowPass::init()
     setDescription("Local Gaussian low-pass operator.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Kernel", IPLData::MATRIX);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
+    addOutput("Kernel", IPL_MATRIX);
 
     // properties
     addProcessPropertyDouble("sigma", "Sigma", "Standard deviation σ", 2.0, IPL_WIDGET_SLIDER, 0.5, 25.0);
@@ -75,7 +75,7 @@ void IPLGaussianLowPass::gauss(IPLImage* image, IPLImage* result, IPLData* kerne
         IPLImagePlane* newplane = result->plane( planeNr );
 
         /// @todo should be double image
-        IPLImage* tmpI = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
+        IPLImage* tmpI = new IPLImage( IPL_IMAGE_GRAYSCALE, width, height );
 
         // horizontal run
         float sum = 0;

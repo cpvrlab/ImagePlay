@@ -11,10 +11,10 @@ Channel weights:
 - Blue: 0.0721
 
 \section Inputs
-- Image: IPLData::IMAGE_COLOR
+- Image: IPL_IMAGE_COLOR
 
 \section Outputs
-- Image: IPLData::IMAGE_GRAYSCALE
+- Image: IPL_IMAGE_GRAYSCALE
 
 \section Examples
 <table>

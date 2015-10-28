@@ -33,8 +33,8 @@ void IPLConvertToGray::init()
     setCategory(IPLProcess::CATEGORY_CONVERSIONS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLData::IMAGE_GRAYSCALE);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_GRAYSCALE);
 
     // properties
     addProcessPropertyDouble("weight_r", "Weight R", "", 0.2125, IPL_WIDGET_SLIDER, 0.0, 1.0);
@@ -72,8 +72,8 @@ bool IPLConvertToGray::processInputData(IPLImage* image , int, bool)
 
     switch( image->type() )
     {
-    case IPLImage::IMAGE_BW:
-        _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
+    case IPL_IMAGE_BW:
+        _result = new IPLImage( IPL_IMAGE_GRAYSCALE, width, height );
         plane = image->plane( 0 );
         newplane = _result->plane( 0 );
 
@@ -88,8 +88,8 @@ bool IPLConvertToGray::processInputData(IPLImage* image , int, bool)
             }
         }
         break;
-    case IPLData::IMAGE_GRAYSCALE:
-        _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
+    case IPL_IMAGE_GRAYSCALE:
+        _result = new IPLImage( IPL_IMAGE_GRAYSCALE, width, height );
         plane = image->plane( 0 );
         newplane = _result->plane( 0 );
 
@@ -104,8 +104,8 @@ bool IPLConvertToGray::processInputData(IPLImage* image , int, bool)
             }
         }
         break;
-    case IPLData::IMAGE_COLOR:
-        _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, width, height );
+    case IPL_IMAGE_COLOR:
+        _result = new IPLImage( IPL_IMAGE_GRAYSCALE, width, height );
         newplane = _result->plane( 0 );
         red = image->plane( 0 );
         green = image->plane( 1 );

@@ -33,8 +33,8 @@ void IPLWarpPerspective::init()
     setKeywords("warp, transformation");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     std::vector<double> value = {1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0};

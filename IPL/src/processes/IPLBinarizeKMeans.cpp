@@ -30,8 +30,8 @@ void IPLBinarizeKMeans::init()
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_BW);
 }
 
 void IPLBinarizeKMeans::destroy()
@@ -47,8 +47,8 @@ bool IPLBinarizeKMeans::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    if( image->type() == IPLData::IMAGE_GRAYSCALE )
-        _result = new IPLImage( IPLImage::IMAGE_BW, width, height );
+    if( image->type() == IPL_IMAGE_GRAYSCALE )
+        _result = new IPLImage( IPL_IMAGE_BW, width, height );
     else
         _result = new IPLImage( image->type(), width, height );
 

@@ -33,9 +33,9 @@ void IPLNormalizeIllumination::init()
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
-    addOutput("Illumination Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
+    addOutput("Illumination Image", IPL_IMAGE_COLOR);
 
     // set the openCV support
     setOpenCVSupport( IPLOpenCVSupport::OPENCV_ONLY );

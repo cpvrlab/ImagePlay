@@ -31,8 +31,8 @@ void IPLFalseColor::init()
     setKeywords("heatmap");
 
     // inputs and outputs
-    addInput("Grayscale Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Grayscale Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Image", IPL_IMAGE_COLOR);
 }
 
 void IPLFalseColor::destroy()
@@ -48,7 +48,7 @@ bool IPLFalseColor::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    _result = new IPLImage(IPLImage::IMAGE_COLOR, width, height );
+    _result = new IPLImage(IPL_IMAGE_COLOR, width, height );
 
     int progress = 0;
     int maxProgress = image->height();

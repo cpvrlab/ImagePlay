@@ -17,8 +17,8 @@
 //
 //#############################################################################
 
-#ifndef IPPROCESSERRORWIDGET_H
-#define IPPROCESSERRORWIDGET_H
+#ifndef IPPROCESSMESSAGEWIDGET_H
+#define IPPROCESSMESSAGEWIDGET_H
 
 #include <QWidget>
 
@@ -43,5 +43,5 @@ private:
     MainWindow*                 _mainWindow;
 };
 
-#endif // IPPROCESSERRORWIDGET_H
+#endif // IPPROCESSMESSAGEWIDGET_H
 

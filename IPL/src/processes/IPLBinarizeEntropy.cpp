@@ -31,8 +31,8 @@ void IPLBinarizeEntropy::init()
     setDescription("Binarize image using threshold computed with maximum entropy method.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 }
 
 void IPLBinarizeEntropy::destroy()
@@ -48,8 +48,8 @@ bool IPLBinarizeEntropy::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    if( image->type() == IPLData::IMAGE_GRAYSCALE )
-        _result = new IPLImage( IPLImage::IMAGE_BW, width, height );
+    if( image->type() == IPL_IMAGE_GRAYSCALE )
+        _result = new IPLImage( IPL_IMAGE_BW, width, height );
     else
         _result = new IPLImage( image->type(), width, height );
 

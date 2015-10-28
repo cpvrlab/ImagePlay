@@ -39,10 +39,10 @@ void IPLMergePlanes::init()
     addProcessPropertyInt("input_type", "Color Model:RGB|HSV|HSL", "", _inputType, IPL_WIDGET_RADIOBUTTONS);
 
     // inputs and outputs
-    addInput("Plane 1", IPLData::IMAGE_COLOR);
-    addInput("Plane 2", IPLData::IMAGE_COLOR);
-    addInput("Plane 3", IPLData::IMAGE_COLOR);
-    addOutput("Image",  IPLData::IMAGE_COLOR);
+    addInput("Plane 1", IPL_IMAGE_COLOR);
+    addInput("Plane 2", IPL_IMAGE_COLOR);
+    addInput("Plane 3", IPL_IMAGE_COLOR);
+    addOutput("Image",  IPL_IMAGE_COLOR);
 
 }
 
@@ -86,7 +86,7 @@ bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool)
     int height  = std::max(std::max(_inputA->height(), _inputB->height()), _inputC->height());
 
     delete _result;
-    _result =  new IPLImage(IPLData::IMAGE_COLOR, width, height);
+    _result =  new IPLImage(IPL_IMAGE_COLOR, width, height);
 
     int progress = 0;
     int maxProgress = image->height() * _result->getNumberOfPlanes();

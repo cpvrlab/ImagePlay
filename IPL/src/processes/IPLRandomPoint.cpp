@@ -31,9 +31,9 @@ void IPLRandomPoint::init()
     setCategory(IPLProcess::CATEGORY_OBJECTS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Random Point", IPLImage::POINT);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
+    addOutput("Random Point", IPL_POINT);
 
     // properties
     addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", 0.5, IPL_WIDGET_SLIDER, 0.0, 1.0);

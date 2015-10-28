@@ -31,8 +31,8 @@ void IPLResize::init()
     setOpenCVSupport(IPLProcess::OPENCV_ONLY);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("mode", "Mode:Absolute|Factor", "absolute|factor", 0, IPL_WIDGET_GROUP, 0, 1);

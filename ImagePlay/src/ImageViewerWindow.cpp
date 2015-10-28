@@ -276,9 +276,9 @@ void ImageViewerWindow::updateStatistics(IPLImage* image)
         statistics.append("</table>");
 
         QString imageType = "COLOR";
-        if(image->type() == IPLData::IMAGE_GRAYSCALE)
+        if(image->type() == IPL_IMAGE_GRAYSCALE)
             imageType = "GRAY";
-        else if(image->type() == IPLImage::IMAGE_BW)
+        else if(image->type() == IPL_IMAGE_BW)
             imageType = "BW";
 
         statistics = statistics.arg(image->height()).arg(image->width()).arg(imageType).arg(image->getNumberOfPlanes());
@@ -286,7 +286,7 @@ void ImageViewerWindow::updateStatistics(IPLImage* image)
 
         // histogram statistics
 
-        if(image->type() == IPLData::IMAGE_COLOR)
+        if(image->type() == IPL_IMAGE_COLOR)
         {
             IPLHistogram* histogramR = ui->histogramWidget->histogramR();
             IPLHistogram* histogramG = ui->histogramWidget->histogramG();
@@ -308,7 +308,7 @@ void ImageViewerWindow::updateStatistics(IPLImage* image)
 
             statistics += statistics2;
         }
-        else if(image->type() == IPLData::IMAGE_GRAYSCALE || image->type() == IPLImage::IMAGE_BW)
+        else if(image->type() == IPL_IMAGE_GRAYSCALE || image->type() == IPL_IMAGE_BW)
         {
             IPLHistogram* histogram = ui->histogramWidget->histogram();
 
@@ -858,7 +858,7 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 
 
     QString value;
-    if(data->type() == IPLData::IMAGE_COLOR)
+    if(data->type() == IPL_IMAGE_COLOR)
     {
         IPLImage* image = data->toImage();
         QString r = QString::number(image->plane(0)->cp(x, y), 'f', 2);
@@ -872,7 +872,7 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 
         value = value.arg(r).arg(g).arg(b);
     }
-    else if(data->type() == IPLData::IMAGE_GRAYSCALE || data->type() == IPLImage::IMAGE_BW)
+    else if(data->type() == IPL_IMAGE_GRAYSCALE || data->type() == IPL_IMAGE_BW)
     {
         IPLImage* image = data->toImage();
         QString v = QString::number(image->plane(0)->cp(x, y), 'f', 2);
@@ -880,7 +880,7 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 
         value = value.arg(v);
     }
-    else if(data->type() == IPLData::IMAGE_ORIENTED)
+    else if(data->type() == IPL_IMAGE_ORIENTED)
     {
         IPLImage* image = data->toImage();
         QString m = QString::number(image->plane(0)->cp(x, y), 'f', 2);
@@ -889,7 +889,7 @@ void ImageViewerWindow::on_mousePositionChanged(int x, int y)
 
         value = value.arg(p).arg(m);
     }
-    else if(data->type() == IPLData::IMAGE_COMPLEX)
+    else if(data->type() == IPL_IMAGE_COMPLEX)
     {
         IPLComplexImage* image = data->toComplexImage();
         int xx = ((x-image->width()/2) + image->width()) % image->width();

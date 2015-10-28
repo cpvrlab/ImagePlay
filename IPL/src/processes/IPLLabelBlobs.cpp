@@ -35,8 +35,8 @@ void IPLLabelBlobs::init()
     addProcessPropertyInt("labelCount", "Number of Labels", "Only maximum of labels is counted. This determines the intensity increments of the output image.", 1024, IPL_WIDGET_SLIDER, 1, 4096);
 
     // inputs and outputs
-    addInput("Binary Image", IPLData::IMAGE_BW);
-    addOutput("Objects", IPLImage::IMAGE_GRAYSCALE);
+    addInput("Binary Image", IPL_IMAGE_BW);
+    addOutput("Objects", IPL_IMAGE_GRAYSCALE);
 }
 
 void IPLLabelBlobs::destroy()
@@ -52,7 +52,7 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    _result = new IPLImage(IPLImage::IMAGE_GRAYSCALE, width, height );
+    _result = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height );
 
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();

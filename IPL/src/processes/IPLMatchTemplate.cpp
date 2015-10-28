@@ -33,10 +33,10 @@ void IPLMatchTemplate::init()
     setDescription("The circle Hough Transform (CHT) is a feature extraction technique for detecting circles.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Circle Overlay", IPLImage::IMAGE_COLOR);
-    addOutput("Circle Positions", IPLImage::POINT);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Hough Result", IPL_IMAGE_GRAYSCALE);
+    addOutput("Circle Overlay", IPL_IMAGE_COLOR);
+    addOutput("Circle Positions", IPL_POINT);
 
     // properties
     addProcessPropertyInt("thresholdCanny", "Threshold 1", "Upper threshold for the internal Canny edge detector", 200, IPL_WIDGET_SLIDER, 1, 200);
@@ -104,8 +104,8 @@ bool IPLMatchTemplate::processInputData(IPLImage* image , int, bool useOpenCV)
 
 /*!
  * \brief IPLMatchTemplate::getResultData
- *        index == 0: "Hough Result", IPLImage::IMAGE_GRAYSCALE
- *        index == 1: "Circle Overlay", IPLImage::IMAGE_COLOR
+ *        index == 0: "Hough Result", IPL_IMAGE_GRAYSCALE
+ *        index == 1: "Circle Overlay", IPL_IMAGE_COLOR
  *        index == 2: "Circle Positions", IPLImage::IMAGE_POINT
  * \return
  */

@@ -415,6 +415,9 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
       </widget>
      </item>
      <item>
+      <widget class="IPProcessInputOutputWidget" name="processInputOutputWidget" native="true"/>
+     </item>
+     <item>
       <widget class="IPProcessMessageWidget" name="processMessageWidget" native="true"/>
      </item>
      <item>

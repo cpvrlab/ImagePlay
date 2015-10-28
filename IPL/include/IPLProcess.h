@@ -77,11 +77,11 @@ struct IPLSHARED_EXPORT IPLProcessIO
     {
         this->index = -1;
         this->name = "";
-        this->type = IPLData::UNDEFINED;
+        this->type = IPL_UNDEFINED;
         this->occupied = false;
     }
 
-    IPLProcessIO(int index, std::string name, IPLData::IPLDataType type)
+    IPLProcessIO(int index, std::string name, IPLDataType type)
     {
         this->index = index;
         this->name = name;
@@ -91,7 +91,7 @@ struct IPLSHARED_EXPORT IPLProcessIO
 
     int                     index;
     std::string             name;
-    IPLData::IPLDataType    type;
+    IPLDataType             type;
     bool                    occupied;
 };
 
@@ -190,8 +190,8 @@ public:
     int                     availableInputs                     ();
     int                     availableOutputs                    ();
 
-    void                    addInput                            (std::string name, IPLData::IPLDataType type);
-    void                    addOutput                           (std::string name, IPLData::IPLDataType type);
+    void                    addInput                            (std::string name, IPLDataType type);
+    void                    addOutput                           (std::string name, IPLDataType type);
     void                    addProcessPropertyInt               (const char* name, const char* title, const char* description, int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, int min = 0, int max = 0);
     void                    addProcessPropertyUnsignedInt       (const char* name, const char* title, const char* description, unsigned int value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, unsigned int min = 0, unsigned int max = 0);
     void                    addProcessPropertyDouble            (const char* name, const char* title, const char* description, double value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, double min = 0.0, double max = 0.0);

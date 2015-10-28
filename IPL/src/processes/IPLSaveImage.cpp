@@ -39,8 +39,8 @@ void IPLSaveImage::init()
     setCategory(IPLProcess::CATEGORY_IO);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // all properties which can later be changed by gui
     addProcessPropertyString("path", "File:Bitmap (*.bmp);;OpenEXR (*.exr);;JPEG (*.jpg);;PNG (*.png);;Portable BitMap (*.pbm);;Portable GrayMap (*.pgm);;Portable PixMap (*.ppm)",

@@ -36,11 +36,11 @@ void IPLSplitPlanes::init()
     addProcessPropertyInt("hue_shift", "Hue Shift", "0° - 360°", _hueShift, IPL_WIDGET_SLIDER, 0, 360);
 
     // inputs and outputs
-    addInput("Color Image", IPLData::IMAGE_COLOR);
+    addInput("Color Image", IPL_IMAGE_COLOR);
 
-    addOutput("Channel 1", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Channel 2", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Channel 3", IPLData::IMAGE_GRAYSCALE);
+    addOutput("Channel 1", IPL_IMAGE_GRAYSCALE);
+    addOutput("Channel 2", IPL_IMAGE_GRAYSCALE);
+    addOutput("Channel 3", IPL_IMAGE_GRAYSCALE);
 
 }
 
@@ -80,7 +80,7 @@ bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool)
 
         for( int planeNr=0; planeNr < image->getNumberOfPlanes(); planeNr++ )
         {
-            IPLImage* newImage = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+            IPLImage* newImage = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
             _result.push_back(newImage);
 
             // copy data
@@ -99,9 +99,9 @@ bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool)
     // HSV
     else if(outputType == 1)
     {
-        IPLImage* image_h = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
-        IPLImage* image_s = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
-        IPLImage* image_v = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_h = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_s = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_v = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
         _result.push_back(image_h);
         _result.push_back(image_s);
         _result.push_back(image_v);
@@ -134,9 +134,9 @@ bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool)
     // HSL
     else if(outputType == 2)
     {
-        IPLImage* image_h = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
-        IPLImage* image_s = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
-        IPLImage* image_l = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_h = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_s = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
+        IPLImage* image_l = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
         _result.push_back(image_h);
         _result.push_back(image_s);
         _result.push_back(image_l);

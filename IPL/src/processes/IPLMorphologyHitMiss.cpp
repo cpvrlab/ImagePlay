@@ -41,8 +41,8 @@ void IPLMorphologyHitMiss::init()
     }
 
     // inputs and outputs
-    addInput("Image", IPLImage::IMAGE_BW);
-    addOutput("Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_BW);
+    addOutput("Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_BINARY_MORPHOLOGY_TRISTATE);
@@ -65,7 +65,7 @@ bool IPLMorphologyHitMiss::processInputData(IPLImage* image, int, bool)
     // copy constructor doesnt work:
     // _result = new IPLImage(*image);
 
-    _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+    _result = new IPLImage( IPL_IMAGE_BW, width, height);
 
     // get properties
 //    _propertyMutex.lock();

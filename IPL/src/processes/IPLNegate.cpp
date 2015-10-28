@@ -31,8 +31,8 @@ void IPLNegate::init()
     setKeywords("inverse, invert");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 }
 
 void IPLNegate::destroy()

@@ -17,40 +17,31 @@
 //
 //#############################################################################
 
-#include "IPLPoint.h"
+#ifndef IPPROCESSINPUTOUTPUTWIDGET_H
+#define IPPROCESSINPUTOUTPUTWIDGET_H
 
-IPLPoint::IPLPoint() : IPLData(IPL_POINT)
+#include <QWidget>
+
+#include "IPL_processes.h"
+#include "MainWindow.h"
+
+//-----------------------------------------------------------------------------
+//!IPProcessInputOutputWidget displays errors and messages for IPLProcess
+/*!
+ *
+ */
+class IPProcessInputOutputWidget : public QWidget
 {
-}
+    Q_OBJECT
+public:
+    explicit                    IPProcessInputOutputWidget  (QWidget *parent = 0);
+    void                        init                        (IPProcessStep* process);
+    void                        updateInputsOutputs         ();
 
-IPLPoint::IPLPoint(double x, double y) : IPLPoint()
-{
-    _x = x;
-    _y = y;
-}
+private:
+    IPProcessStep*              _processStep;
+    MainWindow*                 _mainWindow;
+};
 
-IPLPoint::IPLPoint(const IPLPoint &other)
-{
-    _x = other._x;
-    _y = other._y;
-}
+#endif // IPPROCESSINPUTOUTPUTWIDGET_H
 
-IPLPoint &IPLPoint::operator=(const IPLPoint &other)
-{
-    _x = other._x;
-    _y = other._y;
-    return *this;
-}
-
-IPLPoint::~IPLPoint()
-{
-
-}
-
-std::string IPLPoint::toString(int x, int y)
-{
-    std::stringstream s;
-    s << "X: " << x << " Y: " << y;
-
-    return s.str();
-}

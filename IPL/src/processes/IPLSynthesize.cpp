@@ -39,7 +39,7 @@ void IPLSynthesize::init()
     setIsSource(true);
 
     // inputs and outputs
-    addOutput("Image", IPLData::IMAGE_GRAYSCALE);
+    addOutput("Image", IPL_IMAGE_GRAYSCALE);
 
     // all properties which can later be changed by gui
     addProcessPropertyInt("type", "Type:Flat|Plane Wave|Center Wave","flat|plane|radial", _type, IPL_WIDGET_GROUP);
@@ -82,9 +82,9 @@ bool IPLSynthesize::processInputData(IPLImage*, int, bool)
     IPLColor color = getProcessPropertyColor("flat_color");
 
     if( _type == 0 )
-        _result = new IPLImage( IPLData::IMAGE_COLOR, _width, _height );
+        _result = new IPLImage( IPL_IMAGE_COLOR, _width, _height );
     else
-        _result = new IPLImage( IPLData::IMAGE_GRAYSCALE, _width, _height );
+        _result = new IPLImage( IPL_IMAGE_GRAYSCALE, _width, _height );
 
     double dx = (double)_width / 2.0;
     double dy = (double)_height / 2.0;

@@ -10,11 +10,11 @@ in the process properties.
 Boolean operations need binary images as input
 
 \section Inputs
-- Image A: IPLData::IMAGE_COLOR
-- Image B: IPLData::IMAGE_COLOR
+- Image A: IPL_IMAGE_COLOR
+- Image B: IPL_IMAGE_COLOR
 
 \section Outputs
-- Image: IPLData::IMAGE_COLOR
+- Image: IPL_IMAGE_COLOR
 
 \section Algorithms
 - Arithmetic_Add

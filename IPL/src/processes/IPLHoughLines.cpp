@@ -33,9 +33,9 @@ void IPLHoughLines::init()
     setDescription("Finds lines in a binary image using the standard Hough transform.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Hough Result", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Line Overlay", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Hough Result", IPL_IMAGE_GRAYSCALE);
+    addOutput("Line Overlay", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyDouble("rho", "Rho", "Distance resolution of the accumulator in pixels", 1, IPL_WIDGET_SLIDER, 0, 10);
@@ -112,8 +112,8 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
 
 /*!
  * \brief IPLHoughLines::getResultData
- *        index == 0: "Hough Result", IPLImage::IMAGE_GRAYSCALE
- *        index == 1: "Circle Overlay", IPLImage::IMAGE_COLOR
+ *        index == 0: "Hough Result", IPL_IMAGE_GRAYSCALE
+ *        index == 1: "Circle Overlay", IPL_IMAGE_COLOR
  * \return
  */
 IPLData* IPLHoughLines::getResultData(int index)

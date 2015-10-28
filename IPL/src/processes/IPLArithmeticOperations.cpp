@@ -49,9 +49,9 @@ void IPLArithmeticOperations::init()
     setKeywords("add, substract, multiply, divide, minimum, maximum, and, or, xor, exclusive or, not, atan, arcus tangens");
 
     // inputs and outputs
-    addInput("Image A", IPLData::IMAGE_COLOR);
-    addInput("Image B", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image A", IPL_IMAGE_COLOR);
+    addInput("Image B", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("operation", "Operation:ADD|SUB|MUL|DIV|MIN|MAX|AND|OR|XOR|NOT|ATAN2",
@@ -103,9 +103,9 @@ bool IPLArithmeticOperations::processInputData(IPLImage* image, int imageIndex, 
     int progress = 0;
     int maxProgress = maxNrOfPlanes*height;
 
-    IPLData::IPLDataType type = IPLData::IMAGE_COLOR;
+    IPLDataType type = IPL_IMAGE_COLOR;
     if(maxNrOfPlanes == 1)
-        type = IPLData::IMAGE_GRAYSCALE;
+        type = IPL_IMAGE_GRAYSCALE;
 
     // create result
     _result = new IPLImage(type, width, height);

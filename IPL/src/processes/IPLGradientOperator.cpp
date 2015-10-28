@@ -36,8 +36,8 @@ void IPLGradientOperator::init()
     setKeywords("Fast Gradient, Roberts, Sobel, Cubic Spline");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Image", IPLData::IMAGE_ORIENTED);
+    addInput("Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Image", IPL_IMAGE_ORIENTED);
 
     // set the openCV support
     setOpenCVSupport( IPLOpenCVSupport::OPENCV_ONLY );

@@ -41,8 +41,8 @@ void IPLMorphologyGrayscale::init()
     _iterations = 1;
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
 //    _properties["kernel"]       = new IPLProcessPropertyVectorInt(this, 0, "Kernel", "", IPL_INT_GRAYSCALE_MORPHOLOGY, _kernel);

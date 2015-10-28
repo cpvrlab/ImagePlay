@@ -31,8 +31,8 @@ void IPLGammaCorrection::init()
     setCategory(IPLProcess::CATEGORY_POINTOPERATIONS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyDouble("gamma", "Gamma", "0.0 < threshold < 1.0", _gamma, IPL_WIDGET_SLIDER, 0.1, 10.0);

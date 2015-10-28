@@ -67,9 +67,9 @@ void IPLBlendImages::init()
     setDescription("Blend two input images using various blend modes known from popular image editing software.");
 
     // inputs and outputs
-    addInput("Image A", IPLData::IMAGE_COLOR);
-    addInput("Image B", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image A", IPL_IMAGE_COLOR);
+    addInput("Image B", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyDouble("factorA", "Weight A", "", _factorA, IPL_WIDGET_SLIDER, 0.0, 1.0);
@@ -127,9 +127,9 @@ bool IPLBlendImages::processInputData(IPLImage* image , int imageIndex, bool)
     int progress = 0;
     int maxProgress = maxNrOfPlanes*height;
 
-    IPLData::IPLDataType type = IPLData::IMAGE_COLOR;
+    IPLDataType type = IPL_IMAGE_COLOR;
     if(maxNrOfPlanes == 1)
-        type = IPLData::IMAGE_GRAYSCALE;
+        type = IPL_IMAGE_GRAYSCALE;
 
     // create result
     _result = new IPLImage(type, width, height);

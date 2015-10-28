@@ -34,7 +34,7 @@ void IPLLoadImageSequence::init()
     setIsSource(true);
 
     // inputs and outputs
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // all properties which can later be changed by gui
     addProcessPropertyString("folder", "Folder", "", _folder, IPL_WIDGET_FOLDER);

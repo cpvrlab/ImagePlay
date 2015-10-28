@@ -67,7 +67,7 @@ bool IPLFileIO::loadFile(const std::string filename, IPLImage*& image, std::stri
         // clear old image
         delete image;
         // create new instance with the right dimensions
-        image = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+        image = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
 
         for(int y = 0; y < height; y++)
         {
@@ -91,7 +91,7 @@ bool IPLFileIO::loadFile(const std::string filename, IPLImage*& image, std::stri
         // clear old image
         delete image;
         // create new instance with the right dimensions
-        image = new IPLImage(IPLData::IMAGE_COLOR, width, height);
+        image = new IPLImage(IPL_IMAGE_COLOR, width, height);
 
         for(int y = 0; y < height; y++)
         {
@@ -158,7 +158,7 @@ bool IPLFileIO::loadMemory(void* mem, IPLImage*& image)
         // clear old image
         delete image;
         // create new instance with the right dimensions
-        image = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+        image = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
 
         for(int y = 0; y < height; y++)
         {
@@ -182,7 +182,7 @@ bool IPLFileIO::loadMemory(void* mem, IPLImage*& image)
         // clear old image
         delete image;
         // create new instance with the right dimensions
-        image = new IPLImage(IPLData::IMAGE_COLOR, width, height);
+        image = new IPLImage(IPL_IMAGE_COLOR, width, height);
 
         for(int y = 0; y < height; y++)
         {
@@ -216,7 +216,7 @@ bool IPLFileIO::saveFile(const std::string path, IPLImage* image, int format, in
 
     FIBITMAP *dib = FreeImage_Allocate(width, height, 24);
 
-    if(image->type() == IPLData::IMAGE_COLOR)
+    if(image->type() == IPL_IMAGE_COLOR)
     {
         for(int y = 0; y < height; y++)
         {
@@ -511,9 +511,9 @@ bool IPLFileIO::loadRawFile(const std::string filename, IPLImage *&image, int wi
     delete image;
     // create IPLImage
     if(format == IPL_RAW_8BIT)
-        image = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+        image = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
     else
-        image = new IPLImage(IPLData::IMAGE_COLOR, width, height);
+        image = new IPLImage(IPL_IMAGE_COLOR, width, height);
 
     // read file
     switch (format) {

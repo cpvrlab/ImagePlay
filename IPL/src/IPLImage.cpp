@@ -21,7 +21,7 @@
 
 int IPLImage::_instanceCount = 0;
 
-IPLImage::IPLImage() : IPLData(IPLData::UNDEFINED)
+IPLImage::IPLImage() : IPLData(IPL_UNDEFINED)
 {
     _width = 0;
     _height = 0;
@@ -36,20 +36,20 @@ IPLImage::IPLImage(const IPLImage& other)
     _width = other._width;
     _height = other._height;
 
-    if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
+    if( _type == IPL_IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
         _planes.push_back(new IPLImagePlane( *(other._planes[i]) ));
 
     _instanceCount++;
 }
 
-IPLImage::IPLImage( IPLData::IPLDataType t, int width, int height )
+IPLImage::IPLImage( IPLDataType t, int width, int height )
 {
     _type = t;
     _width = width;
     _height = height;
 
-    if( _type == IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
+    if( _type == IPL_IMAGE_COLOR ) _nrOfPlanes = 3; else _nrOfPlanes = 1;
     for( int i=0; i<_nrOfPlanes; i++ )
         _planes.push_back(new IPLImagePlane( width, height ));
     fillColor( 0 );
@@ -62,12 +62,12 @@ IPLImage::IPLImage(cv::Mat &cvMat)
     // _type = other._type;
     _width  = cvMat.cols;
     _height = cvMat.rows;
-    _type   = IMAGE_COLOR;
+    _type   = IPL_IMAGE_COLOR;
     _nrOfPlanes = cvMat.channels();
     if(_nrOfPlanes > 1)
-        _type   = IMAGE_COLOR;
+        _type   = IPL_IMAGE_COLOR;
     else
-        _type   = IMAGE_GRAYSCALE;
+        _type   = IPL_IMAGE_GRAYSCALE;
 
     if(_nrOfPlanes > 3)
         _nrOfPlanes = 3;
@@ -209,7 +209,7 @@ cv::Mat IPLImage::toCvMat()
 uchar* IPLImage::rgb32()
 {
     _rgb32.resize(_height * _width * 4);
-    if(_type == IMAGE_BW)
+    if(_type == IPL_IMAGE_BW)
     {
         int i=0;
         for(int y=0; y < _height; y++)
@@ -225,7 +225,7 @@ uchar* IPLImage::rgb32()
             }
         }
     }
-    else if(_type == IMAGE_GRAYSCALE)
+    else if(_type == IPL_IMAGE_GRAYSCALE)
     {
         int i=0;
         for(int y=0; y < _height; y++)
@@ -240,7 +240,7 @@ uchar* IPLImage::rgb32()
             }
         }
     }
-    else if(_type == IMAGE_COLOR)
+    else if(_type == IPL_IMAGE_COLOR)
     {
         int i=0;
         for(int y=0; y < _height; y++)
@@ -257,7 +257,7 @@ uchar* IPLImage::rgb32()
             }
         }
     }
-    else if(_type == IMAGE_ORIENTED)
+    else if(_type == IPL_IMAGE_ORIENTED)
     {
         double maxMag = 0.0;
         for(int x=0; x<_width; x++)

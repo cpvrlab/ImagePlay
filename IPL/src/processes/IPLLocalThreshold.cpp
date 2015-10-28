@@ -31,8 +31,8 @@ void IPLLocalThreshold::init()
     setDescription("Niblack's Local Average Threshold");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("window", "Window", "", 3, IPL_WIDGET_SLIDER_ODD, 3, 9);
@@ -53,8 +53,8 @@ bool IPLLocalThreshold::processInputData(IPLImage* image , int, bool)
     int width = image->width();
     int height = image->height();
 
-    if(image->type() == IPLImage::IMAGE_GRAYSCALE)
-        _result = new IPLImage(IPLImage::IMAGE_BW, width, height);
+    if(image->type() == IPL_IMAGE_GRAYSCALE)
+        _result = new IPLImage(IPL_IMAGE_BW, width, height);
     else
         _result = new IPLImage(image->type(), width, height);
 

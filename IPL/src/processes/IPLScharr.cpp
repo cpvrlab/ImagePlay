@@ -32,10 +32,10 @@ void IPLScharr::init()
     setDescription("");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Magnitude", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Edge", IPLImage::IMAGE_GRAYSCALE);
-    addOutput("Gradient", IPLImage::IMAGE_GRAYSCALE);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Magnitude", IPL_IMAGE_GRAYSCALE);
+    addOutput("Edge", IPL_IMAGE_GRAYSCALE);
+    addOutput("Gradient", IPL_IMAGE_GRAYSCALE);
 
     // properties
     addProcessPropertyInt("threshold", "Threshold", "", 1, IPL_WIDGET_SLIDER, 1, 255);

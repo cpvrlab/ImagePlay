@@ -30,8 +30,8 @@ void IPProcessScript::init()
     setTitle("Process Script");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLData::IMAGE_GRAYSCALE);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_GRAYSCALE);
 }
 
 void IPProcessScript::destroy()

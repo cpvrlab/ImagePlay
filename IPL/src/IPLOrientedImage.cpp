@@ -23,12 +23,12 @@
 
 IPLOrientedImage::IPLOrientedImage() : IPLImage()
 {
-    _type = IPLImage::IMAGE_ORIENTED;
+    _type = IPL_IMAGE_ORIENTED;
 }
 
 
 IPLOrientedImage::IPLOrientedImage( int width, int height )
-  : IPLImage( IPLImage::IMAGE_ORIENTED, width, height )
+  : IPLImage( IPL_IMAGE_ORIENTED, width, height )
 {
     // 2 planes are needed for magnitude and phase
     // 1 plane already created by default constructor

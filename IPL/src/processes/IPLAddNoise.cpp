@@ -32,8 +32,8 @@ void IPLAddNoise::init()
     setDescription("Add impulse, Gaussian noise (additive or multiplicative) to an image.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("type", "Type:Impulsive|Gaussian", "impl|gauss", 0, IPL_WIDGET_GROUP);

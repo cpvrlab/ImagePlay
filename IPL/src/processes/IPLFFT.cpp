@@ -31,8 +31,8 @@ void IPLFFT::init()
     setDescription("Fast Fourier Transform.");
 
     // inputs and outputs
-    addInput("Grayscale Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Complex Image", IPLData::IMAGE_COMPLEX);
+    addInput("Grayscale Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Complex Image", IPL_IMAGE_COMPLEX);
 
     // properties
     addProcessPropertyInt("mode", "Windowing Function:None|Hanning|Hamming|Blackman|Border", "", 0, IPL_WIDGET_RADIOBUTTONS);

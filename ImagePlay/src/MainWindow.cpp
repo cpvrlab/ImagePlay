@@ -328,6 +328,7 @@ void MainWindow::showProcessSettings(IPProcessStep* processStep)
 
     ui->processPropertiesWidget->init(processStep);
     ui->processMessageWidget->init(processStep);
+    ui->processInputOutputWidget->init(processStep);
 }
 
 void MainWindow::hideProcessSettings()

@@ -31,8 +31,8 @@ void IPLCanvasSize::init()
     setCategory(IPLProcess::CATEGORY_GEOMETRY);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("width",      "Width", "", 512, IPL_WIDGET_SLIDER, 1, 4096);

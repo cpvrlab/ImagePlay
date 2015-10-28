@@ -31,8 +31,8 @@ void IPLEqualizeHistogram::init()
     setDescription("Histogram equalization of the input image.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyDouble("factor", "Factor", "", 1.0, IPL_WIDGET_SLIDER, 0.0, 5.0);

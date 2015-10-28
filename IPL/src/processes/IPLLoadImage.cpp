@@ -34,7 +34,7 @@ void IPLLoadImage::init()
     setHelpPage("helppage.html");
 
     // inputs and outputs
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // all properties which can later be changed by GUI
     addProcessPropertyString("path", "File",

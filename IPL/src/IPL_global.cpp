@@ -19,6 +19,25 @@
 
 #include "IPL_global.h"
 
+const char* const dataTypeNames[IPL_NUM_DATATYPES] = {
+    "IPL_IMAGE_BW",
+    "IPL_IMAGE_GRAYSCALE",
+    "IPL_IMAGE_COLOR",
+    "IPL_IMAGE_ORIENTED",
+    "IPL_IMAGE_COMPLEX",
+    "IPL_POINT",
+    "IPL_MATRIX",
+    "IPL_SHAPES",
+    "IPL_UNDEFINED"
+};
+
+const char *dataTypeName(IPLDataType type)
+{
+    if (type < 0 || type >= IPL_NUM_DATATYPES)
+        return "UNKNOWN";
+    return dataTypeNames[type];
+}
+
 const char* const widgetNames[IPL_NUM_WIDGETS] = {
     "IPL_WIDGET_DEFAULT",
     "IPL_WIDGET_HIDDEN",
@@ -50,7 +69,7 @@ const char* const widgetNames[IPL_NUM_WIDGETS] = {
 
 const char *widgetName(IPLProcessWidgetType type)
 {
-    if (type < 0 || type >= IPL_NUM_WIDGETS)
+    if (type < 0 || type >= IPL_NUM_DATATYPES)
         return "UNKNOWN";
     return widgetNames[type];
 }

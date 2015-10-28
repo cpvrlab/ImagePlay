@@ -107,10 +107,10 @@ void IPImageViewer::updateImage()
             setVisible(true);
         }
 
-        if(_rawData->type() == IPLData::IMAGE_COLOR
-                || _rawData->type() == IPLData::IMAGE_GRAYSCALE
-                || _rawData->type() == IPLData::IMAGE_BW
-                || _rawData->type() == IPLData::IMAGE_ORIENTED
+        if(_rawData->type() == IPL_IMAGE_COLOR
+                || _rawData->type() == IPL_IMAGE_GRAYSCALE
+                || _rawData->type() == IPL_IMAGE_BW
+                || _rawData->type() == IPL_IMAGE_ORIENTED
                 )
         {
             _rawImage = _rawData->toImage();
@@ -118,14 +118,14 @@ void IPImageViewer::updateImage()
             // show normal image
             _image = new QImage(_rawImage->rgb32(), _rawImage->width(), _rawImage->height(), QImage::Format_RGB32);
         }
-        else if(_rawData->type() == IPLData::IMAGE_COMPLEX)
+        else if(_rawData->type() == IPL_IMAGE_COMPLEX)
         {
             _rawComplexImage = _rawData->toComplexImage();
 
             // show complex image
             _image = new QImage(_rawComplexImage->rgb32(), _rawComplexImage->width(), _rawComplexImage->height(), QImage::Format_RGB32);
         }
-        else if(_rawData->type() == IPLImage::POINT)
+        else if(_rawData->type() == IPL_POINT)
         {
             // show point
             _rawData = _processStep->process()->getResultData(0);
@@ -146,7 +146,7 @@ void IPImageViewer::updateImage()
             painter.setBrush(brush);
             painter.drawEllipse(point, 10, 10);
         }
-        else if(_rawData->type() == IPLData::MATRIX)
+        else if(_rawData->type() == IPL_MATRIX)
         {
             int cellSize = 30;
             int headerSize = 30;

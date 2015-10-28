@@ -46,7 +46,7 @@ public:
 
     void updateHistogram(IPLImage* image);
     void setLogarithmic(bool logarithmic);
-    IPLData::IPLDataType type()   { return _type; }
+    IPLDataType type()   { return _type; }
     //TODO: Use references?
     IPLHistogram* histogram()       { return _histogram.data(); }
     IPLHistogram* histogramR()      { return _histogramR.data(); }
@@ -63,7 +63,7 @@ private:
     int                          _bins;
     int                          _planes;
     bool                         _logarithmic;
-    IPLData::IPLDataType         _type;
+    IPLDataType         _type;
     QScopedPointer<IPLHistogram> _histogram;
     QScopedPointer<IPLHistogram> _histogramR;
     QScopedPointer<IPLHistogram> _histogramG;

@@ -33,8 +33,8 @@ void IPLIFFT::init()
 	setKeywords("IFFT");
 
     // inputs and outputs
-    addInput("Complex Image", IPLData::IMAGE_COMPLEX);
-    addOutput("Grayscale Image", IPLImage::IMAGE_GRAYSCALE);
+    addInput("Complex Image", IPL_IMAGE_COMPLEX);
+    addOutput("Grayscale Image", IPL_IMAGE_GRAYSCALE);
 
     // properties
     //addProcessPropertyInt("mode", "Windowing Function:None|Hanning|Hamming|Blackman|Border", "", IPL_INT_RADIOBUTTONS, 0);
@@ -61,7 +61,7 @@ bool IPLIFFT::processInputData(IPLImage* data , int, bool)
     int width = _complexImage->width();
     int height = _complexImage->height();
 
-    _result = new IPLImage(IPLData::IMAGE_GRAYSCALE, width, height);
+    _result = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
 
     // get properties
     //int mode = getProcessPropertyInt("mode");

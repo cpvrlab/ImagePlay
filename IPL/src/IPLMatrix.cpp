@@ -20,13 +20,13 @@
 #include "IPLMatrix.h"
 
 
-IPLMatrix::IPLMatrix(int height, int width) : IPLData(IPLData::MATRIX)
+IPLMatrix::IPLMatrix(int height, int width) : IPLData(IPL_MATRIX)
 {
     _height = height;
     _width = width;
 }
 
-IPLMatrix::IPLMatrix(int height, int width, ipl_basetype array[]) : IPLData(IPLData::MATRIX)
+IPLMatrix::IPLMatrix(int height, int width, ipl_basetype array[]) : IPLData(IPL_MATRIX)
 {
     _height = height;
     _width = width;
@@ -34,7 +34,7 @@ IPLMatrix::IPLMatrix(int height, int width, ipl_basetype array[]) : IPLData(IPLD
     _data.insert(_data.begin(), array, array + height * width);
 }
 
-IPLMatrix::IPLMatrix(const IPLMatrix &other) : IPLData(IPLData::MATRIX)
+IPLMatrix::IPLMatrix(const IPLMatrix &other) : IPLData(IPL_MATRIX)
 {
     _data = other._data;
     _height = other._height;

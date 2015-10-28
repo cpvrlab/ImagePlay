@@ -107,13 +107,13 @@ int IPLProcess::availableOutputs()
     return count;
 }
 
-void IPLProcess::addInput(std::string name, IPLData::IPLDataType type)
+void IPLProcess::addInput(std::string name, IPLDataType type)
 {
     // automatically increment ID
     _inputs.push_back(IPLProcessIO((int)_inputs.size(), name, type));
 }
 
-void IPLProcess::addOutput(std::string name, IPLData::IPLDataType type)
+void IPLProcess::addOutput(std::string name, IPLDataType type)
 {
     // automatically increment ID
     _outputs.push_back(IPLProcessIO((int)_outputs.size(), name, type));

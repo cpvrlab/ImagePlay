@@ -33,8 +33,8 @@ void IPLUndistort::init()
     setKeywords("distortion, undistortion, barrel, lens correction");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("f", "f", "Focal Length", 1000, IPL_WIDGET_SLIDER, 0, 10000.0);

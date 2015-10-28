@@ -22,7 +22,7 @@
 IPLComplexImage::IPLComplexImage() : IPLData()
 {
     _plane = NULL;
-    _type = IPLData::IMAGE_COMPLEX;
+    _type = IPL_IMAGE_COMPLEX;
 }
 
 IPLComplexImage::IPLComplexImage(const IPLComplexImage &other)
@@ -49,7 +49,7 @@ IPLComplexImage::IPLComplexImage( int width, int height )
     _width = width;
     _height = height;
     _rgb32.resize(_height * _width*4);
-    _type = IPLData::IMAGE_COMPLEX;
+    _type = IPL_IMAGE_COMPLEX;
     newPlane();
 }
 

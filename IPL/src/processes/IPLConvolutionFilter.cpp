@@ -50,8 +50,8 @@ void IPLConvolutionFilter::init()
     }
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_KERNEL);

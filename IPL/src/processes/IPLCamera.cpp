@@ -34,7 +34,7 @@ void IPLCamera::init()
     setIsSequence(true);
 
     // inputs and outputs
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     addProcessPropertyUnsignedInt("trigger", "Trigger Image", "", 0, IPL_WIDGET_BUTTON);
     addProcessPropertyBool("continuous", "Run continuously", "", false);

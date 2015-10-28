@@ -32,10 +32,10 @@ void IPLGabor::init()
     setCategory(IPLProcess::CATEGORY_LOCALOPERATIONS);
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Even Gabor ", IPLImage::IMAGE_COLOR);
-    addOutput("Odd Gabor ", IPLImage::IMAGE_COLOR);
-    addOutput("Power Gabor ", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Even Gabor ", IPL_IMAGE_COLOR);
+    addOutput("Odd Gabor ", IPL_IMAGE_COLOR);
+    addOutput("Power Gabor ", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("window", "Window", "", 5, IPL_WIDGET_SLIDER_ODD, 3, 15);

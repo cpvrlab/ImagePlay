@@ -32,8 +32,8 @@ void IPLFillConcavities::init()
     setDescription("Local fill concavities operator.");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Gray Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Gray Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyInt("type", "Type:Bright|Dark", "", 0, IPL_WIDGET_RADIOBUTTONS);

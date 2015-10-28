@@ -111,7 +111,7 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
             uchar b = 0;
 
             int nrOfPlanes = _image->getNumberOfPlanes();
-            if( _image->type() == IPLData::IMAGE_COLOR)
+            if( _image->type() == IPL_IMAGE_COLOR)
             {
                 //uchar test = *_image->rgb32() + (_x+offsetX)*_image->height() + (_y+offsetY);
                 r = _image->plane(0)->cp(_x+offsetX, _y+offsetY) * FACTOR_TO_UCHAR;
@@ -120,14 +120,14 @@ void IPZoomWidget::paintEvent(QPaintEvent*)
 
                 highlightColor = QColor(255-r, 255-g, 255-b);
             }
-            else if( _image->type() == IPLData::IMAGE_GRAYSCALE || _image->type() == IPLImage::IMAGE_BW )
+            else if( _image->type() == IPL_IMAGE_GRAYSCALE || _image->type() == IPL_IMAGE_BW )
             {
                 r = g = b = _image->plane(0)->cp(_x+offsetX, _y+offsetY) * FACTOR_TO_UCHAR;
 
                 highlightColor = QColor(255, 0, 0);
             }
 
-            else if( _image->type() == IPLData::IMAGE_ORIENTED )
+            else if( _image->type() == IPL_IMAGE_ORIENTED )
             {
                 r = g = b = _image->plane(0)->cp(_x+offsetX, _y+offsetY) * FACTOR_TO_UCHAR;
 

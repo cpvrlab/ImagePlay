@@ -42,7 +42,7 @@ class IPLSHARED_EXPORT IPLImage : public IPLData
 public:
     IPLImage();
     IPLImage( const IPLImage& image );
-    IPLImage( IPLData::IPLDataType _type, int width, int height );
+    IPLImage( IPLDataType _type, int width, int height );
     IPLImage( cv::Mat& cvMat );
     ~IPLImage();
 

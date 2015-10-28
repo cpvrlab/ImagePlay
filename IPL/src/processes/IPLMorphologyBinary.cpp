@@ -48,8 +48,8 @@ void IPLMorphologyBinary::init()
     _iterations = 1;
 
     // inputs and outputs
-    addInput("Image", IPLImage::IMAGE_BW);
-    addOutput("Image", IPLImage::IMAGE_BW);
+    addInput("Image", IPL_IMAGE_BW);
+    addOutput("Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyVectorInt("kernel", "Kernel", "", _kernel, IPL_WIDGET_BINARY_MORPHOLOGY);
@@ -170,7 +170,7 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
     {
         //Add an empty image - The image viewer currently may trigger
         //a segfault if we return NULL.
-        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+        _result = new IPLImage( IPL_IMAGE_BW, width, height);
         addError("Empty kernel.");
         return false;
     }
@@ -188,7 +188,7 @@ bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
 
     if (!useOpenCV)
     {
-        _result = new IPLImage( IPLImage::IMAGE_BW, width, height);
+        _result = new IPLImage( IPL_IMAGE_BW, width, height);
 
         //std::vector<bool> packs its elements bitwise into a vector of
         //bytes. The kernel therefore uses much less cpu cache this way.

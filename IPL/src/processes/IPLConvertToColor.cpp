@@ -31,8 +31,8 @@ void IPLConvertToColor::init()
     setCategory(IPLProcess::CATEGORY_CONVERSIONS);
 
     // inputs and outputs
-    addInput("Gray Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Gray Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Image", IPL_IMAGE_COLOR);
 }
 
 void IPLConvertToColor::destroy()
@@ -52,7 +52,7 @@ bool IPLConvertToColor::processInputData(IPLImage* image , int, bool)
     int progress = 0;
     int maxProgress = image->height();
 
-    _result = new IPLImage( IPLData::IMAGE_COLOR, width, height );
+    _result = new IPLImage( IPL_IMAGE_COLOR, width, height );
 
     for(int y=0; y<height; y++)
     {

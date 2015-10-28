@@ -33,8 +33,8 @@ void IPLMarkImage::init()
                    "image is a color image and has to be converted if used as a mask.");
 
     // inputs and outputs
-    addInput("Grayscale Image", IPLData::IMAGE_GRAYSCALE);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Grayscale Image", IPL_IMAGE_GRAYSCALE);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyDouble("min", "Min", "", 0.4, IPL_WIDGET_SLIDER, 0.0, 1.0);
@@ -57,7 +57,7 @@ bool IPLMarkImage::processInputData(IPLImage* image , int, bool)
 
     int width = image->width();
     int height = image->height();
-    _result = new IPLImage(IPLImage::IMAGE_COLOR, width, height );
+    _result = new IPLImage(IPL_IMAGE_COLOR, width, height );
 
     // get properties
     float   min         = getProcessPropertyDouble("min");

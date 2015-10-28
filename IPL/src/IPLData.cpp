@@ -29,19 +29,19 @@ bool IPLData::isConvertibleTo(IPLDataType dataType)
 {
     switch (dataType)
     {
-    case IPLData::IMAGE_BW:
-    case IPLData::IMAGE_GRAYSCALE:
-    case IPLData::IMAGE_COLOR:
+    case IPL_IMAGE_BW:
+    case IPL_IMAGE_GRAYSCALE:
+    case IPL_IMAGE_COLOR:
         return toImage() != NULL;
-    case IPLData::IMAGE_COMPLEX:
+    case IPL_IMAGE_COMPLEX:
         return toComplexImage() != NULL;
-    case IPLData::POINT:
+    case IPL_POINT:
         return toPoint() != NULL;
-    case IPLData::MATRIX:
+    case IPL_MATRIX:
         return toMatrix() != NULL;
-    case IPLData::IMAGE_ORIENTED:
-    case IPLData::SHAPES:
-    case IPLData::UNDEFINED:
+    case IPL_IMAGE_ORIENTED:
+    case IPL_SHAPES:
+    case IPL_UNDEFINED:
     default:
         throw std::logic_error("Unknown method for data type");
         break;

@@ -41,8 +41,8 @@ void IPLArithmeticOperationsConstant::init()
     setKeywords("add, substract, multiply, divide");
 
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLData::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyInt("operation", "Operation:ADD Constant|SUB Constant|MUL Constant|DIV Constant",

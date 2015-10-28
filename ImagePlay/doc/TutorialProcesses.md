@@ -39,8 +39,8 @@ It is also the place to define process properties, which result in GUI options f
 void IPLExample::init()
 {
     // inputs and outputs
-    addInput("Image", IPLData::IMAGE_COLOR);
-    addOutput("Image", IPLImage::IMAGE_COLOR);
+    addInput("Image", IPL_IMAGE_COLOR);
+    addOutput("Image", IPL_IMAGE_COLOR);
 
     // properties
     addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", IPL_DOUBLE_SLIDER, 0.5, 0.0, 1.0);

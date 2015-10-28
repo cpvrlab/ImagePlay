@@ -33,9 +33,9 @@ void IPLFrequencyFilter::init()
     setKeywords("FFT");
 
     // inputs and outputs
-    addInput("Complex Image", IPLData::IMAGE_COMPLEX);
-    addOutput("Complex Image", IPLData::IMAGE_COMPLEX);
-    //addOutput("Filter", IPLImage::IMAGE_GRAYSCALE);
+    addInput("Complex Image", IPL_IMAGE_COMPLEX);
+    addOutput("Complex Image", IPL_IMAGE_COMPLEX);
+    //addOutput("Filter", IPL_IMAGE_GRAYSCALE);
 
     // properties
     addProcessPropertyInt("maskType", "Mask Type:Low Pass|High Pass|Band Pass|Band Stop", "low|high|*|*", 0, IPL_WIDGET_GROUP);
@@ -65,7 +65,7 @@ bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
     _result = new IPLComplexImage(*_input);
     int width = _result->width();
     int height = _result->height();
-    _filter = new IPLImage(IPLImage::IMAGE_GRAYSCALE, width, height);
+    _filter = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height);
 
 
     // get properties
