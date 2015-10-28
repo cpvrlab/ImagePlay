@@ -28,6 +28,8 @@ void IPLGradientOperator::init()
 {
     // init
     _result = NULL;
+    _magnitude = NULL;
+    _phase = NULL;
 
     // basic settings
     setClassName("IPLGradientOperator");
@@ -37,7 +39,9 @@ void IPLGradientOperator::init()
 
     // inputs and outputs
     addInput("Image", IPL_IMAGE_GRAYSCALE);
-    addOutput("Image", IPL_IMAGE_ORIENTED);
+    addOutput("Oriented Image", IPL_IMAGE_ORIENTED);
+    addOutput("Magnitude", IPL_IMAGE_GRAYSCALE);
+    addOutput("Phase", IPL_IMAGE_GRAYSCALE);
 
     // set the openCV support
     setOpenCVSupport( IPLOpenCVSupport::OPENCV_ONLY );
@@ -49,6 +53,8 @@ void IPLGradientOperator::init()
 void IPLGradientOperator::destroy()
 {
     delete _result;
+    delete _magnitude;
+    delete _phase;
 }
 
 bool IPLGradientOperator::processInputData(IPLImage* image , int, bool)
@@ -60,20 +66,42 @@ bool IPLGradientOperator::processInputData(IPLImage* image , int, bool)
     // get properties
     int algorithm = getProcessPropertyInt("algorithm");
 
+    bool success = false;
     switch (algorithm){
-       case 0:
-       default:
-          return fastGradient(image);
-       case 1:
-          return roberts(image);
-       case 2:
-          return sobel(image);
-       case 3:
-          return cubicSpline(image);
+        case 0:
+        default:
+            success = fastGradient(image);
+            break;
+        case 1:
+            success = roberts(image);
+            break;
+        case 2:
+            success = sobel(image);
+            break;
+        case 3:
+            success = cubicSpline(image);
+            break;
+    }
+
+    // generate grayscale magnitude and phase
+    if(success)
+    {
+        delete _magnitude;
+        delete _phase;
+        _magnitude  = new IPLImage(IPL_IMAGE_GRAYSCALE, image->width(), image->height());
+        _phase      = new IPLImage(IPL_IMAGE_GRAYSCALE, image->width(), image->height());
+        for(int y=0; y<image->height(); y++)
+        {
+            for(int x=0; x<image->width(); x++)
+            {
+                _magnitude->plane(0)->p(x, y)   = _result->magnitude(x, y);
+                _phase->plane(0)->p(x, y)       = _result->phase(x, y);
+            }
+        }
     }
 
     //make compiler happy...
-    return false;
+    return success;
 }
 
 bool IPLGradientOperator::fastGradient(IPLImage* image)
@@ -272,7 +300,12 @@ bool IPLGradientOperator::cubicSpline(IPLImage* image)
   return true;
 }
 
-IPLImage* IPLGradientOperator::getResultData( int )
+IPLImage* IPLGradientOperator::getResultData( int index )
 {
-    return _result;
+    if(index == 0)
+        return _result;
+    else if(index == 1)
+        return _magnitude;
+    else
+        return _phase;
 }

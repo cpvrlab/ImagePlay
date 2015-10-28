@@ -307,7 +307,6 @@ void MainWindow::showProcessSettings(IPProcessStep* processStep)
     ui->dockSettings->setVisible(true);
     ui->dockProcesses->setVisible(false);
 
-
     // add description
     if(processStep->process()->description().length() > 0)
     {
@@ -326,9 +325,51 @@ void MainWindow::showProcessSettings(IPProcessStep* processStep)
     // hide help button because it is currently not used
     //ui->btnHelpPage->hide();
 
+    // add inputs/outputs
+    if(processStep->process()->inputs()->size() > 0 || processStep->process()->outputs()->size() > 0)
+    {
+        QString msgInputsOutputs;
+
+        if(processStep->process()->inputs()->size() > 0)
+        {
+            msgInputsOutputs.append("<b>Inputs:</b>");
+            for(int i=0; i < (int)processStep->process()->inputs()->size(); i++)
+            {
+                IPLProcessIO input = processStep->process()->inputs()->at(i);
+                QString msgString("<br />%1: %2 (<i>%3</i>)");
+                msgInputsOutputs.append(msgString
+                                        .arg(input.index)
+                                        .arg(QString::fromStdString(input.name))
+                                        .arg(QString::fromStdString(dataTypeName(input.type))));
+            }
+        }
+
+        if(processStep->process()->outputs()->size() > 0)
+        {
+            if(processStep->process()->inputs()->size() > 0)
+                msgInputsOutputs.append("<br />");
+
+            msgInputsOutputs.append("<b>Outputs:</b>");
+            for(int i=0; i < (int)processStep->process()->outputs()->size(); i++)
+            {
+                IPLProcessIO output = processStep->process()->outputs()->at(i);
+                QString msgString("<br />%1: %2 (<i>%3</i>)");
+                msgInputsOutputs.append(msgString
+                                        .arg(output.index)
+                                        .arg(QString::fromStdString(output.name))
+                                        .arg(QString::fromStdString(dataTypeName(output.type))));
+            }
+        }
+        ui->lblProcessInputsOutputs->setText(msgInputsOutputs);
+        ui->lblProcessInputsOutputs->setVisible(true);
+    }
+    else
+    {
+        ui->lblProcessInputsOutputs->setVisible(false);
+    }
+
     ui->processPropertiesWidget->init(processStep);
     ui->processMessageWidget->init(processStep);
-    ui->processInputOutputWidget->init(processStep);
 }
 
 void MainWindow::hideProcessSettings()

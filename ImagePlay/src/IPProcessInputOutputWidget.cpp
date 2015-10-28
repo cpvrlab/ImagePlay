@@ -54,23 +54,12 @@ void IPProcessInputOutputWidget::updateInputsOutputs()
         }
 //      delete layout();
 
-        // add inputs
-        for(IPLProcessIO input: *_processStep->process()->inputs())
-        {
-            //QString tmp = QString::fromStdString(dataTypeName(input.type));
-            QString msgString("<b>Input %1: </b> %2");
-            QLabel* msgLabel = new QLabel(msgString.arg(input.index).arg(input.type), this);
-            msgLabel->setWordWrap(true);
-            msgLabel->setStyleSheet("color: #a94442; background-color: #f2dede; border: 1px solid #ebccd1; padding:4px; margin: 2px 0px 2px 0px;");
-            this->layout()->addWidget(msgLabel);
-        }
-
         // add outputs
         for(IPLProcessIO output: *_processStep->process()->outputs())
         {
             //QString tmp = QString::fromStdString(dataTypeName(output.type));
             QString msgString("<b>Output %1: </b> %2");
-            QLabel* msgLabel = new QLabel(msgString.arg(output.index).arg(output.type), this);
+            QLabel* msgLabel = new QLabel(msgString.arg(output.index).arg(QString::fromStdString(dataTypeName(output.type))), this);
             msgLabel->setWordWrap(true);
             msgLabel->setStyleSheet("color: #a94442; background-color: #f2dede; border: 1px solid #ebccd1; padding:4px; margin: 2px 0px 2px 0px;");
             this->layout()->addWidget(msgLabel);

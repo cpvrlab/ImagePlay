@@ -45,6 +45,8 @@ public:
 
 protected:
     IPLOrientedImage*   _result;
+    IPLImage*           _magnitude;
+    IPLImage*           _phase;
 
 private:
     bool fastGradient(IPLImage* data);

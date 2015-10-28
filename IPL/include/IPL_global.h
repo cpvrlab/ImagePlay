@@ -82,7 +82,7 @@ enum IPLDataType
 
     IPL_NUM_DATATYPES
 };
-const char *dataTypeName(IPLDataType type);
+IPLSHARED_EXPORT const char *dataTypeName(IPLDataType type);
 
 enum IPLProcessWidgetType
 {
@@ -140,7 +140,7 @@ enum IPLProcessWidgetType
 
     IPL_NUM_WIDGETS
 };
-const char *widgetName(IPLProcessWidgetType type);
+IPLSHARED_EXPORT const char *widgetName(IPLProcessWidgetType type);
 
 enum IPLRawImageType
 {

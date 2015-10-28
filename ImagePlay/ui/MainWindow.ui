@@ -395,7 +395,7 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
           <x>0</x>
           <y>0</y>
           <width>289</width>
-          <height>92</height>
+          <height>75</height>
          </rect>
         </property>
        </widget>
@@ -407,7 +407,7 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
         <string notr="true">color: #333344; background-color: #e0e0ee; border: 1px solid #333344; padding:4px; margin: 2px 0px 2px 0px;</string>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Description</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -415,7 +415,14 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
       </widget>
      </item>
      <item>
-      <widget class="IPProcessInputOutputWidget" name="processInputOutputWidget" native="true"/>
+      <widget class="QLabel" name="lblProcessInputsOutputs">
+       <property name="styleSheet">
+        <string notr="true">color: #334433; background-color: #E1EDE7; border: 1px solid #334433; padding:4px; margin: 2px 0px 2px 0px;</string>
+       </property>
+       <property name="text">
+        <string>Inputs/Outputs</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="IPProcessMessageWidget" name="processMessageWidget" native="true"/>
@@ -692,11 +699,6 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
    <extends>QWidget</extends>
    <header>IPProcessMessageWidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>IPProcessInputOutputWidget</class>
-   <extends>QWidget</extends>
-   <header>IPProcessInputOutputWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
