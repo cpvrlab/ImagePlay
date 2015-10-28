@@ -29,7 +29,8 @@ IPLPoint::IPLPoint(double x, double y) : IPLPoint()
     _y = y;
 }
 
-IPLPoint::IPLPoint(const IPLPoint &other)
+IPLPoint::IPLPoint(const IPLPoint &other):
+    IPLData(other)
 {
     _x = other._x;
     _y = other._y;

@@ -30,7 +30,8 @@ IPLImage::IPLImage() : IPLData(IPL_UNDEFINED)
     _instanceCount++;
 }
 
-IPLImage::IPLImage(const IPLImage& other)
+IPLImage::IPLImage(const IPLImage& other):
+    IPLData(other)
 {
     _type = other._type;
     _width = other._width;
