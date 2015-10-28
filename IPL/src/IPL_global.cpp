@@ -69,7 +69,7 @@ const char* const widgetNames[IPL_NUM_WIDGETS] = {
 
 const char *widgetName(IPLProcessWidgetType type)
 {
-    if (type < 0 || type >= IPL_NUM_DATATYPES)
+    if (type < 0 || type >= IPL_NUM_WIDGETS)
         return "UNKNOWN";
     return widgetNames[type];
 }
