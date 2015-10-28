@@ -25,7 +25,8 @@ IPLComplexImage::IPLComplexImage() : IPLData()
     _type = IPL_IMAGE_COMPLEX;
 }
 
-IPLComplexImage::IPLComplexImage(const IPLComplexImage &other)
+IPLComplexImage::IPLComplexImage(const IPLComplexImage &other):
+    IPLData(other)
 {
     if(this != &other)
     {
