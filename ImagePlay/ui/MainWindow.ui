@@ -395,7 +395,7 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
           <x>0</x>
           <y>0</y>
           <width>289</width>
-          <height>108</height>
+          <height>92</height>
          </rect>
         </property>
        </widget>
@@ -692,6 +692,11 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
    <extends>QWidget</extends>
    <header>IPProcessMessageWidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IPProcessInputOutputWidget</class>
+   <extends>QWidget</extends>
+   <header>IPProcessInputOutputWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
