@@ -652,11 +652,11 @@ void MainWindow::propagateResultReady(IPLProcess *process, bool resultReady)
 
 void MainWindow::clearScene()
 {
-    for(auto it = _scene->edges()->begin(); it != _scene->edges()->end(); it)
+    for(auto it = _scene->edges()->begin(); it != _scene->edges()->end(); ++it)
     {
         removeEdge(*it);
     }
-    for(auto it = _scene->steps()->begin(); it != _scene->steps()->end(); it)
+    for(auto it = _scene->steps()->begin(); it != _scene->steps()->end(); ++it)
     {
         removeStep(*it);
     }
