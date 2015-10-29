@@ -37,6 +37,8 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
     static const auto pluginFilter = QStringList() << "*.so";
 #endif
 
+    qDebug() << "loadPlugins: " << pluginPath;
+
     _pluginPath = pluginPath;
     _factory = factory;
     _loadedPlugins.clear();
@@ -47,8 +49,15 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
     // _pluginFileSystemWatcher->addPath(pluginPath());
 
     QDateTime now = QDateTime::currentDateTime();
-    _pluginTmpPath = _pluginPath + "/tmp/"; // + now.toString("yyyyMMddhhmmss");
+    _pluginTmpPath = _pluginPath + "/tmp/";
     QDir tmpPluginsDir(_pluginTmpPath);
+
+    // delete old tmp directory
+    if(!removeDir(_pluginTmpPath))
+    {
+        qDebug() << "Could not remove old plugin dir: " << _pluginTmpPath;
+        return;
+    }
 
     // create new directory, copy dlls
     if(!tmpPluginsDir.exists())
@@ -97,7 +106,6 @@ void IPPluginManager::unloadPlugins()
     for(int i=0; i<_loadedPlugins.count(); i++)
     {
         QString plugin = _loadedPlugins.at(i);
-        qDebug() << "unregisterProcess: " << plugin;
         _factory->unregisterProcess(plugin);
     }
     _loadedPlugins.clear();
@@ -111,7 +119,7 @@ void IPPluginManager::unloadPlugins()
     _kernels.clear();
     _drivers.clear();
 
-    // delete old tmp directories
+    // delete old tmp directory
     removeDir(_pluginTmpPath);
 }
 

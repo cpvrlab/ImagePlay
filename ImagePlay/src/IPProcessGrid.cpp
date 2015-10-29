@@ -597,3 +597,4 @@ void IPProcessGrid::requestUpdate()
 {
     _updateNeeded = true;
 }
+

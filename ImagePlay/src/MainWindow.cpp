@@ -644,7 +644,7 @@ void MainWindow::removeStep(IPProcessStep *step)
     // remove from scene
     _scene->removeStep(step);
 
-    delete step;
+    // delete step;
 
     setParamsHaveChanged();
 //    execute();
@@ -679,7 +679,7 @@ void MainWindow::removeEdge(IPProcessEdge *edge)
     // remove from scene
     _scene->removeEdge(edge);
 
-    delete edge;
+    // delete edge;
 
     // update graphics
     setParamsHaveChanged();
@@ -693,11 +693,12 @@ void MainWindow::propagateResultReady(IPLProcess *process, bool resultReady)
 
 void MainWindow::clearScene()
 {
-    for(auto it = _scene->edges()->begin(); it != _scene->edges()->end(); ++it)
+    // WARNING: the it doesn't need to increment actually, this is no bug!
+    for(auto it = _scene->edges()->begin(); it != _scene->edges()->end(); it)
     {
         removeEdge(*it);
     }
-    for(auto it = _scene->steps()->begin(); it != _scene->steps()->end(); ++it)
+    for(auto it = _scene->steps()->begin(); it != _scene->steps()->end(); it)
     {
         removeStep(*it);
     }

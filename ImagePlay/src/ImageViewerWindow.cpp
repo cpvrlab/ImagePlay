@@ -157,6 +157,7 @@ ImageViewerWindow::removeProcessStep
 */
 void ImageViewerWindow::removeProcessStep(IPProcessStep *processStep)
 {
+    qDebug() << "removeProcessStep: " << processStep->name();
     _ignoreZoomEvents = true;
     long stepID = processStep->stepID();
     delete _imageViewers1.value(stepID);

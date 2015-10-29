@@ -122,6 +122,30 @@ void IPProcessStep::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
     QBrush brush(Qt::white);
     painter->setBrush(brush);
 
+    // inputs
+    /*int input_y = 0;
+    for(int i=0; i < (int) process()->inputs()->size(); i++)
+    {
+        // check if output is free
+        if(!process()->inputs()->at(i).occupied)
+        {
+            painter->drawEllipse(0, input_y, 10, 10);
+            input_y += 20;
+        }
+    }
+
+    // outputs
+    int output_y = 0;
+    for(int i=0; i < (int) process()->outputs()->size(); i++)
+    {
+        // check if output is free
+        if(!process()->outputs()->at(i).occupied)
+        {
+            painter->drawEllipse(55, output_y, 10, 10);
+            input_y += 20;
+        }
+    }*/
+
     // main box
     QRect rect(8,8,48,48);
     //painter->fillRect(rect);
