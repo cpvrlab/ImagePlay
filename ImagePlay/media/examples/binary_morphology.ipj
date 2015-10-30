@@ -2,48 +2,42 @@
     "author": "Kaspar",
     "edges": [
         {
-            "from": 5,
+            "from": 1,
             "indexFrom": 0,
             "indexTo": 0,
-            "to": 6
+            "to": 2
         },
         {
-            "from": 5,
+            "from": 2,
             "indexFrom": 0,
             "indexTo": 0,
-            "to": 7
-        },
-        {
-            "from": 5,
-            "indexFrom": 0,
-            "indexTo": 0,
-            "to": 8
+            "to": 3
         }
     ],
     "steps": [
         {
-            "ID": 5,
-            "posX": 64,
-            "posY": 192,
+            "ID": 1,
+            "posX": 192,
+            "posY": 64,
             "properties": [
                 {
                     "key": "mode",
                     "type": "int",
-                    "value": "1",
+                    "value": "0",
                     "widget": "24",
                     "widgetName": "IPL_WIDGET_GROUP"
                 },
                 {
                     "key": "path",
                     "type": "string",
-                    "value": "images/lena.raw",
+                    "value": "images/moon.jpg",
                     "widget": "12",
                     "widgetName": "IPL_WIDGET_FILE_OPEN"
                 },
                 {
                     "key": "raw_format",
                     "type": "int",
-                    "value": "1",
+                    "value": "0",
                     "widget": "4",
                     "widgetName": "IPL_WIDGET_COMBOBOX"
                 },
@@ -72,19 +66,34 @@
             "type": "IPLLoadImage"
         },
         {
-            "ID": 6,
+            "ID": 2,
             "posX": 192,
-            "posY": 64,
+            "posY": 192,
             "properties": [
                 {
-                    "key": "borders",
-                    "type": "int",
-                    "value": "0",
-                    "widget": "3",
-                    "widgetName": "IPL_WIDGET_RADIOBUTTONS"
+                    "key": "highThreshold",
+                    "type": "double",
+                    "value": "0.6",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
                 },
                 {
-                    "key": "divisor",
+                    "key": "lowThreshold",
+                    "type": "double",
+                    "value": "0.3",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLHysteresisThreshold"
+        },
+        {
+            "ID": 3,
+            "posX": 192,
+            "posY": 320,
+            "properties": [
+                {
+                    "key": "iterations",
                     "type": "int",
                     "value": "1",
                     "widget": "5",
@@ -93,57 +102,20 @@
                 {
                     "key": "kernel",
                     "type": "vector<int>",
-                    "value": "[0,-1,0,-1,5,-1,0,-1,0]",
-                    "widget": "15",
-                    "widgetName": "IPL_WIDGET_KERNEL"
+                    "value": "[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]",
+                    "widget": "16",
+                    "widgetName": "IPL_WIDGET_BINARY_MORPHOLOGY"
                 },
                 {
-                    "key": "normalize",
-                    "type": "bool",
-                    "value": "0",
-                    "widget": "2",
-                    "widgetName": "IPL_WIDGET_CHECKBOXES"
-                },
-                {
-                    "key": "offset",
-                    "type": "double",
-                    "value": "0",
-                    "widget": "5",
-                    "widgetName": "IPL_WIDGET_SLIDER"
-                }
-            ],
-            "type": "IPLConvolutionFilter"
-        },
-        {
-            "ID": 7,
-            "posX": 192,
-            "posY": 192,
-            "properties": [
-                {
-                    "key": "sigma",
-                    "type": "double",
-                    "value": "2",
-                    "widget": "5",
-                    "widgetName": "IPL_WIDGET_SLIDER"
-                }
-            ],
-            "type": "IPLGaussianLowPass"
-        },
-        {
-            "ID": 8,
-            "posX": 192,
-            "posY": 320,
-            "properties": [
-                {
-                    "key": "window",
+                    "key": "operation",
                     "type": "int",
-                    "value": "3",
-                    "widget": "7",
-                    "widgetName": "IPL_WIDGET_SLIDER_ODD"
+                    "value": "2",
+                    "widget": "3",
+                    "widgetName": "IPL_WIDGET_RADIOBUTTONS"
                 }
             ],
-            "type": "IPLOnePixelEdge"
+            "type": "IPLMorphologyBinary"
         }
     ],
-    "timestamp": 1446212557
+    "timestamp": 1446212215
 }

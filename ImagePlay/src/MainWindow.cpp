@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionSynchronizeViews->setChecked(_synchronizeViews);
 
     // add version number to title
-    setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
+    //setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
 
     // connect to MainWindow
     ui->graphicsView->setMainWindow(this);
@@ -460,7 +460,6 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLResize",              new IPLResize);
     _factory->registerProcess("IPLRotate",              new IPLRotate);
 
-    _factory->registerProcess("IPLAgglomerate",         new IPLAgglomerate);
     _factory->registerProcess("IPLEnhanceMode",         new IPLEnhanceMode);
     _factory->registerProcess("IPLFillConcavities",     new IPLFillConcavities);
     _factory->registerProcess("IPLGabor",               new IPLGabor);
@@ -857,10 +856,21 @@ bool MainWindow::readProcessFile()
     return true;
 }
 
-bool MainWindow::readProcessFile(QString file)
+void MainWindow::setCurrentFile(QString file)
 {
     _currentProcessFileName = file;
     IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
+
+    //setWindowFilePath(_currentProcessFileName);
+    QString windowTitle("ImagePlay");
+    if(_currentProcessFileName.length() > 0)
+        windowTitle.append(" - ").append(_currentProcessFileName);
+    setWindowTitle(windowTitle);
+}
+
+bool MainWindow::readProcessFile(QString file)
+{
+    setCurrentFile(file);
     return readProcessFile();
 }
 
@@ -1128,10 +1138,9 @@ void MainWindow::on_actionSave_triggered()
 {
     // if no filename, then ask
     if(_currentProcessFileName.length() == 0)
-            _currentProcessFileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", "ImagePlay JSON File (*.ipj)");
-
-    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
-
+    {
+            setCurrentFile(QFileDialog::getSaveFileName(this, tr("Save File"), "", "ImagePlay JSON File (*.ipj)"));
+    }
     writeProcessFile();
 
     addRecentProcessFile(_currentProcessFileName);
@@ -1147,8 +1156,8 @@ void MainWindow::on_actionSaveAs_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    _currentProcessFileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "ImagePlay JSON File (*.ipj)");
-    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
+    setCurrentFile(QFileDialog::getOpenFileName(this, tr("Open File"), "", "ImagePlay JSON File (*.ipj)"));
+
     readProcessFile();
 
     addRecentProcessFile(_currentProcessFileName);
@@ -1187,8 +1196,7 @@ void MainWindow::updateRecentProcessesMenu()
                 QString processFile = _recentProcessFiles[index];
                 QFileInfo processFileInfo(processFile);
                 if (processFileInfo.exists()) {
-                    _currentProcessFileName = processFile;
-                    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
+                    setCurrentFile(processFile);
                     readProcessFile();
                 }
             }
@@ -1297,9 +1305,7 @@ void MainWindow::on_actionNew_triggered()
     }
 
     clearScene();
-    _currentProcessFileName = "";
-
-    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
+    setCurrentFile("");
 }
 
 

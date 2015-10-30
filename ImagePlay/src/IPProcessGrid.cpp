@@ -483,6 +483,11 @@ void IPProcessGrid::zoomTo(float newScale)
  */
 void IPProcessGrid::wheelEvent(QWheelEvent* event)
 {
+#ifdef Q_OS_MACX
+    // Qt handles mac trackpads and magic mouse events very badly,
+    // it is better to just ignore them for now...
+    return;
+#endif
     if(event->angleDelta().y() > 0)
         zoomIn();
     else

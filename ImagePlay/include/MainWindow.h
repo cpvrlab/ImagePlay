@@ -140,6 +140,8 @@ public:
     bool                    threadRunning                   ()                              { return _threadRunning; }
     IPPluginManager*        pluginManager                   ()                              { return _pluginManager; }
 
+    void setCurrentFile(QString file);
+    
 public slots:
     void                    execute                         (bool forcedUpdate = false);
     void                    handleProgress                  (int);

@@ -37,7 +37,7 @@ void IPLCamera::init()
     addOutput("Image", IPL_IMAGE_COLOR);
 
     addProcessPropertyUnsignedInt("trigger", "Trigger Image", "", 0, IPL_WIDGET_BUTTON);
-    addProcessPropertyBool("continuous", "Run continuously", "", false);
+    addProcessPropertyBool("continuous", "Run continuously", "", false, IPL_WIDGET_CHECKBOXES);
 
     // all properties which can later be changed by gui
     addProcessPropertyInt("width", "Width", "", 640, IPL_WIDGET_SLIDER, 640, 1920);

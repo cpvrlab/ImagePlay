@@ -90,18 +90,18 @@ inline IPLProcessProperty::SerializedData serializeProperty(const char *type, IP
 
 inline void deserializeValue(const std::string &data, bool &value)
 {
-    if (data.length() != 4)
+    /*if (data.length() != 4)
     {
         value = false;
         return;
-    }
+    }*/
 
-    static const unsigned char nonAsciiMap = 1<<7;
+    //static const unsigned char nonAsciiMap = 1<<7;
     std::string lowercase(data);
     //tolower is undefined (i.e. might crash) for non-ASCII characters. Since we don't want to parse those, just xor them out
-    std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), [](char c) { return c ^ nonAsciiMap; });
+    //std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), [](char c) { return c ^ nonAsciiMap; });
     std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(), tolower); //Transform to lower case
-    value = lowercase.compare("true") == 0;
+    value = (lowercase.compare("true") == 0 || lowercase.compare("1") == 0);
 }
 
 inline void deserializeValue(const std::string &data, int &value)

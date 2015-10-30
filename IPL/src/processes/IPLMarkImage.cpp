@@ -39,7 +39,7 @@ void IPLMarkImage::init()
     // properties
     addProcessPropertyDouble("min", "Min", "", 0.4, IPL_WIDGET_SLIDER, 0.0, 1.0);
     addProcessPropertyDouble("max", "Max", "", 0.6, IPL_WIDGET_SLIDER, 0.0, 1.0);
-    addProcessPropertyInt("mode", "Mode:Binary|Show Background|Mask Only", "", 0, IPL_WIDGET_GROUP);
+    addProcessPropertyInt("mode", "Mode:Show Background|Mask Only", "", 0, IPL_WIDGET_COMBOBOX);
     addProcessPropertyColor("color", "Color", "", IPLColor(1.0,0.0,0.0), IPL_WIDGET_COLOR_RGB);
     addProcessPropertyBool("invert", "Invert Mask", "", false, IPL_WIDGET_CHECKBOXES);
 }

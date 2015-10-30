@@ -1,0 +1,239 @@
+{
+    "author": "Kaspar",
+    "edges": [
+        {
+            "from": 1,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 2
+        },
+        {
+            "from": 2,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 3
+        },
+        {
+            "from": 3,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 4
+        },
+        {
+            "from": 4,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 5
+        },
+        {
+            "from": 6,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 1
+        },
+        {
+            "from": 6,
+            "indexFrom": 0,
+            "indexTo": 1,
+            "to": 5
+        }
+    ],
+    "steps": [
+        {
+            "ID": 1,
+            "posX": 64,
+            "posY": 192,
+            "properties": [
+                {
+                    "key": "hue_shift",
+                    "type": "int",
+                    "value": "180",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "output_type",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "3",
+                    "widgetName": "IPL_WIDGET_RADIOBUTTONS"
+                }
+            ],
+            "type": "IPLSplitPlanes"
+        },
+        {
+            "ID": 2,
+            "posX": 64,
+            "posY": 256,
+            "properties": [
+                {
+                    "key": "sigma",
+                    "type": "double",
+                    "value": "6.12",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLGaussianLowPass"
+        },
+        {
+            "ID": 3,
+            "posX": 64,
+            "posY": 320,
+            "properties": [
+                {
+                    "key": "weight_b",
+                    "type": "double",
+                    "value": "0.0721",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "weight_g",
+                    "type": "double",
+                    "value": "0.7154",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "weight_r",
+                    "type": "double",
+                    "value": "0.2125",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLConvertToGray"
+        },
+        {
+            "ID": 4,
+            "posX": 64,
+            "posY": 384,
+            "properties": [
+                {
+                    "key": "color",
+                    "type": "color",
+                    "value": "[1,0,0]",
+                    "widget": "19",
+                    "widgetName": "IPL_WIDGET_COLOR_RGB"
+                },
+                {
+                    "key": "invert",
+                    "type": "bool",
+                    "value": "0",
+                    "widget": "2",
+                    "widgetName": "IPL_WIDGET_CHECKBOXES"
+                },
+                {
+                    "key": "max",
+                    "type": "double",
+                    "value": "0.25",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "min",
+                    "type": "double",
+                    "value": "0",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "mode",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                }
+            ],
+            "type": "IPLMarkImage"
+        },
+        {
+            "ID": 5,
+            "posX": 128,
+            "posY": 512,
+            "properties": [
+                {
+                    "key": "factorA",
+                    "type": "double",
+                    "value": "1",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "factorB",
+                    "type": "double",
+                    "value": "1",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "operation",
+                    "type": "int",
+                    "value": "4",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                }
+            ],
+            "type": "IPLBlendImages"
+        },
+        {
+            "ID": 6,
+            "posX": 128,
+            "posY": 64,
+            "properties": [
+                {
+                    "key": "brightness",
+                    "type": "int",
+                    "value": "128",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "continuous",
+                    "type": "bool",
+                    "value": "0",
+                    "widget": "2",
+                    "widgetName": "IPL_WIDGET_CHECKBOXES"
+                },
+                {
+                    "key": "contrast",
+                    "type": "int",
+                    "value": "128",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "exposure",
+                    "type": "double",
+                    "value": "0.5",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "height",
+                    "type": "int",
+                    "value": "480",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "trigger",
+                    "type": "uint",
+                    "value": "1",
+                    "widget": "23",
+                    "widgetName": "IPL_WIDGET_BUTTON"
+                },
+                {
+                    "key": "width",
+                    "type": "int",
+                    "value": "640",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLCamera"
+        }
+    ],
+    "timestamp": 1446212015
+}

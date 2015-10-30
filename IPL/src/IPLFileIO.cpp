@@ -504,8 +504,14 @@ bool IPLFileIO::readRaw32BitPlanar(int stride, IPLRawImageType format, IPLImage 
  * \param information
  * \return
  */
-bool IPLFileIO::loadRawFile(const std::string filename, IPLImage *&image, int width, int height, IPLRawImageType format, bool interleaved, std::string &information)
+bool IPLFileIO::loadRawFile(std::string filename, IPLImage *&image, int width, int height, IPLRawImageType format, bool interleaved, std::string &information)
 {
+    // try loading relative filepaths to the _baseDir
+    if( filename.find("/") == std::string::npos && filename.find("\\") == std::string::npos)
+    {
+        filename = IPLFileIO::_baseDir.append("/").append(filename);
+    }
+
     std::ifstream  file(filename, std::ios::binary);
 
     if(!file.is_open())

@@ -49,7 +49,6 @@
 #include "IPLCanvasSize.h"
 #include "IPLResize.h"
 #include "IPLRotate.h"
-#include "IPLAgglomerate.h"
 #include "IPLEnhanceMode.h"
 #include "IPLFillConcavities.h"
 #include "IPLGabor.h"

@@ -50,7 +50,7 @@ public:
         // check if structure is Title:Option1|Option2
         if(!(rawName.contains(":") && rawName.contains("|")))
         {
-            qWarning() << "IPPropertyRadioInt: Invalid title structure " << rawName;
+            qWarning() << "IPPropertyCombobox: Invalid title structure " << rawName;
             return;
         }
 
