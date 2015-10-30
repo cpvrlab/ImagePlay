@@ -140,8 +140,6 @@ void IPImageViewer::updateImage()
             point.setX(p->x());
             point.setY(p->y());
 
-            qDebug() << point;
-
             QBrush brush(Qt::red);
             painter.setBrush(brush);
             painter.drawEllipse(point, 10, 10);

@@ -110,6 +110,7 @@ ImageViewerWindow::addProcessStep
 */
 void ImageViewerWindow::addProcessStep(IPProcessStep *processStep)
 {
+    qDebug() << "ImageViewerWindow::addProcessStep: " << processStep->name();
     int stepID = processStep->stepID();
     if(_imageViewers1.contains(stepID))
     {
@@ -132,8 +133,8 @@ void ImageViewerWindow::addProcessStep(IPProcessStep *processStep)
         // some styling
 //        imageViewer2->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
 	
-	// zoom to match other windows
-	imageViewer1->zoomTo( _currentZoomFactor );
+        // zoom to match other windows
+        imageViewer1->zoomTo( _currentZoomFactor );
 
         QString tabName = QString::number(stepID).append(": ").append(QString::fromStdString(processStep->process()->title()));
 
@@ -157,7 +158,7 @@ ImageViewerWindow::removeProcessStep
 */
 void ImageViewerWindow::removeProcessStep(IPProcessStep *processStep)
 {
-    qDebug() << "removeProcessStep: " << processStep->name();
+    qDebug() << "ImageViewerWindow::removeProcessStep: " << processStep->name();
     _ignoreZoomEvents = true;
     long stepID = processStep->stepID();
     delete _imageViewers1.value(stepID);
@@ -183,6 +184,7 @@ ImageViewerWindow::updateImage
 */
 void ImageViewerWindow::updateImage()
 {
+    qDebug() << "ImageViewerWindow::udpateImage";
     if(ui && ui->tabWidget->isVisible())
     {
         // update the currently visible image
@@ -214,6 +216,7 @@ ImageViewerWindow::setActiveStep
 */
 void ImageViewerWindow::setActiveStep(long stepID)
 {
+    qDebug() << "ImageViewerWindow::setActiveStep: " << stepID;
     for(int i=0; i < ui->tabWidget->count(); i++)
     {
         IPImageViewer* item = (IPImageViewer*) ui->tabWidget->widget(i);
@@ -230,6 +233,7 @@ ImageViewerWindow::showProcessDuration
 */
 void ImageViewerWindow::showProcessDuration(int durationMs)
 {
+    qDebug() << "ImageViewerWindow::showProcessDuration";
     if(durationMs > 0)
     {
         float fps = 1000.0f / durationMs;
@@ -243,6 +247,7 @@ ImageViewerWindow::updateHistogram
 */
 void ImageViewerWindow::updateHistogram(IPLImage* image)
 {
+    qDebug() << "ImageViewerWindow::updateHistogram";
     ui->histogramWidget->updateHistogram(image);
 }
 //-----------------------------------------------------------------------------
@@ -251,6 +256,7 @@ ImageViewerWindow::resetHistogramValue
 */
 void ImageViewerWindow::resetHistogramValue()
 {
+    qDebug() << "ImageViewerWindow::resetHistogramValue";
     ui->labelHistogramValue->setText("-");
 }
 //-----------------------------------------------------------------------------
@@ -259,6 +265,7 @@ ImageViewerWindow::updateStatistics
 */
 void ImageViewerWindow::updateStatistics(IPLImage* image)
 {
+    qDebug() << "ImageViewerWindow::updateStatistics";
     if(!image)
     {
         ui->statisticsLabel->setText("-");
@@ -339,16 +346,19 @@ ImageViewerWindow::resetStatistics
 */
 void ImageViewerWindow::resetStatistics()
 {
+    qDebug() << "ImageViewerWindow::resetStatistics";
     ui->statisticsLabel->setText("-");
 }
 
 void ImageViewerWindow::updateZoomwidget(IPLImage* image)
 {
+    qDebug() << "ImageViewerWindow::updateZoomwidget";
     ui->zoomWidget->setImage(image);
 }
 
 void ImageViewerWindow::resetZoomWidget()
 {
+    qDebug() << "ImageViewerWindow::resetZoomWidget";
     ui->zoomWidget->setImage(NULL);
 }
 
@@ -358,6 +368,8 @@ ImageViewerWindow::sortTabs
 */
 void ImageViewerWindow::sortTabs()
 {
+    qDebug() << "ImageViewerWindow::sortTabs";
+
     // sort tabs according to their depth
    int moveTo = 0;
    int currentDepth = 0;
@@ -434,6 +446,7 @@ ImageViewerWindow::zoomAllViewers
 */
 void ImageViewerWindow::zoomAllViewers(ZoomAction action)
 {
+    qDebug() << "ImageViewerWindow::zoomAllViewers";
     _currentZoomMode = action;
 
     if(_ignoreZoomEvents || _imageViewers1.count() == 0)
@@ -555,6 +568,7 @@ ImageViewerWindow::tabChanged
 */
 void ImageViewerWindow::updateOutputs()
 {
+    qDebug() << "ImageViewerWindow::updateOutputs";
     IPImageViewer* item = (IPImageViewer*) ui->tabWidget->currentWidget();
 
     if(item && item->processStep())
@@ -582,6 +596,8 @@ IPZoomWidget *ImageViewerWindow::zoomWidget()
 
 void ImageViewerWindow::tabChanged(int tabIndex)
 {
+    qDebug() << "ImageViewerWindow::tabChanged";
+
     if(tabIndex < 0)
         return;
 

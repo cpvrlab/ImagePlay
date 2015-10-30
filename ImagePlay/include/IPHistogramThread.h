@@ -47,11 +47,11 @@ public:
         }
         catch(std::exception &e)
         {
-            qDebug() << "Error: " << e.what();
+            qWarning() << "Error: " << e.what();
         }
         catch(...)
         {
-            qDebug() << "UNKNOWN ERROR IN THREAD";
+            qWarning() << "UNKNOWN ERROR IN THREAD";
         }
     }
 

@@ -116,7 +116,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    int _debugLevel = 2;
+    int _debugLevel = 1;
     QString timestamp = QTime::currentTime().toString("hh:mm:ss");
     QString line;
     switch (type) {
@@ -739,7 +739,7 @@ bool MainWindow::readProcessFile()
     // parse file and create process
     QJsonParseError error;
     QJsonDocument document = QJsonDocument::fromJson(fileContents.toLatin1(), &error);
-    qDebug() << error.errorString();
+    qWarning() << error.errorString();
 
     QJsonObject root = document.object();
 

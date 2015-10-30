@@ -65,6 +65,7 @@ bool IPProcessGrid::sortTreeDepthLessThan(IPProcessStep* s1, IPProcessStep* s2)
 
 void IPProcessGrid::buildQueue()
 {
+    qDebug() << "IPProcessGrid::buildQueue";
     QQueue<IPProcessStep*> tmpQueue;
     _processList.clear();
 
@@ -128,6 +129,7 @@ void IPProcessGrid::buildQueue()
 
 int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/, int inputIndex /*= 0*/, bool useOpenCV /*= false*/)
 {
+    qDebug() << "IPProcessGrid::executeThread: " << QString::fromStdString(process->className());
     QElapsedTimer timer;
     timer.start();
 
@@ -164,6 +166,7 @@ int IPProcessGrid::executeThread(IPLProcess* process, IPLImage *image /*= NULL*/
 
 void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
 {
+    qDebug() << "IPProcessGrid::propagateNeedsUpdate: " << QString::fromStdString(process->className());
     QQueue<IPProcessStep*> tmpQueue;
 
     // find step from process
@@ -205,6 +208,7 @@ void IPProcessGrid::propagateNeedsUpdate(IPLProcess* process)
 
 void IPProcessGrid::propagateResultReady(IPLProcess* process, bool resultReady)
 {
+    qDebug() << "IPProcessGrid::propagateResultReady: " << QString::fromStdString(process->className()) << ", " << (resultReady ? "true" : "false");
     QQueue<IPProcessStep*> tmpQueue;
 
     // find step from process
@@ -411,7 +415,7 @@ void IPProcessGrid::execute(bool forcedUpdate /* = false*/)
 
 void IPProcessGrid::terminate()
 {
-    qDebug() << "terminate";
+    qDebug() << "IPProcessGrid::terminate";
     if(_thread)
         _thread->terminate();
 }

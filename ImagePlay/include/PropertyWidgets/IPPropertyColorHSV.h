@@ -154,8 +154,6 @@ public slots:
     {
         QColor color = QColor::fromHsv(_sliderH->value(), _sliderS->value(), _sliderV->value());
 
-        qDebug() << "color: " << color;
-
         _dialog = new QColorDialog(color);
         _dialog->setOptions(QColorDialog::DontUseNativeDialog);
         connect(_dialog, &QColorDialog::currentColorChanged, this, &IPPropertyColorHSV::onColorPickerChanged);
@@ -172,7 +170,6 @@ public slots:
 
     void onColorSelected(QColor color)
     {
-        qDebug() << "onColorSelected";
         onColorPickerChanged(color);
     }
 

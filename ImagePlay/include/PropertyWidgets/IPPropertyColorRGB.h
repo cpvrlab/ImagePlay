@@ -156,7 +156,6 @@ public:
 
     void onColorSelected(QColor color)
     {
-        qDebug() << "onColorSelected";
         onColorPickerChanged(color);
     }
 

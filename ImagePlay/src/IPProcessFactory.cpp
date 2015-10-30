@@ -35,13 +35,13 @@ IPProcessFactory::~IPProcessFactory()
 
 void IPProcessFactory::registerProcess(QString name, IPLProcess *process)
 {
-    qDebug() << "registerProcess: " << name << " -> " << process;
+    qDebug() << "IPProcessFactory::registerProcess: " << name << " -> " << process;
     _map.insert(name, process);
 }
 
 void IPProcessFactory::unregisterProcess(QString name)
 {
-    qDebug() << "unregisterProcess: " << name;
+    qDebug() << "IPProcessFactory::unregisterProcess: " << name;
     if(_map.contains(name))
     {
         // delete instance and remove from map
@@ -52,6 +52,7 @@ void IPProcessFactory::unregisterProcess(QString name)
 
 IPLProcess* IPProcessFactory::getInstance(QString name)
 {
+    qDebug() << "IPProcessFactory::getInstance: " << name;
     if(_map.contains(name))
     {
         // return a fresh copy of the template process
@@ -70,6 +71,7 @@ IPLProcess* IPProcessFactory::getInstance(QString name)
 
 QStringList IPProcessFactory::getProcessNamesByCategory(IPLProcess::IPLProcessCategory category)
 {
+    qDebug() << "IPProcessFactory::getProcessNamesByCategory";
     QStringList filteredList;
     for (auto it = _map.begin(); it != _map.end(); ++it)
     {

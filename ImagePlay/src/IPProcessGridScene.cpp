@@ -237,7 +237,6 @@ bool IPProcessGridScene::isSupportedMimeType(const QMimeData* mimeData)
     // check for image/* mime types
     foreach(QString type, mimeData->formats())
     {
-        qDebug() << type;
         if(type.startsWith("image/"))
             return true;
     }

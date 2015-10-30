@@ -522,7 +522,6 @@ void IPProcessStep::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     // notify the scene that the geometry has changed
     //prepareGeometryChange();
-    //qDebug() << "prepareGeometryChange";
 
     // if colliding with other item, change cursor
     bool groupIsColliding = false;

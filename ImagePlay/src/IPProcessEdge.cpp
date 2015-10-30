@@ -71,7 +71,6 @@ QRectF IPProcessEdge::boundingRect() const
     float width = std::abs(maxX-minX);
     float height = std::abs(maxY-minY);
 
-//    qDebug() << QRectF(minX, minY, width, height);
     return QRectF(minX, minY, width, height);
 }
 

@@ -37,7 +37,7 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
     static const auto pluginFilter = QStringList() << "*.so";
 #endif
 
-    qDebug() << "loadPlugins: " << pluginPath;
+    qDebug() << "IPPluginManager::loadPlugins: " << pluginPath;
 
     _pluginPath = pluginPath;
     _factory = factory;
@@ -55,7 +55,7 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
     // delete old tmp directory
     if(!removeDir(_pluginTmpPath))
     {
-        qDebug() << "Could not remove old plugin dir: " << _pluginTmpPath;
+        qWarning() << "Could not remove old plugin dir: " << _pluginTmpPath;
         return;
     }
 
