@@ -19,3 +19,7 @@ before_install:
 script:
  - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8
  - make
+ 
+branches:
+  only:
+    - master
