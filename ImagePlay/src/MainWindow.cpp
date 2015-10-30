@@ -144,8 +144,6 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, c
     {
 #ifdef Q_OS_MAC
         QDir logDir(QDir::homePath() + "/ImagePlay_log/");
-        // doesn't work, disable for now...
-        return;
 #else
         QDir logDir(qApp->applicationDirPath() + "/log/");
 #endif
@@ -166,7 +164,7 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, c
 
         if (!logFile.open(QIODevice::Append | QIODevice::Text))
         {
-            qWarning() << logFile.fileName() << " not writable!";
+            ui->txtLog->append(logFile.fileName() + QString(" not writable!"));
             return;
         }
 

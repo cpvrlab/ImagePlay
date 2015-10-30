@@ -47,7 +47,7 @@ void IPLFloodFill::destroy()
     //delete _result;
 }
 
-bool IPLFloodFill::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLFloodFill::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

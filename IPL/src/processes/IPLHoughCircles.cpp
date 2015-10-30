@@ -50,7 +50,7 @@ void IPLHoughCircles::destroy()
 {
     //delete _result;
 }
-bool IPLHoughCircles::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLHoughCircles::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

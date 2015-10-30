@@ -45,7 +45,7 @@ void IPLAccumulate::destroy()
     //delete _result;
 }
 
-bool IPLAccumulate::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLAccumulate::processInputData(IPLImage* image , int, bool)
 {
     // init result
     if(!_result)

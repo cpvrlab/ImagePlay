@@ -115,7 +115,7 @@ void IPLMorphologyHitMiss::hitmiss(IPLImagePlane* workingPlane, IPLImagePlane* r
             {
                 for( int kx=-kernelOffset; kx<=kernelOffset && success; kx++ )
                 {
-                    if(i >= _kernel.size())
+                    if(i >= (int) _kernel.size())
                         continue;
 
                     int kernelValue = _kernel[i++];

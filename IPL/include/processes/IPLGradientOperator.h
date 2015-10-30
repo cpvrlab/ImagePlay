@@ -37,8 +37,8 @@ public:
     IPLGradientOperator() : IPLClonableProcess() { init(); }
     ~IPLGradientOperator()  { destroy(); }
 
-    void                    init();
-    virtual void        destroy();
+    void                    init() override;
+    virtual void            destroy();
 
     virtual bool            processInputData            (IPLImage* data, int inNr, bool) override;
     virtual IPLImage*       getResultData               (int outNr);

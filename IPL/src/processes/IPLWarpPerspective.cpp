@@ -59,7 +59,7 @@ bool IPLWarpPerspective::processInputData(IPLImage* image, int, bool)
 
     // convert vector to cv::Mat
     cv::Mat matrix(3, 3, CV_32FC1);
-    for(int i=0; i<v.size(); i++)
+    for(int i=0; i < (int) v.size(); i++)
     {
         int col = i % matrix.cols;
         int row = i / matrix.cols;

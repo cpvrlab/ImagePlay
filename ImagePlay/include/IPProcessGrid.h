@@ -101,11 +101,11 @@ private:
 
     // QWidget interface
 protected:
-    void                    wheelEvent              (QWheelEvent *);
-    virtual void            resizeEvent             (QResizeEvent *)                        override;
-    void                    keyPressEvent           (QKeyEvent *);
-    void                    keyReleaseEvent         (QKeyEvent *);
-    virtual void            showEvent               (QShowEvent *)                          override;
+    virtual void            wheelEvent              (QWheelEvent *)     override;
+    virtual void            resizeEvent             (QResizeEvent *)    override;
+    virtual void            keyPressEvent           (QKeyEvent *)       override;
+    virtual void            keyReleaseEvent         (QKeyEvent *)       override;
+    virtual void            showEvent               (QShowEvent *)      override;
 };
 
 #endif // IPPROCESSGRID_H

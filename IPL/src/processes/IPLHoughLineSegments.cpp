@@ -49,7 +49,7 @@ void IPLHoughLineSegments::destroy()
 {
     //delete _result;
 }
-bool IPLHoughLineSegments::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLHoughLineSegments::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -88,7 +88,7 @@ bool IPLHoughLineSegments::processInputData(IPLImage* image , int, bool useOpenC
     s << lines.size();
     addInformation(s.str());
 
-    for(int i = 0; i < lines.size(); i++ )
+    for(int i = 0; i < (int) lines.size(); i++ )
     {
        cv::Vec4i l = lines[i];
        cv::line(overlay, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0,0,255), 2, CV_AA);

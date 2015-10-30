@@ -70,7 +70,7 @@ public:
         if (! driver) return false;
 
         pugg::detail::Server* server = _get_server(driver->server_name());
-        if (! server) return NULL;
+        if (! server) return false;
 
         if (server->min_driver_version() > driver->version()) return false;
 

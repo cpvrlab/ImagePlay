@@ -35,7 +35,7 @@ template<>
 inline std::string serializeValue<bool>(const bool &value)
 {
     std::ostringstream buffer;
-    buffer <<  value ? "true" : "false";
+    buffer <<  (value ? "true" : "false");
     return buffer.str();
 }
 
@@ -45,7 +45,7 @@ inline std::string serializeValue<std::vector<int>>(const std::vector<int> &valu
     std::ostringstream buffer;
     buffer << "[";
     if (value.size() > 0) buffer << value[0];
-    for (int i = 1; i < value.size(); ++i) buffer << "," << value[i];
+    for (int i = 1; i < (int) value.size(); ++i) buffer << "," << value[i];
     buffer << "]";
     return buffer.str();
 }
@@ -56,7 +56,7 @@ inline std::string serializeValue<std::vector<double>>(const std::vector<double>
     std::ostringstream buffer;
     buffer << "[";
     if (value.size() > 0) buffer << value[0];
-    for (int i = 1; i < value.size(); ++i) buffer << "," << value[i];
+    for (int i = 1; i < (int) value.size(); ++i) buffer << "," << value[i];
     buffer << "]";
     return buffer.str();
 }
@@ -188,7 +188,7 @@ inline void deserializeValue(const std::string &data, IPLColor &value)
     int i = 0;
     std::smatch match;
     auto pos = data.begin();
-    while(i < color.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
+    while(i < (int) color.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
     {
         pos += match.position();
 
@@ -209,7 +209,7 @@ inline void deserializeValue(const std::string &data, IPLPoint &value)
     int i = 0;
     std::smatch match;
     auto pos = data.begin();
-    while(i < point.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
+    while(i < (int) point.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
     {
         pos += match.position();
 

@@ -112,7 +112,7 @@ bool IPLMaxMinMedian::processInputData(IPLImage* image , int, bool)
                 for( int z=1; z<4; z++ )
                     mi = ( mi < m[z])? mi : m[z];
 
-                newplane->p(x,y) = ( abs(ma-m0)>=abs(m0-mi) )? ma : mi;
+                newplane->p(x,y) = ( std::abs(ma-m0)>=abs(m0-mi) )? ma : mi;
             }
         }
     }

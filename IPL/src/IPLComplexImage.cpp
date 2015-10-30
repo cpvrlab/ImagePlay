@@ -84,9 +84,9 @@ unsigned char* IPLComplexImage::rgb32(int mode/* = 0*/)
         {
             float value;
             if(mode == 0)
-                value = abs(real(x,y));
+                value = std::abs(real(x,y));
             else
-                value = abs(imag(x,y));
+                value = std::abs(imag(x,y));
 
             if(value < min)
                 min = value;
@@ -111,9 +111,9 @@ unsigned char* IPLComplexImage::rgb32(int mode/* = 0*/)
             int yy = ((y-_height/2) + _height) % _height;
             double c;
             if(mode == 0)
-                c = abs(real(xx,yy));
+                c = std::abs(real(xx,yy));
             else
-                c = abs(imag(xx,yy));
+                c = std::abs(imag(xx,yy));
             double lgc = (c!=0.0)? log(delta+c) : logdelta;
             uchar val = ( (lgc-min)*scale );
             _rgb32[i++] = val;
@@ -149,7 +149,7 @@ ipl_basetype IPLComplexImage::maxReal()
     {
         for(int x=0; x < _width; x++)
         {
-            if(abs(real(x,y)) > max)
+            if(std::abs(real(x,y)) > max)
                 max = real(x,y);
         }
     }
@@ -163,7 +163,7 @@ ipl_basetype IPLComplexImage::minReal()
     {
         for(int x=0; x < _width; x++)
         {
-            if(abs(real(x,y)) < min)
+            if(std::abs(real(x,y)) < min)
                 min = real(x,y);
         }
     }

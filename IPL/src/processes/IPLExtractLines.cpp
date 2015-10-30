@@ -42,7 +42,7 @@ void IPLExtractLines::destroy()
     delete _result;
 }
 
-bool IPLExtractLines::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLExtractLines::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;

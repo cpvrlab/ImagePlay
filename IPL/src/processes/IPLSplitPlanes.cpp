@@ -175,7 +175,7 @@ IPLImage* IPLSplitPlanes::getResultData( int outputIndex )
     if(!isResultReady())
         return NULL;
 
-    if(outputIndex < _result.size())
+    if(outputIndex < (int) _result.size())
         return _result[outputIndex];
     else
         return NULL;

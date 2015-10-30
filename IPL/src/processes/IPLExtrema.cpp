@@ -92,7 +92,7 @@ bool IPLExtrema::processInputData(IPLImage* image , int, bool)
                 }
                 average = average/area;
                 ipl_basetype res = ( (img0 - fmin) > (fmax -img0) ) ? fmax : fmin;
-                if( abs( average - img0 ) <= abs( res -img0 ) ) res = average;
+                if( std::abs( average - img0 ) <= std::abs( res -img0 ) ) res = average;
                 newplane->p(x,y) = res;
             }
         }

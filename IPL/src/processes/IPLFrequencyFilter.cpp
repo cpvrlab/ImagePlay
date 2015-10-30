@@ -122,7 +122,7 @@ bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
     return true;
 }
 
-IPLData* IPLFrequencyFilter::getResultData(int index)
+IPLData* IPLFrequencyFilter::getResultData(int)
 {
     return _result;
 }

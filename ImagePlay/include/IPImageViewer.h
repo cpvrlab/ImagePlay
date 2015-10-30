@@ -159,7 +159,7 @@ public:
     void zoomFit();
     void zoomReset();
 
-    bool eventFilter(QObject* object, QEvent* event);
+    bool eventFilter(QObject* object, QEvent* event) override;
 
     QScrollBar* horizontalScrollBar()   { return _graphicsView->horizontalScrollBar(); }
     QScrollBar* verticalScrollBar()     { return _graphicsView->verticalScrollBar(); }

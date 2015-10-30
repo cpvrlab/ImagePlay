@@ -119,7 +119,7 @@ bool IPLBinarizeUnimodal::processInputData(IPLImage* image , int, bool)
             double maxDist = 0.0;
             for( int k=x0; k<=x1; ++k )
             {
-                double distance = abs( ( a*k + b*p[k] + c ) / d );
+                double distance = std::abs( ( a*k + b*p[k] + c ) / d );
                 if( distance > maxDist )
                 {
                     maxDist = distance;

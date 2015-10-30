@@ -21,8 +21,8 @@ public:
 	int version() const {return _version;}
 
 private:
-    std::string _name;
     std::string _server_name;
+    std::string _name;
     int _version;
 };
 

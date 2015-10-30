@@ -46,7 +46,7 @@ bool IPLFileIO::loadFile(std::string filename, IPLImage*& image, std::string& in
                                     "RGBAF"};
 
     // try loading relative filepaths to the _baseDir
-    if( filename.find("/") == std::string::npos && filename.find("\\") == std::string::npos)
+    if( (filename.find("/") == std::string::npos) && (filename.find("\\") == std::string::npos))
     {
         filename = IPLFileIO::_baseDir.append("/").append(filename);
     }

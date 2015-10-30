@@ -98,8 +98,8 @@ public:
 private:
     int _min;                         //!< min value, may be used in GUI
     int _max;                         //!< max value, may be used in GUI
-    int _default;                     //!< default value
     int _value;                       //!< current value
+    int _default;                     //!< default value
 };
 
 // UNSIGNED INT
@@ -121,8 +121,8 @@ public:
 private:
     unsigned int _min;                         //!< min value, may be used in GUI
     unsigned int _max;                         //!< max value, may be used in GUI
-    unsigned int _default;                     //!< default value
     unsigned int _value;                       //!< current value
+    unsigned int _default;                     //!< default value
 };
 
 // DOUBLE
@@ -144,8 +144,8 @@ public:
 private:
     double _min;                         //!< min value, may be used in GUI
     double _max;                         //!< max value, may be used in GUI
-    double _default;                     //!< default value
     double _value;                       //!< current value
+    double _default;                     //!< default value
 };
 
 // DOUBLE
@@ -167,8 +167,8 @@ public:
 private:
     float _min;                         //!< min value, may be used in GUI
     float _max;                         //!< max value, may be used in GUI
-    float _default;                     //!< default value
     float _value;                       //!< current value
+    float _default;                     //!< default value
 };
 
 
@@ -188,8 +188,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    bool _default;                     //!< default value
     bool _value;                       //!< current value
+    bool _default;                     //!< default value
 };
 
 // STRING
@@ -208,8 +208,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    std::string _default;                     //!< default value
     std::string _value;                       //!< current value
+    std::string _default;                     //!< default value
 };
 
 
@@ -229,8 +229,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    std::vector<int> _default;                     //!< default value
     std::vector<int> _value;                       //!< current value
+    std::vector<int> _default;                     //!< default value
 };
 
 // VECTOR<DOUBLE>
@@ -249,8 +249,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    std::vector<double> _default;                     //!< default value
     std::vector<double> _value;                       //!< current value
+    std::vector<double> _default;                     //!< default value
 };
 
 // COLOR
@@ -269,8 +269,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    IPLColor _default;                     //!< default value
     IPLColor _value;                       //!< current value
+    IPLColor _default;                     //!< default value
 };
 
 
@@ -290,8 +290,8 @@ public:
     IPLProcessProperty *clone() const;
 
 private:
-    IPLPoint _default;                     //!< default value
     IPLPoint _value;                       //!< current value
+    IPLPoint _default;                     //!< default value
 };
 
 //! IPLProcessPropertyMap

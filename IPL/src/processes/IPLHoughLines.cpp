@@ -49,7 +49,7 @@ void IPLHoughLines::destroy()
 {
     //delete _result;
 }
-bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLHoughLines::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -88,7 +88,7 @@ bool IPLHoughLines::processInputData(IPLImage* image , int, bool useOpenCV)
     s << lines.size();
     addInformation(s.str());
 
-    for(int i = 0; i < lines.size(); i++ )
+    for(int i = 0; i < (int) lines.size(); i++ )
     {
         float rho = lines[i][0], theta = lines[i][1];
         cv::Point pt1, pt2;

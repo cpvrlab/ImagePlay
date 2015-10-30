@@ -50,7 +50,7 @@ void IPLGoodFeaturesToTrack::destroy()
 {
     //delete _result;
 }
-bool IPLGoodFeaturesToTrack::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLGoodFeaturesToTrack::processInputData(IPLImage* image , int, bool)
 {
     // delete previous result
     delete _result;
@@ -83,7 +83,7 @@ bool IPLGoodFeaturesToTrack::processInputData(IPLImage* image , int, bool useOpe
     s << circles.size();
     addInformation(s.str());
 
-    for(int i = 0; i < circles.size(); i++ )
+    for(int i = 0; i < (int) circles.size(); i++ )
     {
        cv::Point center(round(circles[i][0]), round(circles[i][1]));
        int radius = cvRound(circles[i][2]);
