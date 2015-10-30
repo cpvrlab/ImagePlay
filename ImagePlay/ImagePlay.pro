@@ -85,7 +85,8 @@ win32: {
     QMAKE_POST_LINK +=  windeployqt.exe --no-angle --no-svg --no-system-d3d-compiler --no-quick-import --no-translations ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.exe & \
                         $${QMAKE_COPY_DIR} ..\\_lib\\windows ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\ & \
                         $${QMAKE_COPY_DIR} media\\process_icons ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\process_icons\\ & \
-                        $${QMAKE_COPY_DIR} media\\images ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\images\\ & \
+                        $${QMAKE_COPY_DIR} media\\examples ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\examples\\ & \
+                        $${QMAKE_COPY_DIR} media\\examples\images ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\examples\\images\\ & \
                         $${QMAKE_COPY_DIR} media\\plugin_development ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development & \
                         $${QMAKE_COPY_DIR} ..\\IPL\\include ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development\\_lib\\include & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
@@ -131,7 +132,7 @@ linux: {
     LIBS += -lopencv_highgui
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
-                        $${QMAKE_COPY_DIR} media/images/ ../_bin/$$CONFIGURATION/$$PLATFORM/ &&\
+                        $${QMAKE_COPY_DIR} media/examples/ ../_bin/$$CONFIGURATION/$$PLATFORM/ &&\
                         $${QMAKE_MKDIR} ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
                         rm -rf ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_lib ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/_template && \
                         $${QMAKE_COPY_DIR} media/plugin_development/_template ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development && \
