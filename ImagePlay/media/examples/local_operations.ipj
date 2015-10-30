@@ -1,0 +1,128 @@
+{
+    "author": "Kaspar",
+    "edges": [
+        {
+            "from": 1,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 2
+        },
+        {
+            "from": 1,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 3
+        }
+    ],
+    "steps": [
+        {
+            "ID": 1,
+            "posX": 64,
+            "posY": 128,
+            "properties": [
+                {
+                    "key": "mode",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "24",
+                    "widgetName": "IPL_WIDGET_GROUP"
+                },
+                {
+                    "key": "path",
+                    "type": "string",
+                    "value": "images/lena_rgb.png",
+                    "widget": "12",
+                    "widgetName": "IPL_WIDGET_FILE_OPEN"
+                },
+                {
+                    "key": "raw_format",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_height",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "raw_interleaved",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_width",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLLoadImage"
+        },
+        {
+            "ID": 2,
+            "posX": 192,
+            "posY": 64,
+            "properties": [
+                {
+                    "key": "borders",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "3",
+                    "widgetName": "IPL_WIDGET_RADIOBUTTONS"
+                },
+                {
+                    "key": "divisor",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "kernel",
+                    "type": "vector<int>",
+                    "value": "[0,-1,0,-1,5,-1,0,-1,0]",
+                    "widget": "15",
+                    "widgetName": "IPL_WIDGET_KERNEL"
+                },
+                {
+                    "key": "normalize",
+                    "type": "bool",
+                    "value": "0",
+                    "widget": "2",
+                    "widgetName": "IPL_WIDGET_CHECKBOXES"
+                },
+                {
+                    "key": "offset",
+                    "type": "double",
+                    "value": "0",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLConvolutionFilter"
+        },
+        {
+            "ID": 3,
+            "posX": 192,
+            "posY": 192,
+            "properties": [
+                {
+                    "key": "sigma",
+                    "type": "double",
+                    "value": "2",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLGaussianLowPass"
+        }
+    ],
+    "timestamp": 1446201654
+}

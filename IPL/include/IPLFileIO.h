@@ -46,6 +46,10 @@ public:
     static bool readRaw32BitInterleaved(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
     static bool readRaw24BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
     static bool readRaw32BitPlanar(int stride, IPLRawImageType format, IPLImage *&image, std::ifstream &file);
+
+    static void setBasedir(std::string dir) { _baseDir = dir; }
+
+    static std::string _baseDir;
 };
 
 #endif // IPLFILEIO_H

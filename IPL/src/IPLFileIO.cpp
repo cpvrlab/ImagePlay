@@ -21,13 +21,15 @@
 
 #include "FreeImage.h"
 
+std::string IPLFileIO::_baseDir = "";
+
 /*!
  * \brief IPLFileIO::loadFile
  * \param filename
  * \param image pass by pointer reference, because we need to change the pointer
  * \return
  */
-bool IPLFileIO::loadFile(const std::string filename, IPLImage*& image, std::string& information)
+bool IPLFileIO::loadFile(std::string filename, IPLImage*& image, std::string& information)
 {
     std::string formatNames[37] =  {"BMP", "ICO", "JPEG", "JNG",
                                     "KOALA", "LBM", "MNG", "PBM",
@@ -42,6 +44,12 @@ bool IPLFileIO::loadFile(const std::string filename, IPLImage*& image, std::stri
                                     "UINT32", "INT32", "FLOAT", "DOUBLE",
                                     "COMPLEX", "RGB16", "RGBA16", "RGBF",
                                     "RGBAF"};
+
+    // try loading relative filepaths to the _baseDir
+    if( filename.find("/") == std::string::npos && filename.find("\\") == std::string::npos)
+    {
+        filename = IPLFileIO::_baseDir.append("/").append(filename);
+    }
 
     FREE_IMAGE_FORMAT format = FIF_UNKNOWN;
     format = FreeImage_GetFileType(filename.c_str());

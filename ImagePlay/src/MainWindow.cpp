@@ -860,6 +860,7 @@ bool MainWindow::readProcessFile()
 bool MainWindow::readProcessFile(QString file)
 {
     _currentProcessFileName = file;
+    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
     return readProcessFile();
 }
 
@@ -1129,6 +1130,8 @@ void MainWindow::on_actionSave_triggered()
     if(_currentProcessFileName.length() == 0)
             _currentProcessFileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", "ImagePlay JSON File (*.ipj)");
 
+    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
+
     writeProcessFile();
 
     addRecentProcessFile(_currentProcessFileName);
@@ -1145,6 +1148,7 @@ void MainWindow::on_actionSaveAs_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
     _currentProcessFileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "ImagePlay JSON File (*.ipj)");
+    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
     readProcessFile();
 
     addRecentProcessFile(_currentProcessFileName);
@@ -1184,6 +1188,7 @@ void MainWindow::updateRecentProcessesMenu()
                 QFileInfo processFileInfo(processFile);
                 if (processFileInfo.exists()) {
                     _currentProcessFileName = processFile;
+                    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
                     readProcessFile();
                 }
             }
@@ -1293,6 +1298,8 @@ void MainWindow::on_actionNew_triggered()
 
     clearScene();
     _currentProcessFileName = "";
+
+    IPLFileIO::setBasedir(QFileInfo(_currentProcessFileName).absolutePath().toStdString());
 }
 
 

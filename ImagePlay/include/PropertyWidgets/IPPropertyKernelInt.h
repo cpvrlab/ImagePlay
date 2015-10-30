@@ -144,16 +144,17 @@ public:
          }
          _kernelSizeComboBox->setCurrentIndex(_kernelType);
 
-         int i = 0;
+         int j = 0;
          int offset = 3-((int)sqrt((float)_kernel.size()) / 2);
-         for(QSpinBox* input : _inputs)
+         for(int i=0; i < _inputs.size(); i++)
          {
+             QSpinBox* input = _inputs.at(i);
              int column = i%7;
              int row    = i/7;
 
              if(column >= offset && row >= offset && column < 7-offset && row < 7-offset)
              {
-                 input->setValue(_kernel[i++]);
+                 input->setValue(_kernel[j++]);
              }
              else
              {
