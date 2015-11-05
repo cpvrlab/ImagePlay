@@ -49,6 +49,11 @@ public:
 
     static void setBasedir(std::string dir) { _baseDir = dir; }
 
+    // Naive approach:
+    // win: C:\... D://...
+    // unix: /var/...
+    static bool isAbsolutePath(std::string filename) { return (filename.substr(0, 1) == "/" || filename.substr(1, 1) == ":"); }
+
     static std::string _baseDir;
 };
 

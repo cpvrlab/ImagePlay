@@ -1,0 +1,178 @@
+{
+    "author": "Kaspar",
+    "edges": [
+        {
+            "from": 2,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 3
+        },
+        {
+            "from": 1,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 5
+        },
+        {
+            "from": 5,
+            "indexFrom": 0,
+            "indexTo": 0,
+            "to": 4
+        }
+    ],
+    "steps": [
+        {
+            "ID": 1,
+            "posX": 64,
+            "posY": 64,
+            "properties": [
+                {
+                    "key": "mode",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "24",
+                    "widgetName": "IPL_WIDGET_GROUP"
+                },
+                {
+                    "key": "path",
+                    "type": "string",
+                    "value": "images/lena_8bit.raw",
+                    "widget": "12",
+                    "widgetName": "IPL_WIDGET_FILE_OPEN"
+                },
+                {
+                    "key": "raw_format",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_height",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "raw_interleaved",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_width",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLLoadImage"
+        },
+        {
+            "ID": 2,
+            "posX": 64,
+            "posY": 192,
+            "properties": [
+                {
+                    "key": "mode",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "24",
+                    "widgetName": "IPL_WIDGET_GROUP"
+                },
+                {
+                    "key": "path",
+                    "type": "string",
+                    "value": "images/lena.raw",
+                    "widget": "12",
+                    "widgetName": "IPL_WIDGET_FILE_OPEN"
+                },
+                {
+                    "key": "raw_format",
+                    "type": "int",
+                    "value": "1",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_height",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "raw_interleaved",
+                    "type": "int",
+                    "value": "0",
+                    "widget": "4",
+                    "widgetName": "IPL_WIDGET_COMBOBOX"
+                },
+                {
+                    "key": "raw_width",
+                    "type": "int",
+                    "value": "512",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLLoadImage"
+        },
+        {
+            "ID": 3,
+            "posX": 192,
+            "posY": 192,
+            "properties": [
+                {
+                    "key": "gamma",
+                    "type": "double",
+                    "value": "2.34",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLGammaCorrection"
+        },
+        {
+            "ID": 4,
+            "posX": 192,
+            "posY": 64,
+            "properties": [
+            ],
+            "type": "IPLFalseColor"
+        },
+        {
+            "ID": 5,
+            "posX": 128,
+            "posY": 64,
+            "properties": [
+                {
+                    "key": "weight_b",
+                    "type": "double",
+                    "value": "0.0721",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "weight_g",
+                    "type": "double",
+                    "value": "0.7154",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                },
+                {
+                    "key": "weight_r",
+                    "type": "double",
+                    "value": "0.2125",
+                    "widget": "5",
+                    "widgetName": "IPL_WIDGET_SLIDER"
+                }
+            ],
+            "type": "IPLConvertToGray"
+        }
+    ],
+    "timestamp": 1446732112
+}

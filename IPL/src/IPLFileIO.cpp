@@ -45,20 +45,23 @@ bool IPLFileIO::loadFile(std::string filename, IPLImage*& image, std::string& in
                                     "COMPLEX", "RGB16", "RGBA16", "RGBF",
                                     "RGBAF"};
 
+
+    std::string filePath;
+
     // try loading relative filepaths to the _baseDir
-    if( (filename.find("/") == std::string::npos) && (filename.find("\\") == std::string::npos))
+    if(!IPLFileIO::isAbsolutePath(filename))
     {
-        filename = IPLFileIO::_baseDir.append("/").append(filename);
+        filePath.append(IPLFileIO::_baseDir).append("/").append(filename);
     }
 
     FREE_IMAGE_FORMAT format = FIF_UNKNOWN;
-    format = FreeImage_GetFileType(filename.c_str());
+    format = FreeImage_GetFileType(filePath.c_str());
     if(format == FIF_UNKNOWN)
     {
         return false;
     }
 
-    FIBITMAP *dib = FreeImage_Load(format, filename.c_str());
+    FIBITMAP *dib = FreeImage_Load(format, filePath.c_str());
     int width = FreeImage_GetWidth(dib);
     int height = FreeImage_GetHeight(dib);
 
@@ -306,7 +309,7 @@ bool IPLFileIO::readRaw8bit(int stride, IPLImage *&image, std::ifstream &file)
     {
        file.read(&buffer, 1);
 
-       ipl_basetype value = buffer * FACTOR_TO_FLOAT;
+       ipl_basetype value = ((uchar) buffer) * FACTOR_TO_FLOAT;
        image->plane(0)->cp(x, y) = value;
 
        x++;
@@ -331,15 +334,15 @@ bool IPLFileIO::readRaw24BitInterleaved(int stride, IPLRawImageType format, IPLI
        ipl_basetype r,g,b;
        if(format == 1)
        {
-           r = buffer[0] * FACTOR_TO_FLOAT;
-           g = buffer[1] * FACTOR_TO_FLOAT;
-           b = buffer[2] * FACTOR_TO_FLOAT;
+           r = ((uchar) buffer[0]) * FACTOR_TO_FLOAT;
+           g = ((uchar) buffer[1]) * FACTOR_TO_FLOAT;
+           b = ((uchar) buffer[2]) * FACTOR_TO_FLOAT;
        }
        else
        {
-           b = buffer[0] * FACTOR_TO_FLOAT;
-           g = buffer[1] * FACTOR_TO_FLOAT;
-           r = buffer[2] * FACTOR_TO_FLOAT;
+           b = ((uchar) buffer[0]) * FACTOR_TO_FLOAT;
+           g = ((uchar) buffer[1]) * FACTOR_TO_FLOAT;
+           r = ((uchar) buffer[2]) * FACTOR_TO_FLOAT;
        }
 
        image->plane(0)->cp(x, y) = r;
@@ -368,17 +371,17 @@ bool IPLFileIO::readRaw32BitInterleaved(int stride, IPLRawImageType format, IPLI
        ipl_basetype r,g,b,a;
        if(format == 1)
        {
-           r = buffer[0] * FACTOR_TO_FLOAT;
-           g = buffer[1] * FACTOR_TO_FLOAT;
-           b = buffer[2] * FACTOR_TO_FLOAT;
-           a = buffer[3] * FACTOR_TO_FLOAT;
+           r = ((uchar) buffer[0]) * FACTOR_TO_FLOAT;
+           g = ((uchar) buffer[1]) * FACTOR_TO_FLOAT;
+           b = ((uchar) buffer[2]) * FACTOR_TO_FLOAT;
+           a = ((uchar) buffer[3]) * FACTOR_TO_FLOAT;
        }
        else
        {
-           a = buffer[0] * FACTOR_TO_FLOAT;
-           b = buffer[1] * FACTOR_TO_FLOAT;
-           g = buffer[2] * FACTOR_TO_FLOAT;
-           r = buffer[3] * FACTOR_TO_FLOAT;
+           a = ((uchar) buffer[0]) * FACTOR_TO_FLOAT;
+           b = ((uchar) buffer[1]) * FACTOR_TO_FLOAT;
+           g = ((uchar) buffer[2]) * FACTOR_TO_FLOAT;
+           r = ((uchar) buffer[3]) * FACTOR_TO_FLOAT;
        }
 
        image->plane(0)->cp(x, y) = r;
@@ -506,13 +509,15 @@ bool IPLFileIO::readRaw32BitPlanar(int stride, IPLRawImageType format, IPLImage 
  */
 bool IPLFileIO::loadRawFile(std::string filename, IPLImage *&image, int width, int height, IPLRawImageType format, bool interleaved, std::string &information)
 {
+    std::string filePath;
+
     // try loading relative filepaths to the _baseDir
-    if( filename.find("/") == std::string::npos && filename.find("\\") == std::string::npos)
+    if(!IPLFileIO::isAbsolutePath(filename))
     {
-        filename = IPLFileIO::_baseDir.append("/").append(filename);
+        filePath.append(IPLFileIO::_baseDir).append("/").append(filename);
     }
 
-    std::ifstream  file(filename, std::ios::binary);
+    std::ifstream file(filePath, std::ios::binary);
 
     if(!file.is_open())
     {
