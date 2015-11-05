@@ -184,7 +184,7 @@ ImageViewerWindow::updateImage
 */
 void ImageViewerWindow::updateImage()
 {
-    qDebug() << "ImageViewerWindow::udpateImage";
+    qDebug() << "ImageViewerWindow::updateImage";
     if(ui && ui->tabWidget->isVisible())
     {
         // update the currently visible image
