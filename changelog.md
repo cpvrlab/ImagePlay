@@ -1,5 +1,27 @@
 # Change Log
 
+## 6.0.0-rc.3 - 2015-11-05
+### Added
+- Added examples (located under /examples/ or directly on the DMG for Mac OS X)
+- Inputs/Outputs are now shown for each process right underneath the process properties
+- We now have a completely new plugin system
+- File paths can now be relative
+- Added better event logging (needs to be enabled in settings)
+
+### Fixed
+- Improved IPPropertyKernelInt
+- Improved bluepring background image
+- Fixed scene clearing (could lead to crashes before)
+
+### Known Issues
+- Mac OS X: Building ImagePlay may produce errors after macdeployqt ../_bin/Release/macx/ImagePlay.app/ -dmg
+ - those errors only affect the creation of the dmg file, you can still run ImagePlay.app
+- Mac OS X: The Image Viewer might only display a small portion of an image.
+ - Workaround: Load a large image
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
+
 ## 6.0.0-rc.2 - 2015-10-16
 ### Added
 - New button which allows to reset all process properties to their defaults

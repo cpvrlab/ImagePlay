@@ -53,6 +53,10 @@ bool IPLFileIO::loadFile(std::string filename, IPLImage*& image, std::string& in
     {
         filePath.append(IPLFileIO::_baseDir).append("/").append(filename);
     }
+    else
+    {
+        filePath.append(filename);
+    }
 
     FREE_IMAGE_FORMAT format = FIF_UNKNOWN;
     format = FreeImage_GetFileType(filePath.c_str());
@@ -515,6 +519,10 @@ bool IPLFileIO::loadRawFile(std::string filename, IPLImage *&image, int width, i
     if(!IPLFileIO::isAbsolutePath(filename))
     {
         filePath.append(IPLFileIO::_baseDir).append("/").append(filename);
+    }
+    else
+    {
+        filePath.append(filename);
     }
 
     std::ifstream file(filePath, std::ios::binary);
