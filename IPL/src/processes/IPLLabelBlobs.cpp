@@ -50,6 +50,9 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
     delete _result;
     _result = NULL;
 
+    // we need a working copy
+    IPLImage* input = new IPLImage(*image);
+
     int width = image->width();
     int height = image->height();
     _result = new IPLImage(IPL_IMAGE_GRAYSCALE, width, height );
@@ -57,10 +60,10 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
     int progress = 0;
     int maxProgress = image->height() * image->getNumberOfPlanes();
 
-    IPLImagePlane* plane = image->plane(0);
+    IPLImagePlane* plane = input->plane(0);
     IPLImagePlane* newplane = _result->plane(0);
 
-    int labelCount = 1024;
+    int labelCount = getProcessPropertyInt("labelCount");
     float labelIncrement = 1.0f/labelCount;
     float label = 0.01f;
     for(int y=0; y<height; y++)
@@ -76,6 +79,7 @@ bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
                 labelBlob(plane, newplane, x, y, label += labelIncrement);
         }
     }
+    delete input;
     return true;
 }
 
