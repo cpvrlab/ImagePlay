@@ -38,7 +38,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background: url(:/about_logo.png) no-repeat;</string>
+      <string notr="true">border-image: url(:/about_logo.png);</string>
      </property>
      <property name="text">
       <string/>
