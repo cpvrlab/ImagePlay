@@ -41,7 +41,7 @@ Makefile.Release
 
 # Windows
 *.sln
-*.vcxproj
+#*.vcxproj
 *.vcxproj.filters
 
 # temporary and html doc files

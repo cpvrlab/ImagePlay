@@ -65,9 +65,6 @@ bool IPLBinarizeOtsu::processInputData(IPLImage* image , int, bool)
         IPLImagePlane* plane = image->plane( planeNr );
         IPLImagePlane* newplane = _result->plane( planeNr );
 
-
-
-
         double histogram[256];
         for(int i = 0; i < 256; i++)
             histogram[i] = 0.0;
