@@ -15,7 +15,7 @@ void %CLASSNAME%::init()
 
     // inputs and outputs
     addInput("Image", IPL_IMAGE_COLOR);
-    addOutput("Gray Image", IPL_IMAGE_BW);
+    addOutput("Binary Image", IPL_IMAGE_BW);
 
     // properties
     addProcessPropertyDouble("threshold", "Threshold", "0.0 < threshold < 1.0", 0.5, IPL_WIDGET_SLIDER, 0.0, 1.0);

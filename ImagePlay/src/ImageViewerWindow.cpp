@@ -568,7 +568,6 @@ ImageViewerWindow::tabChanged
 */
 void ImageViewerWindow::updateOutputs()
 {
-    qDebug() << "ImageViewerWindow::updateOutputs";
     IPImageViewer* item = (IPImageViewer*) ui->tabWidget->currentWidget();
 
     if(item && item->processStep())

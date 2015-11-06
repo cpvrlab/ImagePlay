@@ -116,26 +116,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    QString line;
     int _debugLevel = 1;
     QString timestamp = QTime::currentTime().toString("hh:mm:ss");
-    QString line;
     switch (type) {
     case QtDebugMsg:
         line = QString("%1 Debug: %2").arg(timestamp).arg(msg);
-        if (_debugLevel >= 1)
+        if (ui->dockLog->isVisible() && _debugLevel >= 1)
             ui->txtLog->append(QString("<b>%1</b> %2").arg(timestamp).arg(msg));
         break;
     case QtWarningMsg:
         line = QString("%1 Warning: %2").arg(timestamp).arg(msg);
-        ui->txtLog->append(QString("<b style=\"color:blue\">%1</b> %2").arg(timestamp).arg(msg));
+        if (ui->dockLog->isVisible())
+            ui->txtLog->append(QString("<b style=\"color:blue\">%1</b> %2").arg(timestamp).arg(msg));
         break;
     case QtCriticalMsg:
         line = QString("%1 Critical: %2").arg(timestamp).arg(msg);
-        ui->txtLog->append(QString("<b style=\"color:red\">%1</b> %2").arg(timestamp).arg(msg));
+        if (ui->dockLog->isVisible())
+            ui->txtLog->append(QString("<b style=\"color:red\">%1</b> %2").arg(timestamp).arg(msg));
         break;
     case QtFatalMsg:
         line = QString("%1 Fatal: %2").arg(timestamp).arg(msg);
-        ui->txtLog->append(QString("<b style=\"color:red\">%1 Fatal:</b> %2").arg(timestamp).arg(msg));
+        if (ui->dockLog->isVisible())
+            ui->txtLog->append(QString("<b style=\"color:red\">%1 Fatal:</b> %2").arg(timestamp).arg(msg));
         abort();
     }
 
