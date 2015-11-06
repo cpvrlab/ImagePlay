@@ -106,6 +106,12 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
     setFilterFocus();
+
+    if(QApplication::arguments().length() > 1)
+    {
+        QString filePath = QApplication::arguments().at(1);
+        readProcessFile(filePath);
+    }
 }
 
 MainWindow::~MainWindow()
