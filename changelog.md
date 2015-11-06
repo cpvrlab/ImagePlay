@@ -10,7 +10,7 @@
 
 ### Fixed
 - Improved IPPropertyKernelInt
-- Improved bluepring background image
+- Improved blueprint background image
 - Fixed scene clearing (could lead to crashes before)
 
 ### Known Issues
