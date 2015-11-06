@@ -21,7 +21,9 @@
 
 IPApplication::IPApplication(int &argc, char **argv) : QApplication(argc, argv)
 {
+#ifdef Q_OS_MACX
     setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
 }
 /*
 bool IPApplication::notify(QObject* rec, QEvent* ev)

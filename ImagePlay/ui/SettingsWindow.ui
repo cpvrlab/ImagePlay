@@ -186,6 +186,9 @@
          </property>
          <item>
           <widget class="QPushButton" name="btnUnloadPlugins">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Unload Plugins</string>
            </property>
@@ -193,6 +196,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnReloadPlugins">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Reload Plugins</string>
            </property>
