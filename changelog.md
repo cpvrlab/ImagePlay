@@ -1,5 +1,17 @@
 # Change Log
 
+## 6.0.0 - 2015-11-06
+### Added
+- Improved OS X retina dispay support
+- You can now directly open .ipj files when associated with ImagePlay.exe
+
+### Fixed
+- Fixed some issues with IPLLabelBlobs
+
+### Known Issues
+- While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
+- The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
 ## 6.0.0-rc.3 - 2015-11-05
 ### Added
 - Added examples (located under /examples/ or directly on the DMG for Mac OS X)
