@@ -9,7 +9,7 @@
 ## Windows
 ### Prerequisites
 * Install [Git](http://git-scm.com/download/win/)
-* Install Visual Studio 2013 or later:
+* Install Visual Studio 2013:
    * [Visual Studio Community Edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs/)
     or
    * [Visual Studio Express 2013 for Windows Desktop](https://www.visualstudio.com/downloads/)
