@@ -130,6 +130,7 @@ linux: {
     LIBS += -lopencv_core
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
+    LIBS += -ldl
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
                         $${QMAKE_COPY_DIR} media/examples/ ../_bin/$$CONFIGURATION/$$PLATFORM/ &&\
