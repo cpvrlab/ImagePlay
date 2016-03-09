@@ -23,6 +23,7 @@
 #include "IPLComplexImage.h"
 #include "IPLPoint.h"
 #include "IPLMatrix.h"
+#include "IPLKeyPoints.h"
 
 
 bool IPLData::isConvertibleTo(IPLDataType dataType)
@@ -67,4 +68,9 @@ IPLPoint* IPLData::toPoint()
 IPLMatrix* IPLData::toMatrix()
 {
     return dynamic_cast<IPLMatrix*>(this);
+}
+
+IPLKeyPoints* IPLData::toKeyPoints()
+{
+    return dynamic_cast<IPLKeyPoints*>(this);
 }

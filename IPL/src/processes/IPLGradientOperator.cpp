@@ -57,8 +57,10 @@ void IPLGradientOperator::destroy()
     delete _phase;
 }
 
-bool IPLGradientOperator::processInputData(IPLImage* image , int, bool)
+bool IPLGradientOperator::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = new IPLOrientedImage(image->width(), image->height());

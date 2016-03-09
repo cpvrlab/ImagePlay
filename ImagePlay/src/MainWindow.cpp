@@ -521,10 +521,16 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLWarpAffine",          new IPLWarpAffine);
     _factory->registerProcess("IPLWarpPerspective",     new IPLWarpPerspective);
 
+    _factory->registerProcess("IPLFeatureDetection",    new IPLFeatureDetection);
+    _factory->registerProcess("IPLFeatureMatcher",      new IPLFeatureMatcher);
+
+
     // not ready:
     /*_factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);
     _factory->registerProcess("IPLGoodFeaturesToTrack", new IPLGoodFeaturesToTrack);
     _factory->registerProcess("IPLFloodFill",           new IPLFloodFill);
+
+    _factory->registerProcess("IPLOpticalFlow",         new IPLOpticalFlow);
 
     _factory->registerProcess("IPProcessScript",        new IPProcessScript);*/
 }

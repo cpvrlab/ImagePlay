@@ -49,8 +49,10 @@ void IPLHoughLineSegments::destroy()
 {
     //delete _result;
 }
-bool IPLHoughLineSegments::processInputData(IPLImage* image , int, bool)
+bool IPLHoughLineSegments::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

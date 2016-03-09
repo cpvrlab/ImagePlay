@@ -79,6 +79,7 @@ enum IPLDataType
 
     //Add additional data types here
     //...
+    IPL_KEYPOINTS,
 
     IPL_NUM_DATATYPES
 };

@@ -42,8 +42,10 @@ void IPLExtractLines::destroy()
     delete _result;
 }
 
-bool IPLExtractLines::processInputData(IPLImage* image , int, bool)
+bool IPLExtractLines::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

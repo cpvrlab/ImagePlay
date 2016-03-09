@@ -41,7 +41,7 @@ public:
 
     void                    init                    ();
     void                    destroy                 ();
-    bool                    processInputData        (IPLImage*, int index, bool useOpenCV);
+    bool                    processInputData        (IPLData*, int index, bool useOpenCV);
     IPLData*                getResultData           (int);
 
 protected:

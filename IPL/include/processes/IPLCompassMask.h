@@ -37,7 +37,7 @@ public:
 
     void                    init                    ();
     void                    destroy                 ();
-    bool                    processInputData        (IPLImage*, int, bool useOpenCV);
+    bool                    processInputData        (IPLData*, int, bool useOpenCV);
     IPLData*                getResultData           (int);
 
 private:

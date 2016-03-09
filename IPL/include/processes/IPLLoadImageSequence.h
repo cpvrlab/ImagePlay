@@ -46,7 +46,7 @@ public:
 
     void init();
     void destroy();
-    virtual bool        processInputData            (IPLImage* data, int inNr, bool useOpenCV);
+    virtual bool        processInputData            (IPLData* data, int inNr, bool useOpenCV);
     virtual IPLImage*   getResultData               (int outNr);
     int                 sequenceCount               ()                         { return _sequenceCount; }
     int                 sequenceIndex               ()                         { return _sequenceIndex; }

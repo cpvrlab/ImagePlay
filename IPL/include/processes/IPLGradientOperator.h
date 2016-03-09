@@ -40,7 +40,7 @@ public:
     void                    init() override;
     virtual void            destroy();
 
-    virtual bool            processInputData            (IPLImage* data, int inNr, bool) override;
+    virtual bool            processInputData            (IPLData* data, int inNr, bool) override;
     virtual IPLImage*       getResultData               (int outNr);
 
 protected:

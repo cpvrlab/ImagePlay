@@ -48,8 +48,10 @@ void IPLWarpPerspective::destroy()
     delete _result;
 }
 
-bool IPLWarpPerspective::processInputData(IPLImage* image, int, bool)
+bool IPLWarpPerspective::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // get properties
     std::vector<double> v = getProcessPropertyVectorDouble("M");
     int interpolation = getProcessPropertyInt("interpolation");

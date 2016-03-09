@@ -47,8 +47,10 @@ void IPLScharr::destroy()
     //delete _result;
 }
 
-bool IPLScharr::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLScharr::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

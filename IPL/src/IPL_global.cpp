@@ -28,7 +28,8 @@ const char* const dataTypeNames[IPL_NUM_DATATYPES] = {
     "IPL_POINT",
     "IPL_MATRIX",
     "IPL_SHAPES",
-    "IPL_UNDEFINED"
+    "IPL_UNDEFINED",
+    "IPL_KEYPOINTS"
 };
 
 const char *dataTypeName(IPLDataType type)

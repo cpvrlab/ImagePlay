@@ -42,8 +42,10 @@ void IPLRankTransform::destroy()
     delete _result;
 }
 
-bool IPLRankTransform::processInputData(IPLImage* image , int, bool)
+bool IPLRankTransform::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

@@ -133,7 +133,8 @@ public:
     virtual void            init                        () = 0;
     virtual void            destroy                     () = 0;
     virtual void            beforeProcessing            () {}
-    virtual bool            processInputData            (IPLImage* data, int inputIndex, bool useOpenCV) = 0;
+    //virtual bool            processInputData            (IPLImage* data, int inputIndex, bool useOpenCV);
+    virtual bool            processInputData            (IPLData* data, int inputIndex, bool useOpenCV) = 0;
     virtual IPLData*        getResultData               (int outputIndex ) = 0;
     virtual void            afterProcessing             () {}
 

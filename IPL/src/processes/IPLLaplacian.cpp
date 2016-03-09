@@ -47,8 +47,10 @@ void IPLLaplacian::destroy()
     //delete _result;
 }
 
-bool IPLLaplacian::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLLaplacian::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

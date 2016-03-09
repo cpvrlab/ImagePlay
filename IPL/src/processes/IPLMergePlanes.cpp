@@ -54,8 +54,10 @@ void IPLMergePlanes::destroy()
     delete _inputC;
 }
 
-bool IPLMergePlanes::processInputData(IPLImage* image , int imageIndex, bool)
+bool IPLMergePlanes::processInputData(IPLData* data, int imageIndex, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // save the inputs
     if(imageIndex == 0)
     {

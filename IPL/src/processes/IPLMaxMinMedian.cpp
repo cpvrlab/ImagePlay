@@ -42,8 +42,10 @@ void IPLMaxMinMedian::destroy()
     delete _result;
 }
 
-bool IPLMaxMinMedian::processInputData(IPLImage* image , int, bool)
+bool IPLMaxMinMedian::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

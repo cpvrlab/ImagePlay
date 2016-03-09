@@ -49,7 +49,7 @@ void IPLFrequencyFilter::destroy()
     delete _result;
 }
 
-bool IPLFrequencyFilter::processInputData(IPLImage* data , int, bool)
+bool IPLFrequencyFilter::processInputData(IPLData* data , int, bool)
 {
     IPLComplexImage* complexImageData = data->toComplexImage();
     if (NULL == complexImageData) {

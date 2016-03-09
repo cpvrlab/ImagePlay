@@ -40,8 +40,10 @@ void IPLFalseColor::destroy()
     delete _result;
 }
 
-bool IPLFalseColor::processInputData(IPLImage* image , int, bool)
+bool IPLFalseColor::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

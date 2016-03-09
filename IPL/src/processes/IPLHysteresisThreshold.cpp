@@ -46,8 +46,10 @@ void IPLHysteresisThreshold::destroy()
     delete _result;
 }
 
-bool IPLHysteresisThreshold::processInputData(IPLImage* image , int, bool)
+bool IPLHysteresisThreshold::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

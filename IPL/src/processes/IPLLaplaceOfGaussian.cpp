@@ -45,8 +45,10 @@ void IPLLaplaceOfGaussian::destroy()
     delete _result;
 }
 
-bool IPLLaplaceOfGaussian::processInputData(IPLImage* image , int, bool)
+bool IPLLaplaceOfGaussian::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;
