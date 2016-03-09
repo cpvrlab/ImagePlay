@@ -67,9 +67,13 @@ win32 {
     DEPENDPATH += $$PWD/../_lib/freeimage
 
     # opencv
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core2410
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc2410
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui2410
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_videoio310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310
+    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310
 }
 
 macx {

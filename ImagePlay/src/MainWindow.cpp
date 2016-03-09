@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionSynchronizeViews->setChecked(_synchronizeViews);
 
     // add version number to title
-    //setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
+    setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
 
     // connect to MainWindow
     ui->graphicsView->setMainWindow(this);
