@@ -67,14 +67,25 @@ win32 {
     DEPENDPATH += $$PWD/../_lib/freeimage
 
     # opencv
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_videoio310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310
+    CONFIG(release, debug|release) {
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_videoio310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310
+    } else {
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_videoio310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310d
+    }
 }
 
 macx {

@@ -47,7 +47,8 @@ public:
     IPLData*                getResultData           (int);
 
 protected:
-    IPLImage*               _image;
+    IPLImage*               _image1;
+    IPLImage*               _image2;
     IPLImage*               _preview;
     IPLKeyPoints*           _keypoints1;
     IPLKeyPoints*           _keypoints2;
