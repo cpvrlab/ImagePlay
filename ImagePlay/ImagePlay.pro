@@ -99,15 +99,14 @@ macx: {
 
     mylib.path = Contents/Frameworks
     mylib.files = \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_core.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_highgui.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_videoio.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_calib3d.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_optflow.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_features2d.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_xfeatures2d.3.1.0.dylib \
       ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64
         
     QMAKE_BUNDLE_DATA += mylib
@@ -120,7 +119,8 @@ macx: {
     ICON = res/ImagePlay.icns
 
     #run macdeployqt
-    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
+    # QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
 }
 
 linux: {

@@ -97,9 +97,14 @@ macx {
 
     DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/
 
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_videoio.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_calib3d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_optflow.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_features2d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xfeatures2d.3.1.0
 }
 
 linux {
