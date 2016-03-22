@@ -31,8 +31,7 @@
 /**
  * @brief The IPLImage class
  */
-class IPLSHARED_EXPORT IPLKeyPoints
-        : public IPLData
+class IPLSHARED_EXPORT IPLKeyPoints : public IPLData
 {
 public:
                     IPLKeyPoints       ();
@@ -46,7 +45,7 @@ public:
     int             size                ();
 
 protected:
-    std::vector<cv::KeyPoint>       _keypoints;
+    std::vector<cv::KeyPoint>           _keypoints;
 };
 
 #endif // IPLKEYPOINTS_H

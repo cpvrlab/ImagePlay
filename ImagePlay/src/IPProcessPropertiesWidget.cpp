@@ -255,6 +255,10 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             IPPropertyWidget *widget = NULL;
             switch(p->widget())
             {
+            case IPL_WIDGET_BUTTON:
+                widget = new IPPropertyButtonBool(p, this);
+                addPropertyWidget(property->title(), property->description(), widget);
+                break;
             default: //IPL_WIDGET_CHECKBOXES
                 widget = new IPPropertyCheckbox(p, property->title(), this);
                 addPropertyWidget("", property->description(), widget);

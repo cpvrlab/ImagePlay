@@ -524,6 +524,8 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLFeatureDetection",    new IPLFeatureDetection);
     _factory->registerProcess("IPLFeatureMatcher",      new IPLFeatureMatcher);
 
+    _factory->registerProcess("IPLCameraCalibration",   new IPLCameraCalibration);
+
 
     // not ready:
     /*_factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);

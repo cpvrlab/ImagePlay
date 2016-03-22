@@ -80,6 +80,8 @@ enum IPLDataType
     //Add additional data types here
     //...
     IPL_KEYPOINTS,
+    IPL_CV_MAT,
+    IPL_VECTOR,
 
     IPL_NUM_DATATYPES
 };
@@ -130,6 +132,7 @@ enum IPLProcessWidgetType
     IPL_WIDGET_POINT,
 
     //Integer: A button that increments the property after each click
+    //Bool:    A button that returns true once after it has been pressed
     IPL_WIDGET_BUTTON,
 
     IPL_WIDGET_GROUP,

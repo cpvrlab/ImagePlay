@@ -258,6 +258,7 @@ void IPLProcessPropertyInt::setValue(int value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyInt::serialize() const
@@ -288,6 +289,7 @@ void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyUnsignedInt::serialize() const
@@ -319,6 +321,7 @@ void IPLProcessPropertyDouble::setValue(double value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyDouble::serialize() const
@@ -350,6 +353,7 @@ void IPLProcessPropertyFloat::setValue(float value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyFloat::serialize() const
@@ -379,6 +383,7 @@ void IPLProcessPropertyBool::setValue(bool value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyBool::serialize() const
@@ -396,6 +401,10 @@ IPLProcessProperty *IPLProcessPropertyBool::clone() const
     return new IPLProcessPropertyBool(*this);
 }
 
+IPLProcessPropertyBoolOneShot::IPLProcessPropertyBoolOneShot(IPLProcess *process, int position, const char* name, const char* title, const char *description, bool value, IPLProcessWidgetType widget):
+    IPLProcessPropertyBool(process, position,name,title,description,process,widget)
+{}
+
 
 IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::string &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
@@ -408,6 +417,7 @@ void IPLProcessPropertyString::setValue(const std::string &value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 void IPLProcessPropertyString::setValue(std::string &&value)
@@ -415,6 +425,7 @@ void IPLProcessPropertyString::setValue(std::string &&value)
     _value = std::move(value);
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyString::serialize() const
@@ -445,6 +456,7 @@ void IPLProcessPropertyVectorInt::setValue(const std::vector<int> &value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
@@ -452,6 +464,7 @@ void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
     _value = std::move(value);
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyVectorInt::serialize() const
@@ -482,6 +495,7 @@ void IPLProcessPropertyVectorDouble::setValue(const std::vector<double> &value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 void IPLProcessPropertyVectorDouble::setValue(std::vector<double> &&value)
@@ -489,6 +503,7 @@ void IPLProcessPropertyVectorDouble::setValue(std::vector<double> &&value)
     _value = std::move(value);
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyVectorDouble::serialize() const
@@ -518,6 +533,7 @@ void IPLProcessPropertyColor::setValue(const IPLColor &value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 void IPLProcessPropertyColor::setValue(IPLColor &&value)
@@ -525,6 +541,7 @@ void IPLProcessPropertyColor::setValue(IPLColor &&value)
     _value = std::move(value);
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyColor::serialize() const
@@ -553,6 +570,7 @@ void IPLProcessPropertyPoint::setValue(const IPLPoint &value)
     _value = value;
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
@@ -560,6 +578,7 @@ void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
     _value = std::move(value);
     _process->requestUpdate();
     _process->notifyPropertyChangedEventHandler();
+    _process->processPropertyEvents(std::string(_name));
 }
 
 IPLProcessProperty::SerializedData IPLProcessPropertyPoint::serialize() const

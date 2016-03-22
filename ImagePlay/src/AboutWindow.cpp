@@ -28,9 +28,9 @@ AboutWindow::AboutWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString version("<b>Version: </b> %1, <b>Build Date: </b> %2 %3, <b>OpenCV: </b>%4.%5");
+    QString version("<b>Version: </b> %1, <b>Build Date: </b> %2 %3, <b>OpenCV: </b>%4.%5, <b>Qt: </b>%6");
 
-    ui->labelVersion->setText(version.arg(IMAGEPLAY_VERSION).arg(IMAGEPLAY_BUILDDATE).arg(IMAGEPLAY_BUILDTIME).arg(CV_MAJOR_VERSION).arg(CV_MINOR_VERSION));
+    ui->labelVersion->setText(version.arg(IMAGEPLAY_VERSION).arg(IMAGEPLAY_BUILDDATE).arg(IMAGEPLAY_BUILDTIME).arg(CV_MAJOR_VERSION).arg(CV_MINOR_VERSION).arg(QT_VERSION_STR));
 }
 
 AboutWindow::~AboutWindow()

@@ -144,6 +144,11 @@ void IPLProcess::addProcessPropertyBool(const char *name, const char *title, con
     _properties[name].reset(new IPLProcessPropertyBool(this, (int)_properties.size(), name, title, description, value, widget));
 }
 
+void IPLProcess::addProcessPropertyBoolOneShot(const char *name, const char *title, const char *description, bool value, IPLProcessWidgetType widget)
+{
+    _properties[name].reset(new IPLProcessPropertyBoolOneShot(this, (int)_properties.size(), name, title, description, value, widget));
+}
+
 void IPLProcess::addProcessPropertyString(const char *name, const char *title, const char *description, const std::string &value, IPLProcessWidgetType widget)
 {
     _properties[name].reset(new IPLProcessPropertyString(this, (int)_properties.size(), name, title, description, value, widget));
@@ -197,6 +202,12 @@ bool IPLProcess::getProcessPropertyBool(const char *name)
 {
     checkPropertyKey(name);
     return ((IPLProcessPropertyBool*) _properties[name].get())->value();
+}
+
+bool IPLProcess::getProcessPropertyBoolOneShot(const char *name)
+{
+    checkPropertyKey(name);
+    return ((IPLProcessPropertyBoolOneShot*) _properties[name].get())->value();
 }
 
 std::string IPLProcess::getProcessPropertyString(const char *name)

@@ -74,8 +74,8 @@ bool IPLFeatureDetection::processInputData(IPLData* data, int, bool useOpenCV)
 
     //cv::OrbFeatureDetector detector;
     std::vector<cv::KeyPoint> keypoints;
-    cv::Ptr<cv::ORB> detector = cv::ORB::create(300, 1.2f, 4, 31, 0, 2, cv::ORB::FAST_SCORE, 31, 20);
-    //cv::FAST(input, keypoints, threshold, nonmaxSuppression);
+    //cv::Ptr<cv::ORB> detector = cv::ORB::create(300, 1.2f, 4, 31, 0, 2, cv::ORB::FAST_SCORE, 31, 20);
+    cv::FAST(input, keypoints, threshold, nonmaxSuppression);
     //cv::Ptr<cv::SURF> detector = cv::SURF::create( minHessian );
     //detector.detect(input, keypoints);
     cv::drawKeypoints(input, keypoints, output);

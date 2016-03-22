@@ -107,4 +107,6 @@
 #include "IPLFeatureMatcher.h"
 #include "IPLOpticalFlow.h"
 
+#include "IPLCameraCalibration.h"
+
 #endif // IPL_H
