@@ -46,7 +46,7 @@ public:
 
     void                    init                    ();
     void                    destroy                 ();
-    void                    processPropertyEvents   (std::string);
+    void                    processPropertyEvents   (IPLEvent*);
     bool                    processInputData        (IPLData*, int, bool useOpenCV);
     IPLData*                getResultData           (int);
 protected:

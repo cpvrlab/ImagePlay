@@ -589,6 +589,8 @@ void IPProcessGrid::propertyChanged(IPLProcess* process)
     //process->requestUpdate();
     propagateNeedsUpdate(process);
     _updateNeeded = true;
+
+    _mainWindow->updateProcessMessages();
 }
 
 void IPProcessGrid::outputsChanged(IPLProcess *)

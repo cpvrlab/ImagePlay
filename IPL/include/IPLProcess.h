@@ -21,6 +21,7 @@
 #define IPLPROCESS_H
 
 #include "IPL_global.h"
+#include "IPLEvent.h"
 #include "IPLData.h"
 #include "IPLImage.h"
 #include "IPLProcessProperty.h"
@@ -134,7 +135,7 @@ public:
     virtual void            destroy                     () = 0;
     virtual void            beforeProcessing            () {}
     virtual bool            processInputData            (IPLData* data, int inputIndex, bool useOpenCV) = 0;
-    virtual void            processPropertyEvents       (std::string eventName) {};
+    virtual void            processPropertyEvents       (IPLEvent* eventName) {};
     virtual IPLData*        getResultData               (int outputIndex ) = 0;
     virtual void            afterProcessing             () {}
 

@@ -53,16 +53,19 @@ void IPLCameraCalibration::destroy()
 
 }
 
-void IPLCameraCalibration::processPropertyEvents(std::string eventName)
+void IPLCameraCalibration::processPropertyEvents(IPLEvent* e)
 {
-    if(eventName == "saveCalibration")
+    resetMessages();
+
+    if(e->name() == "saveCalibration")
     {
         std::string fileName = getProcessPropertyString("fileName");
     }
-    if(eventName == "loadCalibration")
+    if(e->name() == "loadCalibration")
     {
         std::string fileName = getProcessPropertyString("fileName");
     }
+    addInformation(e->name());
 }
 
 bool IPLCameraCalibration::processInputData(IPLData* data , int index, bool useOpenCV)

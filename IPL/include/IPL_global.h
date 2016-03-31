@@ -155,4 +155,11 @@ enum IPLRawImageType
     IPL_RAW_32BIT_BGR
 };
 
+enum IPLEventType
+{
+    IPL_EVENT_DEFAULT = 0,
+    IPL_EVENT_BUTTON_PRESSED,
+    IPL_EVENT_BUTTON_RELEASED
+};
+
 #endif // IPL_GLOBAL_H
