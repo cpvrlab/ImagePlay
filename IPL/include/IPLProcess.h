@@ -247,7 +247,7 @@ private:
 
 public:
     // needed for plugins
-    static const int version = 1;
+    static const int version = IPL_VERSION;
     static const std::string server_name() {return "IPLProcessServer";}
 };
 

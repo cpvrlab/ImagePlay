@@ -20,6 +20,12 @@
 #ifndef IPL_GLOBAL_H
 #define IPL_GLOBAL_H
 
+// constants
+
+#ifndef IPL_VERSION
+#define IPL_VERSION 2
+#endif
+
 #define NOMINMAX
 
 //#include <QtCore/qglobal.h>

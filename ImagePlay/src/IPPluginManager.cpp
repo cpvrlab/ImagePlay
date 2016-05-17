@@ -85,6 +85,13 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
             // we can load all drivers from a specific server
             _drivers = kernel->get_all_drivers<IPLProcessDriver>(IPLProcess::server_name());
 
+            if(_drivers.size() == 0)
+            {
+                QString msg("Plugin IPL version does not match ImagePlay IPL version %2.\nCan't load %3.");
+                QMessageBox::warning(NULL, "Plugin Error", msg.arg(IPL_VERSION).arg(fileName));
+                continue;
+            }
+
             for (std::vector<IPLProcessDriver*>::iterator iter = _drivers.begin(); iter != _drivers.end(); ++iter) {
                 IPLProcessDriver& driver = *(*iter);
 

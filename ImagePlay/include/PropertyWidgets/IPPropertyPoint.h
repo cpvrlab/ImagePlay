@@ -62,10 +62,10 @@ public:
 
 
         _spinnerX->setMinimum(0);
-        _spinnerX->setMaximum(1000);
+        _spinnerX->setMaximum(1024);
 
         _spinnerY->setMinimum(0);
-        _spinnerY->setMaximum(1000);
+        _spinnerY->setMaximum(1024);
 
         init();
 
