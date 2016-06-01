@@ -14,9 +14,9 @@ before_install:
  # g++ 4.8 for std=c++11
  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
  # additional headerfiles
- - sudo apt-get install libXxf86vm-dev libXi-dev libudev-dev libXcursor-dev
- - sudo apt-get install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
- - sudo apt-get install libfreeimage-dev libopencv-core-dev libopencv-core-dev libopencv-imgproc-dev libopencv-highgui-dev
+ - sudo apt-get -y install libXxf86vm-dev libXi-dev libudev-dev libXcursor-dev
+ - sudo apt-get -y install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
+ - sudo apt-get -y install libfreeimage-dev libopencv-core-dev libopencv-core-dev libopencv-imgproc-dev libopencv-highgui-dev
 
 script:
  - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8
