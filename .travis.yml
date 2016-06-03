@@ -22,6 +22,7 @@ script:
  - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8  PREFIX=/app
  - make
  - sudo make install
+ - cd ../
  - find /app
  - curl --upload-file /app/bin/imageplay https://transfer.sh/imageplay
  - bash -ex appimage.sh
