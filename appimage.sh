@@ -45,7 +45,8 @@ Categories=Graphics;
 Exec=$LOWERAPP
 EOF
 
-cp "../res/ImagePlay.png" $LOWERAPP.png
+ls ../../
+cp ../../ImagePlay/res/ImagePlay.png $LOWERAPP.png
 
 ########################################################################
 # Copy in the dependencies that cannot be assumed to be available
