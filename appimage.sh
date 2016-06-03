@@ -13,7 +13,8 @@ LOWERAPP=${APP,,}
 
 GIT_REV=$(git rev-parse --short HEAD)
 echo $GIT_REV
-make install DESTDIR=/home/travis/$APP/$APP.AppDir
+
+mkdir -p $HOME/$APP/$APP.AppDir/usr/bin/
 
 cd $HOME/$APP/
 
@@ -21,6 +22,11 @@ wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./func
 . ./functions.sh
 
 cd $APP.AppDir
+
+sudo chown -R $USER /app/
+sed -i -e 's|/app/|././|g' /app/usr/bin/imageplay
+
+cp /app/usr/bin/imageplay ./usr/bin/
 
 ########################################################################
 # Copy desktop and icon file to AppDir for AppRun to pick them up
