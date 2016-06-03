@@ -26,7 +26,7 @@ cd $APP.AppDir
 sudo chown -R $USER /app/
 sed -i -e 's|/app/|././|g' /app/usr/bin/imageplay
 
-cp /app/usr/bin/imageplay ./usr/bin/
+cp /app/bin/imageplay ./usr/bin/
 
 ########################################################################
 # Copy desktop and icon file to AppDir for AppRun to pick them up
