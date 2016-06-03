@@ -45,8 +45,7 @@ Categories=Graphics;
 Exec=$LOWERAPP
 EOF
 
-find ../../ -name ImagePlay.png
-cp ../../ImagePlay/res/ImagePlay.png $LOWERAPP.png
+find ../../ -name ImagePlay.png -exec cp {} imageplay.png \;
 
 ########################################################################
 # Copy in the dependencies that cannot be assumed to be available
