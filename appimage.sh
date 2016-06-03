@@ -45,7 +45,7 @@ Categories=Graphics;
 Exec=$LOWERAPP
 EOF
 
-ls ../../
+find ../../ -name ImagePlay.png
 cp ../../ImagePlay/res/ImagePlay.png $LOWERAPP.png
 
 ########################################################################
