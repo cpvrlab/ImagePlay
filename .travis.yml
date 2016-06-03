@@ -23,7 +23,7 @@ script:
  - make
  - sudo make install
  - find /app
- - curl --upload-file ./app/bin/imageplay https://transfer.sh/imageplay
+ - curl --upload-file /app/bin/imageplay https://transfer.sh/imageplay
  - bash -ex appimage.sh
  
 branches:
