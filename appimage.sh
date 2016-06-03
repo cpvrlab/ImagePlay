@@ -24,7 +24,7 @@ wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./func
 cd $APP.AppDir
 
 sudo chown -R $USER /app/
-sed -i -e 's|/app/|././|g' /app/bin/imageplay
+sed -i -e 's|/app|././|g' /app/bin/imageplay
 
 cp /app/bin/imageplay ./usr/bin/
 
