@@ -29,6 +29,9 @@ SettingsWindow::SettingsWindow(MainWindow *mainWindow) :
     ui->setupUi(this);
 
     _mainWindow = mainWindow;
+
+    // hide plugin list, use the one in the process library instead
+    this->ui->grpPlugins->hide();
 }
 
 SettingsWindow::~SettingsWindow()

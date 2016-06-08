@@ -20,8 +20,9 @@
 #ifndef IPL_GLOBAL_H
 #define IPL_GLOBAL_H
 
-// constants
-
+// IPL_VERSION should be incremented when changes to IPL
+// interfaces are made in order to check if plugins
+// are still compatible
 #ifndef IPL_VERSION
 #define IPL_VERSION 2
 #endif

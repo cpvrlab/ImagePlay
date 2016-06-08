@@ -1,0 +1,13 @@
+#ifndef FVUPDATECONFIG_H
+#define FVUPDATECONFIG_H
+
+//
+// Info.plist:
+//
+// SUEnableSystemProfiling = YES
+// SUExpectsDSASignature = YES
+// SUFeedURL = http://anglonas.fotonija.lt/MacOSX/updates.php
+// SUPublicDSAKeyFile = aupdate_dsa_pub.pem
+//
+
+#endif // FVUPDATECONFIG_H

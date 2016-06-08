@@ -87,7 +87,7 @@ void IPPluginManager::loadPlugins(QString pluginPath, IPProcessFactory* factory)
 
             if(_drivers.size() == 0)
             {
-                QString msg("Plugin IPL version does not match ImagePlay IPL version %2.\nCan't load %3.");
+                QString msg("Plugin IPL version does not match ImagePlay IPL API version %2.\nCan't load %3.");
                 QMessageBox::warning(NULL, "Plugin Error", msg.arg(IPL_VERSION).arg(fileName));
                 continue;
             }

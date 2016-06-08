@@ -52,6 +52,10 @@
 
 #include <pugg/Kernel.h>
 
+#ifdef USE_FERVOR_UPDATER
+    #include "fvupdater.h"
+#endif
+
 namespace Ui {
 class MainWindow;
 }
@@ -147,7 +151,6 @@ public slots:
     void                    setParamsHaveChanged            ();
     void                    hideMessage                     ();
     void                    on_actionImageViewer_hidden     ();
-
 private slots:
     void                    on_actionZoomIn_triggered       ();
     void                    on_actionZoomOut_triggered      ();
@@ -180,6 +183,7 @@ private slots:
     void                    on_btnCloseProcessSettings_clicked();
     void                    on_btnResetProcessSettings_clicked();
     void                    on_actionImage_Viewer_always_on_top_triggered(bool checked);
+    void                    on_actionCheck_for_updates_triggered();
 
 private:
     void                    addRecentProcessFile(const QString&);

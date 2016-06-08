@@ -76,6 +76,8 @@ win32 {
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_photo310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xphoto310
     } else {
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc310d
@@ -84,9 +86,12 @@ win32 {
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_photod310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xphotod310d
     }
 }
+
+
 
 macx {
     QMAKE_MAC_SDK = macosx10.11
@@ -105,6 +110,7 @@ macx {
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_optflow.3.1.0
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_features2d.3.1.0
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xfeatures2d.3.1.0
+
 }
 
 linux {

@@ -100,6 +100,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->processTabWidget->init(this);
 
+#ifndef USE_FERVOR_UPDATER
+        ui->actionCheck_for_updates->setVisible(false);
+#endif
+
 #ifdef Q_OS_MAC
     // set the right placeholder text for OS X
     ui->txtFilter->setPlaceholderText("Find (Cmd+F)...");
@@ -1442,4 +1446,11 @@ void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)
 
     _imageViewer->show();
 
+}
+
+void MainWindow::on_actionCheck_for_updates_triggered()
+{
+#ifdef USE_FERVOR_UPDATER
+    FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+#endif
 }

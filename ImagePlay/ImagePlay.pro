@@ -41,6 +41,9 @@ APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
 APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
 APP_NAME=\\\"$$TARGET\\\" \
 
+# enable or disable update checker
+USE_FERVOR_UPDATER = false
+
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}
 macx {PLATFORM = macx}
@@ -65,6 +68,7 @@ OTHER_FILES += $$files(*,true)
 HEADERS     -= media/plugin_development/_template/NAME.h
 SOURCES     -= media/plugin_development/_template/NAME.cpp
 SOURCES     -= media/plugin_development/_template/plugin.cpp
+
 
 RC_FILE = res/icon.rc
 
@@ -91,6 +95,8 @@ win32: {
                         $${QMAKE_COPY_DIR} ..\\IPL\\include ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development\\_lib\\include & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
+
+    USE_FERVOR_UPDATER = true
 }
 
 macx: {
@@ -121,6 +127,8 @@ macx: {
     #run macdeployqt
     # QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
     QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
+
+    USE_FERVOR_UPDATER = true
 }
 
 linux: {
@@ -185,6 +193,16 @@ INCLUDEPATH += $$PWD/../IPL/include/
 INCLUDEPATH += $$PWD/../IPL/include/processes/
 INCLUDEPATH += $$PWD/../IPL/include/opencv/
 DEPENDPATH += $$PWD/../IPL/include/
+
+# Fervor autoupdater
+if($$USE_FERVOR_UPDATER) {
+    !include("../_fervor/Fervor.pri") {
+        error("Unable to include Fervor autoupdater.")
+    }
+    DEFINES += USE_FERVOR_UPDATER
+}
+
+message($$DEFINES)
 
 # Visual Leak Detector
 #win32: LIBS += -L"C:/Program Files (x86)/Visual Leak Detector/lib/Win32/" -lvld

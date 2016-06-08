@@ -38,6 +38,10 @@
 
 #include "IPL_processes.h"
 
+#ifdef USE_FERVOR_UPDATER
+    #include "fvupdater.h"
+#endif
+
 #include <math.h>
 
 static MainWindow* mainWindow = 0;
@@ -51,6 +55,17 @@ void customMessageOutput(QtMsgType type, const QMessageLogContext &context, cons
 int main(int argc, char *argv[])
 {
     IPApplication a(argc, argv);
+
+    QApplication::setApplicationName(APP_PRODUCT);
+    QApplication::setApplicationVersion(APP_VERSION);
+    QApplication::setOrganizationName(APP_COMPANY);
+    QApplication::setOrganizationDomain("imageplay.io");
+
+#ifdef USE_FERVOR_UPDATER
+    // Fervor update checker
+    FvUpdater::sharedUpdater()->SetFeedURL("http://imageplay.io/Appcast.xml");
+    FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+#endif
 
     // set language to english
     QLocale::setDefault(QLocale::English);
