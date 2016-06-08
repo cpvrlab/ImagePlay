@@ -56,11 +56,27 @@ var App = function () {
             $(".navbar-collapse.in").collapse('hide');
         });
     }
+	
+	function fetchDownloadNumbers() {
+		$.getJSON( "https://api.github.com/repos/cpvrlab/imageplay/releases", function( data ) {
+			//$(data).filter(function(i,n){return i=='download_count';});
+			var download_count = 0;
+			$(data).each(function(i,o){
+				if(o.assets) {
+					$(o.assets).each(function(i,o) {
+						download_count += o.download_count;
+					});
+				}
+			});
+			console.debug(download_count);
+		});
+	}
 
     return {
         init: function () {
             handleHeader();
             handleBootstrap();
+			fetchDownloadNumbers();
         },
 
         initCounter: function () {
