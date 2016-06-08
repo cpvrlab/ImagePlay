@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>BFH ImagePlay - Rapid Prototyping for Image Processing</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		#container {
+			margin: 20px;
+		}
+		h1 {
+			display:none;
+		}
+		h2 {
+			font-size: 24px;
+			border-top: 1px solid #666;
+			margin-top: 20px;
+			padding-top: 20px;
+		}
+		h3 {
+		    font-size: 18px;
+		}
+	</style>
+</head>
+
+<body data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery dark">
+    <div id="container">
+	</div>
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$.get('https://raw.githubusercontent.com/cpvrlab/ImagePlay/develop/changelog.md', function(content) {
+				console.log(content);
+				$.ajax({
+					type: "POST",
+					dataType: "html",
+					processData: false,
+					url: "https://api.github.com/markdown/raw",
+					data: content,
+					contentType: "text/plain",
+					success: function(data){
+						console.log("success!");
+						$('#container').html(data);
+					}, 
+					error: function(jqXHR, textStatus, error){
+						console.log(jqXHR, textStatus, error);
+					}
+				});
+			});
+        });
+    </script>
+</body>
+</html>
