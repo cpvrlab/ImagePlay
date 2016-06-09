@@ -43,6 +43,8 @@ APP_NAME=\\\"$$TARGET\\\" \
 
 # enable or disable update checker
 USE_FERVOR_UPDATER = false
+DEFINES += IMAGEPLAY_URL=\\\"http://imageplay.io\\\"
+DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://colorcode.ch/Appcast.xml\\\"
 
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}
