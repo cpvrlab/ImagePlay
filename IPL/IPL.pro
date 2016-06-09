@@ -110,6 +110,8 @@ macx {
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_optflow.3.1.0
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_features2d.3.1.0
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xfeatures2d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_photo.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xphoto.3.1.0
 
 }
 

@@ -59,11 +59,11 @@ int main(int argc, char *argv[])
     QApplication::setApplicationName(APP_PRODUCT);
     QApplication::setApplicationVersion(APP_VERSION);
     QApplication::setOrganizationName(APP_COMPANY);
-    QApplication::setOrganizationDomain("imageplay.io");
+    QApplication::setOrganizationDomain(IMAGEPLAY_URL);
 
 #ifdef USE_FERVOR_UPDATER
     // Fervor update checker
-    FvUpdater::sharedUpdater()->SetFeedURL("http://imageplay.io/Appcast.xml");
+    FvUpdater::sharedUpdater()->SetFeedURL(IMAGEPLAY_APPCAST_URL);
     FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
 #endif
 
