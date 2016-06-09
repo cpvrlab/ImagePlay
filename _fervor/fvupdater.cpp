@@ -594,8 +594,7 @@ void FvUpdater::showInformationDialog(QString message, bool showEvenInSilentMode
 	}
 
 	QMessageBox dlInformationMsgBox;
-	dlInformationMsgBox.setIcon(QMessageBox::Information);
-	dlInformationMsgBox.setText(tr("Information"));
-	dlInformationMsgBox.setInformativeText(message);
+        dlInformationMsgBox.setIconPixmap(QPixmap(":/info.png").scaledToWidth(48, Qt::SmoothTransformation));
+        dlInformationMsgBox.setText(message);
 	dlInformationMsgBox.exec();
 }
