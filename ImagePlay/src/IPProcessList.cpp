@@ -72,12 +72,16 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
         iconFile = QFileInfo(_mainWindow->processIconPath("Plugin"));
     }
 
-    QPixmap transparentIcon(iconFile.absoluteFilePath());
     QPixmap finalIcon(25,25);
 
-    QPainter painter(&finalIcon);
-    painter.fillRect(0,0,25,25,_categoryColors.at(category));
-    painter.drawPixmap(0,0,25,25,transparentIcon);
+    if(iconFile.exists())
+    {
+        QPixmap transparentIcon(iconFile.absoluteFilePath());
+
+        QPainter painter(&finalIcon);
+        painter.fillRect(0,0,25,25,_categoryColors.at(category));
+        painter.drawPixmap(0,0,25,25,transparentIcon);
+    }
 
     QListWidgetItem* newItem = new QListWidgetItem(finalIcon, text);
     newItem->setToolTip(processID);
