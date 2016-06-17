@@ -134,8 +134,8 @@ public:
     virtual void            init                        () = 0;
     virtual void            destroy                     () = 0;
     virtual void            beforeProcessing            () {}
-    virtual bool            processInputData            (IPLData* data, int inputIndex, bool useOpenCV) = 0;
-    virtual void            processPropertyEvents       (IPLEvent* eventName) {};
+    virtual bool            processInputData            (IPLData*, int, bool) = 0;
+    virtual void            processPropertyEvents       (IPLEvent*) {}
     virtual IPLData*        getResultData               (int outputIndex ) = 0;
     virtual void            afterProcessing             () {}
 

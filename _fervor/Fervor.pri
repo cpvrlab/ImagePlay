@@ -1,4 +1,4 @@
-QT += core gui webengine webenginewidgets network
+QT += core gui network
 
 isEmpty(FV_APP_NAME) {
 	warning("Fervor: falling back to application name '$$TARGET'")

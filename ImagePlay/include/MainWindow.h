@@ -37,7 +37,7 @@
 
 #include "IPProcessStep.h"
 #include "IPProcessFactory.h"
-#include "IPProcessScript.h"
+//#include "IPProcessScript.h"
 #include "IPL_processes.h"
 #include "ImageViewerWindow.h"
 #include "SettingsWindow.h"

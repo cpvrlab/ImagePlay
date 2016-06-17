@@ -103,7 +103,13 @@ win32: {
 
 macx: {
     QMAKE_MAC_SDK = macosx10.11
-    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
+    QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
+
+    #LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
+    #LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
+    LIBS += -L../_lib/ -lIPL
+
+    #DEPENDPATH += $$PWD/../_lib/freeimage
 
     mylib.path = Contents/Frameworks
     mylib.files = \
@@ -115,7 +121,8 @@ macx: {
       ../_lib/opencv/x64/clang/lib/libopencv_optflow.3.1.0.dylib \
       ../_lib/opencv/x64/clang/lib/libopencv_features2d.3.1.0.dylib \
       ../_lib/opencv/x64/clang/lib/libopencv_xfeatures2d.3.1.0.dylib \
-      ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64
+      ../_lib/libIPL.1.0.0.dylib \
+      ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64 \
         
     QMAKE_BUNDLE_DATA += mylib
 
@@ -127,8 +134,12 @@ macx: {
     ICON = res/ImagePlay.icns
 
     #run macdeployqt
-    # QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
-    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/
+    #QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ $$escape_expand(\n\t)
+
+    # fix some weird dylib issues
+    QMAKE_POST_LINK += install_name_tool -change libIPL.1.dylib @executable_path/../Frameworks/libIPL.1.0.0.dylib ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
+    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64  ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib
 
     USE_FERVOR_UPDATER = true
 }
