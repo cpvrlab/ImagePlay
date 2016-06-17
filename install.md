@@ -42,6 +42,8 @@ Install [Homebrew](http://brew.sh)
 ```sh
 brew install qt5
 brew link --force qt5
+brew tap homebrew/science
+brew install opencv3
 ```
 ### Build
 ```sh
