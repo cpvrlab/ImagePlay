@@ -103,10 +103,13 @@ win32: {
 
 macx: {
     QMAKE_MAC_SDK = macosx10.11
-    #LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
-    LIBS += -L$$PWD/../_lib/ -lIPL
+    QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 
-    DEPENDPATH += $$PWD/../_lib/
+    #LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
+    #LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
+    LIBS += -L../_lib/ -lIPL
+
+    #DEPENDPATH += $$PWD/../_lib/freeimage
 
     mylib.path = Contents/Frameworks
     mylib.files = \
@@ -118,8 +121,8 @@ macx: {
       ../_lib/opencv/x64/clang/lib/libopencv_optflow.3.1.0.dylib \
       ../_lib/opencv/x64/clang/lib/libopencv_features2d.3.1.0.dylib \
       ../_lib/opencv/x64/clang/lib/libopencv_xfeatures2d.3.1.0.dylib \
+      ../_lib/libIPL.1.0.0.dylib \
       ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64 \
-      ../_lib/libIPL.1.0.0.dylib
         
     QMAKE_BUNDLE_DATA += mylib
 

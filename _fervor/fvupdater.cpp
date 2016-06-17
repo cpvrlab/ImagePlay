@@ -98,7 +98,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
 
 	// Create a new window
 	m_updaterWindow = new FvUpdateWindow();
-	m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
+    m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
 	m_updaterWindow->show();
 }
 
@@ -129,7 +129,7 @@ void FvUpdater::showUpdateConfirmationDialogUpdatedWithCurrentUpdateProposal()
 
 	// Create a new window
 	m_updateConfirmationDialog = new FvUpdateConfirmDialog();
-	m_updateConfirmationDialog->UpdateWindowWithCurrentProposedUpdate();
+    m_updateConfirmationDialog->UpdateWindowWithCurrentProposedUpdate();
 	m_updateConfirmationDialog->show();
 }
 
@@ -283,6 +283,7 @@ bool FvUpdater::CheckForUpdatesNotSilent()
 {
 	return CheckForUpdates(false);
 }
+
 
 
 void FvUpdater::startDownloadFeed(QUrl url)

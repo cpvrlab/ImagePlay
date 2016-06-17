@@ -104,22 +104,23 @@ private:
 
 	//
 	// HTTP feed fetcher infrastructure
-	//
-	QUrl m_feedURL;					// Feed URL that will be fetched
+    //
+    QUrl m_feedURL;					// Feed URL that will be fetched
+    QUrl m_ReleaseNotesURL;					// Feed URL that will be fetched
 	QNetworkAccessManager m_qnam;
 	QNetworkReply* m_reply;
 	int m_httpGetId;
 	bool m_httpRequestAborted;
 
-	void startDownloadFeed(QUrl url);	// Start downloading feed
-	void cancelDownloadFeed();			// Stop downloading the current feed
+    void startDownloadFeed(QUrl url);	// Start downloading feed
+    void cancelDownloadFeed();			// Stop downloading the current feed
 
 private slots:
 
-	void httpFeedReadyRead();
-	void httpFeedUpdateDataReadProgress(qint64 bytesRead,
-										qint64 totalBytes);
-	void httpFeedDownloadFinished();
+    void httpFeedReadyRead();
+    void httpFeedUpdateDataReadProgress(qint64 bytesRead,
+                                        qint64 totalBytes);
+    void httpFeedDownloadFinished();
 
 
 private:

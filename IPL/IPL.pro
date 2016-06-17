@@ -100,7 +100,7 @@ macx {
     INCLUDEPATH += $$PWD/../_lib/freeimage
     DEPENDPATH += $$PWD/../_lib/freeimage
 
-    # DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/
+    #DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/
     DESTDIR = ../_lib/
 
     LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core.3.1.0
