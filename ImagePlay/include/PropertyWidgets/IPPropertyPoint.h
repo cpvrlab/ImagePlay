@@ -98,6 +98,11 @@ public:
         }
     }
 
+    void finishPickingCoordinates()
+    {
+        _btnPositionPicker->setChecked(false);
+    }
+
 public slots:
     void updateValue(int)
     {
@@ -107,9 +112,14 @@ public slots:
         emit changed();
     }
 
-
     void btnPickerTriggered(bool status)
     {
+        enableCoordinatePicker(status);
+    }
+
+    void enableCoordinatePicker(bool status)
+    {
+
         if(status)
         {
             QApplication::restoreOverrideCursor();

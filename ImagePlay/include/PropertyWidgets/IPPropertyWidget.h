@@ -35,6 +35,7 @@ public:
 
     }
     virtual void pickColor(IPLColor color) = 0;
+    virtual void finishPickingColor() = 0;
 };
 
 class IPLCoordinatePickHandler
@@ -45,6 +46,7 @@ public:
 
     }
     virtual void pickCoordinates(int x, int y) = 0;
+    virtual void finishPickingCoordinates() = 0;
 };
 
 class IPPropertyWidget : public QWidget

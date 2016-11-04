@@ -159,6 +159,11 @@ public:
         onColorPickerChanged(color);
     }
 
+    void finishPickingColor()
+    {
+        _btnColorPicker->setChecked(false);
+    }
+
 signals:
 
 public slots:
@@ -176,6 +181,11 @@ public slots:
     }
 
     void btnColorPickerTriggered(bool status)
+    {
+        enableColorPicker(status);
+    }
+
+    void enableColorPicker(bool status)
     {
         if(status)
         {

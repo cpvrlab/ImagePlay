@@ -86,6 +86,7 @@ win32 {
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_calib3d310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_optflow310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_features2d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xfeatures2d310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_photo310d
         LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_xphoto310d
     }
