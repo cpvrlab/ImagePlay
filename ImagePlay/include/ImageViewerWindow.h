@@ -51,7 +51,7 @@ class IPZoomWidget;
  * information such as a histogram, statistics and a zoomwidget are displayed
  * on the right side.
 */
-class ImageViewerWindow : public QMainWindow
+class ImageViewerWindow : public QMainWindow, public IPLCoordinatePickProvider, public IPLColorPickProvider
 {
     Q_OBJECT
 

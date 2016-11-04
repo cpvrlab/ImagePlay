@@ -46,6 +46,10 @@ public:
 
 protected:
     IPLImage*               _result;
+    IPLImage*               _inputA;
+    IPLImage*               _inputB;
+    IPLImage*               _previewA;
+    IPLImage*               _previewB;
 };
 
 #endif // IPLWarpPerspective_H

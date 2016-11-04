@@ -34,13 +34,13 @@ class IPPropertyPoint : public IPPropertyWidget, public IPLCoordinatePickHandler
 {
     Q_OBJECT
 public:
-    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent) : IPPropertyWidget(property, parent)
+    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent, IPLCoordinatePickProvider *provider) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
         _property = property;
-
+        _coordinateProvider = provider;
 
         _positionPickCursor = new QCursor(QPixmap(":/crosshair_cursor.png"), 15, 15);
 
@@ -119,15 +119,16 @@ public slots:
 
     void enableCoordinatePicker(bool status)
     {
-
         if(status)
         {
+            _coordinateProvider->setCoordinatePickHandler(this);
             QApplication::restoreOverrideCursor();
             QApplication::setOverrideCursor(*_positionPickCursor);
             _btnPositionPicker->setStyleSheet("background-color: #00ff00;");
         }
         else
         {
+            _coordinateProvider->clearCoordinatePickHandler();
             //QApplication::setOverrideCursor(Qt::ArrowCursor);
             QApplication::restoreOverrideCursor();
             _btnPositionPicker->setStyleSheet("");
@@ -136,6 +137,7 @@ public slots:
 
 private:
     IPLProcessPropertyPoint*    _property;
+    IPLCoordinatePickProvider*  _coordinateProvider;
     QSpinBox*                   _spinnerX;
     QSpinBox*                   _spinnerY;
     QPushButton*                _btnPositionPicker;
