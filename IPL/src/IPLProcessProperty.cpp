@@ -215,7 +215,7 @@ inline void deserializeValue(const std::string &data, IPLPoint &value)
 
         int charsParsed = 0;
         float element = 0;
-        if (sscanf(&(*pos),"%lf%n",&element,&charsParsed) > 0)
+        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
             point[i++] = element;
 
         pos += charsParsed;
