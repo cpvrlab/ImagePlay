@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer
     _timer = new QTimer(this);
+    // update and execute graphics view on time out
     connect(_timer, SIGNAL(timeout()), this, SLOT(execute()));
 
     // autosave timer
@@ -63,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->messageLabel->hide();
 
     // sequence control widget
+    // (at the moment not working. it was used for the control of imageloading in sequence loader process.)
     //ui->toolBar->addWidget(ui->sequenceControlWidget);
     ui->sequenceControlWidget->setEnabled(false);
     ui->sequenceControlWidget->hide();
@@ -109,6 +111,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->txtFilter->setPlaceholderText("Find (Cmd+F)...");
 #endif
 
+    //set focus on filter lineedit
     setFilterFocus();
 
     if(QApplication::arguments().length() > 1)
@@ -196,7 +199,6 @@ void MainWindow::readSettings()
 {
     // properties
     _settings = new QSettings("BFH", "ImagePlay");
-
     _useOpenCV          = _settings->value("OpenCV", true).toBool();
     _autosaveEnabled    = _settings->value("AutoSave", true).toBool();
     _defaultImagePath   = _settings->value("DefaultImagePath", "").toString();

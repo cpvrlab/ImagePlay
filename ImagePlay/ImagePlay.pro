@@ -33,18 +33,31 @@ QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
 QMAKE_TARGET_COPYRIGHT = ""
 
-DEFINES += \
-APP_VERSION=\"\\\"$$VERSION\\\"\" \
-APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
-APP_NAME=\\\"$$TARGET\\\" \
+equals(TEMPLATE, app) {
+    #message("Template value equals app")
+    DEFINES += \
+    APP_VERSION=\"\\\"$$VERSION\\\"\" \
+    APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+    APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+    APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+    APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
+    APP_NAME=\\\"$$TARGET\\\" \
+
+} else {
+    #message("Template value equals vcapp")
+    DEFINES += \
+    APP_VERSION=\\\"$$VERSION\\\" \
+    APP_COMPANY=\\\"$$QMAKE_TARGET_COMPANY\\\" \
+    APP_PRODUCT=\\\"$$QMAKE_TARGET_PRODUCT\\\" \
+    APP_DESCRIPTION=\\\"$$QMAKE_TARGET_DESCRIPTION\\\" \
+    APP_COPYRIGHT=\\\"$$QMAKE_TARGET_COPYRIGHT\\\" \
+    APP_NAME=\\\"$$TARGET\\\" \
+}
 
 # enable or disable update checker
 USE_FERVOR_UPDATER = false
 DEFINES += IMAGEPLAY_URL=\\\"http://imageplay.io\\\"
-DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://colorcode.ch/Appcast.xml\\\"
+DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://imageplay.io/Appcast.xml\\\"
 
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}

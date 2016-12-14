@@ -27,7 +27,7 @@ IPProcessList::IPProcessList(MainWindow* mainWindow, QWidget *parent) :
 
     _mainWindow = mainWindow;
 
-    // define category colors
+    // define category colors (IPLProcess icon background color)
     _categoryColors.push_back(QColor(255, 255, 255));       // CATEGORY_UNDEFINED
     _categoryColors.push_back(QColor(173,213,138));         // CATEGORY_IO
     _categoryColors.push_back(QColor(101,194,149));         // CATEGORY_CONVERSIONS

@@ -63,6 +63,7 @@ bool IPProcessGrid::sortTreeDepthLessThan(IPProcessStep* s1, IPProcessStep* s2)
     return s1->treeDepth() < s2->treeDepth();
 }
 
+//breath first search
 void IPProcessGrid::buildQueue()
 {
     qDebug() << "IPProcessGrid::buildQueue";
