@@ -948,6 +948,7 @@ void ImageViewerWindow::on_mouseClick()
           on_verticalScrollBarChanged( vert );
     }
 }
+
 //-----------------------------------------------------------------------------
 /*!
 ImageViewerWindow::on_mouseDoubleClick
@@ -956,13 +957,28 @@ The position stays the same for all image tabs.
 */
 void ImageViewerWindow::on_mouseDoubleClick()
 {
-    ui->zoomWidget->togglePositionLocked();
-
-    // update icon
-    if(ui->zoomWidget->isPositionLocked())
-        ui->positionLockedLabel->setStyleSheet("background-image: url(:/padlock_closed_inv.png) no-repeat;");
+    // either finish picking coordinates
+    if(_coordinatePickHandler)
+    {
+        _coordinatePickHandler->pickCoordinates(_currentPosition.x(), _currentPosition.y());
+        _coordinatePickHandler->finishPickingCoordinates();
+    }// either finish picking coordinates
+    else if(_colorPickHandler)
+    {
+        _colorPickHandler->pickColor(IPLColor(_currentColor.redF(), _currentColor.greenF(), _currentColor.blueF()));
+        _colorPickHandler->finishPickingColor();
+    }
+    // or lock the zoomer position
     else
-        ui->positionLockedLabel->setStyleSheet("background-image: url(:/padlock_open_inv.png) no-repeat;");
+    {
+        ui->zoomWidget->togglePositionLocked();
+
+        // update icon
+        if(ui->zoomWidget->isPositionLocked())
+            ui->positionLockedLabel->setStyleSheet("background-image: url(:/padlock_closed_inv.png) no-repeat;");
+        else
+            ui->positionLockedLabel->setStyleSheet("background-image: url(:/padlock_open_inv.png) no-repeat;");
+    }
 }
 //-----------------------------------------------------------------------------
 /*!

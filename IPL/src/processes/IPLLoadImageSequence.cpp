@@ -45,7 +45,7 @@ void IPLLoadImageSequence::destroy()
     delete _result;
 }
 
-bool IPLLoadImageSequence::processInputData(IPLImage*, int, bool)
+bool IPLLoadImageSequence::processInputData(IPLData*, int, bool)
 {
     // delete previous result
     delete _result;

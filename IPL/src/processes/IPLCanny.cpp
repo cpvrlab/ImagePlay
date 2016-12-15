@@ -162,8 +162,10 @@ void IPLCanny::thinning(IPLOrientedImage* dI, IPLImagePlane* image, IPLImagePlan
     }
 }
 
-bool IPLCanny::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLCanny::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

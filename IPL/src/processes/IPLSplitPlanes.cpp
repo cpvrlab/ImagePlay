@@ -52,8 +52,10 @@ void IPLSplitPlanes::destroy()
     }
 }
 
-bool IPLSplitPlanes::processInputData(IPLImage* image, int, bool)
+bool IPLSplitPlanes::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     for(uint i=0; i<_result.size(); i++)
     {

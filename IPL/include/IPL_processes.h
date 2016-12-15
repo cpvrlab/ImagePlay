@@ -103,4 +103,10 @@
 #include "IPLWarpAffine.h"
 #include "IPLWarpPerspective.h"
 
+#include "IPLFeatureDetection.h"
+#include "IPLFeatureMatcher.h"
+#include "IPLOpticalFlow.h"
+
+#include "IPLCameraCalibration.h"
+
 #endif // IPL_H

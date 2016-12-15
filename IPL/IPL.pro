@@ -67,10 +67,32 @@ win32 {
     DEPENDPATH += $$PWD/../_lib/freeimage
 
     # opencv
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_core2410
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_imgproc2410
-    LIBS += -L$$PWD/../_lib/opencv/x64/vc12/lib/ -lopencv_highgui2410
+    CONFIG(release, debug|release) {
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_core310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_imgproc310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_highgui310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_videoio310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_calib3d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_optflow310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_features2d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xfeatures2d310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_photo310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xphoto310
+    } else {
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_core310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_imgproc310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_highgui310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_videoio310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_calib3d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_optflow310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_features2d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xfeatures2d310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_photo310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xphoto310d
+    }
 }
+
+
 
 macx {
     QMAKE_MAC_SDK = macosx10.12
@@ -79,11 +101,20 @@ macx {
     INCLUDEPATH += $$PWD/../_lib/freeimage
     DEPENDPATH += $$PWD/../_lib/freeimage
 
-    DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/
+    #DESTDIR = ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/
+    DESTDIR = ../_lib/
 
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc
-    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_core.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_imgproc.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_highgui.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_videoio.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_calib3d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_optflow.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_features2d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xfeatures2d.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_photo.3.1.0
+    LIBS += -L$$PWD/../_lib/opencv/x64/clang/lib/ -lopencv_xphoto.3.1.0
+
 }
 
 linux {

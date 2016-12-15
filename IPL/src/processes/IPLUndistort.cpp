@@ -51,8 +51,10 @@ void IPLUndistort::destroy()
     delete _result;
 }
 
-bool IPLUndistort::processInputData(IPLImage* image, int, bool)
+bool IPLUndistort::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // get properties
     float k1 = getProcessPropertyDouble("k1");
     float k2 = getProcessPropertyDouble("k2");

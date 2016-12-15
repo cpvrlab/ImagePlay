@@ -36,6 +36,14 @@ IPProcessEdge::IPProcessEdge(IPProcessStep* from, IPProcessStep* to, int indexFr
     _colorArrow.push_back(QColor(46, 204, 113));    // COLOR: purple
     _colorArrow.push_back(QColor(255, 0, 0));       // COLOR: red
     _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
+    _colorArrow.push_back(QColor(241, 196, 15));    // UNDEFINED: yellow
 
     // set QGraphicItem properties
     setFlag(QGraphicsItem::ItemIsSelectable);

@@ -215,7 +215,7 @@ inline void deserializeValue(const std::string &data, IPLPoint &value)
 
         int charsParsed = 0;
         float element = 0;
-        if (sscanf(&(*pos),"%lf%n",&element,&charsParsed) > 0)
+        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
             point[i++] = element;
 
         pos += charsParsed;
@@ -257,6 +257,7 @@ void IPLProcessPropertyInt::setValue(int value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -287,6 +288,7 @@ void IPLProcessPropertyUnsignedInt::setValue(unsigned int value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -318,6 +320,7 @@ void IPLProcessPropertyDouble::setValue(double value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -349,6 +352,7 @@ void IPLProcessPropertyFloat::setValue(float value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -378,6 +382,7 @@ void IPLProcessPropertyBool::setValue(bool value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -396,6 +401,10 @@ IPLProcessProperty *IPLProcessPropertyBool::clone() const
     return new IPLProcessPropertyBool(*this);
 }
 
+IPLProcessPropertyBoolOneShot::IPLProcessPropertyBoolOneShot(IPLProcess *process, int position, const char* name, const char* title, const char *description, bool value, IPLProcessWidgetType widget):
+    IPLProcessPropertyBool(process, position,name,title,description,process,widget)
+{}
+
 
 IPLProcessPropertyString::IPLProcessPropertyString(IPLProcess *process, int position, const char* name, const char* title, const char *description, const std::string &value, IPLProcessWidgetType widget):
     IPLProcessProperty(position,name,title,description,process,widget),
@@ -407,6 +416,7 @@ void IPLProcessPropertyString::setValue(const std::string &value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -414,6 +424,7 @@ void IPLProcessPropertyString::setValue(std::string &&value)
 {
     _value = std::move(value);
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -444,6 +455,7 @@ void IPLProcessPropertyVectorInt::setValue(const std::vector<int> &value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -451,6 +463,7 @@ void IPLProcessPropertyVectorInt::setValue(std::vector<int> &&value)
 {
     _value = std::move(value);
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -481,6 +494,7 @@ void IPLProcessPropertyVectorDouble::setValue(const std::vector<double> &value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -488,6 +502,7 @@ void IPLProcessPropertyVectorDouble::setValue(std::vector<double> &&value)
 {
     _value = std::move(value);
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -517,6 +532,7 @@ void IPLProcessPropertyColor::setValue(const IPLColor &value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -524,6 +540,7 @@ void IPLProcessPropertyColor::setValue(IPLColor &&value)
 {
     _value = std::move(value);
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -552,6 +569,7 @@ void IPLProcessPropertyPoint::setValue(const IPLPoint &value)
 {
     _value = value;
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 
@@ -559,6 +577,7 @@ void IPLProcessPropertyPoint::setValue(IPLPoint &&value)
 {
     _value = std::move(value);
     _process->requestUpdate();
+    _process->processPropertyEvents(new IPLEvent(_name));
     _process->notifyPropertyChangedEventHandler();
 }
 

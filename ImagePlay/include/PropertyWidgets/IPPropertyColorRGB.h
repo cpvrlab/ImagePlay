@@ -37,7 +37,7 @@ class IPPropertyColorRGB : public IPPropertyWidget, public IPLColorPickHandler
 {
     Q_OBJECT
 public:
-    explicit IPPropertyColorRGB(IPLProcessPropertyColor* property, QWidget *parent) : IPPropertyWidget(property, parent)
+    explicit IPPropertyColorRGB(IPLProcessPropertyColor* property, QWidget *parent, IPLColorPickProvider* provider) : IPPropertyWidget(property, parent)
     {
         _layout = new QGridLayout;
         _layout->setMargin(0);
@@ -46,6 +46,7 @@ public:
         _dialog = NULL;
 
         _property = property;
+        _colorProvider = provider;
 
         _colorPickCursor = new QCursor(QPixmap(":/colorpicker_cursor.png"), 9, 21);
 
@@ -159,6 +160,11 @@ public:
         onColorPickerChanged(color);
     }
 
+    void finishPickingColor()
+    {
+        _btnColorPicker->setChecked(false);
+    }
+
 signals:
 
 public slots:
@@ -177,14 +183,21 @@ public slots:
 
     void btnColorPickerTriggered(bool status)
     {
+        enableColorPicker(status);
+    }
+
+    void enableColorPicker(bool status)
+    {
         if(status)
         {
+            _colorProvider->setColorPickHandler(this);
             QApplication::restoreOverrideCursor();
             QApplication::setOverrideCursor(*_colorPickCursor);
             _btnColorPicker->setStyleSheet("background-color: #00ff00;");
         }
         else
         {
+            _colorProvider->clearColorPickHandler();
             //QApplication::setOverrideCursor(Qt::ArrowCursor);
             QApplication::restoreOverrideCursor();
             _btnColorPicker->setStyleSheet("");
@@ -211,6 +224,7 @@ public slots:
 
 private:
     IPLProcessPropertyColor* _property;
+    IPLColorPickProvider* _colorProvider;
     QGridLayout* _layout;
     QPushButton* _colorLabel;
     QSlider* _sliderR;

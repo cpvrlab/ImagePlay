@@ -55,7 +55,7 @@ void IPLCamera::destroy()
     delete _result;
 }
 
-bool IPLCamera::processInputData(IPLImage*, int, bool)
+bool IPLCamera::processInputData(IPLData*, int, bool)
 {
     // delete previous result
     delete _result;

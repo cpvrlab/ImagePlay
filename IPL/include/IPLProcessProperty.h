@@ -187,9 +187,17 @@ public:
     virtual void deserialize(const SerializedData &data);
     IPLProcessProperty *clone() const;
 
-private:
+protected:
     bool _value;                       //!< current value
     bool _default;                     //!< default value
+};
+
+// BOOL ONE SHOT
+class IPLSHARED_EXPORT IPLProcessPropertyBoolOneShot : public IPLProcessPropertyBool
+{
+public:
+    IPLProcessPropertyBoolOneShot(IPLProcess* process, int position, const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    bool value()                             { bool ret = _value; _value = false; return ret; }
 };
 
 // STRING

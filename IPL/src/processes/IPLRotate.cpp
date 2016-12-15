@@ -46,8 +46,10 @@ void IPLRotate::destroy()
     delete _result;
 }
 
-bool IPLRotate::processInputData(IPLImage* image , int, bool)
+bool IPLRotate::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

@@ -46,8 +46,10 @@ void IPLHarrisCorner::destroy()
     //delete _result;
 }
 
-bool IPLHarrisCorner::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLHarrisCorner::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

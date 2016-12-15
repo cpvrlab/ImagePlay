@@ -21,6 +21,7 @@
 #define IPLPROCESS_H
 
 #include "IPL_global.h"
+#include "IPLEvent.h"
 #include "IPLData.h"
 #include "IPLImage.h"
 #include "IPLProcessProperty.h"
@@ -133,7 +134,8 @@ public:
     virtual void            init                        () = 0;
     virtual void            destroy                     () = 0;
     virtual void            beforeProcessing            () {}
-    virtual bool            processInputData            (IPLImage* data, int inputIndex, bool useOpenCV) = 0;
+    virtual bool            processInputData            (IPLData*, int, bool) = 0;
+    virtual void            processPropertyEvents       (IPLEvent*) {}
     virtual IPLData*        getResultData               (int outputIndex ) = 0;
     virtual void            afterProcessing             () {}
 
@@ -197,6 +199,7 @@ public:
     void                    addProcessPropertyDouble            (const char* name, const char* title, const char* description, double value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, double min = 0.0, double max = 0.0);
     void                    addProcessPropertyFloat             (const char* name, const char* title, const char* description, float value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT, float min = 0.0f, float max = 0.0f);
     void                    addProcessPropertyBool              (const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
+    void                    addProcessPropertyBoolOneShot       (const char* name, const char* title, const char* description, bool value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyString            (const char* name, const char* title, const char* description, const std::string &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyVectorInt         (const char* name, const char* title, const char* description, const std::vector<int> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
     void                    addProcessPropertyVectorDouble      (const char* name, const char* title, const char* description, const std::vector<double> &value, IPLProcessWidgetType widget = IPL_WIDGET_DEFAULT);
@@ -207,6 +210,7 @@ public:
     double                  getProcessPropertyDouble            (const char* name);
     float                   getProcessPropertyFloat             (const char* name);
     bool                    getProcessPropertyBool              (const char* name);
+    bool                    getProcessPropertyBoolOneShot       (const char* name);
     std::string             getProcessPropertyString            (const char* name);
     std::vector<int>        getProcessPropertyVectorInt         (const char* name);
     std::vector<double>     getProcessPropertyVectorDouble      (const char* name);
@@ -243,7 +247,7 @@ private:
 
 public:
     // needed for plugins
-    static const int version = 1;
+    static const int version = IPL_VERSION;
     static const std::string server_name() {return "IPLProcessServer";}
 };
 

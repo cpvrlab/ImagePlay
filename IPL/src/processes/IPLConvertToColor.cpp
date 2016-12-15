@@ -40,8 +40,10 @@ void IPLConvertToColor::destroy()
     delete _result;
 }
 
-bool IPLConvertToColor::processInputData(IPLImage* image , int, bool)
+bool IPLConvertToColor::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

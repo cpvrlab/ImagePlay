@@ -55,8 +55,10 @@ void IPLArithmeticOperationsConstant::destroy()
     delete _result;
 }
 
-bool IPLArithmeticOperationsConstant::processInputData(IPLImage* image , int, bool)
+bool IPLArithmeticOperationsConstant::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

@@ -42,8 +42,10 @@ void IPLBinarizeOtsu::destroy()
     delete _result;
 }
 
-bool IPLBinarizeOtsu::processInputData(IPLImage* image , int, bool)
+bool IPLBinarizeOtsu::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

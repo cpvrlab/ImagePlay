@@ -20,6 +20,13 @@
 #ifndef IPL_GLOBAL_H
 #define IPL_GLOBAL_H
 
+// IPL_VERSION should be incremented when changes to IPL
+// interfaces are made in order to check if plugins
+// are still compatible
+#ifndef IPL_VERSION
+#define IPL_VERSION 2
+#endif
+
 #define NOMINMAX
 
 //#include <QtCore/qglobal.h>
@@ -79,6 +86,9 @@ enum IPLDataType
 
     //Add additional data types here
     //...
+    IPL_KEYPOINTS,
+    IPL_CV_MAT,
+    IPL_VECTOR,
 
     IPL_NUM_DATATYPES
 };
@@ -129,6 +139,7 @@ enum IPLProcessWidgetType
     IPL_WIDGET_POINT,
 
     //Integer: A button that increments the property after each click
+    //Bool:    A button that returns true once after it has been pressed
     IPL_WIDGET_BUTTON,
 
     IPL_WIDGET_GROUP,
@@ -149,6 +160,13 @@ enum IPLRawImageType
     IPL_RAW_24BIT_BGR,
     IPL_RAW_32BIT_RGB,
     IPL_RAW_32BIT_BGR
+};
+
+enum IPLEventType
+{
+    IPL_EVENT_DEFAULT = 0,
+    IPL_EVENT_BUTTON_PRESSED,
+    IPL_EVENT_BUTTON_RELEASED
 };
 
 #endif // IPL_GLOBAL_H

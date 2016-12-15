@@ -228,6 +228,7 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         else if (auto p = dynamic_cast<IPLProcessPropertyColor*>(property))
         {
             IPPropertyWidget *widget = NULL;
+            IPLColorPickProvider *provider = dynamic_cast<IPLColorPickProvider*>(_mainWindow->imageViewer());
             switch(p->widget())
             {
             case IPL_WIDGET_COLOR_HSL:
@@ -241,13 +242,13 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
                 break;
 
             default: //IPL_WIDGET_COLOR_RGB
-                widget = new IPPropertyColorRGB(p, this);
+                widget = new IPPropertyColorRGB(p, this, provider);
                 addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
 
-            if (auto picker = dynamic_cast<IPLColorPickHandler*>(widget)) // connect to image viewer for color picking
-                _mainWindow->imageViewer()->setColorPickHandler(picker);
+            //if (auto picker = dynamic_cast<IPLColorPickHandler*>(widget)) // connect to image viewer for color picking
+            //    _mainWindow->imageViewer()->setColorPickHandler(picker);
         }
 
         else if (auto p = dynamic_cast<IPLProcessPropertyBool*>(property))
@@ -255,6 +256,10 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
             IPPropertyWidget *widget = NULL;
             switch(p->widget())
             {
+            case IPL_WIDGET_BUTTON:
+                widget = new IPPropertyButtonBool(p, this);
+                addPropertyWidget(property->title(), property->description(), widget);
+                break;
             default: //IPL_WIDGET_CHECKBOXES
                 widget = new IPPropertyCheckbox(p, property->title(), this);
                 addPropertyWidget("", property->description(), widget);
@@ -314,16 +319,17 @@ void IPProcessPropertiesWidget::init(IPProcessStep* processStep)
         else if (auto p = dynamic_cast<IPLProcessPropertyPoint*>(property))
         {
             IPPropertyWidget *widget = NULL;
+            IPLCoordinatePickProvider *provider = dynamic_cast<IPLCoordinatePickProvider*>(_mainWindow->imageViewer());
             switch(p->widget())
             {
             default: //IPL_WIDGET_POINT
-                widget = new IPPropertyPoint(p, this);
+                widget = new IPPropertyPoint(p, this, provider);
                 addPropertyWidget(property->title(), property->description(), widget);
                 break;
             }
 
-            if (auto picker = dynamic_cast<IPLCoordinatePickHandler*>(widget)) // connect to image viewer for coordinate picking
-                _mainWindow->imageViewer()->setCoordinatePickHandler(picker);
+            //if (auto picker = dynamic_cast<IPLCoordinatePickHandler*>(widget)) // connect to image viewer for coordinate picking
+            //    _mainWindow->imageViewer()->setCoordinatePickHandler(picker);
         }
     }
 }

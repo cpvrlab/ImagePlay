@@ -65,8 +65,10 @@ void IPLSaveImage::destroy()
     delete _result;
 }
 
-bool IPLSaveImage::processInputData(IPLImage* image, int, bool)
+bool IPLSaveImage::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     //IPLImage* colorImage = new IPLImage(IPLData::COLOR, image->width(), image->height());
 
     // get properties

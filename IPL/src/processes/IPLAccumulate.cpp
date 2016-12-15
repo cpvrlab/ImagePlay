@@ -45,8 +45,10 @@ void IPLAccumulate::destroy()
     //delete _result;
 }
 
-bool IPLAccumulate::processInputData(IPLImage* image , int, bool)
+bool IPLAccumulate::processInputData(IPLData* data , int, bool)
 {
+    IPLImage* image = data->toImage();
+
     // init result
     if(!_result)
     {

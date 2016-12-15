@@ -152,8 +152,10 @@ void close(const IPLImagePlane &src, IPLImagePlane &dst, int iterations, const s
 }
 
 
-bool IPLMorphologyBinary::processInputData(IPLImage* image, int, bool useOpenCV)
+bool IPLMorphologyBinary::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

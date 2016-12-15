@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FvUpdateConfirmDialog</class>
+ <widget class="QDialog" name="FvUpdateConfirmDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>160</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Software Update</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="updateFileIsLocatedLabel">
+     <property name="text">
+      <string>The update file is located at:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="updateFileLinkLabel">
+     <property name="text">
+      <string>&lt;a href=&quot;%1&quot;&gt;%1&lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextBrowserInteraction</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="downloadThisUpdateLabel">
+     <property name="text">
+      <string>Download this update, close &quot;%1&quot;, install it, and then reopen &quot;%1&quot;.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="whenYouClickOkLabel">
+     <property name="text">
+      <string>When you click &quot;OK&quot;, this link will be opened in your browser.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="confirmButtonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

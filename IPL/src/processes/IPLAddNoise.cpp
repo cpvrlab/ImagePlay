@@ -48,8 +48,10 @@ void IPLAddNoise::destroy()
     delete _result;
 }
 
-bool IPLAddNoise::processInputData(IPLImage* image , int, bool)
+bool IPLAddNoise::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     int width = image->width();
     int height = image->height();
 

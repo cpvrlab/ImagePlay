@@ -40,7 +40,7 @@
     </widget>
    </item>
    <item alignment="Qt::AlignTop">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="grpGeneral">
      <property name="title">
       <string>General</string>
      </property>
@@ -154,7 +154,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="grpPlugins">
      <property name="title">
       <string>Plugins</string>
      </property>

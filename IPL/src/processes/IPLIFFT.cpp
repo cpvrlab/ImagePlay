@@ -45,7 +45,7 @@ void IPLIFFT::destroy()
     delete _result;
 }
 
-bool IPLIFFT::processInputData(IPLImage* data , int, bool)
+bool IPLIFFT::processInputData(IPLData* data , int, bool)
 {
     IPLComplexImage* complexImageData = data->toComplexImage();
     if (NULL == complexImageData) {

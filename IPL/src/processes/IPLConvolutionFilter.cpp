@@ -66,8 +66,10 @@ void IPLConvolutionFilter::destroy()
     delete _result;
 }
 
-bool IPLConvolutionFilter::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLConvolutionFilter::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

@@ -28,6 +28,7 @@ class IPLImage;
 class IPLComplexImage;
 class IPLPoint;
 class IPLMatrix;
+class IPLKeyPoints;
 
 class IPLSHARED_EXPORT IPLData
 {
@@ -42,6 +43,7 @@ public:
     IPLComplexImage*    toComplexImage();
     IPLPoint*           toPoint();
     IPLMatrix*          toMatrix();
+    IPLKeyPoints*       toKeyPoints();
 
 protected:
     IPLDataType         _type;

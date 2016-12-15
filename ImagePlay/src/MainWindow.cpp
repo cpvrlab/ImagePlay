@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer
     _timer = new QTimer(this);
+    // update and execute graphics view on time out
     connect(_timer, SIGNAL(timeout()), this, SLOT(execute()));
 
     // autosave timer
@@ -63,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->messageLabel->hide();
 
     // sequence control widget
+    // (at the moment not working. it was used for the control of imageloading in sequence loader process.)
     //ui->toolBar->addWidget(ui->sequenceControlWidget);
     ui->sequenceControlWidget->setEnabled(false);
     ui->sequenceControlWidget->hide();
@@ -77,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionSynchronizeViews->setChecked(_synchronizeViews);
 
     // add version number to title
-    //setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
+    setWindowTitle(windowTitle().append(" ").append(IMAGEPLAY_VERSION));
 
     // connect to MainWindow
     ui->graphicsView->setMainWindow(this);
@@ -100,11 +102,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->processTabWidget->init(this);
 
+#ifndef USE_FERVOR_UPDATER
+        ui->actionCheck_for_updates->setVisible(false);
+#endif
+
 #ifdef Q_OS_MAC
     // set the right placeholder text for OS X
     ui->txtFilter->setPlaceholderText("Find (Cmd+F)...");
 #endif
 
+    //set focus on filter lineedit
     setFilterFocus();
 
     if(QApplication::arguments().length() > 1)
@@ -192,7 +199,6 @@ void MainWindow::readSettings()
 {
     // properties
     _settings = new QSettings("BFH", "ImagePlay");
-
     _useOpenCV          = _settings->value("OpenCV", true).toBool();
     _autosaveEnabled    = _settings->value("AutoSave", true).toBool();
     _defaultImagePath   = _settings->value("DefaultImagePath", "").toString();
@@ -521,12 +527,20 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLWarpAffine",          new IPLWarpAffine);
     _factory->registerProcess("IPLWarpPerspective",     new IPLWarpPerspective);
 
+
     // not ready:
     /*_factory->registerProcess("IPLMatchTemplate",       new IPLMatchTemplate);
     _factory->registerProcess("IPLGoodFeaturesToTrack", new IPLGoodFeaturesToTrack);
     _factory->registerProcess("IPLFloodFill",           new IPLFloodFill);
 
-    _factory->registerProcess("IPProcessScript",        new IPProcessScript);*/
+    _factory->registerProcess("IPLOpticalFlow",         new IPLOpticalFlow);
+
+    _factory->registerProcess("IPProcessScript",        new IPProcessScript);
+
+    _factory->registerProcess("IPLFeatureDetection",    new IPLFeatureDetection);
+    _factory->registerProcess("IPLFeatureMatcher",      new IPLFeatureMatcher);
+
+    _factory->registerProcess("IPLCameraCalibration",   new IPLCameraCalibration);*/
 }
 
 void MainWindow::reloadPlugins()
@@ -1434,4 +1448,11 @@ void MainWindow::on_actionImage_Viewer_always_on_top_triggered(bool checked)
 
     _imageViewer->show();
 
+}
+
+void MainWindow::on_actionCheck_for_updates_triggered()
+{
+#ifdef USE_FERVOR_UPDATER
+    FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+#endif
 }

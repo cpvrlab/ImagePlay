@@ -62,6 +62,7 @@ void IPProcessListTabWidget::init(MainWindow *mainWindow)
     processCategories.append("Objects");                // CATEGORY_OBJECTS
     processCategories.append("Plugins");                //
 
+    //list process names by process category
     QList<QStringList> processLibrary;
     processLibrary.append(mainWindow->factory()->getProcessNamesByCategory(IPLProcess::CATEGORY_IO));
     processLibrary.append(mainWindow->factory()->getProcessNamesByCategory(IPLProcess::CATEGORY_CONVERSIONS));
