@@ -274,7 +274,7 @@ private:
     //    struct KMeansSimpleDownhillFunctor {
     //
     //        Autotune& autotuner;
-    //        KMeansSimpleDownhillFunctor(Autotune& autotuner_) : autotuner(autotuner_) {};
+    //        KMeansSimpleDownhillFunctor(Autotune& autotuner_) : autotuner(autotuner_) {}
     //
     //        float operator()(int* params) {
     //
@@ -299,7 +299,7 @@ private:
     //    struct KDTreeSimpleDownhillFunctor {
     //
     //        Autotune& autotuner;
-    //        KDTreeSimpleDownhillFunctor(Autotune& autotuner_) : autotuner(autotuner_) {};
+    //        KDTreeSimpleDownhillFunctor(Autotune& autotuner_) : autotuner(autotuner_) {}
     //
     //        float operator()(int* params) {
     //            float maxFloat = numeric_limits<float>::max();
@@ -377,6 +377,7 @@ private:
         // evaluate kdtree for all parameter combinations
         for (size_t i = 0; i < FLANN_ARRAY_LEN(testTrees); ++i) {
             CostData cost;
+            cost.params["algorithm"] = FLANN_INDEX_KDTREE;
             cost.params["trees"] = testTrees[i];
 
             evaluate_kdtree(cost);

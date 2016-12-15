@@ -27,7 +27,7 @@ void IPLGoodFeaturesToTrack::init()
 
     // basic settings
     setClassName("IPLGoodFeaturesToTrack");
-    setTitle("Circle Hough Transform");
+    setTitle("Good Features To Track");
     setCategory(IPLProcess::CATEGORY_OBJECTS);
     setOpenCVSupport(IPLOpenCVSupport::OPENCV_ONLY);
     setDescription("The circle Hough Transform (CHT) is a feature extraction technique for detecting circles.");
@@ -50,8 +50,10 @@ void IPLGoodFeaturesToTrack::destroy()
 {
     //delete _result;
 }
-bool IPLGoodFeaturesToTrack::processInputData(IPLImage* image , int, bool)
+bool IPLGoodFeaturesToTrack::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

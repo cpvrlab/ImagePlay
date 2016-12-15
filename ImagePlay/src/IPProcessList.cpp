@@ -27,7 +27,7 @@ IPProcessList::IPProcessList(MainWindow* mainWindow, QWidget *parent) :
 
     _mainWindow = mainWindow;
 
-    // define category colors
+    // define category colors (IPLProcess icon background color)
     _categoryColors.push_back(QColor(255, 255, 255));       // CATEGORY_UNDEFINED
     _categoryColors.push_back(QColor(173,213,138));         // CATEGORY_IO
     _categoryColors.push_back(QColor(101,194,149));         // CATEGORY_CONVERSIONS
@@ -72,12 +72,16 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
         iconFile = QFileInfo(_mainWindow->processIconPath("Plugin"));
     }
 
-    QPixmap transparentIcon(iconFile.absoluteFilePath());
     QPixmap finalIcon(25,25);
 
-    QPainter painter(&finalIcon);
-    painter.fillRect(0,0,25,25,_categoryColors.at(category));
-    painter.drawPixmap(0,0,25,25,transparentIcon);
+    if(iconFile.exists())
+    {
+        QPixmap transparentIcon(iconFile.absoluteFilePath());
+
+        QPainter painter(&finalIcon);
+        painter.fillRect(0,0,25,25,_categoryColors.at(category));
+        painter.drawPixmap(0,0,25,25,transparentIcon);
+    }
 
     QListWidgetItem* newItem = new QListWidgetItem(finalIcon, text);
     newItem->setToolTip(processID);

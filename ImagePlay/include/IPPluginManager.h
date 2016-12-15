@@ -26,6 +26,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QDateTime>
+#include <QMessageBox>
 #include <QDebug>
 
 #include "IPLProcess.h"

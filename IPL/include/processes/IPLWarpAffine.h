@@ -41,11 +41,15 @@ public:
 
     void                    init                    ();
     void                    destroy                 ();
-    bool                    processInputData        (IPLImage*, int index, bool useOpenCV);
+    bool                    processInputData        (IPLData*, int index, bool useOpenCV);
     IPLData*                getResultData           (int);
 
 protected:
     IPLImage*               _result;
+    IPLImage*               _inputA;
+    IPLImage*               _inputB;
+    IPLImage*               _previewA;
+    IPLImage*               _previewB;
 };
 
 #endif // IPLWarpAffine_H

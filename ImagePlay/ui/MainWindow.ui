@@ -158,6 +158,7 @@
     <property name="title">
      <string>?</string>
     </property>
+    <addaction name="actionCheck_for_updates"/>
     <addaction name="actionTutorial"/>
     <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
@@ -667,6 +668,11 @@ QPushButton:pressed {border-image: url(:/back_pressed.png); }</string>
    </property>
    <property name="toolTip">
     <string>Show Image Viewer always on top</string>
+   </property>
+  </action>
+  <action name="actionCheck_for_updates">
+   <property name="text">
+    <string>Check for updates</string>
    </property>
   </action>
  </widget>

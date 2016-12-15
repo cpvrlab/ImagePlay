@@ -59,7 +59,7 @@ void IPLLoadImage::beforeProcessing()
     addInformation("beforeProcessing IPLLoadImage");
 }
 
-bool IPLLoadImage::processInputData(IPLImage*, int, bool)
+bool IPLLoadImage::processInputData(IPLData*, int, bool)
 {
     // delete previous result
     delete _result;

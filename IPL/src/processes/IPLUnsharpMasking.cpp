@@ -43,8 +43,10 @@ void IPLUnsharpMasking::destroy()
     delete _result;
 }
 
-bool IPLUnsharpMasking::processInputData(IPLImage* image , int, bool)
+bool IPLUnsharpMasking::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

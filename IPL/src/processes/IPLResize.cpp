@@ -49,8 +49,10 @@ void IPLResize::destroy()
     delete _result;
 }
 
-bool IPLResize::processInputData(IPLImage* image , int, bool)
+bool IPLResize::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // get properties
     int mode = getProcessPropertyInt("mode");
     int width = getProcessPropertyInt("absolute_width");

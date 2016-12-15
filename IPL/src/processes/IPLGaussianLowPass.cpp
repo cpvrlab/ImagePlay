@@ -126,8 +126,10 @@ void IPLGaussianLowPass::gauss(IPLImage* image, IPLImage* result, IPLData* kerne
     delete [] filter;
 }
 
-bool IPLGaussianLowPass::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLGaussianLowPass::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

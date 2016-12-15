@@ -47,8 +47,10 @@ void IPLSobel::destroy()
     //delete _result;
 }
 
-bool IPLSobel::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPLSobel::processInputData(IPLData* data, int, bool useOpenCV)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

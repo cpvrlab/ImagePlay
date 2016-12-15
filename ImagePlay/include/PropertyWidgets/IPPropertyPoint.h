@@ -34,13 +34,13 @@ class IPPropertyPoint : public IPPropertyWidget, public IPLCoordinatePickHandler
 {
     Q_OBJECT
 public:
-    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent) : IPPropertyWidget(property, parent)
+    IPPropertyPoint(IPLProcessPropertyPoint* property, QWidget *parent, IPLCoordinatePickProvider *provider) : IPPropertyWidget(property, parent)
     {
         setLayout(new QHBoxLayout);
         layout()->setMargin(0);
 
         _property = property;
-
+        _coordinateProvider = provider;
 
         _positionPickCursor = new QCursor(QPixmap(":/crosshair_cursor.png"), 15, 15);
 
@@ -62,10 +62,10 @@ public:
 
 
         _spinnerX->setMinimum(0);
-        _spinnerX->setMaximum(1000);
+        _spinnerX->setMaximum(1024);
 
         _spinnerY->setMinimum(0);
-        _spinnerY->setMaximum(1000);
+        _spinnerY->setMaximum(1024);
 
         init();
 
@@ -98,6 +98,11 @@ public:
         }
     }
 
+    void finishPickingCoordinates()
+    {
+        _btnPositionPicker->setChecked(false);
+    }
+
 public slots:
     void updateValue(int)
     {
@@ -107,17 +112,23 @@ public slots:
         emit changed();
     }
 
-
     void btnPickerTriggered(bool status)
+    {
+        enableCoordinatePicker(status);
+    }
+
+    void enableCoordinatePicker(bool status)
     {
         if(status)
         {
+            _coordinateProvider->setCoordinatePickHandler(this);
             QApplication::restoreOverrideCursor();
             QApplication::setOverrideCursor(*_positionPickCursor);
             _btnPositionPicker->setStyleSheet("background-color: #00ff00;");
         }
         else
         {
+            _coordinateProvider->clearCoordinatePickHandler();
             //QApplication::setOverrideCursor(Qt::ArrowCursor);
             QApplication::restoreOverrideCursor();
             _btnPositionPicker->setStyleSheet("");
@@ -126,6 +137,7 @@ public slots:
 
 private:
     IPLProcessPropertyPoint*    _property;
+    IPLCoordinatePickProvider*  _coordinateProvider;
     QSpinBox*                   _spinnerX;
     QSpinBox*                   _spinnerY;
     QPushButton*                _btnPositionPicker;

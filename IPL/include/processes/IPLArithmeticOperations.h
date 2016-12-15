@@ -35,7 +35,7 @@ public:
                         ~IPLArithmeticOperations    () { destroy(); }
     void                init                        ();
     void                destroy();
-    bool                processInputData            (IPLImage* data, int inNr, bool useOpenCV);
+    bool                processInputData            (IPLData* data, int inNr, bool useOpenCV);
     IPLImage*           getResultData               (int outNr);
 
 private:

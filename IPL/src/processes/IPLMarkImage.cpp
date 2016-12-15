@@ -49,8 +49,10 @@ void IPLMarkImage::destroy()
     delete _result;
 }
 
-bool IPLMarkImage::processInputData(IPLImage* image , int, bool)
+bool IPLMarkImage::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

@@ -116,6 +116,12 @@ bool IPProcessGridScene::addEdge(IPProcessEdge* edge)
     // check type
     int indexOut = edge->indexFrom();
     int indexIn  = edge->indexTo();
+
+    if(indexOut >= edge->from()->process()->outputs()->size())
+        return false;
+    if(indexIn >= edge->to()->process()->inputs()->size())
+        return false;
+
     IPLProcessIO output = edge->from()->process()->outputs()->at(indexOut);
     IPLProcessIO input  = edge->to()->process()->inputs()->at(indexIn);
 

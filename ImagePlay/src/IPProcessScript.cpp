@@ -39,7 +39,7 @@ void IPProcessScript::destroy()
     delete _result;
 }
 
-bool IPProcessScript::processInputData(IPLImage* image , int, bool useOpenCV)
+bool IPProcessScript::processInputData(IPLData* image , int, bool useOpenCV)
 {
     // delete previous result
     /*delete _result;

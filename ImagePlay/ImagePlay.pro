@@ -27,19 +27,37 @@ TARGET = ImagePlay
 TEMPLATE = app
 #TEMPLATE = vcapp
 
-VERSION = "6.0.0"
+VERSION = "6.1.0"
 QMAKE_TARGET_COMPANY = "BFH"
 QMAKE_TARGET_PRODUCT = "ImagePlay"
 QMAKE_TARGET_DESCRIPTION = ""
 QMAKE_TARGET_COPYRIGHT = ""
 
-DEFINES += \
-APP_VERSION=\"\\\"$$VERSION\\\"\" \
-APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
-APP_NAME=\\\"$$TARGET\\\" \
+equals(TEMPLATE, app) {
+    #message("Template value equals app")
+    DEFINES += \
+    APP_VERSION=\"\\\"$$VERSION\\\"\" \
+    APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+    APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+    APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+    APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\" \
+    APP_NAME=\\\"$$TARGET\\\" \
+
+} else {
+    #message("Template value equals vcapp")
+    DEFINES += \
+    APP_VERSION=\\\"$$VERSION\\\" \
+    APP_COMPANY=\\\"$$QMAKE_TARGET_COMPANY\\\" \
+    APP_PRODUCT=\\\"$$QMAKE_TARGET_PRODUCT\\\" \
+    APP_DESCRIPTION=\\\"$$QMAKE_TARGET_DESCRIPTION\\\" \
+    APP_COPYRIGHT=\\\"$$QMAKE_TARGET_COPYRIGHT\\\" \
+    APP_NAME=\\\"$$TARGET\\\" \
+}
+
+# enable or disable update checker
+USE_FERVOR_UPDATER = false
+DEFINES += IMAGEPLAY_URL=\\\"http://imageplay.io\\\"
+DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://imageplay.io/Appcast.xml\\\"
 
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}
@@ -66,6 +84,7 @@ HEADERS     -= media/plugin_development/_template/NAME.h
 SOURCES     -= media/plugin_development/_template/NAME.cpp
 SOURCES     -= media/plugin_development/_template/plugin.cpp
 
+
 RC_FILE = res/icon.rc
 
 
@@ -91,24 +110,34 @@ win32: {
                         $${QMAKE_COPY_DIR} ..\\IPL\\include ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\plugin_development\\_lib\\include & \
                         del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.exp & \
 #                        del ..\\_bin\\$$CONFIGURATION\\$$PLATFORM\\IPL.lib & \
+
+    USE_FERVOR_UPDATER = true
 }
 
 macx: {
-    QMAKE_MAC_SDK = macosx10.11
-    LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
+    QMAKE_MAC_SDK = macosx10.12
+    QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
+
+    #LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
+    #LIBS += -L../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/ -lIPL
+    LIBS += -L$$PWD/../_lib/ -lIPL
+    LIBS += -L$$PWD/../_lib/freeimage/ -lfreeimage-3.16.0
+
+    #INCLUDEPATH += $$PWD/../_lib/freeimage
+    #DEPENDPATH += $$PWD/../_lib/freeimage
 
     mylib.path = Contents/Frameworks
     mylib.files = \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.2.4.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_core.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.2.4.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.10.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.dylib \
-      ../_lib/opencv/x64/clang/lib/libopencv_highgui.2.4.dylib \
-      ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64
+      ../_lib/opencv/x64/clang/lib/libopencv_core.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_imgproc.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_highgui.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_videoio.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_calib3d.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_optflow.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_features2d.3.1.0.dylib \
+      ../_lib/opencv/x64/clang/lib/libopencv_xfeatures2d.3.1.0.dylib \
+      ../_lib/libIPL.1.0.0.dylib \
+      ../_lib/freeimage/libfreeimage-3.16.0.dylib-x86_64 \
         
     QMAKE_BUNDLE_DATA += mylib
 
@@ -120,7 +149,15 @@ macx: {
     ICON = res/ImagePlay.icns
 
     #run macdeployqt
-    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
+    #QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ -dmg
+    QMAKE_POST_LINK += macdeployqt ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/ $$escape_expand(\n\t)
+
+    # fix some weird dylib issues
+    QMAKE_POST_LINK += install_name_tool -change libIPL.1.dylib @executable_path/../Frameworks/libIPL.1.0.0.dylib ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
+    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64 ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
+    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64  ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib
+
+    USE_FERVOR_UPDATER = true
 }
 
 linux: {
@@ -185,6 +222,16 @@ INCLUDEPATH += $$PWD/../IPL/include/
 INCLUDEPATH += $$PWD/../IPL/include/processes/
 INCLUDEPATH += $$PWD/../IPL/include/opencv/
 DEPENDPATH += $$PWD/../IPL/include/
+
+# Fervor autoupdater
+if($$USE_FERVOR_UPDATER) {
+    !include("../_fervor/Fervor.pri") {
+        error("Unable to include Fervor autoupdater.")
+    }
+    DEFINES += USE_FERVOR_UPDATER
+}
+
+message($$DEFINES)
 
 # Visual Leak Detector
 #win32: LIBS += -L"C:/Program Files (x86)/Visual Leak Detector/lib/Win32/" -lvld

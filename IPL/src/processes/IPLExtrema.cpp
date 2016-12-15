@@ -42,8 +42,10 @@ void IPLExtrema::destroy()
     delete _result;
 }
 
-bool IPLExtrema::processInputData(IPLImage* image , int, bool)
+bool IPLExtrema::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

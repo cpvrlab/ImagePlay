@@ -63,8 +63,10 @@ void IPLArithmeticOperations::destroy()
     delete _result;
 }
 
-bool IPLArithmeticOperations::processInputData(IPLImage* image, int imageIndex, bool)
+bool IPLArithmeticOperations::processInputData(IPLData* data, int imageIndex, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // save the first image
     if(imageIndex == 0)
     {

@@ -44,8 +44,10 @@ void IPLLabelBlobs::destroy()
     delete _result;
 }
 
-bool IPLLabelBlobs::processInputData(IPLImage* image , int, bool)
+bool IPLLabelBlobs::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

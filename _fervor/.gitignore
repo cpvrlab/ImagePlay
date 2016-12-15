@@ -1,0 +1,10 @@
+# custom config
+fvupdateconfig.h
+
+# OS X
+.DS_Store
+
+# Qt
+*.pro.user
+*.ui.autosave
+Sample-build-*

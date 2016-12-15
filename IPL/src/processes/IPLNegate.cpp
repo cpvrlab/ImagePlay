@@ -40,8 +40,10 @@ void IPLNegate::destroy()
     delete _result;
 }
 
-bool IPLNegate::processInputData(IPLImage* image , int, bool)
+bool IPLNegate::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

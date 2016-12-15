@@ -51,8 +51,10 @@ void IPLMatchTemplate::destroy()
     //delete _result;
 }
 
-bool IPLMatchTemplate::processInputData(IPLImage* image , int, bool)
+bool IPLMatchTemplate::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result;
     _result = NULL;

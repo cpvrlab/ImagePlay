@@ -45,8 +45,10 @@ void IPLRandomPoint::destroy()
     delete _point;
 }
 
-bool IPLRandomPoint::processInputData(IPLImage* image, int, bool)
+bool IPLRandomPoint::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _image;
     _image = new IPLImage(*image);

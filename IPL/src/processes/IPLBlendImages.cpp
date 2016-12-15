@@ -85,8 +85,10 @@ void IPLBlendImages::destroy()
     delete _inputB;
 }
 
-bool IPLBlendImages::processInputData(IPLImage* image , int imageIndex, bool)
+bool IPLBlendImages::processInputData(IPLData* data , int imageIndex, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // save the first image
     if(imageIndex == 0)
     {

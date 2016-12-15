@@ -1,0 +1,213 @@
+Check out the [`autoupdate` branch](fervor/tree/autoupdate) by Torben Dannhauer too!
+
+----
+
+Fervor is a simple, multiplatform ([Qt](http://qt.nokia.com/)-based) application update tool, inspired by [Sparkle](http://sparkle.andymatuschak.org/).
+
+
+# Description
+
+Fervor is a software library that you include into your own [Qt](http://qt.nokia.com/)-based application in order to enable the application to automatically check for updates and suggest to install them.
+
+When installed and enabled, Fervor downloads a "flavoured" RSS feed (dubbed "appcast") and checks whether an update to the application is available. The RSS feed ("appcast") lists various versions of the application ("1.0", "1.1", "2.0", ...) that are available for download.
+
+When a newer version of the application is found in the "appcast" (e.g. the user is using 1.0, and 1.1 is available), a dialog is presented to the user (see below for example) that allows the user to choose whether he/she wants to install the update, be reminded about the update later, or skip a particular proposed version altogether. A dialog also shows some release notes about the proposed update that help the user to choose whether or not to install an update.
+
+At the moment, Fervor is not as cool as [Sparkle](http://sparkle.andymatuschak.org/) -- it is not able to install the actual update automatically (the user is given an option to download and install the update manually). Pull requests with unattended install modules for `.dmg`, `.pkg` (Mac OS X), `.msi` (Windows), `.rpm`, `.deb` (Linux) are welcome!
+
+
+# Features
+
+* Multiplaform - works (should work) on Windows, Mac OS X, Linux, ...
+* Checks for updates both automatically and manually.
+* Displays release notes.
+* Proposed updates might be skipped or installed later by the user.
+* Backwards compatible with Sparkle (can use the very same "appcast" RSS).
+* BSD license.
+
+
+# Screenshots
+
+![](http://pypt.github.com/fervor/screenshot-1.png "Update is available")
+
+![](http://pypt.github.com/fervor/screenshot-2.png "Download the update")
+
+
+# Installation and Usage
+
+(This is a description of the sample application located in `sample/`.)
+
+I'm writing an application called *Sample*. It's version is only `1.0`, and I would like to enable the users of my application to be notified when I decide to release new versions of *Sample* (`1.1`, `1.2`, maybe even `2.0` if I'm lucky) and help them to download and install each and every update of the application. Thus, I decide I'll use Fervor for that.
+
+This is what I do:
+
+
+## 1. Download Fervor
+
+Git clone Fervor:
+
+	git clone https://github.com/pypt/fervor.git fervor
+
+...or add it as a submodule if you're using Git in your project:
+
+	git submodule add https://github.com/pypt/fervor.git fervor
+	git submodule init
+	git submodule update
+
+You might also download [a tarball](https://github.com/pypt/fervor/tarball/master).
+
+
+## 2. Include Fervor into your project
+
+You can use Fervor either in your Qt Creator project or in your CMake project.
+
+If you want to include Fervor into your Qt Creator project, read section #1 below.
+
+If you use CMake and would like to build Fervor with it instead of Qt Creator, read section #2 below.
+
+
+### 1. Include Fervor into your Qt Creator Project (`.pro` file)
+
+Include Fervor's project include file `Fervor.pri` after setting your application's `TARGET` and `VERSION`:
+
+	QT += core gui
+
+	TARGET = Sample
+	VERSION = 1.0
+	TEMPLATE = app
+
+	# ...
+
+	# Fervor autoupdater
+	!include("fervor/Fervor.pri") {
+		error("Unable to include Fervor autoupdater.")
+	}
+
+Fervor will append itself to your application's `HEADERS`, `SOURCES`, `FORMS` and `TRANSLATIONS`, and thus will become an integral part of your application's binary.
+
+**or**
+
+### 2. Include Fervor into your CMake Project (`CMakeLists.txt` file)
+
+In your `CMakeLists.txt` set the application name and version info, include the fervor-directory and link with it:
+
+	set(FERVOR_APP_NAME "Sample")
+	set(FERVOR_APP_VERSION "1.0")
+
+	add_subdirectory(fervor-directory)
+
+	include_directories(
+		...
+		fervor-directory
+	)
+	...
+	target_link_libraries(Sample
+		...
+		Fervor
+	)
+
+*Note:* `fervor-directory` must be a subdirectory in your source-directory.
+
+## 3. Set your application's `applicationName`, `applicationVersion`, `organizationName` and `organizationDomain` if you haven't done so already
+
+Fervor uses `QApplication::applicationName()`, `QApplication::applicationVersion()`, `QApplication::organizationName()` and `QApplication::organizationDomain()` for its own needs.
+
+If you don't set `QApplication::applicationName()` and `QApplication::applicationVersion()`, Fervor will do that for you. However, `QApplication::organizationName()` and `QApplication::organizationDomain()` have to be set by hand.
+
+Example of setting those four values:
+
+	int main(int argc, char *argv[])
+	{
+		QApplication a(argc, argv);
+
+		QApplication::setApplicationName("Sample");
+		QApplication::setApplicationVersion("1.0");
+		QApplication::setOrganizationName("pypt");
+		QApplication::setOrganizationDomain("pypt.lt");
+
+		// ...
+	}
+
+
+## 4. Set the Fervor's appcast URL right after you start your application
+
+Set the "appcast" URL in Fervor's singleton `FVUpdater::sharedUpdater()` before you do anything else, but **after** you set `applicationName`, `applicationVersion`, `organizationName` and `organizationDomain` in `QApplication`. It is probably a good idea to do that in `int main(int argc, char *argv[])` too, right after setting application name, version, organization name and domain:
+
+	#include "fvupdater.h"
+
+	// ...
+
+	int main(int argc, char *argv[])
+	{
+		QApplication a(argc, argv);
+
+		QApplication::setApplicationName("Sample");
+		QApplication::setApplicationVersion("1.0");
+		QApplication::setOrganizationName("pypt");
+		QApplication::setOrganizationDomain("pypt.lt");
+
+		// Set this to your own appcast URL, of course
+		FvUpdater::sharedUpdater()->SetFeedURL("https://raw.github.com/pypt/fervor/master/sample/Appcast.xml");
+
+		// ...
+	}
+
+
+## 5. Enable checking for updates right after starting the application (if you want to)
+
+Call Fervor's `CheckForUpdatesSilent()` whenever you feel like is a good moment for the Fervor to check for updates. "Silent" part here means that Fervor will not display error dialogs or the "No updates found." notification.
+
+I've decided that I'll check for updates in `int main(int argc, char *argv[])` too:
+
+	#include "fvupdater.h"
+
+	// ...
+
+	int main(int argc, char *argv[])
+	{
+		QApplication a(argc, argv);
+
+		// <...> setApplicationName(), setApplicationVersion(), SetFeedURL(), etc.
+	
+		// Check for updates silently -- this will not block the initialization of
+		// your application, just start a HTTP request and return immediately.
+		FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+
+		// ...
+	}
+
+
+## 6. Enable checking for updates manually by the user (if you want to)
+
+You might want to implement a menu item called "Check for Updates..." that would allow the user to check for updated versions of your application manually. This menu item (or a button, or some other widget) would have to be attached to the `CheckForUpdatesNotSilent()` function of the Fervor's singleton. *Not silent* means that Fervor will notify the user about connection problems (if any) and even when no updates were found.
+
+	#include "fvupdater.h"
+
+	// <...>
+
+	// ui->updateButton is QButton
+	connect(ui->updateButton, SIGNAL(clicked()),
+			FvUpdater::sharedUpdater(), SLOT(CheckForUpdatesNotSilent()));
+
+
+## 7. Publish an "appcast" somewhere suited for your needs
+
+Again, "appcast" is an RSS feed with an additional `fervor` XML namespace. A type of "appcast" used by "Fervor" lists various application versions as `<item>`s, and a single `<item>` might point to several platform builds of your application (Windows build, Linux build, Mac OS X build, ...)
+
+An "appcast" also links to a webpage with each version's "release notes" that are shown to the user when a particular version of the application update is proposed.
+
+When the user clicks "Install Update", he / she is then shown a link (`<enclosure url="..." />`) of an application update download for his particular platform.
+
+See [https://raw.github.com/pypt/fervor/master/sample/Appcast.xml](https://raw.github.com/pypt/fervor/master/sample/Appcast.xml) for an "appcast" example, and [http://pypt.github.com/fervor/RelNotes.html](http://pypt.github.com/fervor/RelNotes.html) for an "release notes" example.
+
+It is up to you to implement "appcasts" and "release notes". If you don't release too many versions of your application, it is even plausible to edit them by hand every time you release an update.
+
+
+# Donations
+
+Donors: Marek Pazdan. Thanks!
+
+
+# Contacts
+
+I'm Linas, my email is <shirshegsm@gmail.com>

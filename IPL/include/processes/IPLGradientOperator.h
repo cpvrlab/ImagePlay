@@ -38,10 +38,10 @@ public:
     ~IPLGradientOperator()  { destroy(); }
 
     void                    init() override;
-    virtual void            destroy();
+    virtual void            destroy() override;
 
-    virtual bool            processInputData            (IPLImage* data, int inNr, bool) override;
-    virtual IPLImage*       getResultData               (int outNr);
+    virtual bool            processInputData            (IPLData* data, int inNr, bool) override;
+    virtual IPLImage*       getResultData               (int outNr) override;
 
 protected:
     IPLOrientedImage*   _result;

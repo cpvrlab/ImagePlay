@@ -38,7 +38,7 @@ public:
     void init();
     virtual void        destroy();
 
-    virtual bool processInputData( IPLImage* data, int inNr, bool useOpenCV );
+    virtual bool processInputData(IPLData*, int inNr, bool useOpenCV );
     virtual IPLImage* getResultData( int outputIndex );
 
 protected:

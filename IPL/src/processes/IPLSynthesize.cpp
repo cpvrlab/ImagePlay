@@ -58,7 +58,7 @@ void IPLSynthesize::destroy()
     delete _result;
 }
 
-bool IPLSynthesize::processInputData(IPLImage*, int, bool)
+bool IPLSynthesize::processInputData(IPLData*, int, bool)
 {
     if(isResultReady())
     {

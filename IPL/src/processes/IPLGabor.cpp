@@ -51,8 +51,10 @@ void IPLGabor::destroy()
     delete _result2;
 }
 
-bool IPLGabor::processInputData(IPLImage* image , int, bool)
+bool IPLGabor::processInputData(IPLData* data, int, bool)
 {
+    IPLImage* image = data->toImage();
+	
     // delete previous result
     delete _result0;
     _result0 = NULL;
