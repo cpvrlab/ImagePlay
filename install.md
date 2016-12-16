@@ -2,7 +2,7 @@
 
 [Windows](#windows)
 
-[macOS](#macOS)
+[macOS](#macos)
 
 [Linux](#linux)
 
