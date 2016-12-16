@@ -167,6 +167,13 @@ linux: {
     LIBS += -lopencv_core
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
+    LIBS += -lopencv_videoio
+    LIBS += -lopencv_calib3d
+    LIBS += -lopencv_optflow
+    LIBS += -lopencv_features2d
+    LIBS += -lopencv_xfeatures2d
+    LIBS += -lopencv_photo
+    LIBS += -lopencv_xphoto
     LIBS += -ldl
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
