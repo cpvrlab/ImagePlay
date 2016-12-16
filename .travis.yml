@@ -44,7 +44,8 @@ install:
   - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules ..
   
   # Run 'make' with four threads.
-  - make -j4 > /dev/null
+  # make -j4 > /dev/null
+  - make -j4
   
   # Install to OS.
   - sudo make install
