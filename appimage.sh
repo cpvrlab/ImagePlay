@@ -1,4 +1,4 @@
-#!/bin/bash
+ -#!/bin/bash
 
 ########################################################################
 # Package the binaries built on Travis-CI as an AppImage
@@ -15,6 +15,7 @@ GIT_REV=$(git rev-parse --short HEAD)
 echo $GIT_REV
 
 mkdir -p $HOME/$APP/$APP.AppDir/usr/bin/
+mkdir -p $HOME/$APP/$APP.AppDir/usr/share/imageplay
 
 cd $HOME/$APP/
 
@@ -27,6 +28,7 @@ sudo chown -R $USER /app/
 sed -i -e 's|/app|././|g' /app/bin/imageplay
 
 cp /app/bin/imageplay ./usr/bin/
+cp -a /app/share/imageplay/. ./usr/share/imageplay/
 
 ########################################################################
 # Copy desktop and icon file to AppDir for AppRun to pick them up
