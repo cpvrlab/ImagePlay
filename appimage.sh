@@ -1,5 +1,3 @@
- -#!/bin/bash
-
 ########################################################################
 # Package the binaries built on Travis-CI as an AppImage
 # By Simon Peter 2016
