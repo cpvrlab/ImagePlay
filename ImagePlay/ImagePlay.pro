@@ -202,9 +202,10 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         plugin_development.files = ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/*
         plugin_development.path = $${PREFIX}/share/imageplay/plugin_development
 
-        INSTALLS += images process_icons plugin_development
+        INSTALLS += images
+        INSTALLS += process_icons
+        INSTALLS += plugin_development
         INSTALLS += target
-
         DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX/share/imageplay/\\\"\"
 }
 
