@@ -167,6 +167,13 @@ linux: {
     LIBS += -lopencv_core
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
+    LIBS += -lopencv_videoio
+    LIBS += -lopencv_calib3d
+    LIBS += -lopencv_optflow
+    LIBS += -lopencv_features2d
+    LIBS += -lopencv_xfeatures2d
+    LIBS += -lopencv_photo
+    LIBS += -lopencv_xphoto
     LIBS += -ldl
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
@@ -195,9 +202,10 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         plugin_development.files = ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/*
         plugin_development.path = $${PREFIX}/share/imageplay/plugin_development
 
-        INSTALLS += images process_icons plugin_development
+        INSTALLS += images
+        INSTALLS += process_icons
+        INSTALLS += plugin_development
         INSTALLS += target
-
         DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX/share/imageplay/\\\"\"
 }
 
