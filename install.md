@@ -2,7 +2,7 @@
 
 [Windows](#windows)
 
-[OSX](#osx)
+[macOS](#macos)
 
 [Linux](#linux)
 
@@ -33,7 +33,7 @@ qmake -tp vc -r
  * Disable *Shadow build* in the project settings.
  * Run
 
-## OSX
+## macOS
 ### Prerequisites
 First make sure you have a recent version of XCode.
 
@@ -42,6 +42,8 @@ Install [Homebrew](http://brew.sh)
 ```sh
 brew install qt5
 brew link --force qt5
+brew tap homebrew/science
+brew install opencv3
 ```
 ### Build
 ```sh

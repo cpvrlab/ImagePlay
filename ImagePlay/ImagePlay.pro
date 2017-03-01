@@ -155,7 +155,7 @@ macx: {
     # fix some weird dylib issues
     QMAKE_POST_LINK += install_name_tool -change libIPL.1.dylib @executable_path/../Frameworks/libIPL.1.0.0.dylib ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
     QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64 ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
-    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64  ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib
+    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64 ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib $$escape_expand(\n\t)
 
     USE_FERVOR_UPDATER = true
 }
@@ -167,6 +167,13 @@ linux: {
     LIBS += -lopencv_core
     LIBS += -lopencv_imgproc
     LIBS += -lopencv_highgui
+    LIBS += -lopencv_videoio
+    LIBS += -lopencv_calib3d
+    LIBS += -lopencv_optflow
+    LIBS += -lopencv_features2d
+    LIBS += -lopencv_xfeatures2d
+    LIBS += -lopencv_photo
+    LIBS += -lopencv_xphoto
     LIBS += -ldl
 
     QMAKE_POST_LINK +=  $${QMAKE_COPY_DIR} media/process_icons/ ../_bin/$$CONFIGURATION/$$PLATFORM/ && \
@@ -195,9 +202,10 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         plugin_development.files = ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/*
         plugin_development.path = $${PREFIX}/share/imageplay/plugin_development
 
-        INSTALLS += images process_icons plugin_development
+        INSTALLS += images
+        INSTALLS += process_icons
+        INSTALLS += plugin_development
         INSTALLS += target
-
         DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX/share/imageplay/\\\"\"
 }
 

@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 language: cpp
 
 os:
@@ -12,13 +14,58 @@ before_install:
  # g++ 4.8 for std=c++11
  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
  # additional headerfiles
- - sudo apt-get install libXxf86vm-dev libXi-dev libudev-dev libXcursor-dev
- - sudo apt-get install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
- - sudo apt-get install libfreeimage-dev libopencv-core-dev libopencv-core-dev libopencv-imgproc-dev libopencv-highgui-dev
+ - sudo apt-get -y install libXxf86vm-dev libXi-dev libudev-dev libXcursor-dev
+ - sudo apt-get -y install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
+ - sudo apt-get -y install libfreeimage-dev
+
+install:
+
+  # OpenCV v3.1.0 install code (modified from orignal source: https://gist.github.com/Randommood/478ccd806511d45febc1)
+
+  # OpenCV dependencies - Details available at: http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html
+  - sudo apt-get install -y build-essential
+  - sudo apt-get install -y cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+  - sudo apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+  # Download contribution module file and extract
+  - curl -sL https://github.com/opencv/opencv_contrib/archive/3.1.0.zip > opencv_contrib-3.1.0.zip
+  - unzip opencv_contrib-3.1.0.zip
+  # Download v3.1.0 .zip file and extract.
+  - curl -sL https://github.com/opencv/opencv/archive/3.1.0.zip > opencv-3.1.0.zip
+  - unzip opencv-3.1.0.zip
+  # Enter opencv directory
+  - cd opencv-3.1.0
+
+  # Create a new 'build' folder.
+  - mkdir build
+  - cd build
+  
+  # Set build instructions for Ubuntu distro.
+  - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules ..
+  
+  # Run 'make' with four threads.
+  # make -j4 > /dev/null
+  - make -j4
+  
+  # Install to OS.
+  - sudo make install
+  
+  # Add configuration to OpenCV to tell it where the library files are located on the file system (/usr/local/lib)
+  - sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+  
+  - sudo ldconfig
+  - echo "OpenCV installed."
+  
+  # We need to return to the repo "root" folder, so we can then 'cd' into the C++ project folder.
+  - cd ../../
 
 script:
- - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8
+ - qmake -recursive QMAKE_CXX=g++-4.8 QMAKE_CC=gcc-4.8  PREFIX=/app
  - make
+ - sudo make install
+ - find /app
+ - curl --upload-file /app/bin/imageplay https://transfer.sh/imageplay
+ - bash -ex appimage.sh
  
 branches:
   only:

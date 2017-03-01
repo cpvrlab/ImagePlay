@@ -67,7 +67,7 @@ class IPProcessGridScene;
 
 // constants
 #ifndef IMAGEPLAY_VERSION
-#define IMAGEPLAY_VERSION "6.1.0-beta"
+#define IMAGEPLAY_VERSION APP_VERSION
 #endif
 
 #ifndef IMAGEPLAY_BUILDDATE

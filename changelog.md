@@ -5,7 +5,7 @@
 - Added Fervor upate checker, you will be notified about future updates (> 6.1.0).
 - Updated to Qt 5.6 and OpenCV 3.1.0
 - Improved plugin API. We now check for API level which should make things more stable.
- - New IPLEvent allows to react to process GUI events from buttons when overriding processPropertyEvents
+- New IPLEvent allows to react to process GUI events from buttons when overriding processPropertyEvents
 
 ### Fixed
 - Fixed some issues with IPLLabelBlobs
@@ -13,6 +13,7 @@
 ### Known Issues
 - While using a IPLCamera, the UI can be pretty unresponsive. Pause to adjust the UI.
 - The application may still be unstable, expect crashes (please report them on https://github.com/cpvrlab/ImagePlay/issues)
+
 ## 6.0.0 - 2015-11-06
 ### Added
 - Improved OS X retina dispay support
