@@ -1,6 +1,6 @@
 # Change Log
 
-## 6.1.0 - 2016-06-10
+## 6.1.0 - 2017-03-01
 ### Added
 - Added Fervor upate checker, you will be notified about future updates (> 6.1.0).
 - Updated to Qt 5.6 and OpenCV 3.1.0
