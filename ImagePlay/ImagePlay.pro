@@ -155,7 +155,7 @@ macx: {
     # fix some weird dylib issues
     QMAKE_POST_LINK += install_name_tool -change libIPL.1.dylib @executable_path/../Frameworks/libIPL.1.0.0.dylib ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
     QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64 ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/MacOS/ImagePlay $$escape_expand(\n\t)
-    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64  ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib
+    QMAKE_POST_LINK += install_name_tool -change libfreeimage-3.16.0.dylib-x86_64 @executable_path/../Frameworks/libfreeimage-3.16.0.dylib-x86_64 ../_bin/$$CONFIGURATION/$$PLATFORM/ImagePlay.app/Contents/Frameworks/libIPL.1.0.0.dylib $$escape_expand(\n\t)
 
     USE_FERVOR_UPDATER = true
 }
