@@ -206,6 +206,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         INSTALLS += process_icons
         INSTALLS += plugin_development
         INSTALLS += target
+        # LINUX_PATH_PREFIX is used later in MainWindow to identify location of process_icons, plugins and plugin_development
         DEFINES += LINUX_PATH_PREFIX=\"\\\"$$PREFIX/share/imageplay/\\\"\"
 }
 

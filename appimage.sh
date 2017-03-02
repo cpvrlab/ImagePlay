@@ -20,11 +20,13 @@ cd $HOME/$APP/
 wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./functions.sh
 . ./functions.sh
 
+# go into appdir
 cd $APP.AppDir
 
 sudo chown -R $USER /app/
 sed -i -e 's|/app|././|g' /app/bin/imageplay
 
+# we are in appdir now...
 cp /app/bin/imageplay ./usr/bin/
 cp -a /app/share/imageplay/. ./usr/share/imageplay/
 
