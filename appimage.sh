@@ -65,8 +65,8 @@ copy_deps
 # echo Moving libraries...
 move_lib
 mv usr/lib/x86_64-linux-gnu/* usr/lib/
-# test, copy opencv!
-# mv usr/local/lib/* usr/lib/
+# moving opencv libs
+mv usr/local/lib/* usr/lib/
 # echo libraries moved
 
 ########################################################################
