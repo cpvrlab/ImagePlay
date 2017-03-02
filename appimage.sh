@@ -62,8 +62,12 @@ cp -r $PLUGINS/* ./usr/lib/qt5/plugins/
 copy_deps
 
 # Move the libraries to usr/bin
+# echo Moving libraries...
 move_lib
 mv usr/lib/x86_64-linux-gnu/* usr/lib/
+# test, copy opencv!
+# mv usr/local/lib/* usr/lib/
+# echo libraries moved
 
 ########################################################################
 # Delete stuff that should not go into the AppImage

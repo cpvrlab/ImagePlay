@@ -195,14 +195,17 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
         }
         TARGET = imageplay
         target.path = $${PREFIX}/bin
-        images.files = ../_bin/$$CONFIGURATION/$$PLATFORM/images/*
-        images.path = $${PREFIX}/share/imageplay/images
+        examples.files = ../_bin/$$CONFIGURATION/$$PLATFORM/examples/*
+        examples.path = $${PREFIX}/share/imageplay/examples
+	examples.CONFIG += no_check_exist
         process_icons.files = ../_bin/$$CONFIGURATION/$$PLATFORM/process_icons/*.png
         process_icons.path = $${PREFIX}/share/imageplay/process_icons
+	process_icons.CONFIG += no_check_exist
         plugin_development.files = ../_bin/$$CONFIGURATION/$$PLATFORM/plugin_development/*
         plugin_development.path = $${PREFIX}/share/imageplay/plugin_development
+	plugin_development.CONFIG += no_check_exist
 
-        INSTALLS += images
+        INSTALLS += examples
         INSTALLS += process_icons
         INSTALLS += plugin_development
         INSTALLS += target
@@ -240,6 +243,7 @@ if($$USE_FERVOR_UPDATER) {
     DEFINES += USE_FERVOR_UPDATER
 }
 
+message("Defines:")
 message($$DEFINES)
 
 # Visual Leak Detector
