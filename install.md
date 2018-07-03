@@ -81,3 +81,6 @@ sudo make install
 The following files are installed:
 - `/usr/bin/imageplay`
 - `/usr/share/imageplay/*`
+
+### Debug build
+Append `CONFIG+=debug` to the `qmake -recursive` command (note: In such a case, `make` current does not rebuild `imageplay` binary automatically)
