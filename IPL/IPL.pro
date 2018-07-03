@@ -17,7 +17,8 @@
 #
 ##############################################################################
 
-CONFIG -= qt
+# CONFIG -= qt
+QT       += core gui
 
 TARGET = IPL
 CONFIG(debug, debug|release): DESTDIR  = ../ImagePlay/debug

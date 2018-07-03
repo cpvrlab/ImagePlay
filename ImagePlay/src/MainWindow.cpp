@@ -456,6 +456,7 @@ void MainWindow::loadProcesses()
     _factory->registerProcess("IPLCamera",              new IPLCamera);
     //_factory->registerProcess("IPLLoadVideo",           new IPLLoadVideo);
     _factory->registerProcess("IPLLoadImageSequence",   new IPLLoadImageSequence);
+    _factory->registerProcess("IPLScreenshot",          new IPLScreenshot);
     _factory->registerProcess("IPLSaveImage",           new IPLSaveImage);
     _factory->registerProcess("IPLSplitPlanes",         new IPLSplitPlanes);
     _factory->registerProcess("IPLMergePlanes",         new IPLMergePlanes);
