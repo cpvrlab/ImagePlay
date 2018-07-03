@@ -49,6 +49,7 @@ public:
 protected:
     IPLImage*               _result;
     IPLImage*               _overlay;
+    IPLKeyPoints*           _corners;
 };
 
 #endif // IPLGOODFEATURESTOTRACK_H
