@@ -22,28 +22,31 @@
 void IPLGoodFeaturesToTrack::init()
 {
     // init
-    _overlay        = NULL;
-    _result         = NULL;
+    _overlay = NULL;
+    _result  = NULL;
+    _corners = NULL;
 
     // basic settings
     setClassName("IPLGoodFeaturesToTrack");
     setTitle("Good Features To Track");
     setCategory(IPLProcess::CATEGORY_OBJECTS);
     setOpenCVSupport(IPLOpenCVSupport::OPENCV_ONLY);
-    setDescription("The circle Hough Transform (CHT) is a feature extraction technique for detecting circles.");
+    setDescription("Shi-Tomasi Corner Detector & Good Features to Track.");
 
     // inputs and outputs
-    addInput("Image", IPL_IMAGE_COLOR);
-    addOutput("Hough Result", IPL_IMAGE_GRAYSCALE);
-    addOutput("Circle Overlay", IPL_IMAGE_COLOR);
-    addOutput("Circle Positions", IPL_POINT);
+    addInput("Image", IPL_IMAGE_GRAYSCALE); // Input 8-bit or floating-point 32-bit, single-channel image.
+    addOutput("Corners overlay", IPL_IMAGE_COLOR); // index 0 (overlay)
+    addOutput("Corners (raw)", IPL_IMAGE_GRAYSCALE); // index 1 (result)
+    // Not implemented (later, when <cv::Vec2f> to IPLKeypoints is implemented
+    addOutput("Corners positions", IPL_KEYPOINTS); // index 2 (corners)
 
     // properties
-    addProcessPropertyInt("thresholdCanny", "Threshold 1", "Upper threshold for the internal Canny edge detector", 200, IPL_WIDGET_SLIDER, 1, 200);
-    addProcessPropertyInt("thresholdCenter", "Threshold 2", "Threshold for center detection", 100, IPL_WIDGET_SLIDER, 1, 200);
-    addProcessPropertyInt("minRadius", "Min. Radius", "", 1, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("maxRadius", "Max. Radius", "", 5, IPL_WIDGET_SLIDER, 1, 1000);
-    addProcessPropertyInt("minDist", "Min. Distance", "", 100, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyInt("maxCorners", "Max corners", "Maximum number of corners to return. If there are more corners than are found, the strongest of them is returned.", 200, IPL_WIDGET_SLIDER, 1, 200);
+    addProcessPropertyDouble("qualityLevel", "Quality level", "Parameter characterizing the minimal accepted quality of image corners.", 0.01, IPL_WIDGET_SLIDER, 0.001, 15);
+    addProcessPropertyDouble("minDistance", "Min. distance", "Minimum possible Euclidean distance between the returned corners.", 20, IPL_WIDGET_SLIDER, 1, 1000);
+    addProcessPropertyInt("block_size", "Block size", "Size of an average block for computing a derivative covariation matrix over each pixel neighborhood.", 3, IPL_WIDGET_SLIDER, 1, 250);
+    addProcessPropertyBool("useHarrisDetector", "Harris detector", "Whether to use a Harris detector", false, IPL_WIDGET_CHECKBOXES);
+    addProcessPropertyDouble("k", "k", "Free parameter of the Harris detector.", 0.04, IPL_WIDGET_SLIDER, 0, 1);
 }
 
 void IPLGoodFeaturesToTrack::destroy()
@@ -61,62 +64,49 @@ bool IPLGoodFeaturesToTrack::processInputData(IPLData* data, int, bool)
     _overlay = NULL;
 
     // get properties
-    int thresholdCanny       = getProcessPropertyInt("thresholdCanny");
-    int thresholdCenter      = getProcessPropertyInt("thresholdCenter");
-    int minRadius            = getProcessPropertyInt("minRadius");
-    int maxRadius            = getProcessPropertyInt("maxRadius");
-    int minDist              = getProcessPropertyInt("minDist");
+    int maxCorners         = getProcessPropertyInt("maxCorners");
+    double qualityLevel    = getProcessPropertyDouble("qualityLevel");
+    double minDistance     = getProcessPropertyDouble("minDistance");
+    int block_size         = getProcessPropertyInt("block_size");
+    bool useHarrisDetector = getProcessPropertyBool("useHarrisDetector");
+    double k               = getProcessPropertyDouble("k");
 
     notifyProgressEventHandler(-1);
     cv::Mat input;
+    cv::Mat mask; // ToDo (as optional input?)
     cv::Mat overlay = image->toCvMat();
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
     cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
 
-    std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);
-
-    // WARNING: cv::HoughCircles does not work in debug mode!!!
-    //          destroys the std::vector<cv::Vec3f> circles;
+    std::vector<cv::Vec2f> corners;
+    cv::goodFeaturesToTrack(input, corners, maxCorners, qualityLevel, minDistance, cv::noArray(), block_size, useHarrisDetector, k);
 
     std::stringstream s;
-    s << "Circles found: ";
-    s << circles.size();
+    s << "Corners found: ";
+    s << corners.size();
     addInformation(s.str());
 
-    for(int i = 0; i < (int) circles.size(); i++ )
+    for(int i = 0; i < (int) corners.size(); i++)
     {
-       cv::Point center(round(circles[i][0]), round(circles[i][1]));
-       int radius = cvRound(circles[i][2]);
-       // circle center
-       cv::circle(overlay, center, 3, cv::Scalar(0,255,0), -1, 8, 0);
-       // circle outline
-       cv::circle(overlay, center, radius, cv::Scalar(0,0,255), 3, 1, 0);
-
-       // raw result
-       cv::circle(result, center, radius, cv::Scalar(255), -1);
+       cv::Point center(round(corners[i][0]), round(corners[i][1]));
+       cv::circle(overlay, center, 5, cv::Scalar(0,255,0), -1, 8, 0);
+       cv::circle(result, center, 5, cv::Scalar(255), -1);
      }
 
     _overlay = new IPLImage(overlay);
     _result = new IPLImage(result);
+    // _corners = corners;
 
-	return true;
+    return true;
 }
 
-/*!
- * \brief IPLGoodFeaturesToTrack::getResultData
- *        index == 0: "Hough Result", IPL_IMAGE_GRAYSCALE
- *        index == 1: "Circle Overlay", IPL_IMAGE_COLOR
- *        index == 2: "Circle Positions", IPLImage::IMAGE_POINT
- * \return
- */
 IPLData* IPLGoodFeaturesToTrack::getResultData(int index)
 {
     if(index == 0)
-        return _result;
-    else if(index == 1)
         return _overlay;
-    else
+    else // if(index == 1)
         return _result;
+    /*else if(index == 1)
+        return _corners;*/
 }
