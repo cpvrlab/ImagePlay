@@ -38,6 +38,7 @@ void IPLCamera::init()
 
     addProcessPropertyUnsignedInt("trigger", "Trigger Image", "", 0, IPL_WIDGET_BUTTON);
     addProcessPropertyBool("continuous", "Run continuously", "", false, IPL_WIDGET_CHECKBOXES);
+    addProcessPropertyInt("camera_id", "Camera ID", "", 0, IPL_WIDGET_SLIDER, 0, 5);
 
     // all properties which can later be changed by gui
     addProcessPropertyInt("width", "Width", "", 640, IPL_WIDGET_SLIDER, 640, 1920);
@@ -62,6 +63,7 @@ bool IPLCamera::processInputData(IPLData*, int, bool)
     _result = NULL;
 
     _continuous = getProcessPropertyBool("continuous");
+    _camera_id = getProcessPropertyInt("camera_id");
 
     /*if (_continuous = getProcessPropertyBool("continuous"))
     {
@@ -92,7 +94,7 @@ bool IPLCamera::processInputData(IPLData*, int, bool)
     //delete _camera;
     //_camera = NULL;
 
-    _result = IPLCameraIO::grabFrame(!_continuous);
+    _result = IPLCameraIO::grabFrame((uint)_camera_id, !_continuous);
 
     // if we didn't get a frame
     if(!_result)

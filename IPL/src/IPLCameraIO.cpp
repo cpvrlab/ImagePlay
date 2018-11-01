@@ -20,14 +20,17 @@
 #include "IPLCameraIO.h"
 
 cv::VideoCapture*   IPLCameraIO::_camera    = NULL;
+uint                IPLCameraIO::_last_camera_id = 0;
 IPLImage*           IPLCameraIO::_lastFrame = NULL;
 
-IPLImage* IPLCameraIO::grabFrame(bool forcedCapture/* = false*/)
+IPLImage* IPLCameraIO::grabFrame(uint camera_id, bool forcedCapture/* = false*/)
 {
     // connect camera once
-    if(!_camera)
+    if(!_camera || _last_camera_id != camera_id)
     {
-        _camera = new cv::VideoCapture(0);
+	release();
+        _camera = new cv::VideoCapture(camera_id);
+	_last_camera_id = camera_id;
     }
 
     if(!_camera->isOpened())

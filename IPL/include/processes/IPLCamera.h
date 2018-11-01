@@ -46,6 +46,7 @@ public:
 protected:
     IPLImage*               _result;
     bool                    _continuous;
+    uint                    _camera_id;
 };
 
 #endif // IPLCAMERA_H
