@@ -138,6 +138,11 @@ bool IPLSaveImage::processInputData(IPLData* data, int, bool)
         else
             flags = PNM_SAVE_ASCII;
     }
+    else {
+        addError("Unknown image extension for saving");
+        delete _result;
+        return false;
+    }
 
     notifyProgressEventHandler(-1);
 
