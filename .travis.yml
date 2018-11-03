@@ -6,10 +6,12 @@ compiler: g++
 
 addons:
   apt:
+    update: true
     sources:
       - george-edison55-precise-backports
       - ubuntu-toolchain-r-test
-      - timsc
+      - sourceline: 'ppa:timsc/opencv-3.4'
+        key_url: 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8A9CA30DB3C431E3'
     packages:
       - cmake-data
       - cmake
@@ -22,9 +24,12 @@ addons:
 before_install:
  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install opencv && brew install qt5 && brew link --force qt5; fi
  # additional headerfiles
- - sudo apt-get -y install libxxf86vm-dev libxi-dev libudev-dev libxcursor-dev
+ - sudo apt-get -y install libxxf86vm-dev libxi-dev libudev-dev libxcursor-dev wget xz-utils
  - sudo apt-get -y install -f qtbase5-dev qt5-default qttools5-dev-tools libqt5opengl5-dev
  - sudo apt-get -y install libfreeimage-dev
+ # workaround for contrib binary libs unavailability
+ - wget -O opencv-3.4-x86_64.pkg.tar.xz https://www.archlinux.org/packages/extra/x86_64/opencv/download/
+ - sudo tar --wildcards --strip=2 -C /usr/lib/x86_64-linux-gnu/ -xf opencv-3.4-x86_64.pkg.tar.xz usr/lib/libopencv_xfeatures2d.so* usr/lib/libopencv_xphoto.so* usr/lib/libopencv_optflow.so*
 
 script:
  - qmake -recursive PREFIX=/app
