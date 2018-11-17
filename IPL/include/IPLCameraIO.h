@@ -33,11 +33,12 @@
 class IPLSHARED_EXPORT IPLCameraIO
 {
 public:
-    static IPLImage*            grabFrame(bool forcedCapture = false);
+    static IPLImage*            grabFrame(uint camera_id, bool forcedCapture = false);
     static cv::VideoCapture*    camera();
     static void                 release();
 private:
     static cv::VideoCapture*    _camera;
+    static uint                 _last_camera_id;
     static IPLImage*            _lastFrame;
 };
 
