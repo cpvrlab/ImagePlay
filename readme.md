@@ -2,7 +2,7 @@
 
 ImagePlay is a rapid prototyping application allowing you to experiment with state-of-the-art image processing algorithms.
 
-[Website](http://imageplay.io)
+[Website](http://cpvrlab.github.io/ImagePlay/)
 
 [Build instructions](install.md)
 
