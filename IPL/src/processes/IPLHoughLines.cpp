@@ -78,7 +78,7 @@ bool IPLHoughLines::processInputData(IPLData* data, int, bool)
     cv::Mat overlay = image->toCvMat();
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
-    cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
     overlay.convertTo(overlay, CV_8UC3);
 
     std::vector<cv::Vec2f> lines;
@@ -100,10 +100,10 @@ bool IPLHoughLines::processInputData(IPLData* data, int, bool)
         pt1.y = cvRound(y0 + 1000*(a));
         pt2.x = cvRound(x0 - 1000*(-b));
         pt2.y = cvRound(y0 - 1000*(a));
-       cv::line(overlay, pt1, pt2, cv::Scalar(0,0,255), 2, CV_AA);
+       cv::line(overlay, pt1, pt2, cv::Scalar(0,0,255), 2, cv::LINE_AA);
 
        // raw result
-       cv::line(result, pt1, pt2, cv::Scalar(255), 1, CV_AA);
+       cv::line(result, pt1, pt2, cv::Scalar(255), 1, cv::LINE_AA);
      }
 
     _overlay = new IPLImage(overlay);

@@ -73,7 +73,7 @@ bool IPLHarrisCorner::processInputData(IPLData* data, int, bool useOpenCV)
     notifyProgressEventHandler(-1);
     cv::Mat input;
     cv::Mat output;
-    cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
 
     /// Detector parameters
     int blockSize = 2;
@@ -89,7 +89,7 @@ bool IPLHarrisCorner::processInputData(IPLData* data, int, bool useOpenCV)
     cv::normalize( output, dst_norm, 0, 255, cv::NORM_MINMAX, CV_32FC1, cv::Mat() );
     cv::convertScaleAbs( dst_norm, output );
 
-    cvtColor(output, output, CV_GRAY2BGR);
+    cvtColor(output, output, cv::COLOR_GRAY2BGR);
 
     /// Drawing a circle around corners
     for( int j = 0; j < dst_norm.rows ; j++ )

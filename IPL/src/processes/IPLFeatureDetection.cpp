@@ -69,7 +69,7 @@ bool IPLFeatureDetection::processInputData(IPLData* data, int, bool useOpenCV)
     notifyProgressEventHandler(-1);
     cv::Mat input;
     cv::Mat output;
-    cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
     input.copyTo(output);
 
     //cv::OrbFeatureDetector detector;

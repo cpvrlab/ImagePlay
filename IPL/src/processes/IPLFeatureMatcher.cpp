@@ -105,8 +105,8 @@ bool IPLFeatureMatcher::processInputData(IPLData* data , int index, bool useOpen
         cv::Mat output;
         std::vector<cv::KeyPoint> keypoints1 = *_keypoints1->get();
         std::vector<cv::KeyPoint> keypoints2 = *_keypoints2->get();
-        cv::cvtColor(_image1->toCvMat(), input1, CV_BGR2GRAY);
-        cv::cvtColor(_image2->toCvMat(), input2, CV_BGR2GRAY);
+        cv::cvtColor(_image1->toCvMat(), input1, cv::COLOR_BGR2GRAY);
+        cv::cvtColor(_image2->toCvMat(), input2, cv::COLOR_BGR2GRAY);
 
         std::stringstream s1;
         s1 << "Number of Keypoints 1: ";

@@ -73,7 +73,7 @@ bool IPLNormalizeIllumination::processInputData(IPLData* data, int, bool)
     cv::Mat *lMat;
     image->toCvMat().convertTo(bgr32,CV_32F);
     bgr32 *= 1.f/255.f;
-    cvtColor(bgr32,labMat,CV_BGR2Lab);
+    cvtColor(bgr32,labMat,cv::COLOR_BGR2Lab);
     split(labMat,splitLabMats);
     // grab the lightness channel
     lMat = &splitLabMats[0];
@@ -119,7 +119,7 @@ bool IPLNormalizeIllumination::processInputData(IPLData* data, int, bool)
     int from_to[] = { 0,0 };
     mixChannels(&result,1,&labMat,1,from_to,1);
 
-    cvtColor(labMat,rgbResult32,CV_Lab2BGR);
+    cvtColor(labMat,rgbResult32,cv::COLOR_Lab2BGR);
     rgbResult32 *= 255.f;
     rgbResult32.convertTo(rgbResult,CV_8U);
 

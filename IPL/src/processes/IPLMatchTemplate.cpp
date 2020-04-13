@@ -73,10 +73,10 @@ bool IPLMatchTemplate::processInputData(IPLData* data, int, bool)
     cv::Mat overlay = image->toCvMat();
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
-    cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
 
     std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(input, circles, CV_HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);
+    cv::HoughCircles(input, circles, cv::HOUGH_GRADIENT, 2, input.rows/4, thresholdCanny, thresholdCenter, minRadius, maxRadius);
 
     // WARNING: cv::HoughCircles does not work in debug mode!!!
     //          destroys the std::vector<cv::Vec3f> circles;
