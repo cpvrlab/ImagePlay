@@ -50,3 +50,8 @@ _doc/
 _bin/
 .settings/
 ImagePlay.VC.db
+
+# release-related dirs
+IPL/release/
+IPL/debug/
+IPL/lib/
