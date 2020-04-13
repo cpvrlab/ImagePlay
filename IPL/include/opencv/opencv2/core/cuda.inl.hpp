@@ -41,8 +41,8 @@
 //
 //M*/
 
-#ifndef __OPENCV_CORE_CUDAINL_HPP__
-#define __OPENCV_CORE_CUDAINL_HPP__
+#ifndef OPENCV_CORE_CUDAINL_HPP
+#define OPENCV_CORE_CUDAINL_HPP
 
 #include "opencv2/core/cuda.hpp"
 
@@ -343,6 +343,12 @@ bool GpuMat::empty() const
     return data == 0;
 }
 
+inline
+void* GpuMat::cudaPtr() const
+{
+    return data;
+}
+
 static inline
 GpuMat createContinuous(int rows, int cols, int type)
 {
@@ -628,4 +634,4 @@ Mat::Mat(const cuda::GpuMat& m)
 
 //! @endcond
 
-#endif // __OPENCV_CORE_CUDAINL_HPP__
+#endif // OPENCV_CORE_CUDAINL_HPP
