@@ -56,8 +56,8 @@ equals(TEMPLATE, app) {
 
 # enable or disable update checker
 USE_FERVOR_UPDATER = false
-DEFINES += IMAGEPLAY_URL=\\\"http://imageplay.io\\\"
-DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://imageplay.io/Appcast.xml\\\"
+DEFINES += IMAGEPLAY_URL=\\\"http://cpvrlab.github.io/ImagePlay\\\"
+DEFINES += IMAGEPLAY_APPCAST_URL=\\\"http://cpvrlab.github.io/ImagePlay/Appcast.xml\\\"
 
 #define platform variable for folder name
 win32 {contains(QMAKE_TARGET.arch, x86_64) {PLATFORM = x64} else {PLATFORM = Win32}}
