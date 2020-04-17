@@ -32,9 +32,7 @@ before_install:
  - sudo tar --wildcards --strip=2 -C /usr/lib/x86_64-linux-gnu/ -xf opencv-3.4-x86_64.pkg.tar.xz usr/lib/libopencv_xfeatures2d.so* usr/lib/libopencv_xphoto.so* usr/lib/libopencv_optflow.so*
 
 script:
- - qmake -recursive PREFIX=/app
- - make
- - sudo make install
+ - qmake -recursive PREFIX=/app && make && sudo make install
 
 after_success:
  - find /app

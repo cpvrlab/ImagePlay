@@ -65,3 +65,34 @@ QMAKE_DEFAULT_LIBDIRS = \
 QMAKE_MAC_SDK.macosx10.12.Path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk
 QMAKE_MAC_SDK.macosx10.12.PlatformPath = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform
 QMAKE_MAC_SDK.macosx10.12.SDKVersion = 10.12
+QMAKE_CXX.INCDIRS = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 \
+    /usr/local/include \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include \
+    /usr/include \
+    "/System/Library/Frameworks (framework directory)" \
+    "/Library/Frameworks (framework directory)" \
+    /usr/include/c++/7 \
+    /usr/include/x86_64-linux-gnu/c++/7 \
+    /usr/include/c++/7/backward \
+    /usr/lib/gcc/x86_64-linux-gnu/7/include \
+    /usr/local/include \
+    /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed \
+    /usr/include/x86_64-linux-gnu \
+    /usr/include
+QMAKE_CXX.LIBDIRS = \
+    /lib \
+    /usr/lib \
+    /usr/lib/gcc/x86_64-linux-gnu/7 \
+    /usr/lib/x86_64-linux-gnu \
+    /lib/x86_64-linux-gnu
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
