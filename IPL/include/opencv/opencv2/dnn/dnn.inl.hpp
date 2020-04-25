@@ -39,15 +39,14 @@
 //
 //M*/
 
-#ifndef __OPENCV_DNN_DNN_INL_HPP__
-#define __OPENCV_DNN_DNN_INL_HPP__
+#ifndef OPENCV_DNN_DNN_INL_HPP
+#define OPENCV_DNN_DNN_INL_HPP
 
 #include <opencv2/dnn.hpp>
 
-namespace cv
-{
-namespace dnn
-{
+namespace cv {
+namespace dnn {
+CV__DNN_INLINE_NS_BEGIN
 
 template<typename TypeIter>
 DictValue DictValue::arrayInt(TypeIter begin, int size)
@@ -86,7 +85,7 @@ inline DictValue DictValue::get<DictValue>(int idx) const
 template<>
 inline int64 DictValue::get<int64>(int idx) const
 {
-    CV_Assert(idx == -1 && size() == 1 || idx >= 0 && idx < size());
+    CV_Assert((idx == -1 && size() == 1) || (idx >= 0 && idx < size()));
     idx = (idx == -1) ? 0 : idx;
 
     if (type == Param::INT)
@@ -103,15 +102,24 @@ inline int64 DictValue::get<int64>(int idx) const
 
         return (int64)doubleValue;
     }
+    else if (type == Param::STRING)
+    {
+        return std::atoi((*ps)[idx].c_str());
+    }
     else
     {
-        CV_Assert(isInt() || isReal());
+        CV_Assert(isInt() || isReal() || isString());
         return 0;
     }
 }
 
 template<>
 inline int DictValue::get<int>(int idx) const
+{
+    return (int)get<int64>(idx);
+}
+
+inline int DictValue::getIntValue(int idx) const
 {
     return (int)get<int64>(idx);
 }
@@ -131,7 +139,7 @@ inline bool DictValue::get<bool>(int idx) const
 template<>
 inline double DictValue::get<double>(int idx) const
 {
-    CV_Assert(idx == -1 && size() == 1 || idx >= 0 && idx < size());
+    CV_Assert((idx == -1 && size() == 1) || (idx >= 0 && idx < size()));
     idx = (idx == -1) ? 0 : idx;
 
     if (type == Param::REAL)
@@ -142,11 +150,20 @@ inline double DictValue::get<double>(int idx) const
     {
         return (double)(*pi)[idx];
     }
+    else if (type == Param::STRING)
+    {
+        return std::atof((*ps)[idx].c_str());
+    }
     else
     {
-        CV_Assert(isReal() || isInt());
+        CV_Assert(isReal() || isInt() || isString());
         return 0;
     }
+}
+
+inline double DictValue::getRealValue(int idx) const
+{
+    return get<double>(idx);
 }
 
 template<>
@@ -159,8 +176,14 @@ template<>
 inline String DictValue::get<String>(int idx) const
 {
     CV_Assert(isString());
-    CV_Assert(idx == -1 && ps->size() == 1 || idx >= 0 && idx < (int)ps->size());
+    CV_Assert((idx == -1 && ps->size() == 1) || (idx >= 0 && idx < (int)ps->size()));
     return (*ps)[(idx == -1) ? 0 : idx];
+}
+
+
+inline String DictValue::getStringValue(int idx) const
+{
+    return get<String>(idx);
 }
 
 inline void DictValue::release()
@@ -176,6 +199,16 @@ inline void DictValue::release()
     case Param::REAL:
         delete pd;
         break;
+    case Param::BOOLEAN:
+    case Param::MAT:
+    case Param::MAT_VECTOR:
+    case Param::ALGORITHM:
+    case Param::FLOAT:
+    case Param::UNSIGNED_INT:
+    case Param::UINT64:
+    case Param::UCHAR:
+    case Param::SCALAR:
+        break; // unhandled
     }
 }
 
@@ -246,17 +279,22 @@ inline int DictValue::size() const
     {
     case Param::INT:
         return (int)pi->size();
-        break;
     case Param::STRING:
         return (int)ps->size();
-        break;
     case Param::REAL:
         return (int)pd->size();
-        break;
-    default:
-        CV_Error(Error::StsInternal, "");
-        return -1;
+    case Param::BOOLEAN:
+    case Param::MAT:
+    case Param::MAT_VECTOR:
+    case Param::ALGORITHM:
+    case Param::FLOAT:
+    case Param::UNSIGNED_INT:
+    case Param::UINT64:
+    case Param::UCHAR:
+    case Param::SCALAR:
+        break; // unhandled
     }
+    CV_Error_(Error::StsInternal, ("Unhandled type (%d)", static_cast<int>(type)));
 }
 
 inline std::ostream &operator<<(std::ostream &stream, const DictValue &dictv)
@@ -287,7 +325,7 @@ inline std::ostream &operator<<(std::ostream &stream, const DictValue &dictv)
 
 /////////////////////////////////////////////////////////////////
 
-inline bool Dict::has(const String &key)
+inline bool Dict::has(const String &key) const
 {
     return dict.count(key) != 0;
 }
@@ -295,6 +333,12 @@ inline bool Dict::has(const String &key)
 inline DictValue *Dict::ptr(const String &key)
 {
     _Dict::iterator i = dict.find(key);
+    return (i == dict.end()) ? NULL : &i->second;
+}
+
+inline const DictValue *Dict::ptr(const String &key) const
+{
+    _Dict::const_iterator i = dict.find(key);
     return (i == dict.end()) ? NULL : &i->second;
 }
 
@@ -336,6 +380,11 @@ inline const T &Dict::set(const String &key, const T &value)
     return value;
 }
 
+inline void Dict::erase(const String &key)
+{
+    dict.erase(key);
+}
+
 inline std::ostream &operator<<(std::ostream &stream, const Dict &dict)
 {
     Dict::_Dict::const_iterator it;
@@ -345,6 +394,17 @@ inline std::ostream &operator<<(std::ostream &stream, const Dict &dict)
     return stream;
 }
 
+inline std::map<String, DictValue>::const_iterator Dict::begin() const
+{
+    return dict.begin();
+}
+
+inline std::map<String, DictValue>::const_iterator Dict::end() const
+{
+    return dict.end();
+}
+
+CV__DNN_INLINE_NS_END
 }
 }
 

@@ -66,11 +66,14 @@ Functions reading and writing .flo files in "Middlebury" format, see: <http://vi
 
  */
 
+#include "opencv2/optflow/pcaflow.hpp"
+#include "opencv2/optflow/sparse_matching_gpc.hpp"
+#include "opencv2/optflow/rlofflow.hpp"
 namespace cv
 {
 namespace optflow
 {
-    
+
 //! @addtogroup optflow
 //! @{
 
@@ -134,27 +137,6 @@ CV_EXPORTS_W void calcOpticalFlowSparseToDense ( InputArray from, InputArray to,
                                                  bool use_post_proc = true, float fgs_lambda = 500.0f,
                                                  float fgs_sigma = 1.5f );
 
-/** @brief Read a .flo file
-
-@param path Path to the file to be loaded
-
-The function readOpticalFlow loads a flow field from a file and returns it as a single matrix.
-Resulting Mat has a type CV_32FC2 - floating-point, 2-channel. First channel corresponds to the
-flow in the horizontal direction (u), second - vertical (v).
- */
-CV_EXPORTS_W Mat readOpticalFlow( const String& path );
-/** @brief Write a .flo to disk
-
-@param path Path to the file to be written
-@param flow Flow field to be stored
-
-The function stores a flow field in a file, returns true on success, false otherwise.
-The flow field must be a 2-channel, floating-point matrix (CV_32FC2). First channel corresponds
-to the flow in the horizontal direction (u), second - vertical (v).
- */
-CV_EXPORTS_W bool writeOpticalFlow( const String& path, InputArray flow );
-
-
 /** @brief DeepFlow optical flow algorithm implementation.
 
 The class implements the DeepFlow optical flow algorithm described in @cite Weinzaepfel2013 . See
@@ -190,6 +172,132 @@ CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_Farneback();
 
 //! Additional interface to the SparseToDenseFlow algorithm - calcOpticalFlowSparseToDense()
 CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_SparseToDense();
+
+/** @brief "Dual TV L1" Optical Flow Algorithm.
+
+The class implements the "Dual TV L1" optical flow algorithm described in @cite Zach2007 and
+@cite Javier2012 .
+Here are important members of the class that control the algorithm, which you can set after
+constructing the class instance:
+
+-   member double tau
+    Time step of the numerical scheme.
+
+-   member double lambda
+    Weight parameter for the data term, attachment parameter. This is the most relevant
+    parameter, which determines the smoothness of the output. The smaller this parameter is,
+    the smoother the solutions we obtain. It depends on the range of motions of the images, so
+    its value should be adapted to each image sequence.
+
+-   member double theta
+    Weight parameter for (u - v)\^2, tightness parameter. It serves as a link between the
+    attachment and the regularization terms. In theory, it should have a small value in order
+    to maintain both parts in correspondence. The method is stable for a large range of values
+    of this parameter.
+
+-   member int nscales
+    Number of scales used to create the pyramid of images.
+
+-   member int warps
+    Number of warpings per scale. Represents the number of times that I1(x+u0) and grad(
+    I1(x+u0) ) are computed per scale. This is a parameter that assures the stability of the
+    method. It also affects the running time, so it is a compromise between speed and
+    accuracy.
+
+-   member double epsilon
+    Stopping criterion threshold used in the numerical scheme, which is a trade-off between
+    precision and running time. A small value will yield more accurate solutions at the
+    expense of a slower convergence.
+
+-   member int iterations
+    Stopping criterion iterations number used in the numerical scheme.
+
+C. Zach, T. Pock and H. Bischof, "A Duality Based Approach for Realtime TV-L1 Optical Flow".
+Javier Sanchez, Enric Meinhardt-Llopis and Gabriele Facciolo. "TV-L1 Optical Flow Estimation".
+*/
+class CV_EXPORTS_W DualTVL1OpticalFlow : public DenseOpticalFlow
+{
+public:
+    //! @brief Time step of the numerical scheme
+    /** @see setTau */
+    CV_WRAP virtual double getTau() const = 0;
+    /** @copybrief getTau @see getTau */
+    CV_WRAP virtual void setTau(double val) = 0;
+    //! @brief Weight parameter for the data term, attachment parameter
+    /** @see setLambda */
+    CV_WRAP virtual double getLambda() const = 0;
+    /** @copybrief getLambda @see getLambda */
+    CV_WRAP virtual void setLambda(double val) = 0;
+    //! @brief Weight parameter for (u - v)^2, tightness parameter
+    /** @see setTheta */
+    CV_WRAP virtual double getTheta() const = 0;
+    /** @copybrief getTheta @see getTheta */
+    CV_WRAP virtual void setTheta(double val) = 0;
+    //! @brief coefficient for additional illumination variation term
+    /** @see setGamma */
+    CV_WRAP virtual double getGamma() const = 0;
+    /** @copybrief getGamma @see getGamma */
+    CV_WRAP virtual void setGamma(double val) = 0;
+    //! @brief Number of scales used to create the pyramid of images
+    /** @see setScalesNumber */
+    CV_WRAP virtual int getScalesNumber() const = 0;
+    /** @copybrief getScalesNumber @see getScalesNumber */
+    CV_WRAP virtual void setScalesNumber(int val) = 0;
+    //! @brief Number of warpings per scale
+    /** @see setWarpingsNumber */
+    CV_WRAP virtual int getWarpingsNumber() const = 0;
+    /** @copybrief getWarpingsNumber @see getWarpingsNumber */
+    CV_WRAP virtual void setWarpingsNumber(int val) = 0;
+    //! @brief Stopping criterion threshold used in the numerical scheme, which is a trade-off between precision and running time
+    /** @see setEpsilon */
+    CV_WRAP virtual double getEpsilon() const = 0;
+    /** @copybrief getEpsilon @see getEpsilon */
+    CV_WRAP virtual void setEpsilon(double val) = 0;
+    //! @brief Inner iterations (between outlier filtering) used in the numerical scheme
+    /** @see setInnerIterations */
+    CV_WRAP virtual int getInnerIterations() const = 0;
+    /** @copybrief getInnerIterations @see getInnerIterations */
+    CV_WRAP virtual void setInnerIterations(int val) = 0;
+    //! @brief Outer iterations (number of inner loops) used in the numerical scheme
+    /** @see setOuterIterations */
+    CV_WRAP virtual int getOuterIterations() const = 0;
+    /** @copybrief getOuterIterations @see getOuterIterations */
+    CV_WRAP virtual void setOuterIterations(int val) = 0;
+    //! @brief Use initial flow
+    /** @see setUseInitialFlow */
+    CV_WRAP virtual bool getUseInitialFlow() const = 0;
+    /** @copybrief getUseInitialFlow @see getUseInitialFlow */
+    CV_WRAP virtual void setUseInitialFlow(bool val) = 0;
+    //! @brief Step between scales (<1)
+    /** @see setScaleStep */
+    CV_WRAP virtual double getScaleStep() const = 0;
+    /** @copybrief getScaleStep @see getScaleStep */
+    CV_WRAP virtual void setScaleStep(double val) = 0;
+    //! @brief Median filter kernel size (1 = no filter) (3 or 5)
+    /** @see setMedianFiltering */
+    CV_WRAP virtual int getMedianFiltering() const = 0;
+    /** @copybrief getMedianFiltering @see getMedianFiltering */
+    CV_WRAP virtual void setMedianFiltering(int val) = 0;
+
+    /** @brief Creates instance of cv::DualTVL1OpticalFlow*/
+    CV_WRAP static Ptr<DualTVL1OpticalFlow> create(
+                                            double tau = 0.25,
+                                            double lambda = 0.15,
+                                            double theta = 0.3,
+                                            int nscales = 5,
+                                            int warps = 5,
+                                            double epsilon = 0.01,
+                                            int innnerIterations = 30,
+                                            int outerIterations = 10,
+                                            double scaleStep = 0.8,
+                                            double gamma = 0.0,
+                                            int medianFiltering = 5,
+                                            bool useInitialFlow = false);
+};
+
+/** @brief Creates instance of cv::DenseOpticalFlow
+*/
+CV_EXPORTS_W Ptr<DualTVL1OpticalFlow> createOptFlow_DualTVL1();
 
 //! @}
 

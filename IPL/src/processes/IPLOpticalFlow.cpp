@@ -73,9 +73,9 @@ bool IPLOpticalFlow::processInputData(IPLData* data, int, bool useOpenCV)
     // Obtain first image
     if(_image_prev.cols == 0)
         _image_prev = image->toCvMat();
-        //cvtColor(image->toCvMat(), _image_prev, CV_BGR2GRAY);
+        //cvtColor(image->toCvMat(), _image_prev, cv::COLOR_BGR2GRAY);
 
-    //cvtColor(image->toCvMat(), _image_next, CV_BGR2GRAY);
+    //cvtColor(image->toCvMat(), _image_next, cv::COLOR_BGR2GRAY);
     _image_next = image->toCvMat();
 
     cv::Mat flow;

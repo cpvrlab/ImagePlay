@@ -77,7 +77,7 @@ bool IPLGoodFeaturesToTrack::processInputData(IPLData* data, int, bool)
     cv::Mat overlay = image->toCvMat();
     cv::Mat result = cv::Mat(image->height(), image->width(), CV_8UC1);
     result = cv::Scalar(0);
-    cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+    cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
 
     std::vector<cv::Vec2f> corners;
     cv::goodFeaturesToTrack(input, corners, maxCorners, qualityLevel, minDistance, cv::noArray(), block_size, useHarrisDetector, k);

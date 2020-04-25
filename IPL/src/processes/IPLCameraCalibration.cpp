@@ -88,7 +88,7 @@ bool IPLCameraCalibration::processInputData(IPLData* data , int index, bool useO
     notifyProgressEventHandler(-1);
     cv::Mat input;
     cv::Mat output = _image->toCvMat();
-    cv::cvtColor(_image->toCvMat(), input, CV_BGR2GRAY);
+    cv::cvtColor(_image->toCvMat(), input, cv::COLOR_BGR2GRAY);
 
     std::vector<cv::Point2f>              pointBuf;
     cv::Size                              boardSize(targetCols, targetRows);
@@ -127,7 +127,7 @@ bool IPLCameraCalibration::processInputData(IPLData* data , int index, bool useO
         switch(targetType) // Find feature points on the input format
         {
             case 0: // CHESSBOARD
-                found = cv::findChessboardCorners(input, boardSize, pointBuf, CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE);
+                found = cv::findChessboardCorners(input, boardSize, pointBuf, cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FAST_CHECK | cv::CALIB_CB_NORMALIZE_IMAGE);
             break;
             case 1: //CIRCLES_GRID:
                 found = cv::findCirclesGrid(input, boardSize, pointBuf);
@@ -143,7 +143,7 @@ bool IPLCameraCalibration::processInputData(IPLData* data , int index, bool useO
             // improve the found corners' coordinate accuracy for chessboard
             if(targetType == 0) // CHESSBOARD
             {
-                cv::cornerSubPix(input, pointBuf, cv::Size(11,11), cv::Size(-1,-1), cv::TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1 ));
+                cv::cornerSubPix(input, pointBuf, cv::Size(11,11), cv::Size(-1,-1), cv::TermCriteria( cv::TermCriteria::EPS+cv::TermCriteria::MAX_ITER, 30, 0.1 ));
             }
 
             _imagePoints.push_back(pointBuf);
@@ -164,7 +164,7 @@ bool IPLCameraCalibration::processInputData(IPLData* data , int index, bool useO
     if(_mode == CALIBRATION)
     {
         Pattern patternType = (Pattern) targetType;
-        bool result = this->runCalibration(_imagePoints, imageSize, boardSize, patternType, 1, 1, CV_CALIB_FIX_K4|CV_CALIB_FIX_K5, cameraMatrix,
+        bool result = this->runCalibration(_imagePoints, imageSize, boardSize, patternType, 1, 1, cv::CALIB_FIX_K4 | cv::CALIB_FIX_K5, cameraMatrix,
                                 distCoeffs, rvecs, tvecs, reprojErrs, totalAvgErr);
 
         if(result) {

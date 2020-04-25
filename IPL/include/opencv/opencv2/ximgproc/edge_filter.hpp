@@ -11,7 +11,7 @@
  *  Redistribution and use in source and binary forms, with or without modification,
  *  are permitted provided that the following conditions are met :
  *
- *  *Redistributions of source code must retain the above copyright notice,
+ *  * Redistributions of source code must retain the above copyright notice,
  *  this list of conditions and the following disclaimer.
  *
  *  * Redistributions in binary form must reproduce the above copyright notice,
@@ -107,7 +107,7 @@ guided image then use DTFilter interface to avoid extra computations on initiali
 @param guide guided image (also called as joint image) with unsigned 8-bit or floating-point 32-bit
 depth and up to 4 channels.
 @param src filtering image with unsigned 8-bit or floating-point 32-bit depth and up to 4 channels.
-@param dst
+@param dst destination image
 @param sigmaSpatial \f${\sigma}_H\f$ parameter in the original article, it's similar to the sigma in the
 coordinate space into bilateralFilter.
 @param sigmaColor \f${\sigma}_r\f$ parameter in the original article, it's similar to the sigma in the
@@ -316,6 +316,28 @@ proportional to sigmaSpace .
 CV_EXPORTS_W
 void jointBilateralFilter(InputArray joint, InputArray src, OutputArray dst, int d, double sigmaColor, double sigmaSpace, int borderType = BORDER_DEFAULT);
 
+/** @brief Applies the bilateral texture filter to an image. It performs structure-preserving texture filter.
+For more details about this filter see @cite Cho2014.
+
+@param src Source image whose depth is 8-bit UINT or 32-bit FLOAT
+
+@param dst Destination image of the same size and type as src.
+
+@param fr Radius of kernel to be used for filtering. It should be positive integer
+
+@param numIter Number of iterations of algorithm, It should be positive integer
+
+@param sigmaAlpha Controls the sharpness of the weight transition from edges to smooth/texture regions, where
+a bigger value means sharper transition. When the value is negative, it is automatically calculated.
+
+@param sigmaAvg Range blur parameter for texture blurring. Larger value makes result to be more blurred. When the
+value is negative, it is automatically calculated as described in the paper.
+
+@sa rollingGuidanceFilter, bilateralFilter
+*/
+CV_EXPORTS_W
+void bilateralTextureFilter(InputArray src, OutputArray dst, int fr = 3, int numIter = 1, double sigmaAlpha = -1., double sigmaAvg = -1.);
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
@@ -353,6 +375,80 @@ void rollingGuidanceFilter(InputArray src, OutputArray dst, int d = -1, double s
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
+/** @brief Interface for implementations of Fast Bilateral Solver.
+
+For more details about this solver see @cite BarronPoole2016 .
+*/
+class CV_EXPORTS_W FastBilateralSolverFilter : public Algorithm
+{
+public:
+    /** @brief Apply smoothing operation to the source image.
+
+    @param src source image for filtering with unsigned 8-bit or signed 16-bit or floating-point 32-bit depth and up to 3 channels.
+
+    @param confidence confidence image with unsigned 8-bit or floating-point 32-bit confidence and 1 channel.
+
+    @param dst destination image.
+
+    @note Confidence images with CV_8U depth are expected to in [0, 255] and CV_32F in [0, 1] range.
+    */
+    CV_WRAP virtual void filter(InputArray src, InputArray confidence, OutputArray dst) = 0;
+};
+
+/** @brief Factory method, create instance of FastBilateralSolverFilter and execute the initialization routines.
+
+@param guide image serving as guide for filtering. It should have 8-bit depth and either 1 or 3 channels.
+
+@param sigma_spatial parameter, that is similar to spatial space sigma (bandwidth) in bilateralFilter.
+
+@param sigma_luma parameter, that is similar to luma space sigma (bandwidth) in bilateralFilter.
+
+@param sigma_chroma parameter, that is similar to chroma space sigma (bandwidth) in bilateralFilter.
+
+@param lambda smoothness strength parameter for solver.
+
+@param num_iter number of iterations used for solver, 25 is usually enough.
+
+@param max_tol convergence tolerance used for solver.
+
+For more details about the Fast Bilateral Solver parameters, see the original paper @cite BarronPoole2016.
+
+*/
+CV_EXPORTS_W Ptr<FastBilateralSolverFilter> createFastBilateralSolverFilter(InputArray guide, double sigma_spatial, double sigma_luma, double sigma_chroma, double lambda = 128.0, int num_iter = 25, double max_tol = 1e-5);
+
+
+
+/** @brief Simple one-line Fast Bilateral Solver filter call. If you have multiple images to filter with the same
+guide then use FastBilateralSolverFilter interface to avoid extra computations.
+
+@param guide image serving as guide for filtering. It should have 8-bit depth and either 1 or 3 channels.
+
+@param src source image for filtering with unsigned 8-bit or signed 16-bit or floating-point 32-bit depth and up to 4 channels.
+
+@param confidence confidence image with unsigned 8-bit or floating-point 32-bit confidence and 1 channel.
+
+@param dst destination image.
+
+@param sigma_spatial parameter, that is similar to spatial space sigma (bandwidth) in bilateralFilter.
+
+@param sigma_luma parameter, that is similar to luma space sigma (bandwidth) in bilateralFilter.
+
+@param sigma_chroma parameter, that is similar to chroma space sigma (bandwidth) in bilateralFilter.
+
+@param lambda smoothness strength parameter for solver.
+
+@param num_iter number of iterations used for solver, 25 is usually enough.
+
+@param max_tol convergence tolerance used for solver.
+
+For more details about the Fast Bilateral Solver parameters, see the original paper @cite BarronPoole2016.
+
+@note Confidence images with CV_8U depth are expected to in [0, 255] and CV_32F in [0, 1] range.
+*/
+CV_EXPORTS_W void fastBilateralSolverFilter(InputArray guide, InputArray src, InputArray confidence, OutputArray dst, double sigma_spatial = 8, double sigma_luma = 8, double sigma_chroma = 8, double lambda = 128.0, int num_iter = 25, double max_tol = 1e-5);
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 /** @brief Interface for implementations of Fast Global Smoother filter.
 

@@ -195,7 +195,7 @@ bool IPLCanny::processInputData(IPLData* data, int, bool useOpenCV)
         notifyProgressEventHandler(-1);
         cv::Mat input;
         cv::Mat output;
-        cvtColor(image->toCvMat(), input, CV_BGR2GRAY);
+        cvtColor(image->toCvMat(), input, cv::COLOR_BGR2GRAY);
         cv::GaussianBlur(input, input, cv::Size(window, window), sigma);
         cv::Canny(input, output, lowThreshold*255, highThreshold*255, window);
 

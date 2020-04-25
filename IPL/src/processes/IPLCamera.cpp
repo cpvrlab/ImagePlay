@@ -105,15 +105,15 @@ bool IPLCamera::processInputData(IPLData*, int, bool)
 
     // collect information
     std::stringstream s;
-    s << "<b>Width: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_FRAME_WIDTH) << "\n";
-    s << "<b>Height: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_FRAME_HEIGHT) << "\n";
-    s << "<b>Brightness: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_BRIGHTNESS) << "\n";
-    s << "<b>Contrast: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_CONTRAST) << "\n";
-    s << "<b>Saturation: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_SATURATION) << "\n";
-    s << "<b>Hue: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_HUE) << "\n";
-    s << "<b>Gain: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_GAIN) << "\n";
-    s << "<b>Exposure: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_EXPOSURE) << "\n";
-    s << "<b>GUID: </b>" << IPLCameraIO::camera()->get(CV_CAP_PROP_GUID) << "";
+    s << "<b>Width: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_FRAME_WIDTH) << "\n";
+    s << "<b>Height: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_FRAME_HEIGHT) << "\n";
+    s << "<b>Brightness: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_BRIGHTNESS) << "\n";
+    s << "<b>Contrast: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_CONTRAST) << "\n";
+    s << "<b>Saturation: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_SATURATION) << "\n";
+    s << "<b>Hue: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_HUE) << "\n";
+    s << "<b>Gain: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_GAIN) << "\n";
+    s << "<b>Exposure: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_EXPOSURE) << "\n";
+    s << "<b>GUID: </b>" << IPLCameraIO::camera()->get(cv::CAP_PROP_GUID) << "";
 
     addInformation(s.str());
 

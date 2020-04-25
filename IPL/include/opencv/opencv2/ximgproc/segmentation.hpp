@@ -73,9 +73,9 @@ namespace cv {
                      */
                     class CV_EXPORTS_W SelectiveSearchSegmentationStrategy : public Algorithm {
                         public:
-                            /** @brief Set a initial image, with a segementation.
+                            /** @brief Set a initial image, with a segmentation.
                                 @param img The input image. Any number of channel can be provided
-                                @param regions A segementation of the image. The parameter must be the same size of img.
+                                @param regions A segmentation of the image. The parameter must be the same size of img.
                                 @param sizes The sizes of different regions
                                 @param image_id If not set to -1, try to cache pre-computations. If the same set og (img, regions, size) is used, the image_id need to be the same.
                             */
@@ -236,7 +236,7 @@ namespace cv {
                             /** @brief Based on all images, graph segmentations and stragies, computes all possible rects and return them
                                 @param rects The list of rects. The first ones are more relevents than the lasts ones.
                             */
-                            CV_WRAP virtual void process(std::vector<Rect>& rects) = 0;
+                            CV_WRAP virtual void process(CV_OUT std::vector<Rect>& rects) = 0;
                     };
 
                     /** @brief Create a new SelectiveSearchSegmentation class.

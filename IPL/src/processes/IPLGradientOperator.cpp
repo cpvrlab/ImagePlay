@@ -158,7 +158,7 @@ bool IPLGradientOperator::roberts(IPLImage* image)
     cv::Mat input;
     cv::Mat gX;
     cv::Mat gY;
-    cvtColor(image->toCvMat(),input,CV_BGR2GRAY);
+    cvtColor(image->toCvMat(),input,cv::COLOR_BGR2GRAY);
 
     filter2D(input,gX,CV_32F,rxKernel);
     filter2D(input,gY,CV_32F,ryKernel);
@@ -204,7 +204,7 @@ bool IPLGradientOperator::sobel(IPLImage* image)
    cv::Mat input;
    cv::Mat gX;
    cv::Mat gY;
-   cvtColor(image->toCvMat(),input,CV_BGR2GRAY);
+   cvtColor(image->toCvMat(),input,cv::COLOR_BGR2GRAY);
  
    Sobel(input,gX,CV_32F,1,0,kSize);
    Sobel(input,gY,CV_32F,0,1,kSize);

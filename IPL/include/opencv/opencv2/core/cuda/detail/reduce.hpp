@@ -40,8 +40,8 @@
 //
 //M*/
 
-#ifndef __OPENCV_CUDA_REDUCE_DETAIL_HPP__
-#define __OPENCV_CUDA_REDUCE_DETAIL_HPP__
+#ifndef OPENCV_CUDA_REDUCE_DETAIL_HPP
+#define OPENCV_CUDA_REDUCE_DETAIL_HPP
 
 #include <thrust/tuple.h>
 #include "../warp.hpp"
@@ -276,8 +276,8 @@ namespace cv { namespace cuda { namespace device
             static __device__ void reduce(Pointer smem, Reference val, unsigned int tid, Op op)
             {
             #if defined __CUDA_ARCH__ && __CUDA_ARCH__ >= 300
-                (void) smem;
-                (void) tid;
+                CV_UNUSED(smem);
+                CV_UNUSED(tid);
 
                 Unroll<N / 2, Pointer, Reference, Op>::loopShfl(val, op, N);
             #else
@@ -362,4 +362,4 @@ namespace cv { namespace cuda { namespace device
 
 //! @endcond
 
-#endif // __OPENCV_CUDA_REDUCE_DETAIL_HPP__
+#endif // OPENCV_CUDA_REDUCE_DETAIL_HPP

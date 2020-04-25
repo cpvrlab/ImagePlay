@@ -48,12 +48,12 @@ HEADERS += $$files(*.h,true)
 SOURCES += $$files(*.cpp,true)
 OTHER_FILES += $$files(*,true)
 
-#win32: LIBS += -L$$PWD/lib/FreeImage/ -lFreeImage
+win32: LIBS += -L$$PWD/lib/FreeImage/ -lFreeImage
 
-#INCLUDEPATH += $$PWD/lib/FreeImage/
-#DEPENDPATH += $$PWD/lib/FreeImage/
+INCLUDEPATH += $$PWD/lib/FreeImage/
+DEPENDPATH += $$PWD/lib/FreeImage/
 
-#win32: PRE_TARGETDEPS += $$PWD/lib/FreeImage/FreeImage.lib
+win32: PRE_TARGETDEPS += $$PWD/lib/FreeImage/FreeImage.lib
 
 win32 {
     # dirent
@@ -68,27 +68,27 @@ win32 {
 
     # opencv
     CONFIG(release, debug|release) {
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_core310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_imgproc310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_highgui310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_videoio310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_calib3d310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_optflow310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_features2d310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xfeatures2d310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_photo310
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xphoto310
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_core430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_imgproc430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_highgui430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_videoio430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_calib3d430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_optflow430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_features2d430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_xfeatures2d430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_photo430
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_xphoto430
     } else {
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_core310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_imgproc310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_highgui310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_videoio310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_calib3d310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_optflow310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_features2d310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xfeatures2d310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_photo310d
-        LIBS += -L$$PWD/../_lib/opencv/x64/vc14/lib/ -lopencv_xphoto310d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_core430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_imgproc430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_highgui430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_videoio430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_calib3d430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_optflow430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_features2d430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_xfeatures2d430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_photo430d
+        LIBS += -L$$PWD/../_lib/opencv/x64/vc16/lib/ -lopencv_xphoto430d
     }
 }
 

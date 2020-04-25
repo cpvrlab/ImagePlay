@@ -80,7 +80,7 @@ namespace bioinspired
 /** @brief parameter structure that stores the transient events detector setup parameters
 */
 struct SegmentationParameters{ // CV_EXPORTS_W_MAP to export to python native dictionnaries
-	// default structure instance construction with default values	
+	// default structure instance construction with default values
 	SegmentationParameters():
 	    thresholdON(100),
 	    thresholdOFF(100),
@@ -171,7 +171,7 @@ public:
     /** @brief write xml/yml formated parameters information
     @param fs : a cv::Filestorage object ready to be filled
     */
-    virtual void write( cv::FileStorage& fs ) const=0;
+    virtual void write( cv::FileStorage& fs ) const CV_OVERRIDE = 0;
 
     /** @brief main processing method, get result using methods getSegmentationPicture()
     @param inputToSegment : the image to process, it must match the instance buffer size !
@@ -180,20 +180,19 @@ public:
     CV_WRAP virtual void run(InputArray inputToSegment, const int channelIndex=0)=0;
 
     /** @brief access function
-    @return the last segmentation result: a boolean picture which is resampled between 0 and 255 for a display purpose
-   */
+    return the last segmentation result: a boolean picture which is resampled between 0 and 255 for a display purpose
+    */
     CV_WRAP virtual void getSegmentationPicture(OutputArray transientAreas)=0;
 
     /** @brief cleans all the buffers of the instance
     */
     CV_WRAP virtual void clearAllBuffers()=0;
-};
 
-/** @brief allocator
-@param inputSize : size of the images input to segment (output will be the same size)
-@relates bioinspired::TransientAreasSegmentationModule
- */
-CV_EXPORTS_W Ptr<TransientAreasSegmentationModule> createTransientAreasSegmentationModule(Size inputSize);
+    /** @brief allocator
+    @param inputSize : size of the images input to segment (output will be the same size)
+     */
+    CV_WRAP static Ptr<TransientAreasSegmentationModule> create(Size inputSize);
+};
 
 //! @}
 
