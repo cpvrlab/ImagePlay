@@ -27,6 +27,7 @@
 //#include "IPLLoadVideo.h"
 #include "IPLCamera.h"
 #include "IPLLoadImageSequence.h"
+#include "IPLScreenshot.h"
 #include "IPLSynthesize.h"
 #include "IPLSaveImage.h"
 #include "IPLBinarize.h"
