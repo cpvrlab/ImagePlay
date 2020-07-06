@@ -183,45 +183,27 @@ inline void deserializeValue(const std::string &data, std::vector<double> &value
 
 inline void deserializeValue(const std::string &data, IPLColor &value)
 {
-    std::array<float,3> color;
-
-    int i = 0;
     std::smatch match;
-    auto pos = data.begin();
-    while(i < (int) color.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
-    {
-        pos += match.position();
-
-        int charsParsed = 0;
-        float element = 0;
-        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
-            color[i++] = element;
-
-        pos += charsParsed;
+    std::regex e ("\\[([-0-9.eE]+),([-0-9.eE]+),([-0-9.eE]+)\\]");
+    if (!std::regex_search(data, match, e) || match.size() - 1 != 3) {
+	value = IPLColor(0, 0, 0);
+	return;
     }
-    value = IPLColor(color[0], color[1], color[2]);
+    value = IPLColor(std::stof(match.str(1)),
+		     std::stof(match.str(2)),
+		     std::stof(match.str(3)));
 }
 
 inline void deserializeValue(const std::string &data, IPLPoint &value)
 {
-    std::array<double,2> point;
-
-    int i = 0;
     std::smatch match;
-    auto pos = data.begin();
-    while(i < (int) point.size() && std::regex_search(pos,data.end(),match,std::regex("[-0-9.]")))
-    {
-        pos += match.position();
-
-        int charsParsed = 0;
-        float element = 0;
-        if (sscanf(&(*pos),"%f%n",&element,&charsParsed) > 0)
-            point[i++] = element;
-
-        pos += charsParsed;
+    std::regex e ("\\[([-0-9.eE]+),([-0-9.eE]+)\\]");
+    if (!std::regex_search(data, match, e) || match.size() - 1 != 2) {
+	value = IPLPoint(0, 0, 0);
+	return;
     }
-
-    value = IPLPoint(point[0], point[1]);
+    value = IPLPoint(std::stod(match.str(1)),
+		     std::stod(match.str(2)));
 }
 
 inline void deserializeValue(const std::string &data, std::string &value)
