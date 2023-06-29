@@ -55,3 +55,6 @@ ImagePlay.VC.db
 IPL/release/
 IPL/debug/
 IPL/lib/
+
+# cmake build dir
+[bB]uild/
