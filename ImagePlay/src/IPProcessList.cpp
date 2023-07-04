@@ -79,6 +79,11 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
       painter.drawPixmap(0, 0, 25, 25, iconFile);
     }
 
+    QListWidgetItem* newItem = new QListWidgetItem(finalIcon, text);
+    newItem->setToolTip(processID);
+    newItem->setStatusTip(keywords);
+    newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
+
     addItem(newItem);
 }
 
