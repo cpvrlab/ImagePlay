@@ -65,28 +65,19 @@ void IPProcessList::addProcessItem(QString processID, QString text, QString keyw
 {
     // load icon from png file and add background color based on the process category
 
-    QFileInfo iconFile(_mainWindow->processIconPath(processID));
+    QPixmap iconFile(":/process_icons/" + processID + QString(".png"));
 
-    if(!iconFile.exists())
-    {
-        iconFile = QFileInfo(_mainWindow->processIconPath("Plugin"));
+    if (iconFile.isNull()) {
+      iconFile = QPixmap(":/process_icons/Plugin.png");
     }
 
-    QPixmap finalIcon(25,25);
+    QPixmap finalIcon(25, 25);
 
-    if(iconFile.exists())
-    {
-        QPixmap transparentIcon(iconFile.absoluteFilePath());
-
-        QPainter painter(&finalIcon);
-        painter.fillRect(0,0,25,25,_categoryColors.at(category));
-        painter.drawPixmap(0,0,25,25,transparentIcon);
+    if (!iconFile.isNull()) {
+      QPainter painter(&finalIcon);
+      painter.fillRect(0, 0, 25, 25, _categoryColors.at(category));
+      painter.drawPixmap(0, 0, 25, 25, iconFile);
     }
-
-    QListWidgetItem* newItem = new QListWidgetItem(finalIcon, text);
-    newItem->setToolTip(processID);
-    newItem->setStatusTip(keywords);
-    newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
 
     addItem(newItem);
 }

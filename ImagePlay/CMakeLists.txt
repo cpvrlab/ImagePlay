@@ -29,6 +29,7 @@ set(PLUGIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/media/plugin_development)
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${PLUGIN_SRC}
                                ${PLUGIN_HEADERS} ${QRC_FILES})
+
 set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH_USE_LINK_PATH
                                                  TRUE)
 
@@ -51,29 +52,15 @@ find_package(
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 
-if(TEMPLATE___equals___app)
-  target_compile_definitions(
-    ${PROJECT_NAME}
-    PRIVATE APP_COMPANY="BFH"
-            APP_COPYRIGHT=" "
-            APP_DESCRIPTION=" "
-            APP_NAME="ImagePlay"
-            APP_PRODUCT="ImagePlay"
-            APP_VERSION="6.1.0"
-            LINUX_PATH_PREFIX="/usr/share/imageplay/")
-endif()
-
-if(NOT TEMPLATE___equals___app)
-  target_compile_definitions(
-    ${PROJECT_NAME}
-    PRIVATE APP_COMPANY="BFH"
-            APP_COPYRIGHT=" "
-            APP_DESCRIPTION=" "
-            APP_NAME="ImagePlay"
-            APP_PRODUCT="${PROJECT_NAME}"
-            APP_VERSION="6.1.0"
-            LINUX_PATH_PREFIX="/usr/share/${PROJECT_NAME}/")
-endif()
+target_compile_definitions(
+  ${PROJECT_NAME}
+  PRIVATE APP_COMPANY="BFH"
+          APP_COPYRIGHT=" "
+          APP_DESCRIPTION=" "
+          APP_NAME="${PROJECT_NAME}"
+          APP_PRODUCT="${PROJECT_NAME}"
+          APP_VERSION="6.1.0"
+          LINUX_PATH_PREFIX="/usr/share/${PROJECT_NAME}/")
 
 if(LINUX)
   target_link_libraries(${PROJECT_NAME} PRIVATE IPL dl)
