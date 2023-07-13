@@ -18,6 +18,70 @@
         <file>plugins.png</file>
         <file>thumbnails_on.png</file>
         <file>thumbnails_off.png</file>
+        <file>process_icons/IPLAddNoise.png</file>
+        <file>process_icons/IPLAgglomerate.png</file>
+        <file>process_icons/IPLArithmeticOperations.png</file>
+        <file>process_icons/IPLArithmeticOperationsConstant.png</file>
+        <file>process_icons/IPLBinarize.png</file>
+        <file>process_icons/IPLBinarizeEntropy.png</file>
+        <file>process_icons/IPLBinarizeKMeans.png</file>
+        <file>process_icons/IPLBinarizeOtsu.png</file>
+        <file>process_icons/IPLBinarizeSavola.png</file>
+        <file>process_icons/IPLBinarizeUnimodal.png</file>
+        <file>process_icons/IPLBlendImages.png</file>
+        <file>process_icons/IPLCamera.png</file>
+        <file>process_icons/IPLCanny.png</file>
+        <file>process_icons/IPLCanvasSize.png</file>
+        <file>process_icons/IPLCompassMask.png</file>
+        <file>process_icons/IPLConvertToColor.png</file>
+        <file>process_icons/IPLConvertToGray.png</file>
+        <file>process_icons/IPLConvolutionFilter.png</file>
+        <file>process_icons/IPLEnhanceMode.png</file>
+        <file>process_icons/IPLEqualizeHistogram.png</file>
+        <file>process_icons/IPLExtractLines.png</file>
+        <file>process_icons/IPLExtrema.png</file>
+        <file>process_icons/IPLFalseColor.png</file>
+        <file>process_icons/IPLFFT.png</file>
+        <file>process_icons/IPLFillConcavities.png</file>
+        <file>process_icons/IPLFlipImage.png</file>
+        <file>process_icons/IPLFrequencyFilter.png</file>
+        <file>process_icons/IPLGabor.png</file>
+        <file>process_icons/IPLGammaCorrection.png</file>
+        <file>process_icons/IPLGaussianLowPass.png</file>
+        <file>process_icons/IPLGradientOperator.png</file>
+        <file>process_icons/IPLHysteresisThreshold.png</file>
+        <file>process_icons/IPLIFFT.png</file>
+        <file>process_icons/IPLInverseContrastRatioMapping.png</file>
+        <file>process_icons/IPLLabelBlobs.png</file>
+        <file>process_icons/IPLLaplaceOfGaussian.png</file>
+        <file>process_icons/IPLLoadImage.png</file>
+        <file>process_icons/IPLLoadImageSequence.png</file>
+        <file>process_icons/IPLLocalThreshold.png</file>
+        <file>process_icons/IPLMarkImage.png</file>
+        <file>process_icons/IPLMax.png</file>
+        <file>process_icons/IPLMaxMinMedian.png</file>
+        <file>process_icons/IPLMedian.png</file>
+        <file>process_icons/IPLMergePlanes.png</file>
+        <file>process_icons/IPLMin.png</file>
+        <file>process_icons/IPLMorphologicalEdge.png</file>
+        <file>process_icons/IPLMorphologyBinary.png</file>
+        <file>process_icons/IPLMorphologyGrayscale.png</file>
+        <file>process_icons/IPLMorphologyHitMiss.png</file>
+        <file>process_icons/IPLMultiplyConstant.png</file>
+        <file>process_icons/IPLNegate.png</file>
+        <file>process_icons/IPLNormalizeIllumination.png</file>
+        <file>process_icons/IPLOnePixelEdge.png</file>
+        <file>process_icons/IPLRankTransform.png</file>
+        <file>process_icons/IPLResize.png</file>
+        <file>process_icons/IPLRotate.png</file>
+        <file>process_icons/IPLSaveImage.png</file>
+        <file>process_icons/IPLSplitPlanes.png</file>
+        <file>process_icons/IPLStretchContrast.png</file>
+        <file>process_icons/IPLSubstractImages.png</file>
+        <file>process_icons/IPLSynthesize.png</file>
+        <file>process_icons/IPLTriangleSegmentation.png</file>
+        <file>process_icons/IPLUnsharpMasking.png</file>
+        <file>process_icons/Plugin.png</file>
         <file>icons/24hours-phone.png</file>
         <file>icons/abs.png</file>
         <file>icons/add.png</file>
